@@ -55,7 +55,7 @@ function IndexNavbar() {
           >
             <img alt="..." src={require("assets/img/logo.gif")} style={{width :'180px'}} />
           </NavbarBrand>
-          <button
+          {/* <button
             aria-expanded={navbarCollapse}
             className={classnames("navbar-toggler navbar-toggler", {
               toggled: navbarCollapse
@@ -65,7 +65,7 @@ function IndexNavbar() {
             <span className="navbar-toggler-bar bar1" />
             <span className="navbar-toggler-bar bar2" />
             <span className="navbar-toggler-bar bar3" />
-          </button>
+          </button> */}
         </div>
         <Collapse
           className="justify-content-end"
@@ -82,13 +82,8 @@ function IndexNavbar() {
               </NavLink>
             </NavItem>
             <NavItem>
-              <Button
-                className="btn-round"
-                color="danger"
-                href="https://www.creative-tim.com/product/paper-kit-pro-react?ref=pkr-index-navbar"
-                target="_blank"
-              >
-                <i className="nc-icon nc-spaceship"></i> JOIN
+              <Button className="btn-round" color="danger" href="/login">
+                LOGIN
               </Button>
             </NavItem>
           </Nav>

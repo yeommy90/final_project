@@ -1,12 +1,12 @@
 import React from "react";
 
 // reactstrap components
-import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
+import { Button, Card, Form, Input, Container, Row, Col, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar";
 
-function RegisterPage() {
+function Login() {
   document.documentElement.classList.remove("nav-open");
   React.useEffect(() => {
     document.body.classList.add("register-page");
@@ -16,7 +16,7 @@ function RegisterPage() {
   });
   return (
     <>
-      <IndexNavbar />
+      {/* <IndexNavbar /> */}
       <div
         className="page-header"
         style={{
@@ -28,39 +28,32 @@ function RegisterPage() {
           <Row>
             <Col className="ml-auto mr-auto" lg="4">
               <Card className="card-register ml-auto mr-auto">
-                <h3 className="title mx-auto">Welcome</h3>
+                <h3 className="title mx-auto">Login</h3>
                 <div className="social-line text-center">
-                  <Button
-                    className="btn-neutral btn-just-icon mr-1"
-                    color="facebook"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fa fa-facebook-square" />
-                  </Button>
-                  <Button
-                    className="btn-neutral btn-just-icon mr-1"
-                    color="google"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fa fa-google-plus" />
-                  </Button>
-                  <Button
-                    className="btn-neutral btn-just-icon"
-                    color="twitter"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fa fa-twitter" />
-                  </Button>
                 </div>
                 <Form className="register-form">
                   <label>Email</label>
-                  <Input placeholder="Email" type="text" />
+                  <InputGroup className="form-group-no-border">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="nc-icon nc-email-85" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input placeholder="Email" type="email" />
+                  </InputGroup>
                   <label>Password</label>
-                  <Input placeholder="Password" type="password" />
+                  <InputGroup className="form-group-no-border">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="nc-icon nc-key-25" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input placeholder="Password" type="password" />
+                  </InputGroup>
                   <Button block className="btn-round" color="danger">
+                    Login
+                  </Button>
+                  <Button block className="btn-round" color="danger" href="/register">
                     Register
                   </Button>
                 </Form>
@@ -89,4 +82,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default Login;
