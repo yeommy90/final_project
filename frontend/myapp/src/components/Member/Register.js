@@ -14,7 +14,7 @@ import {
   InputGroupText,
 } from 'reactstrap';
 
-function RegisterPage() {
+function Register() {
   document.documentElement.classList.remove('nav-open');
   React.useEffect(() => {
     document.body.classList.add('register-page');
@@ -76,4 +76,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default Register;

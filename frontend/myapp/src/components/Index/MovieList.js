@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const imgNumber = 20;
 
 function setImg() {
@@ -5,11 +7,13 @@ function setImg() {
     <>
       <div style={{ height: 'auto', width: 'auto' }}>
         <div className='img_box'>
+          <Link to="/contents">
           <img
             src='https://an2-img.amz.wtchn.net/image/v2/tkmsakQ3xtdo7JXj6Gogqw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk5UZzRPREF6TXpjeU5qY3dNREkxTXpraWZRLjU3cGhtemxyblpFdW5jU1BfZy1ycUhNU1VjV19WTDlLSjJITmh3anJPVWM'
             class='css-qhzw1o-StyledImg ezcopuc1'
             style={{ marginBottom: '10px' }}
           />
+          </Link>
         </div>
         {/* 영화 타이틀 */}
         <div
