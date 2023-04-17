@@ -1,0 +1,309 @@
+<mxfile host="app.diagrams.net" modified="2023-04-14T03:23:59.038Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="N3LStZ6VCfo5Q8OdiSnj" version="21.1.7" type="device">
+  <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
+    <mxGraphModel dx="2607" dy="1389" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-59" value="영화 검색" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="250" y="630" width="100" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-60" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="B6ivBsOjP7eUwrue9n_T-59" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="aM9ryv3xv72pqoxQDRHE-1" value="로그인" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="110" y="30" width="100" height="610" as="geometry" />
+        </mxCell>
+        <mxCell id="aM9ryv3xv72pqoxQDRHE-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="aM9ryv3xv72pqoxQDRHE-1" vertex="1">
+          <mxGeometry x="50" y="70" width="10" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="aM9ryv3xv72pqoxQDRHE-5" value="영화 목록" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="390" y="30" width="100" height="850" as="geometry" />
+        </mxCell>
+        <mxCell id="aM9ryv3xv72pqoxQDRHE-6" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="aM9ryv3xv72pqoxQDRHE-5" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="710" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-1" value="별점/후기 작성/수정" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="730" y="30" width="100" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="B6ivBsOjP7eUwrue9n_T-1" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-3" value="영화 상세 정보" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="570" y="30" width="100" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-4" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="B6ivBsOjP7eUwrue9n_T-3" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-6" value="" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="20" y="110" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-8" value="사용자" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="10" y="30" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-9" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" target="aM9ryv3xv72pqoxQDRHE-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="90" y="140" as="sourcePoint" />
+            <mxPoint x="150" y="140" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="90" y="140" />
+              <mxPoint x="100" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-10" value="로그인 정보 전달" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="B6ivBsOjP7eUwrue9n_T-9" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-13" value="영화 상세 정보 출력" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="610" y="140" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="550" y="140" />
+            </Array>
+            <mxPoint x="460" y="140" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-14" value="별점 남기기/후기 작성" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="770" y="140" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="710" y="140" />
+            </Array>
+            <mxPoint x="640" y="140" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-27" value="영화 검색" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="250" y="30" width="100" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-28" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="B6ivBsOjP7eUwrue9n_T-27" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="aM9ryv3xv72pqoxQDRHE-10" value="영화 목록 출력(인기 영화 + 추천)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" source="aM9ryv3xv72pqoxQDRHE-2" target="aM9ryv3xv72pqoxQDRHE-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="175" y="235" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="290" y="140" />
+            </Array>
+            <mxPoint x="185" y="150" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-29" value="검색 영화 출력" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="210" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="380" y="210" />
+            </Array>
+            <mxPoint x="310" y="210" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-30" value="사용자 프로필" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="650" y="350" width="100" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-31" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="B6ivBsOjP7eUwrue9n_T-30" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-33" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" parent="1" target="B6ivBsOjP7eUwrue9n_T-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="770" y="260" as="sourcePoint" />
+            <mxPoint x="820" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-34" value="후기 출력" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="B6ivBsOjP7eUwrue9n_T-33" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="24" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-35" value="아직 평가 안 한 작품&lt;br&gt;평가하기(별점)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="847.5" y="450" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="780" y="450" />
+            </Array>
+            <mxPoint x="717.5" y="450" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-36" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="852.5" y="520" as="sourcePoint" />
+            <mxPoint x="707.5" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-37" value="평가한 영화 출력" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="B6ivBsOjP7eUwrue9n_T-36" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="24" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-38" value="영화 목록 출력(인기 영화)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1" target="aM9ryv3xv72pqoxQDRHE-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="740" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="340" y="740" />
+              <mxPoint x="350" y="530" />
+              <mxPoint x="190" y="580" />
+            </Array>
+            <mxPoint x="120" y="740" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-39" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="852.5" y="550" as="sourcePoint" />
+            <mxPoint x="707.5" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-40" value="취향 분석" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="B6ivBsOjP7eUwrue9n_T-39" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="24" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-41" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="852.5" y="580" as="sourcePoint" />
+            <mxPoint x="707.5" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-42" value="보고싶어요" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="B6ivBsOjP7eUwrue9n_T-41" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="24" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-45" value="사용자 정보 가져오기" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" target="B6ivBsOjP7eUwrue9n_T-30" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="310" y="490" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="410" />
+              <mxPoint x="250" y="490" />
+            </Array>
+            <mxPoint x="180" y="410" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-47" value="유저 프로필" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="650" y="780" width="100" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-48" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="B6ivBsOjP7eUwrue9n_T-47" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-49" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="855" y="900" as="sourcePoint" />
+            <mxPoint x="710" y="900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-50" value="평가한 영화 출력" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="B6ivBsOjP7eUwrue9n_T-49" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="24" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-51" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="855" y="940" as="sourcePoint" />
+            <mxPoint x="710" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-52" value="취향 분석" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="B6ivBsOjP7eUwrue9n_T-51" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="24" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-53" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="855" y="980" as="sourcePoint" />
+            <mxPoint x="710" y="980" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-54" value="보고싶어요" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="B6ivBsOjP7eUwrue9n_T-53" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="24" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-55" value="유저 프로필 출력" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" target="B6ivBsOjP7eUwrue9n_T-47" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="900" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="520" y="890" />
+              <mxPoint x="500" y="900" />
+              <mxPoint x="400" y="900" />
+              <mxPoint x="410" y="690" />
+              <mxPoint x="250" y="740" />
+            </Array>
+            <mxPoint x="120" y="890" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-57" value="" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="30" y="710" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-58" value="사용자(비회원)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="20" y="630" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-61" value="검색 목록 출력" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="800" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="420" y="800" />
+              <mxPoint x="430" y="590" />
+              <mxPoint x="270" y="640" />
+            </Array>
+            <mxPoint x="300" y="800" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-63" value="" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="930" y="200" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-64" value="관리자" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="920" y="120" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-65" value="별점/후기 작성/수정" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="1150" y="30" width="100" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-66" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="B6ivBsOjP7eUwrue9n_T-65" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-67" value="후기 관리" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="B6ivBsOjP7eUwrue9n_T-64" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1190" y="150" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1110" y="150" />
+              <mxPoint x="1120" y="-60" />
+              <mxPoint x="960" y="-10" />
+            </Array>
+            <mxPoint x="1010" y="150" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-68" value="" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="1170" y="360" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-69" value="사용자" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1160" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-70" value="사용자 관리" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" source="B6ivBsOjP7eUwrue9n_T-63" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1170" y="380" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1090" y="380" />
+              <mxPoint x="1100" y="170" />
+              <mxPoint x="940" y="220" />
+            </Array>
+            <mxPoint x="990" y="380" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-72" value="영화 상세 정보" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="510" y="630" width="100" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-73" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="B6ivBsOjP7eUwrue9n_T-72" vertex="1">
+          <mxGeometry x="50" y="80" width="10" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="B6ivBsOjP7eUwrue9n_T-74" value="상세 정보 출력" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="550" y="770" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="530" y="770" />
+              <mxPoint x="540" y="560" />
+              <mxPoint x="380" y="610" />
+            </Array>
+            <mxPoint x="450" y="770" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

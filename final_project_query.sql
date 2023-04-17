@@ -27,7 +27,9 @@ create table movie(
      vote_cnt number,
      overview varchar2(4000),
      poster_path varchar2(2000),
-     backdrop_path varchar2(2000)
+     backdrop_path varchar2(2000),
+     country varchar2(50),
+     runtime number
 );
 
 -- 감독정보 테이블

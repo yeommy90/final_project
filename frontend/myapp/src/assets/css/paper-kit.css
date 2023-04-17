@@ -1,27 +1,3 @@
-/*!
-
- =========================================================
- * Paper Kit React - v1.3.1 based on Paper Kit - v2.2.0
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/paper-kit-2
- * Copyright 2022 Creative Tim (http://www.creative-tim.com)
-
- * Designed by www.invisionapp.com Coded by www.creative-tim.com
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
- */
-/*      light colors - used for select dropdown         */
-/* ========================================================================
- * bootstrap-switch - v3.3.2
- * http://www.bootstrap-switch.org
- * ========================================================================
- * Copyright 2012-2013 Mattia Larentis
- * http://www.apache.org/licenses/LICENSE-2.0
- */
 .bootstrap-switch {
   display: inline-block;
   direction: ltr;
@@ -151,8 +127,8 @@
   text-indent: 6px;
 }
 
-.bootstrap-switch input[type="radio"],
-.bootstrap-switch input[type="checkbox"] {
+.bootstrap-switch input[type='radio'],
+.bootstrap-switch input[type='checkbox'] {
   position: absolute !important;
   top: 0;
   left: 0;
@@ -161,8 +137,8 @@
   z-index: -1;
 }
 
-.bootstrap-switch input[type="radio"].form-control,
-.bootstrap-switch input[type="checkbox"].form-control {
+.bootstrap-switch input[type='radio'].form-control,
+.bootstrap-switch input[type='checkbox'].form-control {
   height: auto;
 }
 
@@ -334,11 +310,11 @@
   height: 2px;
   background: #c8c8c8;
 }
-.noUi-origin[style^="left: 0"] .noUi-handle {
+.noUi-origin[style^='left: 0'] .noUi-handle {
   background-color: #fff;
   border: 2px solid #c8c8c8;
 }
-.noUi-origin[style^="left: 0"] .noUi-handle.noUi-active {
+.noUi-origin[style^='left: 0'] .noUi-handle.noUi-active {
   border-width: 1px;
 }
 
@@ -488,15 +464,15 @@
  * https://github.com/Eonasdan/bootstrap-datetimepicker/
  */
 .sr-only,
-.bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after,
-.bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after,
-.bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after,
-.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after,
-.bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after,
-.bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after,
-.bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after,
-.bootstrap-datetimepicker-widget .btn[data-action="clear"]::after,
-.bootstrap-datetimepicker-widget .btn[data-action="today"]::after,
+.bootstrap-datetimepicker-widget .btn[data-action='incrementHours']::after,
+.bootstrap-datetimepicker-widget .btn[data-action='incrementMinutes']::after,
+.bootstrap-datetimepicker-widget .btn[data-action='decrementHours']::after,
+.bootstrap-datetimepicker-widget .btn[data-action='decrementMinutes']::after,
+.bootstrap-datetimepicker-widget .btn[data-action='showHours']::after,
+.bootstrap-datetimepicker-widget .btn[data-action='showMinutes']::after,
+.bootstrap-datetimepicker-widget .btn[data-action='togglePeriod']::after,
+.bootstrap-datetimepicker-widget .btn[data-action='clear']::after,
+.bootstrap-datetimepicker-widget .btn[data-action='today']::after,
 .bootstrap-datetimepicker-widget .picker-switch::after,
 .bootstrap-datetimepicker-widget table th.prev::after,
 .bootstrap-datetimepicker-widget table th.next::after {
@@ -545,7 +521,7 @@
   border-bottom: 11px solid #f1eae0;
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   right: 12px;
@@ -557,7 +533,7 @@
   border-bottom: 11px solid #ffffff;
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   right: 12px;
@@ -596,8 +572,8 @@
   background-color: transparent;
 }
 
-.bootstrap-datetimepicker-widget a[data-action="togglePicker"],
-.bootstrap-datetimepicker-widget a[data-action="togglePicker"]:hover {
+.bootstrap-datetimepicker-widget a[data-action='togglePicker'],
+.bootstrap-datetimepicker-widget a[data-action='togglePicker']:hover {
   color: #429cb6 !important;
 }
 
@@ -628,40 +604,40 @@
   padding: 0;
 }
 
-.bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after {
-  content: "Increment Hours";
+.bootstrap-datetimepicker-widget .btn[data-action='incrementHours']::after {
+  content: 'Increment Hours';
 }
 
-.bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after {
-  content: "Increment Minutes";
+.bootstrap-datetimepicker-widget .btn[data-action='incrementMinutes']::after {
+  content: 'Increment Minutes';
 }
 
-.bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after {
-  content: "Decrement Hours";
+.bootstrap-datetimepicker-widget .btn[data-action='decrementHours']::after {
+  content: 'Decrement Hours';
 }
 
-.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after {
-  content: "Decrement Minutes";
+.bootstrap-datetimepicker-widget .btn[data-action='decrementMinutes']::after {
+  content: 'Decrement Minutes';
 }
 
-.bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after {
-  content: "Show Hours";
+.bootstrap-datetimepicker-widget .btn[data-action='showHours']::after {
+  content: 'Show Hours';
 }
 
-.bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after {
-  content: "Show Minutes";
+.bootstrap-datetimepicker-widget .btn[data-action='showMinutes']::after {
+  content: 'Show Minutes';
 }
 
-.bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after {
-  content: "Toggle AM/PM";
+.bootstrap-datetimepicker-widget .btn[data-action='togglePeriod']::after {
+  content: 'Toggle AM/PM';
 }
 
-.bootstrap-datetimepicker-widget .btn[data-action="clear"]::after {
-  content: "Clear the picker";
+.bootstrap-datetimepicker-widget .btn[data-action='clear']::after {
+  content: 'Clear the picker';
 }
 
-.bootstrap-datetimepicker-widget .btn[data-action="today"]::after {
-  content: "Set the date to today";
+.bootstrap-datetimepicker-widget .btn[data-action='today']::after {
+  content: 'Set the date to today';
 }
 
 .bootstrap-datetimepicker-widget .picker-switch {
@@ -670,7 +646,7 @@
 }
 
 .bootstrap-datetimepicker-widget .picker-switch::after {
-  content: "Toggle Date and Time Screens";
+  content: 'Toggle Date and Time Screens';
 }
 
 .bootstrap-datetimepicker-widget .picker-switch td {
@@ -728,11 +704,11 @@
 }
 
 .bootstrap-datetimepicker-widget table th.prev::after {
-  content: "Previous Month";
+  content: 'Previous Month';
 }
 
 .bootstrap-datetimepicker-widget table th.next::after {
-  content: "Next Month";
+  content: 'Next Month';
 }
 
 .bootstrap-datetimepicker-widget table th.dow {
@@ -926,7 +902,7 @@
   border-top: 11px solid #dcd9d1;
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   right: 12px;
@@ -936,7 +912,7 @@
   border-top: 11px solid #ffffff;
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   right: 12px;
@@ -1045,7 +1021,7 @@ fieldset[disabled] .btn.active {
   box-shadow: none;
   outline: 0 !important;
 }
-.btn[class*="btn-outline-"] {
+.btn[class*='btn-outline-'] {
   background-image: none;
   background-color: transparent;
 }
@@ -2349,7 +2325,7 @@ textarea.form-control {
 }
 .form-check .form-check-sign::before,
 .form-check .form-check-sign::after {
-  content: " ";
+  content: ' ';
   display: inline-block;
   position: absolute;
   width: 24px;
@@ -2366,8 +2342,8 @@ textarea.form-control {
   transition: opacity 0.3s linear;
 }
 .form-check .form-check-sign::after {
-  font-family: "FontAwesome";
-  content: "\f00c";
+  font-family: 'FontAwesome';
+  content: '\f00c';
   top: -1px;
   text-align: center;
   font-size: 15px;
@@ -2382,27 +2358,27 @@ textarea.form-control {
   cursor: not-allowed;
 }
 
-.form-check input[type="checkbox"],
-.form-check-radio input[type="radio"] {
+.form-check input[type='checkbox'],
+.form-check-radio input[type='radio'] {
   opacity: 0;
   position: absolute;
   visibility: hidden;
 }
 
-.form-check input[type="checkbox"]:checked + .form-check-sign::after {
+.form-check input[type='checkbox']:checked + .form-check-sign::after {
   opacity: 1;
 }
 
-.form-control input[type="checkbox"]:disabled + .form-check-sign::before,
-.checkbox input[type="checkbox"]:disabled + .form-check-sign::after {
+.form-control input[type='checkbox']:disabled + .form-check-sign::before,
+.checkbox input[type='checkbox']:disabled + .form-check-sign::after {
   cursor: not-allowed;
 }
 
 .form-check
   .form-check-label
-  input[type="checkbox"]:disabled
+  input[type='checkbox']:disabled
   + .form-check-sign,
-.form-check-radio input[type="radio"]:disabled + .form-check-sign {
+.form-check-radio input[type='radio']:disabled + .form-check-sign {
   pointer-events: none !important;
 }
 
@@ -2419,8 +2395,8 @@ textarea.form-control {
 }
 
 .form-check-radio .form-check-sign::before {
-  font-family: "FontAwesome";
-  content: "\f10c";
+  font-family: 'FontAwesome';
+  content: '\f10c';
   font-size: 22px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2431,25 +2407,25 @@ textarea.form-control {
   top: -5px;
 }
 
-.form-check-label input[type="checkbox"]:checked + .form-check-sign:before {
+.form-check-label input[type='checkbox']:checked + .form-check-sign:before {
   background-color: #66615b;
 }
 
-.form-check-radio input[type="radio"] + .form-check-sign:after,
-.form-check-radio input[type="radio"] {
+.form-check-radio input[type='radio'] + .form-check-sign:after,
+.form-check-radio input[type='radio'] {
   opacity: 0;
   -webkit-transition: opacity 0.3s linear;
   -moz-transition: opacity 0.3s linear;
   -o-transition: opacity 0.3s linear;
   -ms-transition: opacity 0.3s linear;
   transition: opacity 0.3s linear;
-  content: " ";
+  content: ' ';
   display: block;
 }
 
-.form-check-radio input[type="radio"]:checked + .form-check-sign::after {
-  font-family: "FontAwesome";
-  content: "\f192";
+.form-check-radio input[type='radio']:checked + .form-check-sign::after {
+  font-family: 'FontAwesome';
+  content: '\f192';
   top: -5px;
   position: absolute;
   left: 5px;
@@ -2457,12 +2433,12 @@ textarea.form-control {
   font-size: 22px;
 }
 
-.form-check-radio input[type="radio"]:checked + .form-check-sign::after {
+.form-check-radio input[type='radio']:checked + .form-check-sign::after {
   opacity: 1;
 }
 
-.form-check-radio input[type="radio"]:disabled + .form-check-sign::before,
-.form-check-radio input[type="radio"]:disabled + .form-check-sign::after {
+.form-check-radio input[type='radio']:disabled + .form-check-sign::before,
+.form-check-radio input[type='radio']:disabled + .form-check-sign::after {
   color: #9a9a9a;
 }
 
@@ -2515,7 +2491,7 @@ textarea.form-control {
 .badge:focus {
   outline: none;
 }
-.badge span[data-role="remove"]:focus {
+.badge span[data-role='remove']:focus {
   outline: none;
 }
 
@@ -2901,7 +2877,7 @@ select,
 textarea {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-family: "Montserrat", "Helvetica", Arial, sans-serif;
+  font-family: 'Montserrat', 'Helvetica', Arial, sans-serif;
   font-weight: 300;
 }
 
@@ -3003,7 +2979,7 @@ h3 .small {
 .footer-big h5,
 .footer-big h4,
 .media .media-heading {
-  font-family: "Montserrat", "Helvetica", Arial, sans-serif;
+  font-family: 'Montserrat', 'Helvetica', Arial, sans-serif;
 }
 .title,
 .title a,
@@ -3127,7 +3103,7 @@ body {
   color: #66615b;
   font-size: 14px;
   font-weight: 300;
-  font-family: "Montserrat", "Helvetica", Arial, sans-serif;
+  font-family: 'Montserrat', 'Helvetica', Arial, sans-serif;
 }
 
 a {
@@ -3154,11 +3130,11 @@ hr {
 a:focus,
 a:active,
 button::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
+input[type='reset']::-moz-focus-inner,
+input[type='button']::-moz-focus-inner,
+input[type='submit']::-moz-focus-inner,
 select::-moz-focus-inner,
-input[type="file"] > input[type="button"]::-moz-focus-inner {
+input[type='file'] > input[type='button']::-moz-focus-inner {
   outline: 0;
 }
 
@@ -3186,7 +3162,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 .tagsinput-remove-link,
 .filter,
 .btn-hover,
-[data-toggle="collapse"] i,
+[data-toggle='collapse'] i,
 .animation-transition-fast,
 .dropdown-menu .dropdown-item {
   -webkit-transition: all 150ms linear;
@@ -3344,7 +3320,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 
 .offline-doc .page-header:after {
   background-color: rgba(0, 0, 0, 0.5);
-  content: "";
+  content: '';
   display: block;
   height: 100%;
   left: 0;
@@ -3403,12 +3379,12 @@ License - nucleoapp.com/license/
 
 -------------------------------- */
 @font-face {
-  font-family: "nucleo-icons";
-  src: url("~assets/fonts/nucleo-icons.eot");
-  src: url("~assets/fonts/nucleo-icons.eot") format("embedded-opentype"),
-    url("~assets/fonts/nucleo-icons.woff2") format("woff2"),
-    url("~assets/fonts/nucleo-icons.woff") format("woff"),
-    url("~assets/fonts/nucleo-icons.ttf") format("truetype");
+  font-family: 'nucleo-icons';
+  src: url('~assets/fonts/nucleo-icons.eot');
+  src: url('~assets/fonts/nucleo-icons.eot') format('embedded-opentype'),
+    url('~assets/fonts/nucleo-icons.woff2') format('woff2'),
+    url('~assets/fonts/nucleo-icons.woff') format('woff'),
+    url('~assets/fonts/nucleo-icons.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -3418,7 +3394,7 @@ License - nucleoapp.com/license/
 -------------------------*/
 .nc-icon {
   display: inline-block;
-  font: normal normal normal 14px/1 "nucleo-icons";
+  font: normal normal normal 14px/1 'nucleo-icons';
   font-size: inherit;
   speak: none;
   text-transform: none;
@@ -3584,403 +3560,403 @@ License - nucleoapp.com/license/
 	font icons
 -------------------------*/
 .nc-air-baloon::before {
-  content: "\ea01";
+  content: '\ea01';
 }
 
 .nc-album-2::before {
-  content: "\ea02";
+  content: '\ea02';
 }
 
 .nc-alert-circle-i::before {
-  content: "\ea04";
+  content: '\ea04';
 }
 
 .nc-align-center::before {
-  content: "\ea03";
+  content: '\ea03';
 }
 
 .nc-align-left-2::before {
-  content: "\ea05";
+  content: '\ea05';
 }
 
 .nc-ambulance::before {
-  content: "\ea06";
+  content: '\ea06';
 }
 
 .nc-app::before {
-  content: "\ea07";
+  content: '\ea07';
 }
 
 .nc-atom::before {
-  content: "\ea08";
+  content: '\ea08';
 }
 
 .nc-badge::before {
-  content: "\ea09";
+  content: '\ea09';
 }
 
 .nc-bag-16::before {
-  content: "\ea0a";
+  content: '\ea0a';
 }
 
 .nc-bank::before {
-  content: "\ea0b";
+  content: '\ea0b';
 }
 
 .nc-basket::before {
-  content: "\ea0c";
+  content: '\ea0c';
 }
 
 .nc-bell-55::before {
-  content: "\ea0d";
+  content: '\ea0d';
 }
 
 .nc-bold::before {
-  content: "\ea0e";
+  content: '\ea0e';
 }
 
 .nc-book-bookmark::before {
-  content: "\ea0f";
+  content: '\ea0f';
 }
 
 .nc-bookmark-2::before {
-  content: "\ea10";
+  content: '\ea10';
 }
 
 .nc-box-2::before {
-  content: "\ea11";
+  content: '\ea11';
 }
 
 .nc-box::before {
-  content: "\ea12";
+  content: '\ea12';
 }
 
 .nc-briefcase-24::before {
-  content: "\ea13";
+  content: '\ea13';
 }
 
 .nc-bulb-63::before {
-  content: "\ea14";
+  content: '\ea14';
 }
 
 .nc-bullet-list-67::before {
-  content: "\ea15";
+  content: '\ea15';
 }
 
 .nc-bus-front-12::before {
-  content: "\ea16";
+  content: '\ea16';
 }
 
 .nc-button-pause::before {
-  content: "\ea17";
+  content: '\ea17';
 }
 
 .nc-button-play::before {
-  content: "\ea18";
+  content: '\ea18';
 }
 
 .nc-button-power::before {
-  content: "\ea19";
+  content: '\ea19';
 }
 
 .nc-calendar-60::before {
-  content: "\ea1a";
+  content: '\ea1a';
 }
 
 .nc-camera-compact::before {
-  content: "\ea1b";
+  content: '\ea1b';
 }
 
 .nc-caps-small::before {
-  content: "\ea1c";
+  content: '\ea1c';
 }
 
 .nc-cart-simple::before {
-  content: "\ea1d";
+  content: '\ea1d';
 }
 
 .nc-chart-bar-32::before {
-  content: "\ea1e";
+  content: '\ea1e';
 }
 
 .nc-chart-pie-36::before {
-  content: "\ea1f";
+  content: '\ea1f';
 }
 
 .nc-chat-33::before {
-  content: "\ea20";
+  content: '\ea20';
 }
 
 .nc-check-2::before {
-  content: "\ea21";
+  content: '\ea21';
 }
 
 .nc-circle-10::before {
-  content: "\ea22";
+  content: '\ea22';
 }
 
 .nc-cloud-download-93::before {
-  content: "\ea23";
+  content: '\ea23';
 }
 
 .nc-cloud-upload-94::before {
-  content: "\ea24";
+  content: '\ea24';
 }
 
 .nc-compass-05::before {
-  content: "\ea25";
+  content: '\ea25';
 }
 
 .nc-controller-modern::before {
-  content: "\ea26";
+  content: '\ea26';
 }
 
 .nc-credit-card::before {
-  content: "\ea27";
+  content: '\ea27';
 }
 
 .nc-delivery-fast::before {
-  content: "\ea28";
+  content: '\ea28';
 }
 
 .nc-diamond::before {
-  content: "\ea29";
+  content: '\ea29';
 }
 
 .nc-email-85::before {
-  content: "\ea2a";
+  content: '\ea2a';
 }
 
 .nc-favourite-28::before {
-  content: "\ea2b";
+  content: '\ea2b';
 }
 
 .nc-glasses-2::before {
-  content: "\ea2c";
+  content: '\ea2c';
 }
 
 .nc-globe-2::before {
-  content: "\ea2d";
+  content: '\ea2d';
 }
 
 .nc-globe::before {
-  content: "\ea2e";
+  content: '\ea2e';
 }
 
 .nc-hat-3::before {
-  content: "\ea2f";
+  content: '\ea2f';
 }
 
 .nc-headphones::before {
-  content: "\ea30";
+  content: '\ea30';
 }
 
 .nc-html5::before {
-  content: "\ea31";
+  content: '\ea31';
 }
 
 .nc-image::before {
-  content: "\ea32";
+  content: '\ea32';
 }
 
 .nc-istanbul::before {
-  content: "\ea33";
+  content: '\ea33';
 }
 
 .nc-key-25::before {
-  content: "\ea34";
+  content: '\ea34';
 }
 
 .nc-laptop::before {
-  content: "\ea35";
+  content: '\ea35';
 }
 
 .nc-layout-11::before {
-  content: "\ea36";
+  content: '\ea36';
 }
 
 .nc-lock-circle-open::before {
-  content: "\ea37";
+  content: '\ea37';
 }
 
 .nc-map-big::before {
-  content: "\ea38";
+  content: '\ea38';
 }
 
 .nc-minimal-down::before {
-  content: "\ea39";
+  content: '\ea39';
 }
 
 .nc-minimal-left::before {
-  content: "\ea3a";
+  content: '\ea3a';
 }
 
 .nc-minimal-right::before {
-  content: "\ea3b";
+  content: '\ea3b';
 }
 
 .nc-minimal-up::before {
-  content: "\ea3c";
+  content: '\ea3c';
 }
 
 .nc-mobile::before {
-  content: "\ea3d";
+  content: '\ea3d';
 }
 
 .nc-money-coins::before {
-  content: "\ea3e";
+  content: '\ea3e';
 }
 
 .nc-note-03::before {
-  content: "\ea3f";
+  content: '\ea3f';
 }
 
 .nc-palette::before {
-  content: "\ea40";
+  content: '\ea40';
 }
 
 .nc-paper::before {
-  content: "\ea41";
+  content: '\ea41';
 }
 
 .nc-pin-3::before {
-  content: "\ea42";
+  content: '\ea42';
 }
 
 .nc-planet::before {
-  content: "\ea43";
+  content: '\ea43';
 }
 
 .nc-refresh-69::before {
-  content: "\ea44";
+  content: '\ea44';
 }
 
 .nc-ruler-pencil::before {
-  content: "\ea45";
+  content: '\ea45';
 }
 
 .nc-satisfied::before {
-  content: "\ea46";
+  content: '\ea46';
 }
 
 .nc-scissors::before {
-  content: "\ea47";
+  content: '\ea47';
 }
 
 .nc-send::before {
-  content: "\ea48";
+  content: '\ea48';
 }
 
 .nc-settings-gear-65::before {
-  content: "\ea49";
+  content: '\ea49';
 }
 
 .nc-settings::before {
-  content: "\ea4a";
+  content: '\ea4a';
 }
 
 .nc-share-66::before {
-  content: "\ea4b";
+  content: '\ea4b';
 }
 
 .nc-shop::before {
-  content: "\ea4c";
+  content: '\ea4c';
 }
 
 .nc-simple-add::before {
-  content: "\ea4d";
+  content: '\ea4d';
 }
 
 .nc-simple-delete::before {
-  content: "\ea4e";
+  content: '\ea4e';
 }
 
 .nc-simple-remove::before {
-  content: "\ea4f";
+  content: '\ea4f';
 }
 
 .nc-single-02::before {
-  content: "\ea50";
+  content: '\ea50';
 }
 
 .nc-single-copy-04::before {
-  content: "\ea51";
+  content: '\ea51';
 }
 
 .nc-sound-wave::before {
-  content: "\ea52";
+  content: '\ea52';
 }
 
 .nc-spaceship::before {
-  content: "\ea53";
+  content: '\ea53';
 }
 
 .nc-sun-fog-29::before {
-  content: "\ea54";
+  content: '\ea54';
 }
 
 .nc-support-17::before {
-  content: "\ea55";
+  content: '\ea55';
 }
 
 .nc-tablet-2::before {
-  content: "\ea56";
+  content: '\ea56';
 }
 
 .nc-tag-content::before {
-  content: "\ea57";
+  content: '\ea57';
 }
 
 .nc-tap-01::before {
-  content: "\ea58";
+  content: '\ea58';
 }
 
 .nc-tie-bow::before {
-  content: "\ea59";
+  content: '\ea59';
 }
 
 .nc-tile-56::before {
-  content: "\ea5a";
+  content: '\ea5a';
 }
 
 .nc-time-alarm::before {
-  content: "\ea5b";
+  content: '\ea5b';
 }
 
 .nc-touch-id::before {
-  content: "\ea5c";
+  content: '\ea5c';
 }
 
 .nc-trophy::before {
-  content: "\ea5d";
+  content: '\ea5d';
 }
 
 .nc-tv-2::before {
-  content: "\ea5e";
+  content: '\ea5e';
 }
 
 .nc-umbrella-13::before {
-  content: "\ea5f";
+  content: '\ea5f';
 }
 
 .nc-user-run::before {
-  content: "\ea60";
+  content: '\ea60';
 }
 
 .nc-vector::before {
-  content: "\ea61";
+  content: '\ea61';
 }
 
 .nc-watch-time::before {
-  content: "\ea62";
+  content: '\ea62';
 }
 
 .nc-world-2::before {
-  content: "\ea63";
+  content: '\ea63';
 }
 
 .nc-zoom-split::before {
-  content: "\ea64";
+  content: '\ea64';
 }
 
 /* all icon font classes list here */
@@ -4108,7 +4084,7 @@ License - nucleoapp.com/license/
   border-bottom: 11px solid #ffffff;
   border-left: 11px solid rgba(0, 0, 0, 0);
   border-right: 11px solid rgba(0, 0, 0, 0);
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   right: 40%;
@@ -4120,7 +4096,7 @@ License - nucleoapp.com/license/
   border-bottom: 11px solid #f1eae0;
   border-left: 11px solid rgba(0, 0, 0, 0);
   border-right: 11px solid rgba(0, 0, 0, 0);
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   right: 40%;
@@ -4143,7 +4119,7 @@ License - nucleoapp.com/license/
   border-bottom: 11px solid #f1eae0;
   border-left: 11px solid rgba(0, 0, 0, 0);
   border-right: 11px solid rgba(0, 0, 0, 0);
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   right: 12px;
@@ -4153,7 +4129,7 @@ License - nucleoapp.com/license/
   border-bottom: 11px solid #fffcf5;
   border-left: 11px solid rgba(0, 0, 0, 0);
   border-right: 11px solid rgba(0, 0, 0, 0);
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   right: 12px;
@@ -4266,8 +4242,8 @@ License - nucleoapp.com/license/
 }
 .navbar .navbar-brand {
   font-weight: 600;
-  margin: 5px 0px;
-  padding: 20px 15px;
+  /* margin: 5px 0px;
+  padding: 5px 5px; */
   font-size: 14px;
   color: #66615b;
   text-transform: uppercase;
@@ -4278,7 +4254,7 @@ License - nucleoapp.com/license/
 .navbar .form-control-feedback {
   padding-left: 0px;
 }
-.navbar:not([class*="bg"]) .navbar-toggler .navbar-toggler-bar {
+.navbar:not([class*='bg']) .navbar-toggler .navbar-toggler-bar {
   background: #66615b !important;
 }
 .navbar .navbar-nav .nav-item .nav-link {
@@ -4303,7 +4279,7 @@ License - nucleoapp.com/license/
   margin: 15px 3px;
   padding: 9px;
 }
-.navbar .navbar-nav .nav-item .nav-link [class^="fa"] {
+.navbar .navbar-nav .nav-item .nav-link [class^='fa'] {
   font-size: 17px;
   position: relative;
   right: 5px;
@@ -4411,15 +4387,15 @@ License - nucleoapp.com/license/
 }
 
 .navbar-transparent .navbar-brand,
-[class*="bg"] .navbar-brand {
+[class*='bg'] .navbar-brand {
   color: #ffffff;
   opacity: 0.9;
   filter: alpha(opacity=90);
 }
 .navbar-transparent .navbar-brand:focus,
 .navbar-transparent .navbar-brand:hover,
-[class*="bg"] .navbar-brand:focus,
-[class*="bg"] .navbar-brand:hover {
+[class*='bg'] .navbar-brand:focus,
+[class*='bg'] .navbar-brand:hover {
   background-color: transparent;
   opacity: 1;
   filter: alpha(opacity=100);
@@ -4427,7 +4403,7 @@ License - nucleoapp.com/license/
 }
 
 .navbar-transparent .navbar-nav .nav-item .nav-link:not(.btn),
-[class*="bg"] .navbar-nav .nav-item .nav-link:not(.btn) {
+[class*='bg'] .navbar-nav .nav-item .nav-link:not(.btn) {
   color: #ffffff;
   border-color: #ffffff;
 }
@@ -4436,10 +4412,10 @@ License - nucleoapp.com/license/
 .navbar-transparent .navbar-nav .active .nav-link:focus,
 .navbar-transparent .navbar-nav .nav-item .nav-link:hover,
 .navbar-transparent .navbar-nav .nav-item .nav-link:focus,
-[class*="bg"] .navbar-nav .active .nav-link .active .nav-link:hover,
-[class*="bg"] .navbar-nav .active .nav-link:focus,
-[class*="bg"] .navbar-nav .nav-item .nav-link:hover,
-[class*="bg"] .navbar-nav .nav-item .nav-link:focus {
+[class*='bg'] .navbar-nav .active .nav-link .active .nav-link:hover,
+[class*='bg'] .navbar-nav .active .nav-link:focus,
+[class*='bg'] .navbar-nav .nav-item .nav-link:hover,
+[class*='bg'] .navbar-nav .nav-item .nav-link:focus {
   background-color: transparent;
   color: #ffffff;
   opacity: 1;
@@ -4447,16 +4423,16 @@ License - nucleoapp.com/license/
 }
 
 .navbar-transparent .navbar-nav .nav .nav-item a.btn:hover,
-[class*="bg"] .navbar-nav .nav .nav-item a.btn:hover {
+[class*='bg'] .navbar-nav .nav .nav-item a.btn:hover {
   background-color: transparent;
 }
 
 .navbar-transparent .navbar-nav .dropdown .nav-link .caret,
 .navbar-transparent .navbar-nav .dropdown .nav-link:hover .caret,
 .navbar-transparent .navbar-nav .dropdown .nav-link:focus .caret,
-[class*="bg"] .navbar-nav .dropdown .nav-link .caret,
-[class*="bg"] .navbar-nav .dropdown .nav-link:hover .caret,
-[class*="bg"] .navbar-nav .dropdown .nav-link:focus .caret {
+[class*='bg'] .navbar-nav .dropdown .nav-link .caret,
+[class*='bg'] .navbar-nav .dropdown .nav-link:hover .caret,
+[class*='bg'] .navbar-nav .dropdown .nav-link:focus .caret {
   border-bottom-color: #ffffff;
   border-top-color: #ffffff;
 }
@@ -4464,9 +4440,9 @@ License - nucleoapp.com/license/
 .navbar-transparent .navbar-nav .open .nav-link,
 .navbar-transparent .navbar-nav .open .nav-link:hover,
 .navbar-transparent .navbar-nav .open .nav-link:focus,
-[class*="bg"] .navbar-nav .open .nav-link,
-[class*="bg"] .navbar-nav .open .nav-link:hover,
-[class*="bg"] .navbar-nav .open .nav-link:focus {
+[class*='bg'] .navbar-nav .open .nav-link,
+[class*='bg'] .navbar-nav .open .nav-link:hover,
+[class*='bg'] .navbar-nav .open .nav-link:focus {
   background-color: transparent;
   color: #66615b;
   opacity: 1;
@@ -4474,7 +4450,7 @@ License - nucleoapp.com/license/
 }
 
 .navbar-transparent .btn-default.btn-fill,
-[class*="bg"] .btn-default.btn-fill {
+[class*='bg'] .btn-default.btn-fill {
   color: #9a9a9a;
   background-color: #ffffff;
   opacity: 0.9;
@@ -4486,11 +4462,11 @@ License - nucleoapp.com/license/
 .navbar-transparent .btn-default.btn-fill:active,
 .navbar-transparent .btn-default.btn-fill.active,
 .navbar-transparent .open .dropdown-toggle.btn-fill.btn-default,
-[class*="bg"] .btn-default.btn-fill:hover,
-[class*="bg"] .btn-default.btn-fill:focus,
-[class*="bg"] .btn-default.btn-fill:active,
-[class*="bg"] .btn-default.btn-fill.active,
-[class*="bg"] .open .dropdown-toggle.btn-fill.btn-default {
+[class*='bg'] .btn-default.btn-fill:hover,
+[class*='bg'] .btn-default.btn-fill:focus,
+[class*='bg'] .btn-default.btn-fill:active,
+[class*='bg'] .btn-default.btn-fill.active,
+[class*='bg'] .open .dropdown-toggle.btn-fill.btn-default {
   border-color: #ffffff;
   opacity: 1;
   filter: alpha(opacity=100);
@@ -4524,14 +4500,14 @@ License - nucleoapp.com/license/
   visibility: hidden;
   position: absolute;
 }
-.dropdown .dropdown-menu[x-placement="top-start"] {
+.dropdown .dropdown-menu[x-placement='top-start'] {
   -webkit-transform: translate3d(0, 0px, 0) !important;
   -moz-transform: translate3d(0, 0px, 0) !important;
   -o-transform: translate3d(0, 0px, 0) !important;
   -ms-transform: translate3d(0, 0px, 0) !important;
   transform: translate3d(0, 0px, 0) !important;
 }
-.dropdown .dropdown-menu[x-placement="bottom-start"] {
+.dropdown .dropdown-menu[x-placement='bottom-start'] {
   -webkit-transform: translate3d(0, 0px, 0) !important;
   -moz-transform: translate3d(0, 0px, 0) !important;
   -o-transform: translate3d(0, 0px, 0) !important;
@@ -4544,7 +4520,7 @@ License - nucleoapp.com/license/
   filter: alpha(opacity=100);
   visibility: visible;
 }
-.dropdown.show .dropdown-menu[x-placement="top-start"] {
+.dropdown.show .dropdown-menu[x-placement='top-start'] {
   -webkit-transform: translate3d(0, -50px, 0) !important;
   -moz-transform: translate3d(0, -50px, 0) !important;
   -o-transform: translate3d(0, -50px, 0) !important;
@@ -4553,7 +4529,7 @@ License - nucleoapp.com/license/
   top: auto !important;
   bottom: 0 !important;
 }
-.dropdown.show .dropdown-menu[x-placement="bottom-start"] {
+.dropdown.show .dropdown-menu[x-placement='bottom-start'] {
   -webkit-transform: translate3d(0, 40px, 0) !important;
   -moz-transform: translate3d(0, 40px, 0) !important;
   -o-transform: translate3d(0, 40px, 0) !important;
@@ -4839,13 +4815,13 @@ License - nucleoapp.com/license/
 }
 
 .tooltip-inner:after {
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
 }
 
 .tooltip-inner:before {
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
 }
@@ -5271,12 +5247,12 @@ License - nucleoapp.com/license/
 
 .modal-header:after {
   display: table;
-  content: " ";
+  content: ' ';
 }
 
 .modal-header:before {
   display: table;
-  content: " ";
+  content: ' ';
 }
 
 .section-nucleo-icons {
@@ -5667,13 +5643,13 @@ License - nucleoapp.com/license/
   height: auto;
   border-radius: 12px 12px 0 0;
 }
-.card[data-radius="none"] {
+.card[data-radius='none'] {
   border-radius: 0px;
 }
-.card[data-radius="none"] .header {
+.card[data-radius='none'] .header {
   border-radius: 0px 0px 0 0;
 }
-.card[data-radius="none"] .header img {
+.card[data-radius='none'] .header img {
   border-radius: 0px 0px 0 0;
 }
 .card.card-plain {
@@ -5873,7 +5849,7 @@ License - nucleoapp.com/license/
   top: 0;
   width: 1px;
   background-color: #dddddd;
-  content: "";
+  content: '';
   position: absolute;
 }
 .card .card-icon {
@@ -5906,7 +5882,7 @@ License - nucleoapp.com/license/
   display: block;
   width: calc(100% - 10px);
   height: calc(100% - 10px);
-  content: "";
+  content: '';
   top: 5px;
   left: 5px;
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -5926,12 +5902,12 @@ License - nucleoapp.com/license/
 .card.card-just-text .dropdown-menu {
   margin-top: 55px;
 }
-.card[data-background="image"] {
+.card[data-background='image'] {
   background-position: center center;
   background-size: cover;
   text-align: center;
 }
-.card[data-background="image"] .card-body {
+.card[data-background='image'] .card-body {
   position: relative;
   z-index: 2;
   min-height: 280px;
@@ -5941,11 +5917,11 @@ License - nucleoapp.com/license/
   margin: 0 auto;
   text-align: center;
 }
-.card[data-background="image"] .card-title {
+.card[data-background='image'] .card-title {
   color: #fff;
   margin-top: 10px;
 }
-.card[data-background="image"]:after {
+.card[data-background='image']:after {
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -5953,48 +5929,48 @@ License - nucleoapp.com/license/
   display: block;
   left: 0;
   top: 0;
-  content: "";
+  content: '';
   background-color: rgba(0, 0, 0, 0.56);
   border-radius: 12px;
 }
-.card[data-background="image"] .card-category {
+.card[data-background='image'] .card-category {
   color: #ffffff;
 }
-.card[data-background="image"] .image,
-.card[data-background="color"] .image,
+.card[data-background='image'] .image,
+.card[data-background='color'] .image,
 .card[data-color] .image {
   border-radius: 6px;
 }
-.card[data-background="image"] .filter,
-.card[data-background="color"] .filter,
+.card[data-background='image'] .filter,
+.card[data-background='color'] .filter,
 .card[data-color] .filter {
   border-radius: 6px;
 }
-.card[data-background="image"] .card-description,
-.card[data-background="color"] .card-description,
+.card[data-background='image'] .card-description,
+.card[data-background='color'] .card-description,
 .card[data-color] .card-description {
   color: rgba(255, 255, 255, 0.8);
 }
-.card[data-background="image"] .card-title,
-.card[data-background="image"] .card-category,
-.card[data-background="image"] .card-text,
-.card[data-background="image"] .card-body,
-.card[data-background="image"] .card-footer,
-.card[data-background="image"] .stats,
-.card[data-background="image"] small,
-.card[data-background="image"] [class*="text-"],
-.card[data-background="image"] ul li b,
-.card[data-background="image"] a:not(.btn),
-.card[data-background="color"] .card-title,
-.card[data-background="color"] .card-category,
-.card[data-background="color"] .card-text,
-.card[data-background="color"] .card-body,
-.card[data-background="color"] .card-footer,
-.card[data-background="color"] .stats,
-.card[data-background="color"] small,
-.card[data-background="color"] [class*="text-"],
-.card[data-background="color"] ul li b,
-.card[data-background="color"] a:not(.btn),
+.card[data-background='image'] .card-title,
+.card[data-background='image'] .card-category,
+.card[data-background='image'] .card-text,
+.card[data-background='image'] .card-body,
+.card[data-background='image'] .card-footer,
+.card[data-background='image'] .stats,
+.card[data-background='image'] small,
+.card[data-background='image'] [class*='text-'],
+.card[data-background='image'] ul li b,
+.card[data-background='image'] a:not(.btn),
+.card[data-background='color'] .card-title,
+.card[data-background='color'] .card-category,
+.card[data-background='color'] .card-text,
+.card[data-background='color'] .card-body,
+.card[data-background='color'] .card-footer,
+.card[data-background='color'] .stats,
+.card[data-background='color'] small,
+.card[data-background='color'] [class*='text-'],
+.card[data-background='color'] ul li b,
+.card[data-background='color'] a:not(.btn),
 .card[data-color] .card-title,
 .card[data-color] .card-category,
 .card[data-color] .card-text,
@@ -6002,54 +5978,54 @@ License - nucleoapp.com/license/
 .card[data-color] .card-footer,
 .card[data-color] .stats,
 .card[data-color] small,
-.card[data-color] [class*="text-"],
+.card[data-color] [class*='text-'],
 .card[data-color] ul li b,
 .card[data-color] a:not(.btn) {
   color: #ffffff !important;
 }
-.card[data-background="image"] a:not(.btn):hover,
-.card[data-background="image"] a:not(.btn):focus,
-.card[data-background="color"] a:not(.btn):hover,
-.card[data-background="color"] a:not(.btn):focus,
+.card[data-background='image'] a:not(.btn):hover,
+.card[data-background='image'] a:not(.btn):focus,
+.card[data-background='color'] a:not(.btn):hover,
+.card[data-background='color'] a:not(.btn):focus,
 .card[data-color] a:not(.btn):hover,
 .card[data-color] a:not(.btn):focus {
   color: #ffffff;
 }
-.card[data-background="image"] .card-icon i,
-.card[data-background="color"] .card-icon i,
+.card[data-background='image'] .card-icon i,
+.card[data-background='color'] .card-icon i,
 .card[data-color] .card-icon i {
   color: #ffffff;
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
-.card[data-background="image"].card-with-border:after,
-.card[data-background="color"].card-with-border:after,
+.card[data-background='image'].card-with-border:after,
+.card[data-background='color'].card-with-border:after,
 .card[data-color].card-with-border:after {
   border: 1px solid rgba(255, 255, 255, 0.45);
 }
-.card[data-background="image"] .filter {
+.card[data-background='image'] .filter {
   opacity: 0.55;
   filter: alpha(opacity=55);
 }
-.card[data-background="image"]:hover .filter {
+.card[data-background='image']:hover .filter {
   opacity: 0.75;
   filter: alpha(opacity=75);
 }
-.card[data-color="blue"] {
+.card[data-color='blue'] {
   background: #6ec7e0;
 }
-.card[data-color="green"] {
+.card[data-color='green'] {
   background: #86d9ab;
 }
-.card[data-color="yellow"] {
+.card[data-color='yellow'] {
   background: #fcd27b;
 }
-.card[data-color="brown"] {
+.card[data-color='brown'] {
   background: #e4c4a1;
 }
-.card[data-color="purple"] {
+.card[data-color='purple'] {
   background: #cc90cc;
 }
-.card[data-color="orange"] {
+.card[data-color='orange'] {
   background: #f7765f;
 }
 
@@ -6062,12 +6038,12 @@ License - nucleoapp.com/license/
   position: relative;
 }
 .card-big-shadow:before {
-  background-image: url("http://static.tumblr.com/i21wc39/coTmrkw40/shadow.png");
+  background-image: url('http://static.tumblr.com/i21wc39/coTmrkw40/shadow.png');
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   bottom: -12%;
-  content: "";
+  content: '';
   display: block;
   left: -12%;
   position: absolute;
@@ -6197,7 +6173,7 @@ License - nucleoapp.com/license/
 }
 .page-header .filter::after {
   background-color: rgba(0, 0, 0, 0.5);
-  content: "";
+  content: '';
   display: block;
   height: 100%;
   left: 0;
@@ -6545,12 +6521,12 @@ License - nucleoapp.com/license/
   color: #ffffff;
 }
 
-[class*="features-"],
-[class*="team-"],
-[class*="projects-"],
-[class*="pricing-"],
-[class*="testimonials-"],
-[class*="contactus-"] {
+[class*='features-'],
+[class*='team-'],
+[class*='projects-'],
+[class*='pricing-'],
+[class*='testimonials-'],
+[class*='contactus-'] {
   padding: 80px 0;
 }
 
@@ -6560,7 +6536,7 @@ License - nucleoapp.com/license/
 }
 .section-image:before {
   background-color: rgba(0, 0, 0, 0.5);
-  content: "";
+  content: '';
   display: block;
   height: 100%;
   left: 0;
@@ -6591,12 +6567,12 @@ License - nucleoapp.com/license/
   }
 }
 
-[class*="features-"],
-[class*="team-"],
-[class*="projects-"],
-[class*="pricing-"],
-[class*="testimonials-"],
-[class*="contactus-"] {
+[class*='features-'],
+[class*='team-'],
+[class*='projects-'],
+[class*='pricing-'],
+[class*='testimonials-'],
+[class*='contactus-'] {
   padding: 80px 0;
 }
 
@@ -6606,7 +6582,7 @@ License - nucleoapp.com/license/
 }
 .section-image:before {
   background-color: rgba(0, 0, 0, 0.5);
-  content: "";
+  content: '';
   display: block;
   height: 100%;
   left: 0;
@@ -6956,16 +6932,16 @@ License - nucleoapp.com/license/
   .navbar-nav .open .dropdown-menu > li:last-child > a {
     padding: 15px 15px 25px 50px;
   }
-  [class*="navbar-"] .navbar-nav > li > a,
-  [class*="navbar-"] .navbar-nav > li > a:hover,
-  [class*="navbar-"] .navbar-nav > li > a:focus,
-  [class*="navbar-"] .navbar-nav .active > a,
-  [class*="navbar-"] .navbar-nav .active > a:hover,
-  [class*="navbar-"] .navbar-nav .active > a:focus,
-  [class*="navbar-"] .navbar-nav .open .dropdown-menu > li > a,
-  [class*="navbar-"] .navbar-nav .open .dropdown-menu > li > a:hover,
-  [class*="navbar-"] .navbar-nav .open .dropdown-menu > li > a:focus,
-  [class*="navbar-"]
+  [class*='navbar-'] .navbar-nav > li > a,
+  [class*='navbar-'] .navbar-nav > li > a:hover,
+  [class*='navbar-'] .navbar-nav > li > a:focus,
+  [class*='navbar-'] .navbar-nav .active > a,
+  [class*='navbar-'] .navbar-nav .active > a:hover,
+  [class*='navbar-'] .navbar-nav .active > a:focus,
+  [class*='navbar-'] .navbar-nav .open .dropdown-menu > li > a,
+  [class*='navbar-'] .navbar-nav .open .dropdown-menu > li > a:hover,
+  [class*='navbar-'] .navbar-nav .open .dropdown-menu > li > a:focus,
+  [class*='navbar-']
     .navbar-nav
     .navbar-nav
     .open
@@ -6974,16 +6950,16 @@ License - nucleoapp.com/license/
     > a:active {
     color: white;
   }
-  [class*="navbar-"] .navbar-nav > li > a:not(.btn),
-  [class*="navbar-"] .navbar-nav > li > a:hover,
-  [class*="navbar-"] .navbar-nav > li > a:focus,
-  [class*="navbar-"] .navbar-nav .open .dropdown-menu > li > a:not(.btn),
-  [class*="navbar-"] .navbar-nav .open .dropdown-menu > li > a:hover,
-  [class*="navbar-"] .navbar-nav .open .dropdown-menu > li > a:focus {
+  [class*='navbar-'] .navbar-nav > li > a:not(.btn),
+  [class*='navbar-'] .navbar-nav > li > a:hover,
+  [class*='navbar-'] .navbar-nav > li > a:focus,
+  [class*='navbar-'] .navbar-nav .open .dropdown-menu > li > a:not(.btn),
+  [class*='navbar-'] .navbar-nav .open .dropdown-menu > li > a:hover,
+  [class*='navbar-'] .navbar-nav .open .dropdown-menu > li > a:focus {
     opacity: 0.7;
     background: transparent;
   }
-  [class*="navbar-"]
+  [class*='navbar-']
     .navbar-nav.navbar-nav
     .open
     .dropdown-menu
@@ -6991,11 +6967,11 @@ License - nucleoapp.com/license/
     > a:active {
     opacity: 1;
   }
-  [class*="navbar-"] .navbar-nav .dropdown > a:hover .caret {
+  [class*='navbar-'] .navbar-nav .dropdown > a:hover .caret {
     border-bottom-color: #777;
     border-top-color: #777;
   }
-  [class*="navbar-"] .navbar-nav .dropdown > a:active .caret {
+  [class*='navbar-'] .navbar-nav .dropdown > a:active .caret {
     border-bottom-color: white;
     border-top-color: white;
   }
@@ -7171,7 +7147,9 @@ License - nucleoapp.com/license/
   .presentation-page
     .section-icons
     .icons-nucleo
-    .nc-icon:not(.ninth-left-icon):not(.seventh-left-icon):not(.third-left-icon) {
+    .nc-icon:not(.ninth-left-icon):not(.seventh-left-icon):not(
+      .third-left-icon
+    ) {
     display: none !important;
   }
   .bootstrap-datetimepicker-widget {
@@ -7208,7 +7186,7 @@ License - nucleoapp.com/license/
   .pricing-5 .description {
     text-align: center;
   }
-  .page-carousel .carousel-inner [class*="col-md"] {
+  .page-carousel .carousel-inner [class*='col-md'] {
     margin-left: 0 !important;
   }
   .page-carousel .right.carousel-control {
@@ -7290,7 +7268,7 @@ License - nucleoapp.com/license/
       rgba(186, 186, 186, 0.15) 100%
     );
     display: block;
-    content: "";
+    content: '';
     z-index: 1;
   }
   .navbar-collapse.has-image::after {
@@ -7301,7 +7279,7 @@ License - nucleoapp.com/license/
     position: absolute;
     background-color: rgba(17, 17, 17, 0.8);
     display: block;
-    content: "";
+    content: '';
     z-index: 1;
   }
   .nav-open .navbar-collapse {
@@ -7396,7 +7374,7 @@ License - nucleoapp.com/license/
     top: 0;
     left: auto;
     right: 230px;
-    content: "";
+    content: '';
     z-index: 1029;
     overflow-x: hidden;
   }
@@ -7409,7 +7387,7 @@ License - nucleoapp.com/license/
     left: 0;
     background-color: white;
   }
-  .container-cards [class*="col-md-"] {
+  .container-cards [class*='col-md-'] {
     padding-left: 5px;
     padding-right: 5px;
   }
@@ -7505,7 +7483,7 @@ License - nucleoapp.com/license/
       rgba(186, 186, 186, 0.15) 100%
     );
     display: block;
-    content: "";
+    content: '';
     z-index: 1;
   }
   .burger-menu .navbar-collapse.has-image::after {
@@ -7516,7 +7494,7 @@ License - nucleoapp.com/license/
     position: absolute;
     background-color: rgba(17, 17, 17, 0.8);
     display: block;
-    content: "";
+    content: '';
     z-index: 1;
   }
   .burger-menu .navbar .container .navbar-toggler {
@@ -7554,7 +7532,7 @@ License - nucleoapp.com/license/
   .burger-menu .navbar-nav:before,
   .burger-menu .navbar-nav:after {
     display: table;
-    content: " ";
+    content: ' ';
   }
   .nav-open .burger-menu .navbar-collapse.collapse {
     -webkit-transform: translateX(0px);
@@ -7824,7 +7802,7 @@ This file was modified by Creative-Tim
 
 /* Offset direction
 */
-html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
+html:not([dir='rtl']) .noUi-horizontal .noUi-origin {
   left: auto;
   right: 0;
 }
@@ -7889,7 +7867,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   top: -10px;
 }
 
-html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
+html:not([dir='rtl']) .noUi-horizontal .noUi-handle {
   right: -5px;
   left: auto;
 }
@@ -8180,7 +8158,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   width: 0;
   height: 0;
   vertical-align: middle;
-  content: "";
+  content: '';
   top: -5px;
   left: 10px;
   right: auto;
@@ -8193,7 +8171,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   border-bottom: 0.4em solid #ffffff;
   border-right: 0.4em solid transparent;
   border-left: 0.4em solid transparent;
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   top: -5px;
@@ -8517,7 +8495,7 @@ td.rdtYear:hover {
   padding-left: 0.75rem;
 }
 
-.dropdown .dropdown-menu[x-placement="top-start"] {
+.dropdown .dropdown-menu[x-placement='top-start'] {
   -webkit-transform: translate3d(0, 0px, 0) !important;
   -moz-transform: translate3d(0, 0px, 0) !important;
   -o-transform: translate3d(0, 0px, 0) !important;
@@ -8525,7 +8503,7 @@ td.rdtYear:hover {
   transform: translate3d(0, 0px, 0) !important;
 }
 
-.dropdown .dropdown-menu[x-placement="bottom-start"] {
+.dropdown .dropdown-menu[x-placement='bottom-start'] {
   -webkit-transform: translate3d(0, 0px, 0) !important;
   -moz-transform: translate3d(0, 0px, 0) !important;
   -o-transform: translate3d(0, 0px, 0) !important;
@@ -8533,7 +8511,7 @@ td.rdtYear:hover {
   transform: translate3d(0, 0px, 0) !important;
 }
 
-.dropdown.show .dropdown-menu[x-placement="top-start"] {
+.dropdown.show .dropdown-menu[x-placement='top-start'] {
   -webkit-transform: translate3d(0, -50px, 0) !important;
   -moz-transform: translate3d(0, -50px, 0) !important;
   -o-transform: translate3d(0, -50px, 0) !important;
@@ -8543,7 +8521,7 @@ td.rdtYear:hover {
   bottom: 0 !important;
 }
 
-.dropdown.show .dropdown-menu[x-placement="bottom-start"] {
+.dropdown.show .dropdown-menu[x-placement='bottom-start'] {
   -webkit-transform: translate3d(0, 40px, 0) !important;
   -moz-transform: translate3d(0, 40px, 0) !important;
   -o-transform: translate3d(0, 40px, 0) !important;
@@ -8576,14 +8554,14 @@ td.rdtYear:hover {
   .index .presentation-subtitle {
     margin-bottom: 100px;
   }
-  nav[aria-label="pagination"] {
+  nav[aria-label='pagination'] {
     justify-content: center;
     text-align: center;
   }
-  nav[aria-label="pagination"] .pagination {
+  nav[aria-label='pagination'] .pagination {
     display: inline-block;
   }
-  nav[aria-label="pagination"] .pagination .page-item {
+  nav[aria-label='pagination'] .pagination .page-item {
     margin-bottom: 5px;
   }
   .register-page .page-header .container {
@@ -8596,63 +8574,63 @@ td.rdtYear:hover {
   z-index: 1050;
 }
 
-.bs-tooltip-auto[x-placement^="left"] .arrow::before,
+.bs-tooltip-auto[x-placement^='left'] .arrow::before,
 .bs-tooltip-left .arrow::before {
   border-left-color: rgba(0, 0, 0, 0.25);
 }
 
-.bs-tooltip-auto[x-placement^="top"] .arrow::before,
+.bs-tooltip-auto[x-placement^='top'] .arrow::before,
 .bs-tooltip-top .arrow::before {
   border-top-color: rgba(0, 0, 0, 0.25);
 }
 
-.bs-tooltip-auto[x-placement^="right"] .arrow::before,
+.bs-tooltip-auto[x-placement^='right'] .arrow::before,
 .bs-tooltip-right .arrow::before {
   border-right-color: rgba(0, 0, 0, 0.25);
 }
 
-.bs-tooltip-auto[x-placement^="bottom"] .arrow::before,
+.bs-tooltip-auto[x-placement^='bottom'] .arrow::before,
 .bs-tooltip-bottom .arrow::before {
   border-bottom-color: rgba(0, 0, 0, 0.25);
 }
 
-.bs-tooltip-auto[x-placement^="top"] .arrow::after,
+.bs-tooltip-auto[x-placement^='top'] .arrow::after,
 .bs-tooltip-top .arrow::after,
-.bs-tooltip-auto[x-placement^="left"] .arrow::after,
+.bs-tooltip-auto[x-placement^='left'] .arrow::after,
 .bs-tooltip-left .arrow::after,
-.bs-tooltip-auto[x-placement^="right"] .arrow::after,
+.bs-tooltip-auto[x-placement^='right'] .arrow::after,
 .bs-tooltip-right .arrow::after,
-.bs-tooltip-auto[x-placement^="bottom"] .arrow::after,
+.bs-tooltip-auto[x-placement^='bottom'] .arrow::after,
 .bs-tooltip-bottom .arrow::after {
   position: absolute;
   display: block;
-  content: "";
+  content: '';
   border-color: transparent;
   border-style: solid;
 }
 
-.bs-tooltip-auto[x-placement^="left"] .arrow::after,
+.bs-tooltip-auto[x-placement^='left'] .arrow::after,
 .bs-tooltip-left .arrow::after {
   right: 1px;
   border-width: 0.4rem 0 0.4rem 0.4rem;
   border-left-color: #fff;
 }
 
-.bs-tooltip-auto[x-placement^="top"] .arrow::after,
+.bs-tooltip-auto[x-placement^='top'] .arrow::after,
 .bs-tooltip-top .arrow::after {
   bottom: 1px;
   border-width: 0.4rem 0.4rem 0;
   border-top-color: #fff;
 }
 
-.bs-tooltip-auto[x-placement^="right"] .arrow::after,
+.bs-tooltip-auto[x-placement^='right'] .arrow::after,
 .bs-tooltip-right .arrow::after {
   left: 1px;
   border-width: 0.4rem 0.4rem 0.4rem 0;
   border-right-color: #fff;
 }
 
-.bs-tooltip-auto[x-placement^="bottom"] .arrow::after,
+.bs-tooltip-auto[x-placement^='bottom'] .arrow::after,
 .bs-tooltip-bottom .arrow::after {
   top: 1px;
   border-width: 0 0.4rem 0.4rem 0.4rem;

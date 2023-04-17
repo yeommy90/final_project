@@ -1,17 +1,25 @@
-import React from "react";
+import React from 'react';
 
 // reactstrap components
-import { Button, Card, Form, Input, Container, Row, Col, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
-
-// core components
-import IndexNavbar from "components/Navbars/IndexNavbar";
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  Container,
+  Row,
+  Col,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+} from 'reactstrap';
 
 function Login() {
-  document.documentElement.classList.remove("nav-open");
+  document.documentElement.classList.remove('nav-open');
   React.useEffect(() => {
-    document.body.classList.add("register-page");
+    document.body.classList.add('register-page');
     return function cleanup() {
-      document.body.classList.remove("register-page");
+      document.body.classList.remove('register-page');
     };
   });
   return (
@@ -20,7 +28,7 @@ function Login() {
       <div
         className="page-header"
         style={{
-          backgroundImage: "url(" + require("assets/img/login-image.jpg") + ")",
+          backgroundImage: 'url(' + require('assets/img/login-image.jpg') + ')',
         }}
       >
         <div className="filter" />
@@ -29,8 +37,7 @@ function Login() {
             <Col className="ml-auto mr-auto" lg="4">
               <Card className="card-register ml-auto mr-auto">
                 <h3 className="title mx-auto">Login</h3>
-                <div className="social-line text-center">
-                </div>
+                <div className="social-line text-center"></div>
                 <Form className="register-form">
                   <label>Email</label>
                   <InputGroup className="form-group-no-border">
@@ -53,7 +60,12 @@ function Login() {
                   <Button block className="btn-round" color="danger">
                     Login
                   </Button>
-                  <Button block className="btn-round" color="danger" href="/register">
+                  <Button
+                    block
+                    className="btn-round"
+                    color="danger"
+                    href="/register"
+                  >
                     Register
                   </Button>
                 </Form>
@@ -73,7 +85,7 @@ function Login() {
         </Container>
         <div className="footer register-footer text-center">
           <h6>
-            © {new Date().getFullYear()}, made with{" "}
+            © {new Date().getFullYear()}, made with{' '}
             <i className="fa fa-heart heart" /> by Creative Tim
           </h6>
         </div>
