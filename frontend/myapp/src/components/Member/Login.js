@@ -1,4 +1,6 @@
-import React from 'react';
+import { baseUrl } from "apiurl";
+import axios from "axios";
+import React, { useState } from "react";
 
 // reactstrap components
 import {
@@ -12,23 +14,60 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-} from 'reactstrap';
+} from "reactstrap";
 
-function Login() {
-  document.documentElement.classList.remove('nav-open');
-  React.useEffect(() => {
-    document.body.classList.add('register-page');
-    return function cleanup() {
-      document.body.classList.remove('register-page');
-    };
+const Login = () => {
+  const [inputs, setInputs] = useState({
+    memberEmail: "",
+    memberPass: "",
   });
+
+  const { memberEmail, memberPass } = inputs;
+
+  const handleValueChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
+
+  const config = { headers: { "Content-Type": "application/json" } };
+
+  //입력한 로그인 정보 보내기
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post(`${baseUrl}/login`, inputs, config)
+      .then((response) => {
+        console.log("response: ", response.data);
+        //let jwtToken = response.headers['Authorization'];
+        let jwtToken = response.headers.get("Authorization");
+        console.log(jwtToken);
+
+        let jwtMemberName = response.data.memberName;
+        let jwtMemberEmail = response.data.memberEmail;
+        let jwtAuthRole = response.data.authRole;
+
+        localStorage.setItem("Authorization", jwtToken);
+        localStorage.setItem("memberEmail", jwtMemberEmail);
+        localStorage.setItem("memberName", jwtMemberName);
+        localStorage.setItem("authRole", jwtAuthRole);
+        localStorage.setItem("isLogin", "true");
+
+        setInputs({ memberEmail: "", memberPass: "" });
+      })
+      .then((response) => {
+        //navigator('/'); 를 사용하려면 위에 const navigator = useNavigate(); 선언필요
+        window.location.replace("/");
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+  };
   return (
     <>
       {/* <IndexNavbar /> */}
       <div
         className="page-header"
         style={{
-          backgroundImage: 'url(' + require('assets/img/login-image.jpg') + ')',
+          backgroundImage: "url(" + require("assets/img/login-image.jpg") + ")",
         }}
       >
         <div className="filter" />
@@ -36,29 +75,46 @@ function Login() {
           <Row>
             <Col className="ml-auto mr-auto" lg="4">
               <Card className="card-register ml-auto mr-auto">
-                <h3 className="title mx-auto">Login</h3>
+                <h3 className="title mx-auto">로그인</h3>
                 <div className="social-line text-center"></div>
                 <Form className="register-form">
-                  <label>Email</label>
+                  <label>이메일</label>
                   <InputGroup className="form-group-no-border">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
                         <i className="nc-icon nc-email-85" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Email" type="email" />
+                    <Input
+                      placeholder="Email"
+                      type="email"
+                      name="memberEmail"
+                      onChange={handleValueChange}
+                      value={memberEmail}
+                    />
                   </InputGroup>
-                  <label>Password</label>
+                  <label>비밀번호</label>
                   <InputGroup className="form-group-no-border">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
                         <i className="nc-icon nc-key-25" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Password" type="password" />
+                    <Input
+                      placeholder="Password"
+                      type="password"
+                      name="memberPass"
+                      onChange={handleValueChange}
+                      value={memberPass}
+                    />
                   </InputGroup>
-                  <Button block className="btn-round" color="danger">
-                    Login
+                  <Button
+                    block
+                    className="btn-round"
+                    color="danger"
+                    onClick={onSubmit}
+                  >
+                    로그인
                   </Button>
                   <Button
                     block
@@ -66,7 +122,7 @@ function Login() {
                     color="danger"
                     href="/register"
                   >
-                    Register
+                    회원가입
                   </Button>
                 </Form>
                 <div className="forgot">
@@ -76,7 +132,7 @@ function Login() {
                     href="#pablo"
                     onClick={(e) => e.preventDefault()}
                   >
-                    Forgot password?
+                    비밀번호를 잊으셨습니까?
                   </Button>
                 </div>
               </Card>
@@ -85,13 +141,13 @@ function Login() {
         </Container>
         <div className="footer register-footer text-center">
           <h6>
-            © {new Date().getFullYear()}, made with{' '}
+            © {new Date().getFullYear()}, made with{" "}
             <i className="fa fa-heart heart" /> by Creative Tim
           </h6>
         </div>
       </div>
     </>
   );
-}
+};
 
 export default Login;
