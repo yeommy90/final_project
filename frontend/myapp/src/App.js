@@ -6,8 +6,9 @@ import Login from 'components/Member/Login';
 import Home from 'components/Home';
 import SearchPage from 'components/Search/SearchPage';
 import ProfilePage from 'components/Profile/ProfilePage';
-import AnalysisPage from 'components/Profile/Analysis/AnalysisPage';
 import Contents from 'components/Contents/ContentsPage';
+import ReviewPage from 'components/Review/ReviewPage';
+import AnalysisPage from 'components/Analysis/AnalysisPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/analysis" element={<AnalysisPage />} />
         <Route path="/contents" element={<Contents />} />
+        <Route path="/review" element={<ReviewPage />} />
       </Routes>
     </BaseLayout>
   );

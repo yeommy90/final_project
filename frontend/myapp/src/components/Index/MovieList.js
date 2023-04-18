@@ -1,16 +1,24 @@
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const imgNumber = 20;
+const imgNumber = 30;
+const imgWidth = 200; // The width of each image box in pixels
 
 function setImg() {
   return (
     <>
-      <div style={{ height: 'auto', width: 'auto' }}>
+      <div
+        style={{
+          height: 'auto',
+          width: 'auto',
+          float: 'left',
+          marginLeft: '10px',
+        }}
+      >
         <div className='img_box'>
           <Link to="/contents">
           <img
             src='https://an2-img.amz.wtchn.net/image/v2/tkmsakQ3xtdo7JXj6Gogqw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk5UZzRPREF6TXpjeU5qY3dNREkxTXpraWZRLjU3cGhtemxyblpFdW5jU1BfZy1ycUhNU1VjV19WTDlLSjJITmh3anJPVWM'
-            class='css-qhzw1o-StyledImg ezcopuc1'
             style={{ marginBottom: '10px' }}
           />
           </Link>
@@ -19,10 +27,6 @@ function setImg() {
         <div
           className='titlebox'
           style={{
-            height: 'auto',
-            width: 'auto',
-            backgroundColor: 'white',
-            marginTop: '300px',
             marginBottom: '30px',
           }}
         >
@@ -64,6 +68,21 @@ function setImgBox() {
 }
 
 function MovieList() {
+  const [position, setPosition] = useState(0);
+
+  const handlePrevClick = () => {
+    if (position < 0) {
+      setPosition(position + imgWidth);
+    }
+  };
+
+  const handleNextClick = () => {
+    const maxPosition = -(imgNumber - 5) * imgWidth; // Assuming 5 images are shown at a time
+    if (position > maxPosition) {
+      setPosition(position - imgWidth);
+    }
+  };
+
   return (
     <>
       {/* 이미지셋 */}
@@ -73,20 +92,26 @@ function MovieList() {
           width: '100%',
           height: '450px',
           overflow: 'hidden',
+          position: 'relative',
         }}
       >
         {/* 이미지박스 */}
+        {/* left값으로 위치 변경 할 수 있음 */}
         <div
-          className='img_box_container'
+          className='img_set_set'
           style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
+            width: `${imgNumber * imgWidth}px`,
+            height: '100%',
+            position: 'absolute',
+            left: `${position}px`, // Set the initial position of the img_set_set element
+            transition: 'left 0.5s ease-in-out', // Add a CSS transition for smooth animation
           }}
         >
           {setImgBox()}
         </div>
       </div>
+      <button onClick={handlePrevClick}>이전</button>
+      <button onClick={handleNextClick}>다음</button>
     </>
   );
 }

@@ -25,7 +25,7 @@ function IndexBody() {
             국내 상영 영화 순위
           </p>
         </div>
-        <div class="d-flex">
+        <div className="d-flex">
           <MovieList></MovieList>
         </div>
         {/* SET_END */}
@@ -51,7 +51,7 @@ function IndexBody() {
             국내 상영 영화 순위
           </p>
         </div>
-        <div class="d-flex">
+        <div className="d-flex">
           <MovieList></MovieList>
         </div>
         {/* SET_END */}
@@ -77,7 +77,7 @@ function IndexBody() {
             국내 상영 영화 순위
           </p>
         </div>
-        <div class="d-flex">
+        <div className="d-flex">
           <MovieList></MovieList>
         </div>
         {/* SET_END */}
@@ -103,7 +103,7 @@ function IndexBody() {
             국내 상영 영화 순위
           </p>
         </div>
-        <div class="d-flex">
+        <div className="d-flex">
           <MovieList></MovieList>
         </div>
         {/* SET_END */}
@@ -129,7 +129,7 @@ function IndexBody() {
             국내 상영 영화 순위
           </p>
         </div>
-        <div class="d-flex">
+        <div className="d-flex">
           <MovieList></MovieList>
         </div>
         {/* SET_END */}

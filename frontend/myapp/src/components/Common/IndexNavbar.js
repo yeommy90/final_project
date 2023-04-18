@@ -13,36 +13,33 @@ import {
   Container,
 } from 'reactstrap';
 
-function IndexNavbar() {
+function IndexNavbar({ transparent }) {
   const [navbarColor, setNavbarColor] = React.useState('navbar-transparent');
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
+  const initialRender = React.useRef(true);
 
-  const toggleNavbarCollapse = () => {
-    setNavbarCollapse(!navbarCollapse);
-    document.documentElement.classList.toggle('nav-open');
+  // index일때는 transparent 적용, 그외 페이지는 bg-dark (scss/paper-kit/_navbars.scss/&.navbar-transparent 항목 수정)
+  const updateNavbarColor = () => {
+    if (transparent && (document.documentElement.scrollTop > 299 || document.body.scrollTop > 299)) {
+      setNavbarColor('navbar-dark bg-dark');
+    } else if (transparent && (document.documentElement.scrollTop < 300 || document.body.scrollTop < 300)) {
+      setNavbarColor('navbar-transparent');
+    } else if (!transparent && initialRender.current) {
+      setNavbarColor('navbar-dark bg-dark');
+    }
   };
 
   React.useEffect(() => {
-    const updateNavbarColor = () => {
-      if (
-        document.documentElement.scrollTop > 299 ||
-        document.body.scrollTop > 299
-      ) {
-        setNavbarColor('navbar-dark bg-dark');
-      } else if (
-        document.documentElement.scrollTop < 300 ||
-        document.body.scrollTop < 300
-      ) {
-        setNavbarColor('navbar-transparent');
-      }
-    };
+    updateNavbarColor();
+    initialRender.current = false;
 
     window.addEventListener('scroll', updateNavbarColor);
 
     return function cleanup() {
       window.removeEventListener('scroll', updateNavbarColor);
     };
-  }, []); // 두번째 파라미터에 빈 배열을 넣어 최초 렌더링 이후에만 이벤트 리스너가 등록되도록 설정
+  }, [transparent]); // 두번째 파라미터에 빈 배열을 넣어 최초 렌더링 이후에만 이벤트 리스너가 등록되도록 설정
+
   return (
     <Navbar className={classnames('fixed-top', navbarColor)} expand="lg">
       <Container>
@@ -50,8 +47,7 @@ function IndexNavbar() {
           <NavbarBrand
             data-placement="bottom"
             href="/"
-            target=""
-            title="Coded by Creative Tim"
+            title="부귀영화"
             style={{ margin: 0, padding: 0 }}
           >
             <img
@@ -68,9 +64,51 @@ function IndexNavbar() {
         >
           <Nav navbar>
             {/* 네비 버튼 */}
-            <NavItem>
-              <NavLink href="/search">[검색]</NavLink>
-            </NavItem>
+              {/* <NavLink href="/search">[검색]</NavLink> */}
+              <div
+              style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <input
+                type='text'
+                style={{
+                  height: '30px',
+                  marginTop: '0px',
+                  backgroundColor: 'black',
+                  opacity: '0.7',
+                  color: 'white',
+                  borderRadius: '5px',
+                  border: 'none',
+                  padding: '5px 10px',
+                }}
+                placeholder='검색어를 입력하세요...'
+              />
+              <NavLink href="/search"
+                style={{
+                  position: 'absolute',
+                  right: '10px',
+                  top: '50%',
+                  right: '3%',
+                  transform: 'translateY(-50%)',
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                }} >
+                <img
+                  src={require('assets/img/search.png')}
+                  alt='검색 버튼'
+                  style={{
+                    width: '17px',
+                    height: '17px',
+                    filter: 'invert(50%)',
+                    marginLeft: '10px',
+                  }}
+                />
+              </NavLink>
+            </div>
             <NavItem>
               <NavLink href="/profile">아무개 님의 마이페이지</NavLink>
             </NavItem>
