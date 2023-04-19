@@ -33,7 +33,7 @@ const ContentsHeader = () => {
               <div>
                 <Button className='m-1' color="primary">보고싶어요</Button>
                 <Button className='m-1' color="secondary" onClick={handleShow}>코멘트</Button>
-                <CommentModal show={show} handleClose={handleClose} />
+                <CommentModal isOpen={show} onRequestClose={handleClose} />
               </div>
             </div>
           </Col>
