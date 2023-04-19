@@ -29,6 +29,7 @@ const EditInfo = () => {
         setMembers({ ...response.data, memberPass: "" });
       });
   };
+  
   useEffect(() => {
     info();
   }, []);
