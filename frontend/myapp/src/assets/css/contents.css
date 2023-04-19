@@ -1,7 +1,7 @@
 .banner-container {
   position: relative;
   overflow: hidden;
-  height: 350px;
+  height: 400px;
   background-color: #f8f9fa; /* Set the background color to match your website background */
 }
 
@@ -14,7 +14,7 @@
   background-image: url('assets/img/5LWF3lOtEZ08JPGFH3kc1g.jpg');
   background-size: cover;
   background-position: center;
-  filter: blur(10px);
+  filter: blur(6px);
   z-index: 1;
 }
 
@@ -27,7 +27,7 @@
   height: 100%;
   object-fit: cover;
   z-index: 2;
-  -webkit-mask-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, transparent);
   mask-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 90%, transparent);
 }
 
@@ -50,14 +50,36 @@
   object-fit: cover;
 }
 
+
+/* 컨텐츠 내용 */
 .movie-basic h2 {
   font-weight: bold;
 }
 
-.movie-basic div {
-  padding: 10px 0; /* Adjust the padding values as needed */
+h3 {
+  font-weight: bold !important;
+  padding-bottom: 10px;
 }
 
-.movie-detail h3 {
-  font-weight: bold;
+.movie-basic div {
+  padding: 5px; /* Adjust the padding values as needed */
 }
+
+
+/* 코멘트 내용 */
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  padding: auto;
+}
+
+.user-comment {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.comment-box {
+  background-color: #f8f9fa; /* You can adjust the color to match the gray you want */
+  border-radius: 5px;
+}
+

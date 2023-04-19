@@ -13,19 +13,8 @@ function IndexBody() {
 
             marginBottom: '10px',
           }}
-        >
-          <p
-            style={{
-              fontSize: '25px',
-              padding: '10px',
-              fontFamily: '',
-              fontWeight: 'bold',
-            }}
-          >
-            국내 상영 영화 순위
-          </p>
-        </div>
-        <div className="d-flex">
+        ></div>
+        <div className='d-flex'>
           <MovieList></MovieList>
         </div>
         {/* SET_END */}
@@ -39,19 +28,8 @@ function IndexBody() {
 
             marginBottom: '10px',
           }}
-        >
-          <p
-            style={{
-              fontSize: '25px',
-              padding: '10px',
-              fontFamily: '',
-              fontWeight: 'bold',
-            }}
-          >
-            국내 상영 영화 순위
-          </p>
-        </div>
-        <div className="d-flex">
+        ></div>
+        <div className='d-flex'>
           <MovieList></MovieList>
         </div>
         {/* SET_END */}
@@ -65,19 +43,8 @@ function IndexBody() {
 
             marginBottom: '10px',
           }}
-        >
-          <p
-            style={{
-              fontSize: '25px',
-              padding: '10px',
-              fontFamily: '',
-              fontWeight: 'bold',
-            }}
-          >
-            국내 상영 영화 순위
-          </p>
-        </div>
-        <div className="d-flex">
+        ></div>
+        <div className='d-flex'>
           <MovieList></MovieList>
         </div>
         {/* SET_END */}
@@ -91,19 +58,8 @@ function IndexBody() {
 
             marginBottom: '10px',
           }}
-        >
-          <p
-            style={{
-              fontSize: '25px',
-              padding: '10px',
-              fontFamily: '',
-              fontWeight: 'bold',
-            }}
-          >
-            국내 상영 영화 순위
-          </p>
-        </div>
-        <div className="d-flex">
+        ></div>
+        <div className='d-flex'>
           <MovieList></MovieList>
         </div>
         {/* SET_END */}
@@ -117,19 +73,8 @@ function IndexBody() {
 
             marginBottom: '10px',
           }}
-        >
-          <p
-            style={{
-              fontSize: '25px',
-              padding: '10px 10px 10px 0',
-              fontFamily: '',
-              fontWeight: 'bold',
-            }}
-          >
-            국내 상영 영화 순위
-          </p>
-        </div>
-        <div className="d-flex">
+        ></div>
+        <div className='d-flex'>
           <MovieList></MovieList>
         </div>
         {/* SET_END */}

@@ -9,6 +9,7 @@ import ProfilePage from 'components/Profile/ProfilePage';
 import Contents from 'components/Contents/ContentsPage';
 import ReviewPage from 'components/Review/ReviewPage';
 import AnalysisPage from 'components/Analysis/AnalysisPage';
+import CommentPage from 'components/Comment/CommentPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/analysis" element={<AnalysisPage />} />
         <Route path="/contents" element={<Contents />} />
         <Route path="/review" element={<ReviewPage />} />
+        <Route path="/comment" element={<CommentPage />} />
       </Routes>
     </BaseLayout>
   );

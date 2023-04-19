@@ -1,0 +1,24 @@
+1. DB 생성
+cmd > sqlplus > system/a1234 로그인 > 명령어 입력
+
+create user pj2 identified by a1234;
+grant connect, resource to pj2;
+conn pj2/a1234;
+
+연결 확인되면 sqldeveloper 열기
+
+
+
+2. sqldeveloper 접속 추가
+새접속 > 사용자 이름, db 이름, db 비밀번호 입력 > 테스트 > 확인
+
+
+
+3. sql 파일 열어서 테이블 create
+총 12개 테이블
+
+
+
+4. 데이터 import
+테이블명 우클릭 > 데이터 임포트 > 찾아보기 > 테이블명과 맞는 엑셀파일 선택 > 다음다음완료
+

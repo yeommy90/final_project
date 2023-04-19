@@ -35,13 +35,15 @@ create table movie(
 -- 감독정보 테이블
 create table director(
     director_id number primary key,
-    name varchar2(200)
+    name varchar2(200),
+    profile_path varchar2(2000)
 );
 
 -- 배우정보 테이블
 create table actor (
     actor_id number primary key,
-    name varchar2(200)
+    name varchar2(200),
+    profile_path varchar2(2000)
 );
 
 -- 장르정보 테이블
@@ -72,7 +74,7 @@ create table movie_genre(
 -- 영화 이미지 테이블
 create table movie_images(
     movie_id number,
-    filename varchar2(4000),
+--    filename varchar2(4000),
     filepath varchar2(4000)
 );
 
@@ -102,3 +104,29 @@ create table admin(
     password varchar2(100),
     admin_name varchar2(50)
 );
+
+
+
+---------------------------------------------------------
+select count(*) from movie;
+
+select * from movie_actor order by actor_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
