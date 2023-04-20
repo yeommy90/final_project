@@ -34,8 +34,12 @@ const RegisterScreen = () => {
         <form>
           {/* 페이지1 */}
           <div className='reg_sld'>
-            <div className='logo'>
-              <img alt='...' src={require('assets/img/logo.gif')} />
+            <div className='logo' style={{ textAlign: 'center' }}>
+              <img
+                alt='...'
+                src={require('assets/img/logo.gif')}
+                style={{ width: '180px', filter: 'invert(0%)' }}
+              />
             </div>
             <div className='form-temp'>
               <div>

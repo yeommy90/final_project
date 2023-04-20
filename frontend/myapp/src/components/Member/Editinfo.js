@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { baseUrl } from "../../apiurl";
+import { baseUrl } from "../../Apiurl";
 import { useNavigate } from "react-router-dom";
 
 const EditInfo = () => {

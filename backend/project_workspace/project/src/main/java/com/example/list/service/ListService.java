@@ -1,5 +1,9 @@
 package com.example.list.service;
 
-public interface ListService {
+import java.util.List;
 
+import com.example.list.dto.ListDTO;
+
+public interface ListService {
+	public List<ListDTO> getTopRatedMovies();
 }

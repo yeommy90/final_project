@@ -7,6 +7,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* @font-face {
+  font-family: NanumSquare;
+  src: url(../fonts/NanumSquareR.ttf) format(truetype);
+  font-weight: 200;
+  font-style: normal;
+} */
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

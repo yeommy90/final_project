@@ -1,53 +1,62 @@
 package com.example.admin.dto;
 
 public class AdminDTO {
-	private String admin_id;
-	private String passWord;
-	private String admin_name;
-	private String autoRole;
+	private int admin_id;
+	private String email;
+	private String password;
+	private String name;
+	private String authRole;
+	
 	public AdminDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AdminDTO(String admin_id, String passWord) {
+	public AdminDTO(int admin_id, String email, String password, String name, String authRole) {
 		super();
 		this.admin_id = admin_id;
-		this.passWord = passWord;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.authRole = authRole;
 	}
 
-	public String getAdmin_id() {
+	public int getAdmin_id() {
 		return admin_id;
 	}
 
-	public void setAdmin_id(String admin_id) {
+	public void setAdmin_id(int admin_id) {
 		this.admin_id = admin_id;
 	}
 
-	public String getPassWord() {
-		return passWord;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getAdmin_name() {
-		return admin_name;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setAdmin_name(String admin_name) {
-		this.admin_name = admin_name;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getAutoRole() {
-		return autoRole;
+	public String getName() {
+		return name;
 	}
 
-	public void setAutoRole(String autoRole) {
-		this.autoRole = autoRole;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	
-	
-	
+
+	public String getAuthRole() {
+		return authRole;
+	}
+
+	public void setAuthRole(String authRole) {
+		this.authRole = authRole;
+	}	
 }
