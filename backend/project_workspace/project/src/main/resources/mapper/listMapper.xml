@@ -26,10 +26,6 @@
 		]]>
 	</select>
 	
-<!--	<select id="getContents" parameterType="int" resultType="ListDTO">
-		SELECT * FROM movie WHERE movie_id = #{movie_id}
-	</select>-->
-	
 	<!--getTopRatedClassic
 	getTopRatedDirector
 	getTopRatedActor
@@ -37,6 +33,12 @@
 	getFavoriteDirector
 	getFavoriteActor
 	getFavoriteGenre-->
+	
+<!--	<select id="getContents" parameterType="int" resultType="ListDTO">
+		SELECT * FROM movie WHERE movie_id = #{movie_id}
+	</select>-->
+	
+	
 	
 </mapper>
 
