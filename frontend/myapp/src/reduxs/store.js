@@ -1,11 +1,11 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import boardReducer from './reducers/listReducer';
+import movieReducer from './Reducers/MovieReducer';
 
 
 const store = configureStore({
   reducer: {
-    // board_reducer에서 default로 export된 값 사용 > 이름은 맘대로 해도된다고!!!!!!!!!
-    board: boardReducer,
+    // MovieReducer에서 default로 export된 값 사용 > 이름은 맘대로 해도된다고!!!!!!!!!
+    movie: movieReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

@@ -5,7 +5,7 @@
 	<select id="getTopRatedMovies" resultType="ListDTO">
 		<![CDATA[
 		SELECT a.movie_id, a.title, a.release_date, 
-			   a.tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.popularity
+			   round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path
 		FROM (SELECT * 
 			  FROM movie 
 			  WHERE tmdb_vote_cnt >= 100 AND popularity >= 30 AND release_date >= '00/01/01'
@@ -13,6 +13,22 @@
 		WHERE rownum <= 20
 		]]>
 	</select>
+	
+	<select id="getTopRatedClassic" resultType="ListDTO">
+		<![CDATA[
+		SELECT a.movie_id, a.title, a.release_date, 
+				round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path
+		FROM (SELECT * 
+        		FROM movie
+        		WHERE tmdb_vote_cnt >= 100 AND popularity >= 30 AND release_date <= '90/01/01'
+        		ORDER BY tmdb_vote_sum DESC) A 
+		WHERE rownum <= 20
+		]]>
+	</select>
+	
+<!--	<select id="getContents" parameterType="int" resultType="ListDTO">
+		SELECT * FROM movie WHERE movie_id = #{movie_id}
+	</select>-->
 	
 	<!--getTopRatedClassic
 	getTopRatedDirector

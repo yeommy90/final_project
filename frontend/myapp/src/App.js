@@ -21,7 +21,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/analysis" element={<AnalysisPage />} />
-        <Route path="/contents" element={<Contents />} />
+        <Route path="/contents/:movie_id" element={<Contents />} />
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/comment" element={<CommentPage />} />
       </Routes>

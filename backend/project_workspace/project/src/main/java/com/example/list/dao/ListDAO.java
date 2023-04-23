@@ -11,6 +11,7 @@ import com.example.list.dto.ListDTO;
 @Repository
 public interface ListDAO {
 	public List<ListDTO> getTopRatedMovies();
-	
+	public List<ListDTO> getTopRatedClassic();
+	public ListDTO getContents(int movie_id);
 	
 }

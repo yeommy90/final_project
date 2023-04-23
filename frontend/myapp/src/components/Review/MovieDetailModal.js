@@ -60,7 +60,7 @@ const ReviewModal = ({ show, handleClose }) => {
         </div>
       </div>
       <div className='modal-footer'>
-        <Button className="m-3" color="primary">취소</Button>
+        <Button className="m-3" color="primary" onClick={handleClose}>취소</Button>
       </div>
     </Modal>
 

@@ -15,8 +15,18 @@ public class ListServiceImp implements ListService {
 	private ListDAO listDAO;
 	
 	@Override
-	public List<ListDTO> getTopRatedMovies() {
+	public List<ListDTO> getTopRatedMoviesProcess() {
 		return listDAO.getTopRatedMovies();
+	}
+
+	@Override
+	public List<ListDTO> getTopRatedClassicProcess() {
+		return listDAO.getTopRatedClassic();
+	}
+
+	@Override
+	public ListDTO getContentsProcess(int movie_id) {
+		return listDAO.getContents(movie_id);
 	}
 
 }
