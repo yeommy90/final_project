@@ -17,12 +17,8 @@ FROM (SELECT *
 WHERE rownum <= 20;
 
 -- contents
-SELECT m.movie_id, m.title, m.release_date, m.tmdb_vote_sum, m.tmdb_vote_cnt, m.overview, m.poster_path, m.backdrop_path, m.country, m.runtime, 
-    d.name, d.profile_path
-FROM movie m
-JOIN movie_director md ON m.movie_id = md.movie_id
-JOIN director d ON md.director_id = d.director_id
-WHERE m.movie_id = 129;
+SELECT movie_id, title, EXTRACT(YEAR FROM release_date) as release_date, round(tmdb_vote_sum, 2) as tmdb_vote_sum, overview, poster_path, backdrop_path, country, runtime
+		FROM movie WHERE movie_id = 129;
 
 -- genre
 SELECT g.name
@@ -48,5 +44,7 @@ FROM movie m
 join movie_images mi ON m.movie_id = mi.movie_id
 where m.movie_id = 129;
 
-
+-- comment
+insert into review values (129, 1, 4.5, '영화 재미있어요', 0, sysdate, sysdate, 1);
+select * from review;
 

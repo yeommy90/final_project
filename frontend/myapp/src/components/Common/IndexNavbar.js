@@ -113,7 +113,7 @@ function IndexNavbar({ transparent }) {
               <NavLink href="/profile">아무개 님의 마이페이지</NavLink>
             </NavItem>
             <NavItem>
-              <Button className="btn-round" color="danger" href="/login">
+              <Button style={{ borderRadius:5 }}className="btn-round" color="danger" href="/login">
                 LOGIN
               </Button>
             </NavItem>

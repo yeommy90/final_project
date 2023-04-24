@@ -14,6 +14,10 @@ const RegisterScreen = () => {
     }
   };
 
+  const urlReg = () => {
+    window.location.replace('/genreselect');
+  };
+
   return (
     // 최상위
 
@@ -31,7 +35,7 @@ const RegisterScreen = () => {
           transition: 'left 0.5s ease-in-out',
         }}
       >
-        <form>
+        <form action='http://localhost:3000/genreselect'>
           {/* 페이지1 */}
           <div className='reg_sld'>
             <div className='logo' style={{ textAlign: 'center' }}>

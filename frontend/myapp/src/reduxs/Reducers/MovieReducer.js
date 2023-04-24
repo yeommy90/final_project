@@ -21,19 +21,11 @@ const MovieSlice = createSlice({
       state.topRatedClassic = action.payload.data.topRatedClassic;
     },
 
+    // 영화 상세정보 컨텐츠
     getMovieContents(state, action) {
       state.contents = action.payload.data;
     },
 
-    // view reducer
-    getBoardDetail(state, action) {
-      state.boardDetail = action.payload.data;
-    },
-
-    // upload > state에 저장하지 않아도됨
-    getBoardDownload(state, action) {
-      state.boardFile = action.payload.data;
-    },
   },
 });
 

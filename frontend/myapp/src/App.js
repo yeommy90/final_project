@@ -10,6 +10,7 @@ import Contents from 'components/Contents/ContentsPage';
 import ReviewPage from 'components/Review/ReviewPage';
 import AnalysisPage from 'components/Analysis/AnalysisPage';
 import CommentPage from 'components/Comment/CommentPage';
+import GenreSelect from 'components/Member/GenreSelect';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path='/genreselect' element={<GenreSelect />} />
         <Route path="/analysis" element={<AnalysisPage />} />
         <Route path="/contents/:movie_id" element={<Contents />} />
         <Route path="/review" element={<ReviewPage />} />

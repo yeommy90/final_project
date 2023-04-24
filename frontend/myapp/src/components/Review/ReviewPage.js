@@ -1,13 +1,37 @@
 //사용자가 별점 평가를 남길 수 있는 영화 리스트 페이지
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'reactstrap';
 import '../../assets/css/moviemodal.css';
 import ReviewModal from './MovieDetailModal';
+import axios from 'axios';
+import yourImage from '../../assets/img/180c6e128821941b1.jpg';
 
 const ReviewPage = () => {
+  const [movies, setMovies] = useState([]);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const handleClose = () => {
+    setShow(false);
+    setSelectedMovie(null);
+  }
+
+  const handleShow = (movie) => {
+    setSelectedMovie(movie);
+    setShow(true);
+  }
+
+  useEffect(() => {
+    axios.get('http://localhost:8090/printrandom')
+      .then(response => {
+        setMovies(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(movies);
 
   return (
     <div className="container d-flex justify-content-center align-items-center" style={{ marginTop: '150px' }}>
@@ -26,49 +50,24 @@ const ReviewPage = () => {
           <div className="col">
             <ul className='pl-0'>
               <li className="list-group-item">
-                <div className="row align-items-center">
-                  <div className="col-3">
-                    <img src="https://an2-img.amz.wtchn.net/image/v2/cieT7gGSMHncWBrbSgOqeg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1qZ3dlRFF3TUhFNE1DSmRMQ0p3SWpvaUwzWXhMMmhxY1hkaWNHaHdaRzV6ZERSa2JXZGpkVFY2SW4wLmxmQ0dlNFNFcG1VYWtGTVM1b3htOFJqaTVFZ2hXX2VrVnVVZHZ6VDExMUE" alt="movie" className="img-fluid" />
+                {movies.map((movie) => (
+                  <div key={movie.movie_id} className="row align-items-center">
+                    <div className="col-3">
+                      {movie.poster_path
+                        ? <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt="movie" className="img-fluid" />
+                        : <img src={yourImage} alt="movie" className="img-fluid" />
+                      }
+                    </div>
+                    <div className="col-9">
+                      <h3 className="mb-0">{movie.title}</h3>
+                      <div className='mb-3'>{movie.release_date} ・ {movie.country}</div>
+                      <Button color="secondary" onClick={() => handleShow(movie)}>
+                        자세히 보기
+                      </Button>
+                      <ReviewModal show={show} handleClose={handleClose} movie={selectedMovie} />
+                    </div>
                   </div>
-                  <div className="col-9">
-                    <h3 className="mb-0">살인자의 기억법</h3>
-                    <div className='mb-3'>2016 ・ 한국</div>
-                    <Button color="secondary" onClick={handleShow}>
-                      자세히 보기
-                    </Button>
-                    <ReviewModal show={show} handleClose={handleClose} />
-                  </div>
-                </div>
-              </li>
-              <li className="list-group-item">
-                <div className="row align-items-center">
-                  <div className="col-3">
-                    <img src="https://an2-img.amz.wtchn.net/image/v2/cieT7gGSMHncWBrbSgOqeg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1qZ3dlRFF3TUhFNE1DSmRMQ0p3SWpvaUwzWXhMMmhxY1hkaWNHaHdaRzV6ZERSa2JXZGpkVFY2SW4wLmxmQ0dlNFNFcG1VYWtGTVM1b3htOFJqaTVFZ2hXX2VrVnVVZHZ6VDExMUE" alt="movie" className="img-fluid" />
-                  </div>
-                  <div className="col-9">
-                    <h3 className="mb-0">살인자의 기억법</h3>
-                    <div className='mb-3'>2016 ・ 한국</div>
-                    <Button color="secondary" onClick={handleShow}>
-                      자세히 보기
-                    </Button>
-                    <ReviewModal show={show} handleClose={handleClose} />
-                  </div>
-                </div>
-              </li>
-              <li className="list-group-item">
-                <div className="row align-items-center">
-                  <div className="col-3">
-                    <img src="https://an2-img.amz.wtchn.net/image/v2/cieT7gGSMHncWBrbSgOqeg.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1qZ3dlRFF3TUhFNE1DSmRMQ0p3SWpvaUwzWXhMMmhxY1hkaWNHaHdaRzV6ZERSa2JXZGpkVFY2SW4wLmxmQ0dlNFNFcG1VYWtGTVM1b3htOFJqaTVFZ2hXX2VrVnVVZHZ6VDExMUE" alt="movie" className="img-fluid" />
-                  </div>
-                  <div className="col-9">
-                    <h3 className="mb-0">살인자의 기억법</h3>
-                    <div className='mb-3'>2016 ・ 한국</div>
-                    <Button color="secondary" onClick={handleShow}>
-                      자세히 보기
-                    </Button>
-                    <ReviewModal show={show} handleClose={handleClose} />
-                  </div>
-                </div>
+                ))}
               </li>
             </ul>
           </div>

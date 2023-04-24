@@ -16,9 +16,10 @@ function getMovieList() {
   };
 }
 
-function getMovieContents(movie_id, config) {
+// contents
+function getMovieContents(movie_id) {
   return async (dispatch) => {
-    const data = await axios.get(`${baseUrl}/contents/${movie_id}`, config)
+    const data = await axios.get(`${baseUrl}/contents/${movie_id}`)
       .then((res) => res.data);
     dispatch(MovieReducers.getMovieContents({data}));
   };
@@ -69,4 +70,4 @@ function getMovieContents(movie_id, config) {
 //   }
 // }
 
-export const MovieActions = { getMovieList };
+export const MovieActions = { getMovieList, getMovieContents };

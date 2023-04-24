@@ -1,5 +1,11 @@
 package com.example.member.service;
 
-public class MemberService {
+import java.util.List;
 
+import com.example.list.dto.ListDTO;
+import com.example.member.dto.MemberDTO;
+
+public interface MemberService {
+	public List<ListDTO> randomService();
+	public void reviewService(String comment);
 }
