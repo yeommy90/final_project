@@ -45,6 +45,9 @@ join movie_images mi ON m.movie_id = mi.movie_id
 where m.movie_id = 129;
 
 -- comment
-insert into review values (129, 1, 4.5, '영화 재미있어요', 0, sysdate, sysdate, 1);
+insert into review values (129, 1, 4.5, '영화 너무너무 재미있어요', 0, sysdate, sysdate, 1);
 select * from review;
+commit;
+
+SELECT * FROM review WHERE movie_id = 129;
 

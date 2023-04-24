@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.list.dto.ListDTO;
 import com.example.member.dao.MemberDAO;
 import com.example.member.dto.MemberDTO;
+import com.example.member.dto.MemberGenreDTO;
 
 @Service
 public class MemberServiceImp implements MemberService{
@@ -33,5 +34,12 @@ public class MemberServiceImp implements MemberService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void insertMemGenreProcess(MemberGenreDTO dto) {
+		memberDao.insertMemGenre(dto);
+	}
+
+
 	
 }

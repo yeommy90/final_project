@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 
 const CastInfo = ({ contents = {} }) => {
   const directors = Array.isArray(contents.directorDTO) ? contents.directorDTO : [];

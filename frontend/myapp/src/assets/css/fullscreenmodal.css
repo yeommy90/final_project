@@ -1,0 +1,47 @@
+.full-screen-modal-content {
+  height: 80%;
+  border: 0;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.full-screen-modal-content img {
+  width: 1200px;
+  border-radius: 10px;
+  
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+.full-screen-modal-content .prev_button,
+.full-screen-modal-content .next_button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+}
+
+.full-screen-modal-content .prev_button {
+  left: 0;
+}
+
+.full-screen-modal-content .next_button {
+  right: 0;
+}
+
+.full-screen-modal-content .prev_button img,
+.full-screen-modal-content .next_button img {
+  width: 50px;
+}

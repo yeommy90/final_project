@@ -17,6 +17,8 @@ public class MemberDTO {
 	private Date regDate;
 	private String authRole;
 	
+
+	
 	public MemberDTO() {
 	
 	}

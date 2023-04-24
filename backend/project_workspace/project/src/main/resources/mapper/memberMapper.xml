@@ -2,12 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.member.dao.MemberDAO">
-
 	<select id="printRandom" resultType="ListDTO">
-  <![CDATA[
-  SELECT * FROM 
-    (SELECT * FROM movie ORDER BY dbms_random.value)
-  WHERE ROWNUM BETWEEN 0 AND 4
-  ]]>
-</select>
+		<![CDATA[
+		SELECT * FROM 
+			(SELECT * FROM movie ORDER BY dbms_random.value)
+		WHERE ROWNUM BETWEEN 0 AND 4
+		]]>
+	</select>
+
+	<!--회원가입 장르 삽입-->
+	<insert id="insertMemGenre" parameterType="MemberGenreDTO">
+		INSERT INTO member_genre(member_id, genre_id)
+		VALUES(#{memberId},#{genreId})
+	</insert>
+
 </mapper>

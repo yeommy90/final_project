@@ -48,6 +48,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 3px;
 }
 
 
@@ -127,3 +128,42 @@ h3 {
 }
 
 
+/* 갤러리 */
+.img-slide {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.img-box {
+  position: relative;
+  margin: 10px 0px 0px !important;
+}
+
+.img-item img {
+  width: 350px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.img-box .prev_button,
+.img-box .next_button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+}
+
+.img-box .prev_button {
+  left: 0;
+}
+
+.img-box .next_button {
+  right: 0;
+}
+
+.img-box .prev_button img,
+.img-box .next_button img {
+  width: 50px;
+}

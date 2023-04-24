@@ -9,6 +9,7 @@ import '../../assets/css/contents.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { MovieActions } from 'reduxs/Actions/MovieAction';
 import { useParams } from 'react-router-dom';
+import ContentsImage from './ContentsImage';
 
 const Contents = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Contents = () => {
       <BasicInfo contents={contents}/>
       <CastInfo contents={contents}/>
       <Comments contents={contents}/>
+      <ContentsImage contents={contents}/>
       <SimilarMovie />
     </div>
   )

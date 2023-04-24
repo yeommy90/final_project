@@ -1,5 +1,6 @@
 package com.example.member.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.member.dto.MemberDTO;
+import com.example.member.dto.MemberGenreDTO;
 import com.example.member.service.MemberService;
 import com.example.list.dto.ListDTO;
 
@@ -28,6 +30,34 @@ public class MemberController {
 		System.out.println(aList.size());
 		return aList; 
 	}
+	
+	@PostMapping("/genreselect")
+	public String addMember(@RequestBody MemberGenreDTO memberGenreDTO) {
+		
+		  int memberId = memberGenreDTO.getMemberId();
+		  List<Integer> selectedGenre = memberGenreDTO.getSelectedGenre();
+		
+		  MemberGenreDTO dto = new MemberGenreDTO();
+
+	
+		  for (int tagValue : selectedGenre) {	
+				
+			  dto.setMemberId(memberId);
+			  dto.setGenreId(tagValue);
+			  System.out.println(tagValue);
+			  System.out.println(memberId);
+			  memberService.insertMemGenreProcess(dto);
+			  }
+		  
+
+
+		 return null;
+	}
+	
+
+
+	
+	
 	
 
 	
