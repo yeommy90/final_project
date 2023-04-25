@@ -45,9 +45,42 @@ join movie_images mi ON m.movie_id = mi.movie_id
 where m.movie_id = 129;
 
 -- comment
-insert into review values (129, 1, 4.5, '영화 너무너무 재미있어요', 0, sysdate, sysdate, 1);
+insert into review values (129, 1, 4.5, null, 0, sysdate, sysdate, 1);
+update review set content = '별론데요' where member_id = 1;
 select * from review;
 commit;
 
-SELECT * FROM review WHERE movie_id = 129;
+SELECT movie_id, member_id, rating FROM review WHERE movie_id = 129 AND member_id = 1;
+
+
+--이게 무야~~~
+SELECT g.genre_id, g.name, COUNT(r.rating) AS rating_count, AVG(r.rating) AS average_rating, ((sum(r.rating) / (COUNT(r.rating) * 5)) * 100) AS total
+        FROM
+            genre g
+        JOIN
+            movie_genre mg ON g.genre_id = mg.genre_id
+        JOIN
+            review r ON r.movie_id = mg.movie_id
+        WHERE
+            r.member_id = 1
+        GROUP BY
+            g.genre_id,
+            g.name
+        ORDER BY
+            rating_count DESC,
+            total DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

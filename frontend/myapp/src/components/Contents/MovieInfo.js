@@ -9,7 +9,7 @@ const BasicInfo = ({ contents = {} }) => {
             <div className='movie-detail' >
               <h3>기본정보</h3>
               <div className='mt-3'>
-                <p>{contents.original_title}</p>
+                <p className='original-title'>{contents.original_title}</p>
                 <p>{contents.release_date} ・ {' '}{contents.genreDTO ? contents.genreDTO.map((genre) => genre.name).join('/') : null} ・ {contents.country}</p>
                 <p>{contents.runtime}분 · 12세</p>
               </div>

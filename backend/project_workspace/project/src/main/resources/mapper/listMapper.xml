@@ -37,9 +37,27 @@
 	getFavoriteGenre-->
 	
 	
+	
+	
+	<!--검색-->
+	<select id="searchMovies" resultType="ListDTO" parameterType="String">
+        SELECT * FROM movie WHERE UPPER(title) LIKE '%' || #{query} || '%' 
+	</select>
+	
+	<select id="searchActors" resultType="ActorDTO" parameterType="String">
+        SELECT * FROM actor WHERE UPPER(name) LIKE '%' || #{query} || '%'
+	</select>
+	
+	<select id="searchDirectors" resultType="DirectorDTO" parameterType="String">
+        SELECT * FROM director WHERE UPPER(name) LIKE '%' || #{query} || '%'
+	</select>
+	
+	
+	
+	
 	<!--영화 컨텐츠 페이지-->
 	<select id="getMovieById" parameterType="int" resultType="ContentsDTO">
-		SELECT movie_id, title, release_date, round(tmdb_vote_sum, 2) as tmdb_vote_sum, overview, poster_path, backdrop_path, country, runtime
+		SELECT movie_id, title, release_date, round(tmdb_vote_sum, 2) as tmdb_vote_sum, overview, poster_path, backdrop_path, country, runtime, original_title
 		FROM movie WHERE movie_id = #{movie_id}
 	</select>
 	
@@ -77,11 +95,38 @@
 		WHERE movie_id = #{movie_id}
 	</select>
 	
-	<insert id="postReviews" parameterType="ReviewDTO">
+	<!--사용자가 별점, 코멘트 안남긴 상태에서 코멘트를 추가할 경우-->
+	<insert id="postComment" parameterType="CommentDTO">
 		insert into review
-		values (#{movie_id}, 1, #{rating}, #{content, jdbcType=VARCHAR}, 0, sysdate, sysdate, '1')
+		values (#{movie_id}, 1, null, #{content, jdbcType=VARCHAR}, 0, sysdate, sysdate, 1)
 	</insert>
 	
+	<!--사용자가 별점만 남긴 상태에서 코멘트를 추가할 경우-->
+	<update id="updateComment" parameterType="CommentDTO">
+		UPDATE review
+		SET content = #{content}
+		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
+	</update>
+	
+	<!--사용자가 코멘트를 안남긴 상태에서 별점만 추가할 경우-->
+	<insert id="postRating" parameterType="RatingDTO">
+		INSERT INTO review
+		VALUES (#{movie_id}, 1, #{rating}, null, 0, sysdate, sysdate, 1)
+	</insert>
+	
+	<!--사용자가 별점만 남긴 상태에서 별점만 수정할 경우-->
+	<update id="updateRating" parameterType="RatingDTO">
+		UPDATE review
+		SET rating = #{rating}
+		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
+	</update>
+	
+	<!--사용자가 이미 남긴 리뷰가 있는지 확인-->
+	<select id="findReviewById" parameterType="map" resultType="ReviewDTO">
+		SELECT *
+		FROM review
+		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
+	</select>
 </mapper>
 
 

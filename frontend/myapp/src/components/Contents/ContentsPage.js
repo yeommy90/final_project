@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ContentsHeader from './ContentsHeader';
 import BasicInfo from './MovieInfo';
 import CastInfo from './CastInfo';
@@ -14,19 +14,26 @@ import ContentsImage from './ContentsImage';
 const Contents = () => {
   const dispatch = useDispatch();
   const { movie_id } = useParams();
+  const [comments, setComments] = useState([]);
+
   const contents = useSelector((state) => state.movie.contents);
+  
+  const fetchComments = async () => {
+    const fetchedComments = await dispatch(MovieActions.getMovieContents(movie_id));
+    setComments(fetchedComments);
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(MovieActions.getMovieContents(movie_id));
+    fetchComments();
   }, []);
 
   return (
     <div className="section">
-      <ContentsHeader contents={contents}/>
+      <ContentsHeader contents={contents} fetchComments={fetchComments}/>
       <BasicInfo contents={contents}/>
       <CastInfo contents={contents}/>
-      <Comments contents={contents}/>
+      <Comments contents={contents} />
       <ContentsImage contents={contents}/>
       <SimilarMovie />
     </div>

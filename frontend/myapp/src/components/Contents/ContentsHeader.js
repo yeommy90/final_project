@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { Button, Col, Container, Row } from 'reactstrap';
 import '../../assets/css/commentmodal.css';
 import styled from 'styled-components';
+import MovieRating from './MovieRating';
 
-const ContentsHeader = ({ contents = {} }) => {
+const ContentsHeader = ({ contents = {}, fetchComments }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -44,11 +45,12 @@ const ContentsHeader = ({ contents = {} }) => {
               <div className='border-bottom mt-1'>
                 <p>평균 ★ {contents.tmdb_vote_sum}</p>
               </div>
-              <div>
+              <Row>
+                <MovieRating />
                 <Button className='my-2' color="primary">보고싶어요</Button>
                 <Button className='m-2' color="secondary" onClick={handleShow}>코멘트</Button>
-                <CommentModal isOpen={show} onRequestClose={handleClose} movie={contents}/>
-              </div>
+                <CommentModal isOpen={show} onRequestClose={handleClose} movie={contents} fetchComments={fetchComments}/>
+              </Row>
             </div>
           </Col>
         </Row>

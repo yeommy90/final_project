@@ -1,8 +1,10 @@
-import SearchList from './SearchList';
+import SearchList from "./SearchList";
+import "assets/css/font.css";
+import "assets/css/movielist.css";
 
 const SearchPage = () => {
   return (
-    <div className="page-header section">
+    <div>
       <SearchList />
     </div>
   );

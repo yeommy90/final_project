@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search/:query" element={<SearchPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path='/genreselect' element={<GenreSelect />} />
         <Route path="/analysis" element={<AnalysisPage />} />

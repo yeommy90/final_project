@@ -1,9 +1,20 @@
+import ReviewSummary from './ReviewSummary';
+import AnalysisHeader from './AnalysisHeader';
+import UserGenre from './UserGenre';
+import UserActor from './UserActor';
+
 const AnalysisPage = () => {
   return (
-    <div className="page-header section">
-      <h2>취향분석 페이지</h2>
-    </div>
-  )
-}
+    <>
+      <div className='d-flex flex-column min-vh-100'>
+        <div style={{ height: '88px', width: '100%' }}></div>
+        <AnalysisHeader />
+        <ReviewSummary />
+        <UserActor />
+        <UserGenre />
+      </div>
+    </>
+  );
+};
 
 export default AnalysisPage;

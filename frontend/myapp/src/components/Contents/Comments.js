@@ -15,13 +15,15 @@ const Comments = ({ contents = {}}) => {
               <h3>코멘트</h3>
               <Link to="/comment" style={{paddingRight:'20px'}}>More</Link>
             </div>
-              {comments.map((comment) => (
+              {comments && comments.length > 0 ? (comments
+                .filter((comment) => comment.content && comment.content.trim() !== '')
+                .map((comment) => (
                 <div key={comment.movie_id} className="comment-box bg-light p-3 mb-3">
                   <div className="d-flex align-items-center">
                     <img src={profiePic} className="profile-pic rounded-circle mx-3"/>
                     <div className="ml-2">
                       <div className="mt-2">{comment.member_id}</div>
-                      <p>★ {comment.rating}</p>
+                      <p>★ {comment.rating ? comment.rating : '평가없음'}</p>
                     </div>
                   </div>
                   <p className="text-justify ml-2 mt-3 mb-5">{comment.content}</p>
@@ -30,7 +32,7 @@ const Comments = ({ contents = {}}) => {
                     <button className="btn btn-primary">Like</button>
                   </div>
                 </div>
-              ))}
+              ))) : (<p className="d-flex justify-content-center py-5">작성된 코멘트가 없습니다.</p>)}
           </Col>
         </Row>
       </Container>

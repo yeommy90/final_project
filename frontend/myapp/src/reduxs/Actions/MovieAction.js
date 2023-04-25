@@ -4,7 +4,7 @@ import { MovieReducers } from '../Reducers/MovieReducer';
 
 // dispatch를 매개변수로 주면 내부에서 바로 사용 가능
 
-// list action
+// 메인 페이지 리스트
 function getMovieList() {
   return async (dispatch) => {
     const data = await axios.get(`${baseUrl}/`, {cache:false})
@@ -16,7 +16,7 @@ function getMovieList() {
   };
 }
 
-// contents
+// 영화 상세정보 콘텐츠
 function getMovieContents(movie_id) {
   return async (dispatch) => {
     const data = await axios.get(`${baseUrl}/contents/${movie_id}`)
@@ -24,6 +24,16 @@ function getMovieContents(movie_id) {
     dispatch(MovieReducers.getMovieContents({data}));
   };
 }
+
+// 코멘트
+function postComment(commentDTO) {
+  return async () => {
+    await axios.post(`${baseUrl}/comment`, commentDTO)
+      .then((res) => res.data);
+  }
+}
+
+// 별점 
 
 // // view action > 뭔가 뭔가 겹치는 작업이 많음..
 // function getBoardDetail(num, config) {
@@ -70,4 +80,4 @@ function getMovieContents(movie_id) {
 //   }
 // }
 
-export const MovieActions = { getMovieList, getMovieContents };
+export const MovieActions = { getMovieList, getMovieContents, postComment };
