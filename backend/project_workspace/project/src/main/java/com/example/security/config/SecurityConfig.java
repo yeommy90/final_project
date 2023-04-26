@@ -54,7 +54,7 @@ public class SecurityConfig {
 		http.apply(new MyCustomerFilter());
 
 		http.authorizeHttpRequests()
-	    .antMatchers("/", "/images/**", "/login", "/register", "/contents/**", "/search/**", "/review", "/analysis/**", "/comment").permitAll()
+	    .antMatchers("/", "/images/**", "/login", "/register", "/contents/**", "/search/**", "/review", "/analysis/**", "/comment/**").permitAll()
 	    .anyRequest().authenticated();
 		
 		http.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));

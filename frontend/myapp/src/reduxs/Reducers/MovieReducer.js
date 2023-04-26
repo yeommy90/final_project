@@ -4,7 +4,7 @@ let initialState = {
   topRatedList : [],
   topRatedClassic : [],
   contents: {},
-
+  memberReview: {},
   
   pv: {currentPage:1},
   boardDetail: {},
@@ -24,6 +24,11 @@ const MovieSlice = createSlice({
     // 영화 상세정보 컨텐츠
     getMovieContents(state, action) {
       state.contents = action.payload.data;
+    },
+
+    // 멤버 rating, comment 정보
+    getReviewByMemberId(state, action) {
+      state.memberReview = action.payload.data;
     },
 
   },

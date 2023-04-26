@@ -24,6 +24,7 @@ const Contents = () => {
   const handleAuthShow = () => setAuthShow(true);
 
   const contents = useSelector((state) => state.movie.contents);
+  const memberReview = useSelector((state) => state.movie.memberReview);
   
   const fetchComments = async () => {
     const fetchedComments = await dispatch(MovieActions.getMovieContents(movie_id));
@@ -31,13 +32,14 @@ const Contents = () => {
   }
 
   useEffect(() => {
+    dispatch(MovieActions.getReviewByMemberId(movie_id, localStorage.getItem("member_id")));
     window.scrollTo(0, 0);
     fetchComments();
   }, []);
 
   return (
     <div className="section">
-      <ContentsHeader contents={contents} fetchComments={fetchComments} handleAuthShow={handleAuthShow}/>
+      <ContentsHeader contents={contents} fetchComments={fetchComments} handleAuthShow={handleAuthShow} memberReview={memberReview}/>
       <BasicInfo contents={contents}/>
       <CastInfo contents={contents}/>
       <Comments contents={contents} handleAuthShow={handleAuthShow} />

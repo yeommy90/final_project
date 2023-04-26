@@ -13,7 +13,7 @@ import com.example.director.dto.DirectorDTO;
 import com.example.list.dao.ListDAO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ListDTO;
-import com.example.review.dto.CommentDTO;
+import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
 
@@ -66,52 +66,32 @@ public class ListServiceImp implements ListService {
 	
 	// 영화 코멘트
 	@Override
-	@Transactional
-	public void commentProcess(CommentDTO comment) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("movie_id", comment.getMovie_id());
-		map.put("member_id", comment.getMember_id());
-		
-		ReviewDTO review = listDAO.findReviewById(map);
-		
-		// 이미 작성한 review가 있다면
-		if (review != null) {
-			// 기존 작성 review에 rating만 있다면 > comment가 없다면
-			if (review.getContent() == null) {
-				listDAO.updateComment(comment); // 모달창 > update
-			} else {
-				// 기존 작성 comment가 있고 rating도 있다
-				listDAO.updateComment(comment); // 수정
-			}
-		} else {
-			// 새 review일때
-			listDAO.postComment(comment); // 모달창 > insert
-		}
-	}
-
-	@Override
-	public void ratingProcess(RatingDTO rating) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("movie_id", rating.getMovie_id());
-		map.put("member_id", rating.getMember_id());
-		
-		ReviewDTO review = listDAO.findReviewById(map);
-		
-		// 이미 작성한 rating이 있다면
-		if (review != null) {
-			listDAO.updateRating(rating);
-		} else {
-			listDAO.postRating(rating);
-		}
-	}
-
-	@Override
 	public ReviewDTO findReviewByIdProcess(int movie_id, int member_id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("movie_id", movie_id);
 		map.put("member_id", member_id);
 		
 		return listDAO.findReviewById(map);
+	}
+
+	@Override
+	public void postCommentProcess(CommentsDTO comment) {
+		listDAO.postComment(comment);
+	}
+
+	@Override
+	public void updateCommentProcess(CommentsDTO comment) {
+		listDAO.updateComment(comment);
+	}
+
+	@Override
+	public void postRatingProcess(RatingDTO rating) {
+		listDAO.postRating(rating);
+	}
+
+	@Override
+	public void updateRatingProcess(RatingDTO rating) {
+		listDAO.updateRating(rating);
 	}
 
 

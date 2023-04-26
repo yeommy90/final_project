@@ -7,7 +7,7 @@ import com.example.actor.dto.ActorDTO;
 import com.example.director.dto.DirectorDTO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ListDTO;
-import com.example.review.dto.CommentDTO;
+import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
 
@@ -24,8 +24,10 @@ public interface ListService {
 	public ContentsDTO getContentsProcess(int movie_id);
 	
 	// review > comment, rating
-	public void commentProcess(CommentDTO comment);
-	public void ratingProcess(RatingDTO rating);
+	public void postCommentProcess(CommentsDTO comment);
+	public void updateCommentProcess(CommentsDTO comment);
+	public void postRatingProcess(RatingDTO rating);
+	public void updateRatingProcess(RatingDTO rating);
 	
 	public ReviewDTO findReviewByIdProcess(int movie_id, int member_id);
 	

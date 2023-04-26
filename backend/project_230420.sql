@@ -70,8 +70,20 @@ SELECT g.genre_id, g.name, COUNT(r.rating) AS rating_count, Round(AVG(r.rating),
             rating_count DESC,
             total DESC;
 
-SELECT * FROM review  WHERE movie_id = 129 ORDER BY likes DESC;
+SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
+FROM comments c
+LEFT OUTER JOIN rating r ON r.movie_id = c.movie_id AND r.member_id = c.member_id
+WHERE c.movie_id = 129
+ORDER BY likes DESC;
 
+SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
+FROM comments c
+LEFT OUTER JOIN rating r ON c.movie_id = r.movie_id AND c.member_id = r.member_id
+WHERE c.movie_id = 129 AND c.member_id = 1;
+
+commit;
+
+insert into comments values (129, 1, '재밌네요...', 0, sysdate, sysdate, 1);
 
 
 

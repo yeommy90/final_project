@@ -89,44 +89,56 @@
 		where m.movie_id = #{movie_id}
 	</select>
 	
-	<select id="getReviewsByMovieId"  parameterType="int" resultType="ReviewDTO">
-		SELECT * 
-		FROM review 
-		WHERE movie_id = #{movie_id}
+	<resultMap id="CommentAndRatingResultMap" type="ReviewDTO">
+		<result property="movie_id" column="movie_id"/>
+		<result property="member_id" column="member_id"/>
+		<result property="content" column="content"/>
+		<result property="rating" column="rating"/>
+		<result property="likes" column="likes"/>
+		<result property="regdate" column="regdate"/>
+		<result property="state" column="state"/>
+	</resultMap>
+	
+	<select id="getReviewsByMovieId"  parameterType="int" resultMap="CommentAndRatingResultMap">
+		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
+		FROM comments c
+		LEFT OUTER JOIN rating r ON r.movie_id = c.movie_id AND r.member_id = c.member_id
+		WHERE c.movie_id = #{movie_id}
 		ORDER BY likes DESC
 	</select>
 	
 	<!--사용자가 별점, 코멘트 안남긴 상태에서 코멘트를 추가할 경우-->
-	<insert id="postComment" parameterType="CommentDTO">
-		insert into review
-		values (#{movie_id}, #{member_id}, null, #{content, jdbcType=VARCHAR}, 0, sysdate, sysdate, #{state})
+	<insert id="postComment" parameterType="CommentsDTO">
+		insert into comments
+		values (#{movie_id}, #{member_id}, #{content, jdbcType=VARCHAR}, 0, sysdate, sysdate, #{state})
 	</insert>
 	
 	<!--사용자가 별점만 남긴 상태에서 코멘트를 추가할 경우-->
-	<update id="updateComment" parameterType="CommentDTO">
-		UPDATE review
-		SET content = #{content}, state = #{state}
+	<update id="updateComment" parameterType="CommentsDTO">
+		UPDATE comments
+		SET content = #{content}, state = #{state}, moddate = sysdate
 		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
 	</update>
 	
 	<!--사용자가 코멘트를 안남긴 상태에서 별점만 추가할 경우-->
 	<insert id="postRating" parameterType="RatingDTO">
-		INSERT INTO review
-		VALUES (#{movie_id}, 1, #{rating}, null, 0, sysdate, sysdate, 1)
+		INSERT INTO rating
+		VALUES (#{movie_id}, #{member_id}, #{rating})
 	</insert>
 	
 	<!--사용자가 별점만 남긴 상태에서 별점만 수정할 경우-->
 	<update id="updateRating" parameterType="RatingDTO">
-		UPDATE review
+		UPDATE rating
 		SET rating = #{rating}
 		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
 	</update>
 	
 	<!--사용자가 이미 남긴 리뷰가 있는지 확인-->
 	<select id="findReviewById" parameterType="map" resultType="ReviewDTO">
-		SELECT *
-		FROM review
-		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
+		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
+		FROM comments c
+		LEFT OUTER JOIN rating r ON c.movie_id = r.movie_id AND c.member_id = r.member_id
+		WHERE c.movie_id = #{movie_id} AND c.member_id = #{member_id}
 	</select>
 </mapper>
 

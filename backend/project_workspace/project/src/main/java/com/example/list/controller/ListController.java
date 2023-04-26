@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.list.dto.ContentsDTO;
 import com.example.list.service.ListService;
-import com.example.review.dto.CommentDTO;
+import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
 
@@ -54,25 +55,38 @@ public class ListController {
 	}
 	
 	
-	
 	// 영화 상세정보
 	@GetMapping("/contents/{movie_id}")
 	public ContentsDTO contentsExecute(@PathVariable("movie_id") int movie_id) {
 		return listService.getContentsProcess(movie_id);
 	}
 	
+	
+	
+	// 코멘트, 별점 작성
 	@PostMapping("/comment")
-	public void commentExecute(@RequestBody CommentDTO comment) {
-		listService.commentProcess(comment);
+	public void postCommentExecute(@RequestBody CommentsDTO comment) {
+		listService.postCommentProcess(comment);
+	}
+	
+	@PutMapping("/comment")
+	public void updateCommentExecute(@RequestBody CommentsDTO comment) {
+		listService.updateCommentProcess(comment);
 	}
 	
 	@PostMapping("/rating")
-	public void ratingExecute(@RequestBody RatingDTO rating) {
-		listService.ratingProcess(rating);
+	public void postRatingExecute(@RequestBody RatingDTO rating) {
+		listService.postRatingProcess(rating);
+	}
+	
+	@PutMapping("/rating")
+	public void updateRatingExecute(@RequestBody RatingDTO rating) {
+		listService.updateRatingProcess(rating);
 	}
 	
 	@GetMapping("/comment/{movie_id}/{member_id}")
 	public ReviewDTO getCommentExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		System.out.println("냐냐냐" + movie_id + member_id);
 		return listService.findReviewByIdProcess(movie_id, member_id);
 	}
 	

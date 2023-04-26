@@ -12,7 +12,7 @@ import com.example.genre.dto.GenreDTO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ImagesDTO;
 import com.example.list.dto.ListDTO;
-import com.example.review.dto.CommentDTO;
+import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
 
@@ -36,8 +36,8 @@ public interface ListDAO {
 	public List<ReviewDTO> getReviewsByMovieId(int movie_id);
 	
 	// review > comment, rating
-	public void postComment(CommentDTO comment);
-	public void updateComment(CommentDTO comment);
+	public void postComment(CommentsDTO comment);
+	public void updateComment(CommentsDTO comment);
 	public void postRating(RatingDTO rating);
 	public void updateRating(RatingDTO rating);
 	public ReviewDTO findReviewById(Map<String, Object> map);

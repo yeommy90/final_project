@@ -7,16 +7,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//create table comments (
+//	    movie_id number,
+//	    member_id number,
+//	    content varchar2(4000),
+//	    likes number,
+//	    regdate date,
+//	    moddate date,
+//	    state varchar2(2) --1기본2블러3삭제
+//	);
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ReviewDTO {
+public class CommentsDTO {
 	private int movie_id;
 	private int member_id;
-	private Double rating;
 	private String content;
-	private int likes;
 	private Date regdate;
 	private Date moddate;
 	private int state;

@@ -96,17 +96,6 @@ create table movie_images(
     filepath varchar2(1000)
 );
 
--- 리뷰 테이블
-create table review(
-    movie_id number,
-    member_id number,
-    rating number,
-    content varchar2(4000),
-    likes number,
-    regdate date,
-    moddate date,
-    state varchar2(2) --1기본2블러3삭제
-);
 
 -- 보고싶어요 테이블
 create table wish(
@@ -134,6 +123,38 @@ create sequence admin_id_seq
 drop sequence admin_id_seq;
 drop table admin;
 
+
+-- 리뷰 테이블
+create table review(
+    movie_id number,
+    member_id number,
+    rating number,
+    content varchar2(4000),
+    likes number,
+    regdate date,
+    moddate date,
+    state varchar2(2) --1기본2블러3삭제
+);
+
+drop table review;
+
+-- rating table
+create table rating (
+    movie_id number,
+    member_id number,
+    rating number
+);
+
+-- comments table
+create table comments (
+    movie_id number,
+    member_id number,
+    content varchar2(4000),
+    likes number,
+    regdate date,
+    moddate date,
+    state varchar2(2) --1기본2스포3삭제4블러
+);
 
 ---------------------------------------------------------
 select count(*) from movie;

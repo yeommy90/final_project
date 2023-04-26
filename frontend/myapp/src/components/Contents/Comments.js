@@ -31,7 +31,7 @@ const Comments = ({ contents = {}, handleAuthShow }) => {
                     <img src={profiePic} className="profile-pic rounded-circle mx-3"/>
                     <div className="ml-2">
                       <div className="mt-2">{comment.member_id}</div>
-                      <p>★ {comment.rating ? comment.rating : '평가없음'}</p>
+                      <p>★ {comment.rating !== 0 ? comment.rating : '평가없음'}</p>
                     </div>
                   </div>
                   <p className="text-justify ml-2 mt-3 mb-5">{comment.content}</p>

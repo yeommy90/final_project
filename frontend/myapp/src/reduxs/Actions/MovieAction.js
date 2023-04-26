@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { baseUrl } from '../../Apiurl';
-import { MovieReducers } from '../Reducers/MovieReducer';
+import MovieReducer, { MovieReducers } from '../Reducers/MovieReducer';
 
 // dispatch를 매개변수로 주면 내부에서 바로 사용 가능
 
@@ -23,6 +23,14 @@ function getMovieContents(movie_id) {
       .then((res) => res.data);
     dispatch(MovieReducers.getMovieContents({data}));
   };
+}
+
+function getReviewByMemberId(movie_id, member_id) {
+  return async (dispatch) => {
+    const data = await axios.get(`${baseUrl}/comment/${movie_id}/${member_id}`)
+      .then((res) => res.data);
+    dispatch(MovieReducers.getReviewByMemberId({data}));
+  }
 }
 
 // 코멘트
@@ -80,4 +88,4 @@ function postComment(commentDTO) {
 //   }
 // }
 
-export const MovieActions = { getMovieList, getMovieContents, postComment };
+export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment };

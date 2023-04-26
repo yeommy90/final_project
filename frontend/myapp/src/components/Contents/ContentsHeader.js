@@ -1,10 +1,11 @@
 import CommentModal from 'components/Comment/CommentModal';
 import { useState } from 'react';
-import { Button, Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import styled from 'styled-components';
 import MovieRating from './MovieRating';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
+import CommentDropdown from './CommentDropdown';
 
 const BannerOverlay = styled.div`
     position: absolute;
@@ -19,16 +20,28 @@ const BannerOverlay = styled.div`
     background-image: ${({ imageUrl }) => `url(${imageUrl})`};
   `;
 
-const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
+const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow, memberReview }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  const hasComment = memberReview && memberReview.content;
+  const hasRating = memberReview && memberReview.rating;
+
   const handleCommentClick = () => {
-    if (localStorage.getItem('member_id')) {
-      handleShow();
-    } else {
+    const memberId = localStorage.getItem('member_id');
+
+    if (!memberId) {
+      // 로그아웃 상태일 때: authmodal
       handleAuthShow();
+    } else if (hasComment) {
+      // 로그인 상태이며 기존 작성 comment가 있을 때: 수정/삭제 드롭다운 메뉴를 보여줍니다.
+      setIsDropdownVisible(true);
+    } else {
+      // 로그인 상태이며 기존 작성 comment가 없을 때: 코멘트 작성 모달창을 보여줍니다.
+      handleShow();
     }
   }
 
@@ -73,6 +86,7 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
                     <FontAwesomeIcon icon={faComment} className="mr-2" />
                     코멘트쓰기
                   </div>
+                  <CommentDropdown isDropdownVisible={isDropdownVisible} setIsDropdownVisible={setIsDropdownVisible}/>
                 </div>
                 <CommentModal isOpen={show} onRequestClose={handleClose} movie={contents} fetchComments={fetchComments}/>
               </Row>
