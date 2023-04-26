@@ -1,7 +1,8 @@
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { baseUrl } from 'Apiurl';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigation } from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -19,11 +20,11 @@ import {
 
 const Login = () => {
   const [inputs, setInputs] = useState({
-    memberEmail: '',
-    memberPass: '',
+    email: '',
+    password: '',
   });
 
-  const { memberEmail, memberPass } = inputs;
+  const { email, password } = inputs;
 
   const handleValueChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -46,20 +47,23 @@ const Login = () => {
         let jwtToken = response.headers.get('Authorization');
         console.log(jwtToken);
 
-        let jwtMemberName = response.data.memberName;
-        let jwtMemberEmail = response.data.memberEmail;
+        let jwtMemberId = response.data.member_id;
+        let jwtMemberName = response.data.name;
+        let jwtMemberNickname = response.data.nickname;
+        let jwtMemberEmail = response.data.email;
         let jwtAuthRole = response.data.authRole;
 
         localStorage.setItem('Authorization', jwtToken);
-        localStorage.setItem('memberEmail', jwtMemberEmail);
-        localStorage.setItem('memberName', jwtMemberName);
+        localStorage.setItem('member_id', jwtMemberId);
+        localStorage.setItem('email', jwtMemberEmail);
+        localStorage.setItem('name', jwtMemberName);
+        localStorage.setItem('nickname', jwtMemberNickname);
         localStorage.setItem('authRole', jwtAuthRole);
         localStorage.setItem('isLogin', 'true');
 
-        setInputs({ memberEmail: '', memberPass: '' });
+        setInputs({ email: '', password: '' });
       })
       .then((response) => {
-        //navigator('/'); 를 사용하려면 위에 const navigator = useNavigate(); 선언필요
         window.location.replace('/');
       })
       .catch((err) => {
@@ -94,30 +98,30 @@ const Login = () => {
                   <InputGroup className='form-group-no-border'>
                     <InputGroupAddon addonType='prepend'>
                       <InputGroupText>
-                        <i className='nc-icon nc-email-85' />
+                      <FontAwesomeIcon icon={faEnvelope}/>
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
                       placeholder='Email'
                       type='email'
-                      name='memberEmail'
+                      name='email'
                       onChange={handleValueChange}
-                      value={memberEmail}
+                      value={email}
                     />
                   </InputGroup>
                   <label>비밀번호</label>
                   <InputGroup className='form-group-no-border'>
                     <InputGroupAddon addonType='prepend'>
                       <InputGroupText>
-                        <i className='nc-icon nc-key-25' />
+                        <FontAwesomeIcon icon={faLock}/>
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
                       placeholder='Password'
                       type='password'
-                      name='memberPass'
+                      name='password'
                       onChange={handleValueChange}
-                      value={memberPass}
+                      value={password}
                     />
                   </InputGroup>
                   <button

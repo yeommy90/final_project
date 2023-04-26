@@ -13,5 +13,5 @@ public class CommentDTO {
 	private int movie_id;
 	private int member_id;
 	private String content;
-	private String state;
+	private int state;
 }

@@ -78,13 +78,14 @@ public class ListServiceImp implements ListService {
 		if (review != null) {
 			// 기존 작성 review에 rating만 있다면 > comment가 없다면
 			if (review.getContent() == null) {
-				listDAO.updateComment(comment);
+				listDAO.updateComment(comment); // 모달창 > update
 			} else {
-				throw new IllegalArgumentException("A comment already exists for this movie.");
+				// 기존 작성 comment가 있고 rating도 있다
+				listDAO.updateComment(comment); // 수정
 			}
 		} else {
 			// 새 review일때
-			listDAO.postComment(comment);
+			listDAO.postComment(comment); // 모달창 > insert
 		}
 	}
 
@@ -102,6 +103,15 @@ public class ListServiceImp implements ListService {
 		} else {
 			listDAO.postRating(rating);
 		}
+	}
+
+	@Override
+	public ReviewDTO findReviewByIdProcess(int movie_id, int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("movie_id", movie_id);
+		map.put("member_id", member_id);
+		
+		return listDAO.findReviewById(map);
 	}
 
 

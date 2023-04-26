@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { faCloudShowersHeavy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
 import { MovieActions } from 'reduxs/Actions/MovieAction';
@@ -11,11 +13,13 @@ const CommentModal = ({ isOpen, onRequestClose, movie = {}, fetchComments }) => 
   const [isSpoiler, setIsSpoiler] = useState(false);
   
   const handleSubmit = (e) => {
+    console.log('아이디', localStorage.getItem("member_id"));
+    console.log(isSpoiler);
     e.preventDefault();
 
     const commentDTO = {
       movie_id : movie.movie_id,
-      member_id : 1,
+      member_id : localStorage.getItem("member_id"),
       content : comment,
       isSpoiler,
     };
@@ -31,7 +35,7 @@ const CommentModal = ({ isOpen, onRequestClose, movie = {}, fetchComments }) => 
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      contentLabel="Details"
+      contentLabel="Comment"
       className="CommentModal"
       overlayClassName="CommentOverlay"
     >
@@ -58,10 +62,11 @@ const CommentModal = ({ isOpen, onRequestClose, movie = {}, fetchComments }) => 
                   className="form-check-input" 
                   type="checkbox" 
                   id="spoilerCheck" 
-                  checked={isSpoiler}
-                  onChange={(e) => setIsSpoiler(e.target.checked)} />
-                <label className="form-check-label" htmlFor="spoilerCheck">
-                  Spoiler
+                  checked={isSpoiler === 2}
+                  onChange={(e) => setIsSpoiler(e.target.checked ? 2 : 1)} />
+                <label className="form-check-label d-flex" htmlFor="spoilerCheck">
+                  <FontAwesomeIcon icon={faCloudShowersHeavy} size="2x"/>
+                  <div className='spolier ml-2'>스포일러 방지</div>
                 </label>
               </div>
               <button className="btn btn-primary mr-4 mb-3" type="submit">Write</button>

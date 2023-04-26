@@ -1,16 +1,12 @@
 import CommentModal from 'components/Comment/CommentModal';
 import { useState } from 'react';
 import { Button, Col, Container, Row } from 'reactstrap';
-import '../../assets/css/commentmodal.css';
 import styled from 'styled-components';
 import MovieRating from './MovieRating';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
 
-const ContentsHeader = ({ contents = {}, fetchComments }) => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const BannerOverlay = styled.div`
+const BannerOverlay = styled.div`
     position: absolute;
     top: 0;
     left: 0;
@@ -22,6 +18,27 @@ const ContentsHeader = ({ contents = {}, fetchComments }) => {
     z-index: 1;
     background-image: ${({ imageUrl }) => `url(${imageUrl})`};
   `;
+
+const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleCommentClick = () => {
+    if (localStorage.getItem('member_id')) {
+      handleShow();
+    } else {
+      handleAuthShow();
+    }
+  }
+
+  const handleWishClick = () => {
+    if (localStorage.getItem('member_id')) {
+      
+    } else {
+      handleAuthShow();
+    }
+  }
 
   return (
     <>
@@ -47,8 +64,16 @@ const ContentsHeader = ({ contents = {}, fetchComments }) => {
               </div>
               <Row>
                 <MovieRating />
-                <Button className='my-2' color="primary">보고싶어요</Button>
-                <Button className='m-2' color="secondary" onClick={handleShow}>코멘트</Button>
+                <div className='header-button d-flex justify-content-between'>
+                  <div className="m-2 mr-3" onClick={handleWishClick}>
+                    <FontAwesomeIcon icon={faHeart} className="mr-2" />
+                    보고싶어요
+                  </div>
+                  <div className="m-2" onClick={handleCommentClick}>
+                    <FontAwesomeIcon icon={faComment} className="mr-2" />
+                    코멘트쓰기
+                  </div>
+                </div>
                 <CommentModal isOpen={show} onRequestClose={handleClose} movie={contents} fetchComments={fetchComments}/>
               </Row>
             </div>

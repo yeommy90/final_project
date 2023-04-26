@@ -15,6 +15,7 @@ import com.example.list.dto.ContentsDTO;
 import com.example.list.service.ListService;
 import com.example.review.dto.CommentDTO;
 import com.example.review.dto.RatingDTO;
+import com.example.review.dto.ReviewDTO;
 
 @CrossOrigin({"http://localhost:3000"})
 @RestController
@@ -62,7 +63,6 @@ public class ListController {
 	
 	@PostMapping("/comment")
 	public void commentExecute(@RequestBody CommentDTO comment) {
-		comment.getState(); // t, f가져오기 > 내일할일
 		listService.commentProcess(comment);
 	}
 	
@@ -71,6 +71,10 @@ public class ListController {
 		listService.ratingProcess(rating);
 	}
 	
+	@GetMapping("/comment/{movie_id}/{member_id}")
+	public ReviewDTO getCommentExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		return listService.findReviewByIdProcess(movie_id, member_id);
+	}
 	
 	
 	

@@ -1,6 +1,7 @@
 package com.example.list.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.actor.dto.ActorDTO;
 import com.example.director.dto.DirectorDTO;
@@ -8,6 +9,7 @@ import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ListDTO;
 import com.example.review.dto.CommentDTO;
 import com.example.review.dto.RatingDTO;
+import com.example.review.dto.ReviewDTO;
 
 public interface ListService {
 	public List<ListDTO> getTopRatedMoviesProcess();
@@ -24,5 +26,7 @@ public interface ListService {
 	// review > comment, rating
 	public void commentProcess(CommentDTO comment);
 	public void ratingProcess(RatingDTO rating);
+	
+	public ReviewDTO findReviewByIdProcess(int movie_id, int member_id);
 	
 }

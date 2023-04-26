@@ -91,12 +91,13 @@ function IndexNavbar({ transparent }) {
                 style={{
                   height: "30px",
                   marginTop: "0px",
+                  marginRight: "10px",
                   backgroundColor: "black",
                   opacity: "0.7",
                   color: "white",
                   borderRadius: "5px",
                   border: "none",
-                  padding: "5px 10px",
+                  padding: "10px 10px",
                 }}
                 placeholder="검색어를 입력하세요..."
                 // 검색값 변동시 query값 변동
@@ -129,14 +130,24 @@ function IndexNavbar({ transparent }) {
                 />
               </NavLink>
             </div>
-            <NavItem>
-              <NavLink href="/profile">아무개 님의 마이페이지</NavLink>
-            </NavItem>
-            <NavItem>
-              <Button className="btn-round" style={{borderRadius:3}}color="danger" href="/login">
-                LOGIN
-              </Button>
-            </NavItem>
+            {localStorage.getItem('member_id') !== null ? (
+              <>
+                <NavItem>
+                  <NavLink href="/profile" style={{marginRight:10}}>아무개 님의 마이페이지</NavLink>
+                </NavItem>
+                <NavItem>
+                  <Button className="btn-round" style={{borderRadius:3}}color="danger" href="/logout">
+                    LOGOUT
+                  </Button>
+                </NavItem>
+              </>
+            ) : (
+              <NavItem>
+                <Button className="btn-round" style={{borderRadius:3}}color="danger" href="/login">
+                  LOGIN
+                </Button>
+              </NavItem>
+            )}
           </Nav>
         </Collapse>
       </Container>

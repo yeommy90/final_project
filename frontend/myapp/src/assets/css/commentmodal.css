@@ -26,3 +26,21 @@
   overflow-x: hidden;
   outline: 0;
 }
+
+.form-check-input {
+  display: none;
+}
+
+.form-check-label {
+  padding-left: 10px;
+  position: relative;
+  cursor: pointer;
+  color: gray;
+  padding-left: 30px !important;
+}
+
+.form-check-input:checked + .form-check-label {
+  color: #E75757;
+}
+
+

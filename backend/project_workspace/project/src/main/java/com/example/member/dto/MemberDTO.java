@@ -143,5 +143,15 @@ public class MemberDTO {
 		this.authRole = authRole;
 	}
 
+	//매치가 되면 true, 매치가 되지 않으면 false
+	public boolean matchPassword(String password) {
+		return this.password.equals(password);
+	}
+
+	public void changePassword(String oldPassword, String newPassword) {
+		if (!password.equals(oldPassword))
+			throw new com.example.common.exception.WrongEmailPasswordException();
+		this.password = newPassword;
+	}
 	
 }

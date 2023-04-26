@@ -19,5 +19,5 @@ public class ReviewDTO {
 	private int likes;
 	private Date regdate;
 	private Date moddate;
-	private String state;
+	private int state;
 }

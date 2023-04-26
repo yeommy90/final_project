@@ -93,18 +93,19 @@
 		SELECT * 
 		FROM review 
 		WHERE movie_id = #{movie_id}
+		ORDER BY likes DESC
 	</select>
 	
 	<!--사용자가 별점, 코멘트 안남긴 상태에서 코멘트를 추가할 경우-->
 	<insert id="postComment" parameterType="CommentDTO">
 		insert into review
-		values (#{movie_id}, 1, null, #{content, jdbcType=VARCHAR}, 0, sysdate, sysdate, 1)
+		values (#{movie_id}, #{member_id}, null, #{content, jdbcType=VARCHAR}, 0, sysdate, sysdate, #{state})
 	</insert>
 	
 	<!--사용자가 별점만 남긴 상태에서 코멘트를 추가할 경우-->
 	<update id="updateComment" parameterType="CommentDTO">
 		UPDATE review
-		SET content = #{content}
+		SET content = #{content}, state = #{state}
 		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
 	</update>
 	

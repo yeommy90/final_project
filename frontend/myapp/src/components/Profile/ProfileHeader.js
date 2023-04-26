@@ -1,3 +1,5 @@
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'reactstrap';
 
 const ProfileHeader = () => {
@@ -76,17 +78,16 @@ const ProfileHeader = () => {
             }}
           >
             <Button className='btn-round bg-dark' type='button' href='/review'>
-              <i className='fa fa-heart mr-1' />
+            <FontAwesomeIcon icon={faHeart} />
               평가하기
             </Button>
-            {/* <MovieReviewModal modal={modal} closeModal={closeModal} /> */}
             <Button
               className='btn-round bg-dark'
               type='button'
               href='/analysis'
               style={{ margin: '0px 20px' }}
             >
-              <i className='fa fa-heart mr-1' />
+              <FontAwesomeIcon icon={faHeart} />
               취향분석
             </Button>
             <Button
@@ -94,7 +95,7 @@ const ProfileHeader = () => {
               type='button'
               // href='/analysis'
             >
-              <i className='fa fa-heart mr-1' />
+              <FontAwesomeIcon icon={faHeart} />
               정보수정
             </Button>
           </div>

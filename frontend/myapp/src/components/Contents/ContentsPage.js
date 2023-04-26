@@ -6,15 +6,22 @@ import Comments from './Comments';
 import SimilarMovie from './SimilarMovie';
 
 import '../../assets/css/contents.css';
+import '../../assets/css/authmodal.css';
+import '../../assets/css/commentmodal.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { MovieActions } from 'reduxs/Actions/MovieAction';
 import { useParams } from 'react-router-dom';
 import ContentsImage from './ContentsImage';
+import AuthModal from './AuthModal';
 
 const Contents = () => {
   const dispatch = useDispatch();
   const { movie_id } = useParams();
   const [comments, setComments] = useState([]);
+
+  const [authShow, setAuthShow] = useState(false);
+  const handleAuthClose = () => setAuthShow(false);
+  const handleAuthShow = () => setAuthShow(true);
 
   const contents = useSelector((state) => state.movie.contents);
   
@@ -30,12 +37,13 @@ const Contents = () => {
 
   return (
     <div className="section">
-      <ContentsHeader contents={contents} fetchComments={fetchComments}/>
+      <ContentsHeader contents={contents} fetchComments={fetchComments} handleAuthShow={handleAuthShow}/>
       <BasicInfo contents={contents}/>
       <CastInfo contents={contents}/>
-      <Comments contents={contents} />
+      <Comments contents={contents} handleAuthShow={handleAuthShow} />
       <ContentsImage contents={contents}/>
       <SimilarMovie />
+      <AuthModal isOpen={authShow} onRequestClose={handleAuthClose} />
     </div>
   )
 }

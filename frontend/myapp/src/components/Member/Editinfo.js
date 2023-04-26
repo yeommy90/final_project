@@ -4,16 +4,12 @@ import { baseUrl } from "../../Apiurl";
 import { useNavigate } from "react-router-dom";
 
 const EditInfo = () => {
-  const navigator = useNavigate();
-
-  const [members, setMembers] = useState({
-    memberEmail: "",
-    memberPass: "",
-    memberName: "",
-    memberPhone: "",
+  const [member, setMember] = useState({
+    password: "",
+    name: "",
   });
 
-  const { memberEmail, memberPass, memberName, memberPhone } = members;
+  const { password, name } = member;
 
   const config = {
     headers: {
@@ -24,38 +20,38 @@ const EditInfo = () => {
 
   const info = async () => {
     return await axios
-      .get(`${baseUrl}/member/editinfo/${localStorage.memberEmail}`, config)
+      .get(`${baseUrl}/member/editinfo/${localStorage.email}`, config)
       .then((response) => {
-        setMembers({ ...response.data, memberPass: "" });
+        setMember({ ...response.data, password: "" });
       });
   };
-  
+
   useEffect(() => {
     info();
   }, []);
 
   const [passwordCheck, setPasswordCheck] = useState("");
 
-  const passChang = (e) => {
+  const passChange = (e) => {
     e.preventDefault();
-    if (memberPass !== e.target.value) setPasswordCheck("비밀번호 불일치");
+    if (password !== e.target.value) setPasswordCheck("비밀번호 불일치");
     else setPasswordCheck("비밀번호 일치");
   };
 
   const handleValueChange = (e) => {
     e.preventDefault();
-    setMembers({ ...members, [e.target.name]: e.target.value });
+    setMember({ ...member, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!memberPass) {
+    if (!password) {
       alert("비밀번호를 입력하세요.");
       return;
     }
 
-    await axios.post(`${baseUrl}/member/update`, members, config);
-    localStorage.setItem("memberName", memberName);
+    await axios.post(`${baseUrl}/profile/update`, member, config);
+    localStorage.setItem("name", name);
     //navigator('/');
     window.location.replace("/");
   };
@@ -69,9 +65,9 @@ const EditInfo = () => {
             <input
               type="email"
               className="form-control"
-              name="memberEmail"
+              name="email"
               placeholder="이메일"
-              value={localStorage.memberEmail}
+              value={localStorage.email}
               readOnly
             />
           </div>
@@ -79,9 +75,9 @@ const EditInfo = () => {
             <input
               type="password"
               className="form-control"
-              name="memberPass"
+              name="password"
               placeholder="비밀번호"
-              value={memberPass}
+              value={password}
               onChange={handleValueChange}
             />
           </div>
@@ -90,9 +86,9 @@ const EditInfo = () => {
             <input
               type="password"
               className="form-control"
-              name="memberPass2"
+              name="password2"
               placeholder="비밀번호 확인"
-              onChange={passChang}
+              onChange={passChange}
             />
             <span>{passwordCheck}</span>
           </div>
@@ -101,20 +97,9 @@ const EditInfo = () => {
             <input
               type="text"
               className="form-control"
-              name="memberName"
+              name="name"
               placeholder="이름"
-              value={memberName}
-              onChange={handleValueChange}
-            />
-          </div>
-
-          <div className="form-group mb-1">
-            <input
-              type="text"
-              className="form-control"
-              name="memberPhone"
-              placeholder="연락처"
-              value={memberPhone}
+              value={name}
               onChange={handleValueChange}
             />
           </div>

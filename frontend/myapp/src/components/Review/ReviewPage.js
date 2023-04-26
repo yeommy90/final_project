@@ -5,6 +5,7 @@ import '../../assets/css/moviemodal.css';
 import ReviewModal from './MovieDetailModal';
 import axios from 'axios';
 import yourImage from '../../assets/img/180c6e128821941b1.jpg';
+import { baseUrl } from 'Apiurl';
 
 const ReviewPage = () => {
   const [movies, setMovies] = useState([]);
@@ -22,7 +23,7 @@ const ReviewPage = () => {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8090/printrandom')
+    axios.get(`${baseUrl}/review`)
       .then(response => {
         setMovies(response.data);
       })

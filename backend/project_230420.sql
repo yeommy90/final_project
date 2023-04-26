@@ -54,13 +54,13 @@ SELECT movie_id, member_id, rating FROM review WHERE movie_id = 129 AND member_i
 
 
 --이게 무야~~~
-SELECT g.genre_id, g.name, COUNT(r.rating) AS rating_count, AVG(r.rating) AS average_rating, ((sum(r.rating) / (COUNT(r.rating) * 5)) * 100) AS total
+SELECT g.genre_id, g.name, COUNT(r.rating) AS rating_count, Round(AVG(r.rating),2) AS average_rating, ((sum(r.rating) / (COUNT(r.rating) * 5)) * 100) AS total
         FROM
             genre g
         JOIN
             movie_genre mg ON g.genre_id = mg.genre_id
         JOIN
-            review r ON r.movie_id = mg.movie_id
+            review r ON r.movie_id = mg.movie_id group by g.genre_id, g.name
         WHERE
             r.member_id = 1
         GROUP BY
@@ -70,7 +70,7 @@ SELECT g.genre_id, g.name, COUNT(r.rating) AS rating_count, AVG(r.rating) AS ave
             rating_count DESC,
             total DESC;
 
-
+SELECT * FROM review  WHERE movie_id = 129 ORDER BY likes DESC;
 
 
 
