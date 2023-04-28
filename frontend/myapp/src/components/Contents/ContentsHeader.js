@@ -32,13 +32,16 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
   const member_id = localStorage.getItem('member_id');
 
   // memberReview가 아직 전달되지 않았을 수 있으므로 확인 후 state를 초기화 해야함
-  const [comment, setComment] = useState(() => memberReview ? memberReview.content : '');
+  const [comment, setComment] = useState('');
   const [isSpoiler, setIsSpoiler] = useState(1);
-  const [isEditMode, setIsEditMode] = useState(() => memberReview && Object.keys(memberReview).length > 0 ? true : false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   // 코멘트작성 버튼 > 모달
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setComment('');
+  };
   const handleShow = () => setShow(true);
 
   // 코멘트작성 버튼 > 수정/삭제 드롭다운 메뉴
@@ -50,6 +53,7 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
   const handleConfirmDelete = () => {
     dispatch(MovieActions.deleteComment(memberReview.movie_id, memberReview.member_id));
     setShowDeleteModal(false);
+    setComment('');
     fetchComments();
   }
   
@@ -59,7 +63,7 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
 
   // 코멘트 작성 버튼
   const handleCommentClick = () => {
-    dispatch(MovieActions.getReviewByMemberId(contents.movie_id, member_id));
+    // dispatch(MovieActions.getReviewByMemberId(contents.movie_id, member_id));
 
     if (hasComment) {
       setIsEditMode(true);

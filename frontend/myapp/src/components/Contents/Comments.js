@@ -26,7 +26,7 @@ const Comments = ({ contents = {}, handleAuthShow }) => {
               {comments && comments.length > 0 ? (comments
                 .filter((comment) => comment.content && comment.content.trim() !== '')
                 .map((comment) => (
-                <div key={comment.movie_id} className="comment-box bg-light p-3 mb-3">
+                <div key={comment.member_id} className="comment-box bg-light p-3 mb-3">
                   <div className="d-flex align-items-center">
                     <img src={profiePic} className="profile-pic rounded-circle mx-3"/>
                     <div className="ml-2">

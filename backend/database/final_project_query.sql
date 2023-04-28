@@ -161,8 +161,7 @@ select count(*) from movie;
 
 select * from movie_actor order by actor_id;
 
-
-
+commit;
 
 
 

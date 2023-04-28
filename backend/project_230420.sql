@@ -79,7 +79,19 @@ ORDER BY likes DESC;
 SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
 FROM comments c
 LEFT OUTER JOIN rating r ON c.movie_id = r.movie_id AND c.member_id = r.member_id
-WHERE c.movie_id = 129 AND c.member_id = 1;
+WHERE r.movie_id = 129 AND r.member_id = 1;
+
+-- 사용자가 남긴 코멘트, 별점 가져오기
+SELECT COALESCE(c.movie_id, r.movie_id) AS movie_id,
+       COALESCE(c.member_id, r.member_id) AS member_id,
+       c.content,
+       COALESCE(r.rating, 0) AS rating,
+       c.likes,
+       c.state,
+       c.regdate
+FROM rating r
+FULL OUTER JOIN comments c ON c.movie_id = r.movie_id AND c.member_id = r.member_id
+WHERE (c.movie_id = 129 AND c.member_id = 1) OR (r.movie_id = 129 AND r.member_id = 1);
 
 commit;
 

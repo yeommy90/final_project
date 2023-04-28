@@ -27,6 +27,7 @@ const Contents = () => {
   const contents = useSelector((state) => state.movie.contents);
   const memberReview = useSelector((state) => state.movie.memberReview);
   
+  // 렌더링 트리거 함수 > 이름을 잘못지었음..
   const fetchComments = async () => {
     const fetchedComments = await dispatch(MovieActions.getMovieContents(movie_id));
     const fetchedMemberComments = await dispatch(MovieActions.getReviewByMemberId(movie_id, localStorage.getItem("member_id")));
@@ -36,7 +37,7 @@ const Contents = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchComments();
-  }, []);
+  }, [setComments]);
 
   return (
     <div className="section">

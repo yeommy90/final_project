@@ -187,11 +187,17 @@
 	</update>
 	
 	<!--사용자가 이미 남긴 리뷰가 있는지 확인-->
-	<select id="findReviewById" parameterType="map" resultType="ReviewDTO">
-		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
-		FROM comments c
-		LEFT OUTER JOIN rating r ON c.movie_id = r.movie_id AND c.member_id = r.member_id
-		WHERE c.movie_id = #{movie_id} AND c.member_id = #{member_id}
+	<select id="findReviewById" parameterType="map" resultMap="CommentAndRatingResultMap">	
+		SELECT COALESCE(c.movie_id, r.movie_id) AS movie_id,
+		       	COALESCE(c.member_id, r.member_id) AS member_id,
+		       	c.content,
+		       	COALESCE(r.rating, 0) AS rating,
+		       	c.likes,
+		       	c.state,
+		       	c.regdate
+		FROM rating r
+		FULL OUTER JOIN comments c ON c.movie_id = r.movie_id AND c.member_id = r.member_id
+		WHERE (c.movie_id = #{movie_id} AND c.member_id = #{member_id}) OR (r.movie_id = #{movie_id} AND r.member_id = #{member_id})
 	</select>
 </mapper>
 

@@ -25,6 +25,7 @@ function getMovieContents(movie_id) {
   };
 }
 
+// 사용자가 남긴 리뷰 가져오기
 function getReviewByMemberId(movie_id, member_id) {
   return async (dispatch) => {
     const data = await axios.get(`${baseUrl}/comment/${movie_id}/${member_id}`)
@@ -54,7 +55,30 @@ function updateComment(commentDTO) {
 function deleteComment(movie_id, member_id) {
   return async () => {
     await axios.delete(`${baseUrl}/comment/${movie_id}/${member_id}`)
-      .then((res) => res.data);
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+function postRating(ratingDTO) {
+  return async () => {
+    await axios.post(`${baseUrl}/rating`, ratingDTO)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+function updateRating(ratingDTO) {
+  return async () => {
+    await axios.put(`${baseUrl}/rating`, ratingDTO)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }
 
@@ -105,4 +129,4 @@ function deleteComment(movie_id, member_id) {
 //   }
 // }
 
-export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, updateComment, deleteComment };
+export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, updateComment, deleteComment, postRating, updateRating };
