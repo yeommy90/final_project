@@ -1,7 +1,7 @@
 //사용자가 별점 평가를 남길 수 있는 영화 리스트 페이지
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'reactstrap';
-import '../../assets/css/moviemodal.css';
+import '../../assets/css/modal.css';
 import ReviewModal from './MovieDetailModal';
 import axios from 'axios';
 import yourImage from '../../assets/img/180c6e128821941b1.jpg';
@@ -10,11 +10,11 @@ import { baseUrl } from 'Apiurl';
 const ReviewPage = () => {
   const [movies, setMovies] = useState([]);
   const [show, setShow] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState({});
 
   const handleClose = () => {
     setShow(false);
-    setSelectedMovie(null);
+    setSelectedMovie({});
   }
 
   const handleShow = (movie) => {
@@ -31,8 +31,6 @@ const ReviewPage = () => {
         console.log(error);
       });
   }, []);
-
-  console.log(movies);
 
   return (
     <div className="container d-flex justify-content-center align-items-center" style={{ marginTop: '150px' }}>

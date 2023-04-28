@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 
 const CastInfo = ({ contents = {} }) => {
@@ -36,15 +36,15 @@ const CastInfo = ({ contents = {} }) => {
       const currentItem = visibleItems[rowIndex * itemsPerRow + colIndex];
       if (currentItem) {
         cols.push(
-          <>
-          <Col key={currentItem.id} md="1" className="p-2">
-            <img src={currentItem.image} alt={currentItem.name} className="pro-img rounded-square"/>
-          </Col>
-          <Col className='mt-3 p-2 ml-5'>
-            <p className='name'>{currentItem.name}</p>
-            <p>{currentItem.role}</p>
-          </Col>
-          </>
+          <React.Fragment key={currentItem.id} >
+            <Col md="1" className="p-2">
+              <img src={currentItem.image} alt={currentItem.name} className="pro-img rounded-square"/>
+            </Col>
+            <Col className='mt-3 p-2 ml-5'>
+              <p className='name'>{currentItem.name}</p>
+              <p>{currentItem.role}</p>
+            </Col>
+          </React.Fragment>
         );
       }
     }

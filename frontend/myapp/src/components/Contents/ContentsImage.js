@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Modal from 'react-modal';
 
-import '../../assets/css/fullscreenmodal.css';
-
 const { Container, Row } = require("reactstrap")
 
 const ContentsImage = ({ contents = {} }) => {
@@ -79,8 +77,8 @@ const ContentsImage = ({ contents = {} }) => {
         isOpen={modal}
         onRequestClose={closeModal}
         contentLabel="Image Modal"
-        className="full-screen-modal"
-        overlayClassName="Overlay"
+        className="FullScreenModal"
+        overlayClassName="FullScreenModalOverlay"
       >
         <div className="full-screen-modal-content text-center d-flex align-items-center justify-content-center">
           <button

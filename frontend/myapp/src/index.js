@@ -10,7 +10,6 @@ import store from 'reduxs/Store';
 // styles
 import 'bootstrap/scss/bootstrap.scss';
 import 'assets/scss/paper-kit.scss?v=1.3.0';
-import 'assets/css/body.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

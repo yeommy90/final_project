@@ -1,18 +1,19 @@
+import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
 
-const CommentDropdown = ({ isDropdownVisible, setIsDropdownVisible }) => {
-
-  const showEditDeleteDropdown = () => {
-    setIsDropdownVisible(true);
-  };
-
+const CommentDropdown = ({ isDropdownVisible, setIsDropdownVisible, handleShow, onDelete }) => {
   const hideEditDeleteDropdown = () => {
     setIsDropdownVisible(false);
   };
 
+  const handleDelete = () => {
+    onDelete();
+  }
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (isDropdownVisible && !event.target.closest('.comment-dropdown')) {
+      if (isDropdownVisible && !event.target.closest('.dropdown')) {
         hideEditDeleteDropdown();
       }
     };
@@ -21,15 +22,18 @@ const CommentDropdown = ({ isDropdownVisible, setIsDropdownVisible }) => {
     return () => {
       document.removeEventListener('click', handleOutsideClick);
     };
-  }, [isDropdownVisible, hideEditDeleteDropdown]);
+  }, [isDropdownVisible]);
 
   return (
-    <div className="comment-dropdown">
-      {/* 이전에 작성한 로직을 사용하여 드롭다운 메뉴를 표시합니다. */}
+    <div>
       {isDropdownVisible && (
         <div className="dropdown-menu">
-          <button >수정</button>
-          <button >삭제</button>
+          <div className='d-flex justify-content-center flex-column align-items-center'>
+            <div className="dropdown-edit p-2 mb-1" onClick={() => {handleShow();}}>
+              <FontAwesomeIcon icon={faPen} className="mr-2" />코멘트 수정</div>
+            <div className="dropdown-del p-2" href="#" onClick={handleDelete}>
+              <FontAwesomeIcon icon={faTrashCan} className="mr-2" />코멘트 삭제</div>
+          </div>
         </div>
       )}
     </div>

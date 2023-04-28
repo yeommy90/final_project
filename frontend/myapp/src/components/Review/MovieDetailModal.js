@@ -4,7 +4,7 @@ import { Button } from 'reactstrap';
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import '../../assets/css/commentmodal.css';
+import '../../assets/css/modal.css';
 import CommentModal from 'components/Comment/CommentModal';
 
 Modal.setAppElement('#root'); // 이 부분은 루트 요소를 설정합니다. 이 예에서는 index.html에 있는 'root' 요소입니다.
@@ -22,6 +22,7 @@ const ReviewModal = ({ show, handleClose, movie }) => {
   const commentShow = (movie) => {
     setSelectedMovie(movie);
     setComment(true);
+    console.log(movie);
   }
   
   return (
@@ -30,8 +31,8 @@ const ReviewModal = ({ show, handleClose, movie }) => {
         isOpen={show}
         onRequestClose={handleClose}
         contentLabel="상세정보"
-        className="Modal"
-        overlayClassName="Overlay"
+        className="MovieDetailModal"
+        overlayClassName="MovieDetailOverlay"
       >
         {movie && (
           <>
@@ -73,8 +74,7 @@ const ReviewModal = ({ show, handleClose, movie }) => {
           <Button className="m-3" color="primary" onClick={handleClose}>취소</Button>
         </div>
       </Modal>
-
-      <CommentModal isOpen={comment} onRequestClose={commentClose} movie={selectedMovie} />
+      <CommentModal isOpen={comment} onRequestClose={commentClose} movie={movie} />
     </div>
   );
 };

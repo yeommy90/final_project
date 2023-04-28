@@ -116,8 +116,9 @@ const SearchList = () => {
                 key={`${actor.actor_id}-${index}`}
                 className="col-sm-3 col-md-2 mr-auto ml-auto"
               >
+                {/*  */}
                 {actor.profile_path ? (
-                  <Link to={`/contents/${actor.actor_id}`}>
+                  <Link to={`/actorProfile/${actor.actor_id}`}>
                     <h4 className="images-title">{actor.name}</h4>
                     <img
                       className="img-circle img-no-padding img-responsive"
@@ -127,11 +128,11 @@ const SearchList = () => {
                     <p className="text-center">{actor.name}</p>
                   </Link>
                 ) : (
-                  <Link to={`/contents/${actor.actor_id}`}>
+                  <Link to={`/actorProfile/${actor.actor_id}`}>
                     <h4 className="images-title">{actor.name}</h4>
                     <img
                       className="img-circle img-no-padding img-responsive"
-                      src="\emptyCast.png"
+                      src="\pepeAk.png"
                       alt="출연진 프로필 사진이 없습니다."
                     />
                     <p className="text-center">{actor.name}</p>
@@ -158,7 +159,7 @@ const SearchList = () => {
               <div key={`${director.director_id}-${index}`}>
                 <div className="img_box">
                   {director.profile_path ? (
-                    <Link to={`/contents/${director.director}`}>
+                    <Link to={`/dirProfile/${director.director_id}`}>
                       <img
                         src={`https://image.tmdb.org/t/p/original/${director.profile_path}`}
                       />

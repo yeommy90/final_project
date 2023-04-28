@@ -12,6 +12,7 @@ import {
   Nav,
   Container,
 } from "reactstrap";
+import ComboBox from "./AutoComplete";
 
 function IndexNavbar({ transparent }) {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
@@ -20,8 +21,8 @@ function IndexNavbar({ transparent }) {
 
   // 검색어 입력
   const [query, setQuery] = useState("");
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
+  const handleInputChange = (value) => {
+    setQuery(value);
   };
 
   // index일때는 transparent 적용, 그외 페이지는 bg-dark (scss/paper-kit/_navbars.scss/&.navbar-transparent 항목 수정)
@@ -86,10 +87,10 @@ function IndexNavbar({ transparent }) {
                 alignItems: "center",
               }}
             >
-              <input
-                type="text"
+              {/* 자동완성 입력란! */}
+              <ComboBox
                 style={{
-                  height: "30px",
+                  height: "20px !important",
                   marginTop: "0px",
                   marginRight: "10px",
                   backgroundColor: "black",
@@ -101,12 +102,12 @@ function IndexNavbar({ transparent }) {
                 }}
                 placeholder="검색어를 입력하세요..."
                 // 검색값 변동시 query값 변동
-                value={query}
-                onChange={handleInputChange}
+                query={query}
+                onQueryChange={handleInputChange}
               />
               <NavLink
                 // 검색 경로
-                href={`/search/${query}`}
+                href={`/search/${encodeURIComponent(query)}`}
                 style={{
                   position: "absolute",
                   right: "10px",
@@ -130,20 +131,32 @@ function IndexNavbar({ transparent }) {
                 />
               </NavLink>
             </div>
-            {localStorage.getItem('member_id') !== null ? (
+            {localStorage.getItem("member_id") !== null ? (
               <>
                 <NavItem>
-                  <NavLink href="/profile" style={{marginRight:10}}>아무개 님의 마이페이지</NavLink>
+                  <NavLink href="/profile" style={{ marginRight: 10, marginLeft: 10, fontSize: '11pt'}}>
+                    아무개 님의 마이페이지
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <Button className="btn-round" style={{borderRadius:3}}color="danger" href="/logout">
+                  <Button
+                    className="btn-round"
+                    style={{ borderRadius: 3 }}
+                    color="danger"
+                    href="/logout"
+                  >
                     LOGOUT
                   </Button>
                 </NavItem>
               </>
             ) : (
               <NavItem>
-                <Button className="btn-round" style={{borderRadius:3}}color="danger" href="/login">
+                <Button
+                  className="btn-round"
+                  style={{ borderRadius: 3 }}
+                  color="danger"
+                  href="/login"
+                >
                   LOGIN
                 </Button>
               </NavItem>

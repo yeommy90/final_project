@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class ListController {
 		
 	}
 	
-	
+
 	// 메인 리스트
 	// http://localhost:8090/
 	@GetMapping("/")
@@ -41,18 +42,6 @@ public class ListController {
 		return map;
 	}
 	
-	
-	
-	// 검색
-	// http://localhost:8090/search/
-	@GetMapping("/search/{query}")
-	public Map<String, Object> movieExecute(@PathVariable("query") String query) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("searchMovieList", listService.searchMovies(query.toUpperCase()));
-		map.put("searchActorList", listService.searchActors(query.toUpperCase()));
-		map.put("searchDirectorList", listService.searchDirectors(query.toUpperCase()));
-		return map;
-	}
 	
 	
 	// 영화 상세정보
@@ -72,6 +61,11 @@ public class ListController {
 	@PutMapping("/comment")
 	public void updateCommentExecute(@RequestBody CommentsDTO comment) {
 		listService.updateCommentProcess(comment);
+	}
+	
+	@DeleteMapping("/comment/{movie_id}/{member_id}")
+	public void deleteCommentExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		listService.deleteCommentProcess(movie_id, member_id);
 	}
 	
 	@PostMapping("/rating")

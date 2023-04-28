@@ -54,6 +54,54 @@
 	
 	
 	
+	<!--검색 자동완성 기능을 위한 모든 선택-->
+	<select id="selectAll" resultType="java.lang.String">
+		(SELECT ACTOR.NAME FROM ACTOR)
+		UNION
+		(SELECT DIRECTOR.NAME FROM DIRECTOR)
+		UNION
+		(SELECT MOVIE.TITLE FROM MOVIE)
+	</select>
+	
+	<!--배우 ID로 ACTOR row 선택(이미지, 이름, ID)-->
+	<select id ="selectByActorId" resultType="ActorDTO" parameterType="String">
+		SELECT * FROM ACTOR
+		WHERE ACTOR.ACTOR_ID IN (
+		SELECT ACTOR_ID
+		FROM MOVIE_ACTOR
+		WHERE ACTOR_ID = #{actor_id}
+		)
+	</select>
+	
+	<!--감독 ID로 DIRECTOR row 선택(이미지, 이름, ID)-->
+	<select id ="selectByDirId" resultType="DirectorDTO" parameterType="String">
+		SELECT * FROM DIRECTOR
+		WHERE DIRECTOR.DIRECTOR_ID IN (
+		SELECT DIRECTOR_ID
+		FROM MOVIE_DIRECTOR
+		WHERE DIRECTOR_ID = #{dir_id}
+		)
+	</select>
+	
+	<!--배우가 출연한 영화 출력(배우ID값으로 선택)-->
+	<select id="castMovies" resultType="ListDTO" parameterType="String">
+		SELECT DISTINCT MOVIE.*
+		FROM MOVIE
+		INNER JOIN MOVIE_ACTOR ON MOVIE.MOVIE_ID = MOVIE_ACTOR.MOVIE_ID
+		INNER JOIN ACTOR ON MOVIE_ACTOR.ACTOR_ID = ACTOR.ACTOR_ID
+		WHERE ACTOR.ACTOR_ID = #{actor_id}
+	</select>
+	
+	<!--감독이 감독한 영화 출력(감독ID값으로 선택)-->
+	<select id="dirMovies" resultType="ListDTO" parameterType="String">
+		SELECT DISTINCT MOVIE.*
+		FROM MOVIE
+		INNER JOIN MOVIE_DIRECTOR ON MOVIE.MOVIE_ID = MOVIE_DIRECTOR.MOVIE_ID
+		INNER JOIN DIRECTOR ON MOVIE_DIRECTOR.DIRECTOR_ID = DIRECTOR.DIRECTOR_ID
+		WHERE DIRECTOR.DIRECTOR_ID = #{dir_id}
+	</select>
+	
+	
 	
 	<!--영화 컨텐츠 페이지-->
 	<select id="getMovieById" parameterType="int" resultType="ContentsDTO">
@@ -119,6 +167,11 @@
 		SET content = #{content}, state = #{state}, moddate = sysdate
 		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
 	</update>
+	
+	<delete id="deleteComment" parameterType="map">
+		DELETE FROM comments
+		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
+	</delete>
 	
 	<!--사용자가 코멘트를 안남긴 상태에서 별점만 추가할 경우-->
 	<insert id="postRating" parameterType="RatingDTO">

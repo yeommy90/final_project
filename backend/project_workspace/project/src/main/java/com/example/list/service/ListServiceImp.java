@@ -50,6 +50,31 @@ public class ListServiceImp implements ListService {
 		return listDAO.searchDirectors(query);
 	}
 	
+	@Override
+	public List<ListDTO> castMoviesProcess(String actor_id) {
+		return listDAO.castMovies(actor_id);
+	}
+
+	@Override
+	public List<ListDTO> dirMoviesProcess(String dir_id) {
+		return listDAO.dirMovies(dir_id);
+	}
+
+	@Override
+	public ActorDTO selectByActorIdProcess(String actor_id) {
+		return listDAO.selectByActorId(actor_id);
+	}
+
+	@Override
+	public DirectorDTO selectByDirIdProcess(String dir_id) {
+		return listDAO.selectByDirId(dir_id);
+	}
+
+	@Override
+	public List<String> selectAllProcess() {
+		return listDAO.selectAll();
+	}
+	
 
 	// 영화 상세 컨텐츠
 	@Override
@@ -92,6 +117,15 @@ public class ListServiceImp implements ListService {
 	@Override
 	public void updateRatingProcess(RatingDTO rating) {
 		listDAO.updateRating(rating);
+	}
+
+	@Override
+	public void deleteCommentProcess(int movie_id, int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("movie_id", movie_id);
+		map.put("member_id", member_id);
+		
+		listDAO.deleteComment(map);
 	}
 
 

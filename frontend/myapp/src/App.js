@@ -13,6 +13,7 @@ import CommentPage from 'components/Comment/CommentPage';
 import GenreSelect from 'components/Member/GenreSelect';
 import PrivateRoute from 'access/PrivateRoute';
 import LogOut from 'components/Member/Logout';
+import CastProfile from 'components/CastProfile/CastProfile';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/contents/:movie_id" element={<PrivateRoute isAuth={false} RouteComponent={Contents} />} />
         <Route path="/review" element={<PrivateRoute isAuth={true} RouteComponent={ReviewPage} />} />
         <Route path="/comment" element={<PrivateRoute isAuth={false} RouteComponent={CommentPage} />} />
+        <Route path="/:profileType/:id" element={<PrivateRoute isAuth={false} RouteComponent={CastProfile}/>} />
       </Routes>
     </BaseLayout>
   );

@@ -27,6 +27,19 @@ public interface ListDAO {
 	public List<ActorDTO> searchActors(String query);
 	public List<DirectorDTO> searchDirectors(String query);
 	
+	// 배우/감독 정보
+	public ActorDTO selectByActorId(String actor_id);
+	public DirectorDTO selectByDirId(String dir_id);
+	
+	//출연 영화
+	public List<ListDTO> castMovies(String actor_id);
+	
+	//감독 영화
+	public List<ListDTO> dirMovies(String dir_id);
+	
+	//전체선택(자동완성 기능)
+	public List<String> selectAll();
+	
 	// 영화 상세 페이지
 	public ContentsDTO getMovieById(int movie_id);
 	public List<GenreDTO> getGenresByMovieId(int movie_id);
@@ -38,6 +51,7 @@ public interface ListDAO {
 	// review > comment, rating
 	public void postComment(CommentsDTO comment);
 	public void updateComment(CommentsDTO comment);
+	public void deleteComment(Map<String, Object> map);
 	public void postRating(RatingDTO rating);
 	public void updateRating(RatingDTO rating);
 	public ReviewDTO findReviewById(Map<String, Object> map);

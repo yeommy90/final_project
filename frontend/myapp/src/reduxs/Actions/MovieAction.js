@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { baseUrl } from '../../Apiurl';
-import MovieReducer, { MovieReducers } from '../Reducers/MovieReducer';
+import { MovieReducers } from '../Reducers/MovieReducer';
 
 // dispatch를 매개변수로 주면 내부에서 바로 사용 가능
 
@@ -37,6 +37,23 @@ function getReviewByMemberId(movie_id, member_id) {
 function postComment(commentDTO) {
   return async () => {
     await axios.post(`${baseUrl}/comment`, commentDTO)
+      .then((res) => res.data);
+  }
+}
+
+function updateComment(commentDTO) {
+  return async () => {
+    await axios.put(`${baseUrl}/comment`, commentDTO)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+function deleteComment(movie_id, member_id) {
+  return async () => {
+    await axios.delete(`${baseUrl}/comment/${movie_id}/${member_id}`)
       .then((res) => res.data);
   }
 }
@@ -88,4 +105,4 @@ function postComment(commentDTO) {
 //   }
 // }
 
-export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment };
+export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, updateComment, deleteComment };

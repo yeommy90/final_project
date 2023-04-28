@@ -8,7 +8,7 @@ const AuthModal = ({isOpen, onRequestClose}) => {
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      contentLabel="Authentication"
+      contentLabel="Auth"
       className="AuthModal"
       overlayClassName="AuthOverlay"
     >

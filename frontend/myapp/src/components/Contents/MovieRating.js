@@ -17,7 +17,6 @@ const MovieRating = () => {
         width: 250,
         display: 'flex',
         alignItems: 'center',
-        marginLeft: '5px',
       }}
     >
       <Rating
