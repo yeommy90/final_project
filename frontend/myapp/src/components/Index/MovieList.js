@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'assets/css/font.css';
 import 'assets/css/movielist.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { MovieActions } from 'reduxs/Actions/MovieAction';
 
 function MovieList({ movies = [], listTitle = "" }) {
   // 슬라이드 사용하기 위한 선언 모음

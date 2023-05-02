@@ -83,14 +83,9 @@ public class ListController {
 		System.out.println("냐냐냐" + movie_id + member_id);
 		return listService.findReviewByIdProcess(movie_id, member_id);
 	}
+		
 	
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }

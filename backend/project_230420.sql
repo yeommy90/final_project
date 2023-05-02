@@ -1,7 +1,7 @@
 SELECT movie_id, title FROM MOVIE WHERE country like '%Korea%';
 
 -- 평점, 인기도, 2000년도 이후
-SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2), a.tmdb_vote_cnt, a.poster_path
+SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum / 2, 2), a.tmdb_vote_cnt, a.poster_path
 FROM (SELECT * 
         FROM movie
         WHERE tmdb_vote_cnt >= 100 AND popularity >= 30 AND release_date >= '00/01/01'
@@ -104,10 +104,59 @@ delete from actor where profile_path is null;
 DELETE FROM movie_actor
 WHERE movie_id NOT IN (SELECT movie_id FROM movie);
 
-select * from movie_actor where movie_id = 635302;
-select * from director where director_id = 86270;
+select * from movie_director where movie_id = 15370;
+select * from actor where actor_id = 123664;
 
-delete from movie_actor;
+delete from actor;
+
+
+-- 비슷한 영화 쿼리
+WITH matched_genres AS (
+  SELECT movie_id, COUNT(*) AS genre_count
+  FROM movie_genre
+  WHERE genre_id IN (
+    SELECT genre_id
+    FROM movie_genre
+    WHERE movie_id = 299536
+  )
+  AND movie_id <> 299536
+  GROUP BY movie_id
+),
+matched_directors AS (
+  SELECT movie_id, COUNT(*) AS director_count
+  FROM movie_director
+  WHERE director_id IN (
+    SELECT director_id
+    FROM movie_director
+    WHERE movie_id = 299536
+  )
+  AND movie_id <> 299536
+  GROUP BY movie_id
+),
+matched_actors AS (
+  SELECT movie_id, COUNT(*) AS actor_count
+  FROM movie_actor
+  WHERE actor_id IN (
+    SELECT actor_id
+    FROM movie_actor
+    WHERE movie_id = 299536
+  )
+  AND movie_id <> 299536
+  GROUP BY movie_id
+),
+combined AS (
+  SELECT m.*, COALESCE(g.genre_count, 0) + (3 * COALESCE(d.director_count, 0)) + COALESCE(a.actor_count, 0) AS similarity_score
+  FROM movie m
+  LEFT JOIN matched_genres g ON m.movie_id = g.movie_id
+  LEFT JOIN matched_directors d ON m.movie_id = d.movie_id
+  LEFT JOIN matched_actors a ON m.movie_id = a.movie_id
+  WHERE m.movie_id <> 299536
+  ORDER BY similarity_score DESC, m.release_date DESC
+)
+SELECT *
+FROM combined
+WHERE ROWNUM <= 12;
+
 
 
 

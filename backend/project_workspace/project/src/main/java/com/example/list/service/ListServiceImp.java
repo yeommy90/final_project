@@ -85,9 +85,9 @@ public class ListServiceImp implements ListService {
 		contents.setGenreDTO(listDAO.getGenresByMovieId(movie_id));
 		contents.setImagesDTO(listDAO.getImagesByMovieId(movie_id));
 		contents.setReviewDTO(listDAO.getReviewsByMovieId(movie_id));
+		contents.setListDTO(listDAO.getSimilarMovies(movie_id));
 		return contents;
 	}
-
 	
 	// 영화 코멘트
 	@Override
@@ -127,6 +127,7 @@ public class ListServiceImp implements ListService {
 		
 		listDAO.deleteComment(map);
 	}
+
 
 
 

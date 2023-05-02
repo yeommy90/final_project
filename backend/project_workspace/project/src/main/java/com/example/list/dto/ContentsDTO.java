@@ -39,4 +39,5 @@ public class ContentsDTO {
 	private List<GenreDTO> genreDTO;
 	private List<ImagesDTO> imagesDTO;
 	private List<ReviewDTO> reviewDTO;
+	private List<ListDTO> listDTO;
 }

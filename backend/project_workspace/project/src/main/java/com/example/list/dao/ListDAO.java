@@ -47,6 +47,7 @@ public interface ListDAO {
 	public List<ActorDTO> getActorsByMovieId(int movie_id);
 	public List<ImagesDTO> getImagesByMovieId(int movie_id);
 	public List<ReviewDTO> getReviewsByMovieId(int movie_id);
+	public List<ListDTO> getSimilarMovies(int movie_id);
 	
 	// review > comment, rating
 	public void postComment(CommentsDTO comment);

@@ -8,7 +8,7 @@ const CastInfo = ({ contents = {} }) => {
   const totalItems = [...directors, ...actors].map((item) => ({
     id: item.actor_id || item.director_id,
     name: item.name,
-    image: `https://image.tmdb.org/t/p/original/${item.profile_path}`,
+    image: `https://image.tmdb.org/t/p/w200/${item.profile_path}`,
     role: item.actor_id ? 'Actor' : 'Director',
   }));
 

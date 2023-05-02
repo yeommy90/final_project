@@ -47,7 +47,7 @@ const Contents = () => {
       <CastInfo contents={contents}/>
       <Comments contents={contents} handleAuthShow={handleAuthShow} />
       <ContentsImage contents={contents}/>
-      <SimilarMovie />
+      <SimilarMovie contents={contents} />
       <AuthModal isOpen={authShow} onRequestClose={handleAuthClose} />
     </div>
   )

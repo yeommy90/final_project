@@ -7,8 +7,8 @@ const MemberReviewInfo = () => {
   return (
     <Container>
       <div className="mt-5">
-        <h3>내가 작성한 코멘트</h3>
-        <div>{memberReview.content}</div>
+        <h3 className="pt-4">내가 작성한 코멘트</h3>
+        <div className="member-review">{memberReview.content}</div>
       </div>
     </Container>
   )

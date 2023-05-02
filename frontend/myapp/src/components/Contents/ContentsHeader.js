@@ -104,7 +104,7 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
         <Row className="my-4">
           <Col md="2">
             <div className="movie-poster-wrapper">
-              <img src={`https://image.tmdb.org/t/p/original/${contents.poster_path}`} alt="Movie Poster" className="movie-poster img-fluid" />
+              <img src={`https://image.tmdb.org/t/p/w300/${contents.poster_path}`} alt="Movie Poster" className="movie-poster" />
             </div>
           </Col>
           <Col md="10">
@@ -117,7 +117,7 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
                 <p>평균 ★ {contents.tmdb_vote_sum}</p>
               </div>
               <div className='header-button d-flex justify-content'>
-                <MovieRating memberReview={memberReview}/>
+                <MovieRating memberReview={memberReview} fetchComments={fetchComments}/>
                 <div className="m-2 mr-3" onClick={handleWishClick}>
                   <FontAwesomeIcon icon={faHeart} className="mr-2" />
                   보고싶어요
