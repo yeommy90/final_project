@@ -147,6 +147,7 @@
 		<result property="state" column="state"/>
 	</resultMap>
 	
+	<!--영화 하나에 현재까지 작성된 코멘트-->
 	<select id="getReviewsByMovieId"  parameterType="int" resultMap="CommentAndRatingResultMap">
 		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
 		FROM comments c
@@ -168,6 +169,7 @@
 		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
 	</update>
 	
+	<!--코멘트 삭제-->
 	<delete id="deleteComment" parameterType="map">
 		DELETE FROM comments
 		WHERE movie_id = #{movie_id} AND member_id = #{member_id}

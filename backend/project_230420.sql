@@ -97,6 +97,17 @@ commit;
 
 insert into comments values (129, 1, '재밌네요...', 0, sysdate, sysdate, 1);
 
+select count(*) from movie_actor;
+
+delete from actor where profile_path is null;
+
+DELETE FROM movie_actor
+WHERE movie_id NOT IN (SELECT movie_id FROM movie);
+
+select * from movie_actor where movie_id = 635302;
+select * from director where director_id = 86270;
+
+delete from movie_actor;
 
 
 
