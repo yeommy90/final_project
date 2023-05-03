@@ -17,6 +17,7 @@ import MemberReviewInfo from './MemberReviewInfo';
 const Contents = () => {
   const dispatch = useDispatch();
   const { movie_id } = useParams();
+  const member_id = localStorage.getItem("member_id");
   const [comments, setComments] = useState([]);
 
   // 로그인 여부 확인 모달
@@ -30,8 +31,9 @@ const Contents = () => {
   // 렌더링 트리거 함수 > 이름을 잘못지었음..
   const fetchComments = async () => {
     const fetchedComments = await dispatch(MovieActions.getMovieContents(movie_id));
-    const fetchedMemberComments = await dispatch(MovieActions.getReviewByMemberId(movie_id, localStorage.getItem("member_id")));
-    setComments(fetchedComments, fetchedMemberComments);
+    const fetchedMemberComments = await dispatch(MovieActions.getReviewByMemberId(movie_id, member_id));
+    const fetchedMemberWish = await dispatch(MovieActions.getWishByMemberId(movie_id, member_id));
+    setComments(fetchedComments, fetchedMemberComments, fetchedMemberWish);
   }
 
   useEffect(() => {
@@ -42,7 +44,6 @@ const Contents = () => {
   return (
     <div className="section">
       <ContentsHeader contents={contents} fetchComments={fetchComments} handleAuthShow={handleAuthShow} />
-      {memberReview ? <MemberReviewInfo /> : ''}
       <BasicInfo contents={contents}/>
       <CastInfo contents={contents}/>
       <Comments contents={contents} handleAuthShow={handleAuthShow} />

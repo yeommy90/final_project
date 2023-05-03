@@ -4,7 +4,7 @@ SELECT movie_id, title FROM MOVIE WHERE country like '%Korea%';
 SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum / 2, 2), a.tmdb_vote_cnt, a.poster_path
 FROM (SELECT * 
         FROM movie
-        WHERE tmdb_vote_cnt >= 100 AND popularity >= 30 AND release_date >= '00/01/01'
+        WHERE tmdb_vote_cnt >= 200 AND popularity >= 30 AND release_date >= '00/01/01'
         ORDER BY tmdb_vote_sum DESC) A 
 WHERE rownum <= 20;
 
@@ -12,7 +12,7 @@ WHERE rownum <= 20;
 SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2), a.tmdb_vote_cnt, a.poster_path
 FROM (SELECT * 
         FROM movie
-        WHERE tmdb_vote_cnt >= 100 AND popularity >= 30 AND release_date <= '00/01/01'
+        WHERE tmdb_vote_cnt >= 200 AND popularity >= 30 AND release_date <= '00/01/01'
         ORDER BY tmdb_vote_sum DESC) A 
 WHERE rownum <= 20;
 
@@ -99,16 +99,20 @@ insert into comments values (129, 1, '재밌네요...', 0, sysdate, sysdate, 1);
 
 select count(*) from movie_actor;
 
-delete from actor where profile_path is null;
+delete from director where profile_path is null;
 
 DELETE FROM movie_actor
 WHERE movie_id NOT IN (SELECT movie_id FROM movie);
 
-select * from movie_director where movie_id = 15370;
+DELETE FROM movie_actor
+WHERE actor_id NOT IN (SELECT actor_id FROM actor);
+
+select * from movie_director where movie_id = 157336;
 select * from actor where actor_id = 123664;
 
-delete from actor;
+delete from movie_actor;
 
+commit;
 
 -- 비슷한 영화 쿼리
 WITH matched_genres AS (
@@ -156,10 +160,6 @@ combined AS (
 SELECT *
 FROM combined
 WHERE ROWNUM <= 12;
-
-
-
-
 
 
 

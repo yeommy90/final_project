@@ -17,8 +17,10 @@ public interface MemberDAO {
 	public MemberDTO selectByEmail(String email);
 	public void insertMemGenre(MemberGenreDTO dto);
 	
+	public void updateProfileImg(MemberDTO dto);
 	public void updateMember(MemberDTO dto);
 	public void updateByPass(MemberDTO dto);
+	public int idcheck(String email);
 	
 	public List<ListDTO> printRandom();
 	

@@ -23,7 +23,7 @@ const ContentsImage = ({ contents = {} }) => {
   const imageCols = visibleImages.map((image, index) => (
     <div key={index} className="img-item p-2" onClick={() => openModal(currentIndex + index)}>
       <img
-        src={`https://image.tmdb.org/t/p/original/${image.filepath}`}
+        src={`https://image.tmdb.org/t/p/w400/${image.filepath}`}
         alt={`Movie Image ${index}`}
       />
     </div>

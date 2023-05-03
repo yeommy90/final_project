@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../../assets/css/RegisterScreen.css";
 import { FormGroup, Input, Label } from "reactstrap";
 import axios from "axios";
 import { baseUrl } from "../../Apiurl";
-import { useNavigate } from "react-router-dom";
 
 const RegisterScreen = () => {
-  const navigator = useNavigate();
   const [position, setPosition] = useState(0);
+  const [count, setCount] = useState(3);
+  const [isvalid, setIsvalid] = useState();
+
   const [member, setMember] = useState({
     email: "",
     password: "",
@@ -17,16 +18,56 @@ const RegisterScreen = () => {
     visibility: "", //1공개 2비공개
   });
 
+  const { password, email, name, age } = member;
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
+  };
+
+  const handleNextClick = () => {
+    const maxPosition = 350 * 3; // Assuming 5 images are shown at a time
+    if (position < maxPosition) {
+      setPosition(position - 350);
+    }
+  };
+
   const config = { headers: { "Content-Type": "application/json" } };
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (!password) {
+      alert("비밀번호를 입력하세요.");
+      return;
+    }
+
+    console.log(member);
+    await axios.post(`${baseUrl}/register`, member, config);
     await axios
-      .post(`${baseUrl}/register`, member, config)
+      .post(`${baseUrl}/login`, member, config)
       .then((response) => {
-        console.log(response.data);
-        navigator("/genreselect");
+        console.log("response: ", response.data);
+        //let jwtToken = response.headers['Authorization'];
+        let jwtToken = response.headers.get('Authorization');
+        console.log(jwtToken);
+
+        let jwtMemberId = response.data.member_id;
+        let jwtMemberName = response.data.name;
+        let jwtMemberNickname = response.data.nickname;
+        let jwtMemberEmail = response.data.email;
+        let jwtAuthRole = response.data.authRole;
+
+        localStorage.setItem('Authorization', jwtToken);
+        localStorage.setItem('member_id', jwtMemberId);
+        localStorage.setItem('email', jwtMemberEmail);
+        localStorage.setItem('name', jwtMemberName);
+        localStorage.setItem('nickname', jwtMemberNickname);
+        localStorage.setItem('authRole', jwtAuthRole);
+        localStorage.setItem('isLogin', 'true');
       })
+      .then(window.location.replace("/genreselect"))
+      // .then(window.location.replace("/"))
+      // .then((response) => {})
       .catch((err) => {
         console.error(err.message);
       });
@@ -41,15 +82,68 @@ const RegisterScreen = () => {
     }
   }
 
-  const handleValueChange = (e) => {
+  const idcheck = async (e) => {
+    console.log(e.target.value);
+
+    await axios
+      .post(
+        `http://localhost:8090/emailcheck`,
+        { email: e.target.value },
+        config
+      )
+      .then((response) => {
+        console.log(response.data);
+
+        setCount(response.data);
+        setIsvalid(validateEmail(e.target.value));
+      })
+
+      .catch((error) => console.error(error));
+  };
+
+  const handleValueChange = async (e) => {
+    // 이메일 필드에 대한 유효성 검사와 중복 확인
+    if (e.target.name === "email") {
+      // 이메일 형식이 올바른지 검사
+      console.log(isvalid);
+    }
+    // 서버로 이메일 중복 확인 요청 보내기
     setMember({ ...member, [e.target.name]: e.target.value });
   };
 
-  const handleNextClick = () => {
-    const maxPosition = 350 * 3; // Assuming 5 images are shown at a time
-    if (position < maxPosition) {
-      setPosition(position - 350);
-    }
+  const [passwordCheck, setPasswordCheck] = useState("");
+
+  const passChange = (e) => {
+    e.preventDefault();
+    if (password !== e.target.value)
+      setPasswordCheck(
+        <span
+          style={{
+            // textShadow: "0 0 10px white",
+            // color: "red",
+            color: "rgb(255,171, 154)",
+            animation: "glow 1s ease-in-out infinite",
+            fontWeight: "bold",
+          }}
+        >
+          비밀번호 불일치
+        </span>
+      );
+    else
+      setPasswordCheck(
+        <span
+          style={{
+            // color: "rgb(250,580, 500)",
+            color: "rgb(170,255, 0)",
+            // color: "green",
+            textShadow: "0 0 10px white",
+            animation: "glow 1s ease-in-out infinite",
+            fontWeight: "bold",
+          }}
+        >
+          비밀번호 일치
+        </span>
+      );
   };
 
   return (
@@ -115,7 +209,44 @@ const RegisterScreen = () => {
                     type="text"
                     name="email"
                     onChange={handleValueChange}
+                    onBlur={idcheck}
                   ></input>
+                  {!isvalid && (
+                    <div
+                      style={{
+                        color: "rgb(255,171, 154)",
+                        animation: "glow 1s ease-in-out infinite",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      유효하지 않은 이메일입니다.
+                    </div>
+                  )}
+                  {/* color: "lightGreen" */}
+                  {isvalid && count === 0 && (
+                    <div
+                      style={{
+                        color: "rgb(170,255, 0)",
+                        textShadow: "0 0 10px white",
+                        animation: "glow 1s ease-in-out infinite",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      사용 가능한 이메일입니다.
+                    </div>
+                  )}
+                  {count === 1 && (
+                    <span
+                      style={{
+                        color: "rgb(255,171, 154)",
+                        animation: "glow 1s ease-in-out infinite",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {" "}
+                      중복입니다.{" "}
+                    </span>
+                  )}
                 </div>
                 <div>
                   <p
@@ -129,8 +260,9 @@ const RegisterScreen = () => {
                   </p>
                   <input
                     className="text-input-pw"
-                    type="password"
+                    type="text"
                     name="password"
+                    value={password}
                     onChange={handleValueChange}
                   ></input>
                 </div>
@@ -140,10 +272,11 @@ const RegisterScreen = () => {
                   </p>
                   <input
                     className="text-input-pw"
-                    type="password"
+                    type="text"
                     name="password"
-                    onChange={handleValueChange}
+                    onChange={passChange}
                   ></input>
+                  <span>{passwordCheck}</span>
                 </div>
                 <input
                   onClick={handleNextClick}

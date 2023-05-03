@@ -83,4 +83,46 @@ function updateRating(ratingDTO) {
   }
 }
 
-export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, updateComment, deleteComment, postRating, updateRating };
+function deleteRating(movie_id, member_id) {
+  return async () => {
+    await axios.delete(`${baseUrl}/rating/${movie_id}/${member_id}`)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+// 보고싶어요
+function getWishByMemberId(movie_id, member_id) {
+  return async (dispatch) => {
+    const data = await axios.get(`${baseUrl}/wish/${movie_id}/${member_id}`)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+    dispatch(MovieReducers.getWishByMemberId({data}));
+  }
+}
+
+function postWish(wishDTO) {
+  return async () => {
+    await axios.post(`${baseUrl}/wish`, wishDTO)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+function deleteWish(movie_id, member_id) {
+  return async () => {
+    await axios.delete(`${baseUrl}/wish/${movie_id}/${member_id}`)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, updateComment, deleteComment, postRating, updateRating, deleteRating, getWishByMemberId, postWish, deleteWish };

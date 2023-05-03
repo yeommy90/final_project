@@ -7,7 +7,7 @@
 	<select id="getRatingDistribution" parameterType="int"
 		resultType="AnalysisDTO">
 		select rating, count(*) as rating_cnt
-		from review
+		from RATING
 		where member_id = #{member_id}
 		group by rating
 		order by rating
@@ -21,7 +21,7 @@
 		JOIN
 		movie_genre mg ON g.genre_id = mg.genre_id
 		JOIN
-		review r ON r.movie_id = mg.movie_id
+		RATING r ON r.movie_id = mg.movie_id
 		WHERE
 		r.member_id = #{member_id}
 		GROUP BY
@@ -34,7 +34,6 @@
 
 	</select>
 
-
 	<select id="getPreferredDirector" parameterType="int"
 		resultType="AnalysisDTO">
 		SELECT D.NAME AS DIRECTOR_NAME, D.PROFILE_PATH AS DIRECTOR_IMAGE,
@@ -43,13 +42,12 @@
 		FROM MOVIE_DIRECTOR MD
 		JOIN DIRECTOR D ON MD.DIRECTOR_ID = D.DIRECTOR_ID
 		JOIN MOVIE M ON MD.MOVIE_ID = M.MOVIE_ID
-		JOIN REVIEW R ON M.MOVIE_ID = R.MOVIE_ID
+		JOIN RATING R ON M.MOVIE_ID = R.MOVIE_ID
 		WHERE R.MEMBER_ID = #{member_id}
 		GROUP BY D.NAME, D.PROFILE_PATH
 		ORDER BY TOTAL DESC, directorRating_cnt DESC
 
 	</select>
-
 
 	<select id="getPreferredActor" parameterType="int"
 		resultType="AnalysisDTO">
@@ -59,7 +57,7 @@
 		FROM MOVIE_ACTOR MD
 		JOIN ACTOR A ON MD.ACTOR_ID = A.ACTOR_ID
 		JOIN MOVIE M ON MD.MOVIE_ID = M.MOVIE_ID
-		JOIN REVIEW R ON M.MOVIE_ID = R.MOVIE_ID
+		JOIN RATING R ON M.MOVIE_ID = R.MOVIE_ID
 		WHERE R.MEMBER_ID = '5'
 		AND A.PROFILE_PATH is not null
 		GROUP BY A.NAME, A.PROFILE_PATH
@@ -68,18 +66,3 @@
 	</select>
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

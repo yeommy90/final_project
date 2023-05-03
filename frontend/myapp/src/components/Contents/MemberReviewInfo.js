@@ -7,8 +7,13 @@ const MemberReviewInfo = () => {
   return (
     <Container>
       <div className="mt-5">
-        <h3 className="pt-4">내가 작성한 코멘트</h3>
-        <div className="member-review">{memberReview.content}</div>
+        <div className="member-review d-flex justify-content-between">
+          <div className="member-review-content">{memberReview.content}</div>
+          <div>
+            <button>수정</button>
+            <button>삭제</button>
+          </div>
+        </div>
       </div>
     </Container>
   )

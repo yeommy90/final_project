@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { Col, Container, Row } from 'reactstrap';
+import { Container } from 'reactstrap';
 
 const SimilarMovie = ({ contents = {}}) => {
   const movies = Array.isArray(contents.listDTO) ? contents.listDTO : [];

@@ -14,6 +14,7 @@ import GenreSelect from 'components/Member/GenreSelect';
 import PrivateRoute from 'access/PrivateRoute';
 import LogOut from 'components/Member/Logout';
 import CastProfile from 'components/CastProfile/CastProfile';
+import Notice from 'components/Notice/Notice';
 
 function App() {
   return (
@@ -25,12 +26,13 @@ function App() {
         <Route path="/register" element={<PrivateRoute isAuth={false} RouteComponent={RegisterPage} />} />
         <Route path="/search/:query" element={<PrivateRoute isAuth={false} RouteComponent={SearchPage} />} />
         <Route path="/profile" element={<PrivateRoute isAuth={true} RouteComponent={ProfilePage} />} />
-        <Route path='/genreselect' element={<PrivateRoute isAuth={true} RouteComponent={GenreSelect} />} />
+        <Route path='/genreselect' element={<PrivateRoute isAuth={false} RouteComponent={GenreSelect} />} />
         <Route path="/analysis/:member_id" element={<PrivateRoute isAuth={false} RouteComponent={AnalysisPage} />} />
         <Route path="/contents/:movie_id" element={<PrivateRoute isAuth={false} RouteComponent={Contents} />} />
         <Route path="/review" element={<PrivateRoute isAuth={true} RouteComponent={ReviewPage} />} />
         <Route path="/comment" element={<PrivateRoute isAuth={false} RouteComponent={CommentPage} />} />
         <Route path="/:profileType/:id" element={<PrivateRoute isAuth={false} RouteComponent={CastProfile}/>} />
+        <Route path='/notice' element={<PrivateRoute isAuth={false} RouteComponent={Notice} />} />
       </Routes>
     </BaseLayout>
   );

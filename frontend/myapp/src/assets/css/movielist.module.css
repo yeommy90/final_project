@@ -44,7 +44,7 @@
 }
 
 .img_box img {
-  border-radius: 1.5%;
+  border-radius: 3%;
   height: 350px;
 }
 
@@ -54,18 +54,20 @@
   /* max-width: 245px; */
 }
 
-.title_box .title {
+.title {
   padding-top: 10px;
   margin-bottom: 3px;
   font-weight: bold;
   font-size: 16px;
+  color: #343a40;
 }
 
-.title_box .date {
+.date {
   font-size: 14px;
+  color: #343a40;
 }
 
-.title_box .rating {
+.rating {
   padding-top: 2px;
   font-size: 15px;
   color: #fc8080;

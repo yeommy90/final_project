@@ -18,6 +18,7 @@ import com.example.list.service.ListService;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
+import com.example.wish.dto.WishDTO;
 
 @CrossOrigin({"http://localhost:3000"})
 @RestController
@@ -30,7 +31,6 @@ public class ListController {
 		
 	}
 	
-
 	// 메인 리스트
 	// http://localhost:8090/
 	@GetMapping("/")
@@ -41,8 +41,7 @@ public class ListController {
 		
 		return map;
 	}
-	
-	
+		
 	
 	// 영화 상세정보
 	@GetMapping("/contents/{movie_id}")
@@ -78,14 +77,34 @@ public class ListController {
 		listService.updateRatingProcess(rating);
 	}
 	
+	@DeleteMapping("/rating/{movie_id}/{member_id}")
+	public void deleteRatingExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		listService.deleteRatingProcess(movie_id, member_id);
+	}
+	
 	@GetMapping("/comment/{movie_id}/{member_id}")
 	public ReviewDTO getCommentExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
-		System.out.println("냐냐냐" + movie_id + member_id);
+		System.out.println("리뷰썼냐" + movie_id);
 		return listService.findReviewByIdProcess(movie_id, member_id);
 	}
 		
 	
-	
 
+	// 보고싶어요
+	@PostMapping("/wish")
+	public void postWishExecute(@RequestBody WishDTO wish) {
+		listService.postWishProcess(wish);
+	}
+	
+	@DeleteMapping("/wish/{movie_id}/{member_id}")
+	public void deleteWishExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		listService.deleteWishProcess(movie_id, member_id);
+	}
+	
+	@GetMapping("/wish/{movie_id}/{member_id}")
+	public WishDTO getWishExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		System.out.println("보고싶어요" + movie_id);
+		return listService.findWishByIdProcess(movie_id, member_id);
+	}
 	
 }

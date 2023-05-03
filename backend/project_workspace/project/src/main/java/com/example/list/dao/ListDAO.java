@@ -15,6 +15,7 @@ import com.example.list.dto.ListDTO;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
+import com.example.wish.dto.WishDTO;
 
 @Mapper
 @Repository
@@ -55,5 +56,11 @@ public interface ListDAO {
 	public void deleteComment(Map<String, Object> map);
 	public void postRating(RatingDTO rating);
 	public void updateRating(RatingDTO rating);
+	public void deleteRating(Map<String, Object> map);
 	public ReviewDTO findReviewById(Map<String, Object> map);
+	
+	// wish
+	public WishDTO findWishById(Map<String, Object> map);
+	public void postWish(WishDTO wish);
+	public void deleteWish(Map<String, Object> map);
 }

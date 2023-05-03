@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
+import com.example.admin.dao.AdminDAO;
 import com.example.member.dao.MemberDAO;
 import com.example.security.jwt.JwtAuthenticationFilter;
 import com.example.security.jwt.JwtAuthorizationFilter;
@@ -27,6 +28,9 @@ public class SecurityConfig {
 
 	@Autowired
 	private MemberDAO userRepository;
+	
+//	@Autowired
+//	private AdminDAO userRepository2;
 
 	@Autowired
 	private CorsConfig corsConfig;
@@ -55,12 +59,18 @@ public class SecurityConfig {
 
 		http.authorizeHttpRequests()
 	    .antMatchers("/", "/images/**", "/login", "/register", "/contents/**", "/search/**", 
-	    		"/rating", "/review", "/analysis/**", "/comment/**", "/actorProfile/**", "/dirProfile/**", "/selectAll").permitAll()
+	    		 "/comment/**", "/actorProfile/**", "/dirProfile/**", "/selectAll", "/review",
+	    		 "/member/signup", "/editinfo", "/emailcheck", "/genreselect", 
+	    		 "/wish/**", "/rating/**", "/review", "/analysis/**",
+	    		 "/adminlogin", "/adminregister", "/adminpage", "/blur", "/deletereview",
+	    		 "/admin/idcheck", "/admin/update").permitAll()
 	    .anyRequest().authenticated();
 		
 		http.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
 	    
 		return http.build();
+		
+		//"/wish/**", "/rating/**", "/review", "/analysis/**"
 	}
 
 
@@ -80,6 +90,18 @@ public class SecurityConfig {
 			.addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
 		}
 	}
+	
+//	public class MyAnotherFilter extends AbstractHttpConfigurer<MyAnotherFilter, HttpSecurity> {
+//		@Override
+//		public void configure(HttpSecurity http) throws Exception {
+//			AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+//			System.out.println("admin");
+//			// 인증 필터 등록
+//			http.addFilterBefore(new AdminAuthenticationFilter(authenticationManager), JwtAuthenticationFilter.class)
+//					// 인가(권한) 필터 등록
+//			.addFilter(new AdminAuthorizationFilter(authenticationManager, userRepository2));
+//		}
+//	}
 }
 
 

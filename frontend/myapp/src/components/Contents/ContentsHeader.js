@@ -1,15 +1,16 @@
-
 import { useState } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { MovieActions } from 'reduxs/Actions/MovieAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import MovieRating from './MovieRating';
 import CommentDropdown from './CommentDropdown';
 import CommentModal from 'components/Comment/CommentModal';
 import DeleteModal from './DeleteModal';
+import MemberWish from './MemberWish';
+import MemberReviewInfo from './MemberReviewInfo';
 
 const BannerOverlay = styled.div`
     position: absolute;
@@ -42,8 +43,12 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
     setShow(false);
     setComment('');
   };
-  const handleShow = () => setShow(true);
-
+  const handleShow = (editMode = false) => {
+    setIsEditMode(editMode);
+    setComment(memberReview.content);
+    setIsSpoiler(memberReview.state);
+    setShow(true);
+  };
   // 코멘트작성 버튼 > 수정/삭제 드롭다운 메뉴
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -85,20 +90,11 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
     }
   }
 
-  // 보고싶어요 버튼
-  const handleWishClick = () => {
-    if (localStorage.getItem('member_id')) {
-      
-    } else {
-      handleAuthShow();
-    }
-  }
-
   return (
     <>
       <div className="banner-container">
         <BannerOverlay imageUrl={`https://image.tmdb.org/t/p/original/${contents.backdrop_path}`}></BannerOverlay>
-        <img src={`https://image.tmdb.org/t/p/original/${contents.backdrop_path}`} alt="Main centered image" className="banner-image" />
+        <img src={`https://image.tmdb.org/t/p/original/${contents.backdrop_path}`} alt="Main" className="banner-image" />
       </div>
       <Container>
         <Row className="my-4">
@@ -117,11 +113,12 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
                 <p>평균 ★ {contents.tmdb_vote_sum}</p>
               </div>
               <div className='header-button d-flex justify-content'>
-                <MovieRating memberReview={memberReview} fetchComments={fetchComments}/>
-                <div className="m-2 mr-3" onClick={handleWishClick}>
+                <MovieRating memberReview={memberReview} fetchComments={fetchComments} handleAuthShow={handleAuthShow}/>
+                <MemberWish handleAuthShow={handleAuthShow} fetchComments={fetchComments}/>
+                {/* <div className="m-2 mr-3" onClick={handleWishClick}>
                   <FontAwesomeIcon icon={faHeart} className="mr-2" />
                   보고싶어요
-                </div>
+                </div> */}
                 <div className='dropdown'>
                   <div className="mt-1 dropdown-toggle" onClick={handleCommentClick} >
                     <FontAwesomeIcon icon={faComment} className="mr-2" />
@@ -133,6 +130,16 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
             </div>
           </Col>
         </Row>
+        {memberReview.content ? 
+        <div className="mt-5">
+          <div className="member-review d-flex justify-content-between">
+            <div className="member-review-content">{memberReview.content}</div>
+            <div>
+              <button onClick={() => handleShow(true)}>수정</button>
+              <button onClick={handleDelete}>삭제</button>
+            </div>
+          </div>
+        </div> : ''}
         <CommentModal isOpen={show} onRequestClose={handleClose} movie={contents} fetchComments={fetchComments} comment={comment} isSpoiler={isSpoiler} isEditMode={isEditMode} setComment={setComment} setIsSpoiler={setIsSpoiler}/>
         <DeleteModal isOpen={showDeleteModal} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} />
       </Container>

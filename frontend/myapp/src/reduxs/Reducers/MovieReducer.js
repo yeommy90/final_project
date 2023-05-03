@@ -5,10 +5,7 @@ let initialState = {
   topRatedClassic : [],
   contents: {},
   memberReview: {},
-  
-  pv: {currentPage:1},
-  boardDetail: {},
-  boardFile: null,
+  memberWish: {},
 };
 
 const MovieSlice = createSlice({
@@ -30,6 +27,11 @@ const MovieSlice = createSlice({
     getReviewByMemberId(state, action) {
       state.memberReview = action.payload.data;
     },
+
+    // 멤버 wish 정보
+    getWishByMemberId(state, action) {
+      state.memberWish = action.payload.data;
+    }
 
   },
 });

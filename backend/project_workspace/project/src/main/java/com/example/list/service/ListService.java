@@ -1,7 +1,6 @@
 package com.example.list.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.example.actor.dto.ActorDTO;
 import com.example.director.dto.DirectorDTO;
@@ -10,6 +9,7 @@ import com.example.list.dto.ListDTO;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
+import com.example.wish.dto.WishDTO;
 
 public interface ListService {
 	public List<ListDTO> getTopRatedMoviesProcess();
@@ -42,7 +42,11 @@ public interface ListService {
 	public void deleteCommentProcess(int movie_id, int member_id);
 	public void postRatingProcess(RatingDTO rating);
 	public void updateRatingProcess(RatingDTO rating);
-	
+	public void deleteRatingProcess(int movie_id, int member_id);
 	public ReviewDTO findReviewByIdProcess(int movie_id, int member_id);
 	
+	// wish
+	public WishDTO findWishByIdProcess(int movie_id, int member_id);
+	public void postWishProcess(WishDTO wish);
+	public void deleteWishProcess(int movie_id, int member_id);
 }

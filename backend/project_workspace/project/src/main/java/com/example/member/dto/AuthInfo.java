@@ -23,6 +23,15 @@ public class AuthInfo {
 		this.password = password;
 	}
 	
+	public AuthInfo(String email, String name, String password, int age, int gender) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.password = password;
+		this.age = age;
+		this.gender = gender;
+	}
+	
 	public AuthInfo(String email, String name, String password, int age, int gender, String nickname, String profile_path) {
 		super();
 		this.email = email;

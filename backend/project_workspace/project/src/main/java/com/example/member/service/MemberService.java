@@ -18,5 +18,10 @@ public interface MemberService {
 	public AuthInfo updateMemberProcess(MemberDTO dto);
 	public void updatePassProcess(String email, ChangePwdCommand changePwd);
 	
+	public void updateProfileImgProcess(MemberDTO dto);
+	public MemberDTO selectByEmailProcess(String email);
+	//public boolean isEmailAlreadyInUse(String email);
+	public int idcheckprocess(String email);
+	
 	public List<ListDTO> randomService();
 }

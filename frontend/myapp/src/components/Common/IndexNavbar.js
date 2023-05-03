@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // nodejs library that concatenates strings
 import classnames from "classnames";
 // reactstrap components
@@ -135,7 +135,7 @@ function IndexNavbar({ transparent }) {
               <>
                 <NavItem>
                   <NavLink href="/profile" style={{ marginRight: 10, marginLeft: 10, fontSize: '11pt'}}>
-                    아무개 님의 마이페이지
+                    {`${localStorage.getItem("nickname")} 님의 마이페이지`}
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -153,7 +153,7 @@ function IndexNavbar({ transparent }) {
               <NavItem>
                 <Button
                   className="btn-round"
-                  style={{ borderRadius: 3 }}
+                  style={{ borderRadius: 3, marginLeft: 20 }}
                   color="danger"
                   href="/login"
                 >

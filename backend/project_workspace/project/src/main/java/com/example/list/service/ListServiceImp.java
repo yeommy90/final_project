@@ -16,6 +16,7 @@ import com.example.list.dto.ListDTO;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
+import com.example.wish.dto.WishDTO;
 
 @Service
 public class ListServiceImp implements ListService {
@@ -100,26 +101,20 @@ public class ListServiceImp implements ListService {
 	}
 
 	@Override
+	@Transactional
 	public void postCommentProcess(CommentsDTO comment) {
 		listDAO.postComment(comment);
 	}
 
 	@Override
+	@Transactional
 	public void updateCommentProcess(CommentsDTO comment) {
 		listDAO.updateComment(comment);
 	}
+	
 
 	@Override
-	public void postRatingProcess(RatingDTO rating) {
-		listDAO.postRating(rating);
-	}
-
-	@Override
-	public void updateRatingProcess(RatingDTO rating) {
-		listDAO.updateRating(rating);
-	}
-
-	@Override
+	@Transactional
 	public void deleteCommentProcess(int movie_id, int member_id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("movie_id", movie_id);
@@ -127,6 +122,56 @@ public class ListServiceImp implements ListService {
 		
 		listDAO.deleteComment(map);
 	}
+
+	@Override
+	@Transactional
+	public void postRatingProcess(RatingDTO rating) {
+		listDAO.postRating(rating);
+	}
+
+	@Override
+	@Transactional
+	public void updateRatingProcess(RatingDTO rating) {
+		listDAO.updateRating(rating);
+	}
+	
+	@Override
+	@Transactional
+	public void deleteRatingProcess(int movie_id, int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("movie_id", movie_id);
+		map.put("member_id", member_id);
+		
+		listDAO.deleteRating(map);
+	}
+
+	
+	// 보고싶어요
+	@Override
+	public WishDTO findWishByIdProcess(int movie_id, int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("movie_id", movie_id);
+		map.put("member_id", member_id);
+		
+		return listDAO.findWishById(map);
+	}
+
+	@Override
+	@Transactional
+	public void postWishProcess(WishDTO wish) {
+		listDAO.postWish(wish);
+	}
+
+	@Override
+	@Transactional
+	public void deleteWishProcess(int movie_id, int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("movie_id", movie_id);
+		map.put("member_id", member_id);
+		
+		listDAO.deleteWish(map);
+	}
+
 
 
 

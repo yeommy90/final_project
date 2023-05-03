@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.common.exception.WrongEmailPasswordException;
 import com.example.list.dto.ListDTO;
@@ -33,11 +34,13 @@ public class MemberServiceImp implements MemberService{
 	}
 	
 	@Override
+	@Transactional
 	public void insertMemGenreProcess(MemberGenreDTO dto) {
 		memberDao.insertMemGenre(dto);
 	}
 
 	@Override
+	@Transactional
 	public AuthInfo addMemberProcess(MemberDTO dto) {
 		memberDao.insertMember(dto);
 		return new AuthInfo(dto.getEmail(), dto.getName(), dto.getPassword(), dto.getAge(), dto.getGender(), dto.getNickname(), dto.getProfile_path());
@@ -67,8 +70,7 @@ public class MemberServiceImp implements MemberService{
 	@Override
 	public AuthInfo updateMemberProcess(MemberDTO dto) {
 		memberDao.updateMember(dto);
-		MemberDTO member =  memberDao.selectByEmail(dto.getEmail());
-		return new AuthInfo(dto.getEmail(), dto.getName(), dto.getPassword(), dto.getAge(), dto.getGender(), dto.getNickname(), dto.getProfile_path());
+		return new AuthInfo(dto.getEmail(), dto.getName(), dto.getPassword(), dto.getAge(), dto.getGender());
 	}
 
 	@Override
@@ -79,7 +81,21 @@ public class MemberServiceImp implements MemberService{
 		
 		member.changePassword(changePwd.getCurrentPassword(), changePwd.getNewPassword());
 		memberDao.updateByPass(member);
-		
+	}
+
+	@Override
+	public MemberDTO selectByEmailProcess(String email) {
+		return memberDao.selectByEmail(email);
+	}
+ 
+	@Override
+	public void updateProfileImgProcess(MemberDTO dto) {
+		memberDao.updateProfileImg(dto);
+	}
+	
+	@Override
+	public int idcheckprocess(String email) {
+		return memberDao.idcheck(email);
 	}
 
 

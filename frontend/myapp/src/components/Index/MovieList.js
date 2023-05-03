@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import 'assets/css/font.css';
 import 'assets/css/movielist.css';
 
@@ -38,9 +37,9 @@ function MovieList({ movies = [], listTitle = "" }) {
               return (
                 <div className='slide_movie' key={movie.movie_id}>
                   <div className='img_box'>
-                    <Link to={`/contents/${movie.movie_id}`}>
-                      <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}/>
-                    </Link>
+                    <a href={`/contents/${movie.movie_id}`}>
+                      <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}/>
+                    </a>
                   </div>
                   <div className='title_box'>
                     <div className='title'>{movie.title}</div>

@@ -2,6 +2,7 @@ package com.example.member.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,11 +44,27 @@ public class MemberController {
 		System.out.println(memberDTO.getEmail());
 		System.out.println(memberDTO.getVisibility());
 		
+		if(memberDTO.getGender() == 0) {
+			memberDTO.setGender(1);
+		} //리액트에서 디폴트값으로 gender값을 0을 보냈을때 강제로 gender값을 1로 변경해서 db저장함
+		
 		memberDTO.setPassword(encodePassword.encode(memberDTO.getPassword()));
 
 		AuthInfo authInfo = memberService.addMemberProcess(memberDTO);
 		return null;
 	}
+	
+	@PostMapping("/emailcheck")
+	public int checkEmail(@RequestBody Map<String, String> requestBody) {		
+		String a = requestBody.get("email");
+		System.out.println("emailcheck실행");
+		System.out.println(a);
+		int count = memberService.idcheckprocess(a);
+		System.out.println(count);
+		
+	    return count;
+	}
+	
 
 	// 회원정보 가져오기
 	@GetMapping("/member/editinfo/{email}")
@@ -57,19 +74,28 @@ public class MemberController {
 
 	// 회원정보 수정 처리
 	@PostMapping("/profile/update")
-	public void updateMember(@RequestParam(value = "file", required = false) MultipartFile file,
-			@RequestBody MemberDTO memberDTO, HttpServletRequest request) {
-		
-		if (file != null && !file.isEmpty()) {
-			String filePath = FileUpload.urlPath(request); // 파일이 저장될 경로를 지정합니다.
-			UUID uuid = FileUpload.saveCopyFile(file, filePath); // 파일을 저장하고, UUID 값을 받습니다.
-
-			// 파일 업로드가 완료되면 DB에 UUID 값을 저장합니다.
-			memberDTO.setProfile_path(uuid.toString());
-		}
+	public void updateMember(@RequestBody MemberDTO memberDTO, HttpServletRequest request) {
+//		UUID uuid = FileUpload.saveCopyFile(file, FileUpload.urlPath(request));
+//		memberDTO.setProfile_path(uuid + "_" + file.getOriginalFilename());
+		System.out.println(memberDTO.getPassword());
 		memberDTO.setPassword(encodePassword.encode(memberDTO.getPassword()));
+//		memberDTO.setNickname(memberDTO.getNickname());
+//		System.out.println(memberDTO.getProfile_path());
 		memberService.updateMemberProcess(memberDTO);
 	}
+	
+	@PostMapping("/profile/imgUpdate")
+	public void updateprofileImg(@RequestParam("file") MultipartFile file, @RequestParam("email") String email, HttpServletRequest request) {
+		System.out.println("Hello World");
+		UUID uuid = FileUpload.saveCopyFile(file, FileUpload.urlPath(request));
+	    System.out.println(uuid);
+	    System.out.println(email);
+	    MemberDTO member = memberService.selectByEmailProcess(email);
+	    member.setProfile_path(uuid + "_" + file.getOriginalFilename());
+	    System.out.println(member.getProfile_path());
+	    System.out.println(member.getEmail());
+	    memberService.updateProfileImgProcess(member);
+	};
 	
 	// 회원가입 > 장르선택
 	@PostMapping("/genreselect")

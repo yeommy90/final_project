@@ -6,32 +6,45 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { MovieActions } from "reduxs/Actions/MovieAction";
 
-const MovieRating = ({ memberReview, fetchComments }) => {
+const MovieRating = ({ memberReview, fetchComments, handleAuthShow }) => {
   const [value, setValue] = useState(0);
   const [hover, setHover] = useState(-1);
 
   const dispatch = useDispatch();
   const { movie_id } = useParams();
+  const member_id = localStorage.getItem('member_id');
 
   const customStarSize = {
     fontSize: '45px',
   };
 
-  const handleRatingChange = (newValue) => {
+  const handleRatingChange = async (newValue) => {
+    console.log("선택된거", newValue);
+    console.log("원래", memberReview.rating);
+
     const ratingDTO = {
       movie_id: movie_id,
-      member_id: localStorage.getItem("member_id"),
+      member_id: member_id,
       rating: newValue,
     };
 
-    if (memberReview.rating > 0) {
-      // 이미 작성된 평점이 있을 때
-      dispatch(MovieActions.updateRating(ratingDTO));
+    // 로그아웃 상태일 때
+    if (!member_id) {
+      handleAuthShow();
+      setValue(0);
     } else {
-      // memberReview에 없을 때
-      dispatch(MovieActions.postRating(ratingDTO));
+      if (newValue === null || memberReview.rating > 0 && memberReview.rating === newValue) {
+        // 현재 작성된 평점과 저장된 평점이 같을 때
+        await dispatch(MovieActions.deleteRating(movie_id, member_id));
+        setValue(0);
+      } else if (memberReview.rating > 0) {
+        // 이미 작성된 평점이 있을 때
+        await dispatch(MovieActions.updateRating(ratingDTO));
+      } else {
+        // memberReview에 없을 때
+        await dispatch(MovieActions.postRating(ratingDTO));
+      }
     }
-
     fetchComments();
   }
 

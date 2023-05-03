@@ -99,6 +99,16 @@ h3 {
   margin-top: 15px;
 }
 
+.member-wish {
+  margin-top: 9px;
+}
+
+.member-wish .member-wish-label {
+  padding-right: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
 
 /* cast */
 .castinfo {
@@ -206,7 +216,7 @@ h3 {
 
 .similar-movie {
   flex: 1 1 20%;
-  padding: 0 10px;
+  padding: 0 8px;
   box-sizing: border-box;
   max-width: 20%;
 }

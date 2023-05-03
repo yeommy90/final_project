@@ -7,9 +7,10 @@ const EditInfo = () => {
   const [member, setMember] = useState({
     password: "",
     name: "",
+    nickname: "",
   });
 
-  const { password, name } = member;
+  const { password, name, nickname } = member;
 
   const config = {
     headers: {
@@ -51,7 +52,7 @@ const EditInfo = () => {
     }
 
     await axios.post(`${baseUrl}/profile/update`, member, config);
-    localStorage.setItem("name", name);
+    localStorage.setItem('nickname', nickname);
     //navigator('/');
     window.location.replace("/");
   };
@@ -60,7 +61,7 @@ const EditInfo = () => {
     <div className="container">
       <form onSubmit={onSubmit}>
         <div className="container">
-          <h1>회원가입</h1>
+          <h1>회원 정보 수정</h1>
           <div className="form-group mb-1">
             <input
               type="email"
@@ -91,6 +92,17 @@ const EditInfo = () => {
               onChange={passChange}
             />
             <span>{passwordCheck}</span>
+          </div>
+
+          <div className="form-group mb-1">
+            <input
+              type="text"
+              className="form-control"
+              name="nickname"
+              placeholder="닉네임"
+              value={nickname}
+              onChange={handleValueChange}
+            />
           </div>
 
           <div className="form-group mb-1">

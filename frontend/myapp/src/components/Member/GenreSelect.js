@@ -7,7 +7,7 @@ import { baseUrl } from 'Apiurl';
 function GenreSelect() {
   const [selectedGenre, setSelectedGenre] = useState([]);
   //내아이디
-  const memberId = '1';
+  const memberId = localStorage.getItem("member_id");
   const config = { headers: { 'Content-Type': 'application/json' } };
 
   // 체크박스가 선택되면 호출되는 함수
@@ -36,6 +36,7 @@ function GenreSelect() {
       .catch((error) => {
         console.error(error);
       });
+      window.location.replace("/");
   }
 
   return (
@@ -415,7 +416,7 @@ function GenreSelect() {
             <button
               className='btn-round'
               color='danger'
-              // href='/register'
+              href='/'
               onMouseOver={(e) => (e.target.style.backgroundColor = '#d43f3f')}
               onMouseOut={(e) => (e.target.style.backgroundColor = '#e75757')}
               style={{

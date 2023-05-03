@@ -25,7 +25,7 @@
 	<!--회원정보 수정 > 이름, 비번, 닉네임, 프로필 이미지-->
 	<update id="updateMember" parameterType="MemberDTO">
 	  	UPDATE member
-	  	SET password=#{password}, name=#{name}, nickname=#{nickname}, profile_path=#{profile_path}
+	  	SET password=#{password}, name=#{name}, nickname=#{nickname}
 	  	WHERE email=#{email}
 	</update>
 	
@@ -35,6 +35,18 @@
 		SET password=#{password}
 		WHERE email=#{email}
 	</update>
+	
+	<!-- 회원 정보 수정 (비밀번호, 이름, 닉네임) -->
+	<update id="updateProfileImg" parameterType="MemberDTO">
+		UPDATE member
+		SET profile_path=#{profile_path}
+		WHERE email=#{email}
+	</update>
+	
+	<select id="idcheck" parameterType="String" resultType="int">
+		select count(*) from member
+		where email=#{email}
+	</select>
 	
 	<!--마이페이지 > 평가하기-->
 	<select id="printRandom" resultType="ListDTO">
