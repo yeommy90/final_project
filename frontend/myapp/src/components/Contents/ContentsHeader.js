@@ -45,10 +45,13 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
   };
   const handleShow = (editMode = false) => {
     setIsEditMode(editMode);
-    setComment(memberReview.content);
-    setIsSpoiler(memberReview.state);
+    if (editMode) {
+      setComment(memberReview.content);
+      setIsSpoiler(memberReview.state);
+    }
     setShow(true);
   };
+
   // 코멘트작성 버튼 > 수정/삭제 드롭다운 메뉴
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -68,16 +71,6 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
 
   // 코멘트 작성 버튼
   const handleCommentClick = () => {
-    // dispatch(MovieActions.getReviewByMemberId(contents.movie_id, member_id));
-
-    if (hasComment) {
-      setIsEditMode(true);
-      setComment(memberReview.content);
-      setIsSpoiler(memberReview.state);
-    } else {
-      setIsEditMode(false);
-    }
-
     if (!member_id) {
       // 로그아웃 상태일 때: auth 모달
       handleAuthShow();
@@ -115,10 +108,6 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
               <div className='header-button d-flex justify-content'>
                 <MovieRating memberReview={memberReview} fetchComments={fetchComments} handleAuthShow={handleAuthShow}/>
                 <MemberWish handleAuthShow={handleAuthShow} fetchComments={fetchComments}/>
-                {/* <div className="m-2 mr-3" onClick={handleWishClick}>
-                  <FontAwesomeIcon icon={faHeart} className="mr-2" />
-                  보고싶어요
-                </div> */}
                 <div className='dropdown'>
                   <div className="mt-1 dropdown-toggle" onClick={handleCommentClick} >
                     <FontAwesomeIcon icon={faComment} className="mr-2" />
@@ -130,16 +119,7 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
             </div>
           </Col>
         </Row>
-        {memberReview.content ? 
-        <div className="mt-5">
-          <div className="member-review d-flex justify-content-between">
-            <div className="member-review-content">{memberReview.content}</div>
-            <div>
-              <button onClick={() => handleShow(true)}>수정</button>
-              <button onClick={handleDelete}>삭제</button>
-            </div>
-          </div>
-        </div> : ''}
+        {memberReview.content ? <MemberReviewInfo handleShow={handleShow} handleDelete={handleDelete}/> : ''}
         <CommentModal isOpen={show} onRequestClose={handleClose} movie={contents} fetchComments={fetchComments} comment={comment} isSpoiler={isSpoiler} isEditMode={isEditMode} setComment={setComment} setIsSpoiler={setIsSpoiler}/>
         <DeleteModal isOpen={showDeleteModal} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} />
       </Container>

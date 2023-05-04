@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.service.ListService;
 import com.example.review.dto.CommentsDTO;
+import com.example.review.dto.LikesDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
 import com.example.wish.dto.WishDTO;
@@ -106,5 +107,19 @@ public class ListController {
 		System.out.println("보고싶어요" + movie_id);
 		return listService.findWishByIdProcess(movie_id, member_id);
 	}
+	
+	
+	
+	// 코멘트 > 좋아요
+	@GetMapping("/likes/{movie_id}/{member_id}")
+	public LikesDTO getLikesExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		System.out.println(movie_id);
+		return listService.findLikesByIdProcess(movie_id, member_id);
+	}
+	
+	
+	
+	
+	
 	
 }

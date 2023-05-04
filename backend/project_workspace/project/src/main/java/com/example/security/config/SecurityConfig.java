@@ -61,7 +61,7 @@ public class SecurityConfig {
 	    .antMatchers("/", "/images/**", "/login", "/register", "/contents/**", "/search/**", 
 	    		 "/comment/**", "/actorProfile/**", "/dirProfile/**", "/selectAll", "/review",
 	    		 "/member/signup", "/editinfo", "/emailcheck", "/genreselect", 
-	    		 "/wish/**", "/rating/**", "/review", "/analysis/**",
+	    		 "/wish/**", "/rating/**", "/likes/**", "/review", "/analysis/**",
 	    		 "/adminlogin", "/adminregister", "/adminpage", "/blur", "/deletereview",
 	    		 "/admin/idcheck", "/admin/update").permitAll()
 	    .anyRequest().authenticated();

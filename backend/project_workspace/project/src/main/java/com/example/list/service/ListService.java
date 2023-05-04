@@ -7,6 +7,7 @@ import com.example.director.dto.DirectorDTO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ListDTO;
 import com.example.review.dto.CommentsDTO;
+import com.example.review.dto.LikesDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
 import com.example.wish.dto.WishDTO;
@@ -49,4 +50,9 @@ public interface ListService {
 	public WishDTO findWishByIdProcess(int movie_id, int member_id);
 	public void postWishProcess(WishDTO wish);
 	public void deleteWishProcess(int movie_id, int member_id);
+	
+	// likes
+	public LikesDTO findLikesByIdProcess(int movie_id, int member_id);
+	
+	
 }

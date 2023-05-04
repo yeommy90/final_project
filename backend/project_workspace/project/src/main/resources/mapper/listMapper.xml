@@ -10,7 +10,7 @@
 			   round(a.tmdb_vote_sum / 2, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path
 		FROM (SELECT * 
 			  FROM movie 
-			  WHERE tmdb_vote_cnt >= 200 AND popularity >= 30 AND release_date >= '00/01/01'
+			  WHERE tmdb_vote_cnt >= 3000 AND popularity >= 150 AND release_date >= '20/01/01'
         ORDER BY tmdb_vote_sum DESC) A 
 		WHERE rownum <= 20
 		]]>
@@ -223,6 +223,24 @@
 		DELETE FROM wish
 		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
 	</delete>
+	
+	<!--코멘트 좋아요-->
+	<select id="findLikesById" parameterType="map" resultType="LikesDTO">
+		SELECT *
+		FROM likes
+		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<!--비슷한 영화 리스트-->
 	<select id="getSimilarMovies" parameterType="int" resultType="ListDTO">

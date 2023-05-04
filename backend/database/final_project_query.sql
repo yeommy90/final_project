@@ -65,6 +65,8 @@ create table actor (
     profile_path varchar2(500)
 );
 
+drop table actor;
+
 -- 장르정보 테이블
 create table genre(
     genre_id number primary key, --tmdb 제공
@@ -103,6 +105,7 @@ create table wish(
     movie_id number,
     regdate date
 );
+
 
 
 -- 관리자 테이블 (seq추가하고 회원가입은 email,pass,name으로 받음)
@@ -154,6 +157,13 @@ create table comments (
     regdate date,
     moddate date,
     state varchar2(2) --1기본2스포3삭제4블러
+);
+
+-- likes table
+create table likes (
+    member_id number,
+    movie_id number,
+    comment_member_id number --작성된 코멘트의 member id
 );
 
 ---------------------------------------------------------

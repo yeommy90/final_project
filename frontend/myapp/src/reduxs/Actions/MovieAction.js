@@ -125,4 +125,17 @@ function deleteWish(movie_id, member_id) {
   }
 }
 
-export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, updateComment, deleteComment, postRating, updateRating, deleteRating, getWishByMemberId, postWish, deleteWish };
+// 코멘트 좋아요
+function getLikesByMemberId(movie_id, member_id) {
+  return async (dispatch) => {
+    const data = await axios.get(`${baseUrl}/likes/${movie_id}/${member_id}`)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+    dispatch(MovieReducers.getLikesByMemberId({data}));
+  }
+}
+
+
+export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, updateComment, deleteComment, postRating, updateRating, deleteRating, getWishByMemberId, postWish, deleteWish, getLikesByMemberId };

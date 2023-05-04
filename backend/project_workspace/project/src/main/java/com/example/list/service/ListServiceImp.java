@@ -14,6 +14,7 @@ import com.example.list.dao.ListDAO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ListDTO;
 import com.example.review.dto.CommentsDTO;
+import com.example.review.dto.LikesDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
 import com.example.wish.dto.WishDTO;
@@ -170,6 +171,15 @@ public class ListServiceImp implements ListService {
 		map.put("member_id", member_id);
 		
 		listDAO.deleteWish(map);
+	}
+
+	@Override
+	public LikesDTO findLikesByIdProcess(int movie_id, int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("movie_id", movie_id);
+		map.put("member_id", member_id);
+		
+		return listDAO.findLikesById(map);
 	}
 
 

@@ -4,7 +4,7 @@ SELECT movie_id, title FROM MOVIE WHERE country like '%Korea%';
 SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum / 2, 2), a.tmdb_vote_cnt, a.poster_path
 FROM (SELECT * 
         FROM movie
-        WHERE tmdb_vote_cnt >= 200 AND popularity >= 30 AND release_date >= '00/01/01'
+        WHERE tmdb_vote_cnt >= 3000 AND popularity >= 150 AND release_date >= '20/01/01'
         ORDER BY tmdb_vote_sum DESC) A 
 WHERE rownum <= 20;
 
@@ -52,7 +52,6 @@ commit;
 
 SELECT movie_id, member_id, rating FROM review WHERE movie_id = 129 AND member_id = 1;
 
-
 --이게 무야~~~
 SELECT g.genre_id, g.name, COUNT(r.rating) AS rating_count, Round(AVG(r.rating),2) AS average_rating, ((sum(r.rating) / (COUNT(r.rating) * 5)) * 100) AS total
         FROM
@@ -70,16 +69,13 @@ SELECT g.genre_id, g.name, COUNT(r.rating) AS rating_count, Round(AVG(r.rating),
             rating_count DESC,
             total DESC;
 
-SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
+-- 하나의 영화 > 코멘트 리스트 가져오기
+SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate, m.nickname
 FROM comments c
 LEFT OUTER JOIN rating r ON r.movie_id = c.movie_id AND r.member_id = c.member_id
-WHERE c.movie_id = 129
+JOIN member m ON m.member_id = c.member_id
+WHERE c.movie_id = 361743
 ORDER BY likes DESC;
-
-SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
-FROM comments c
-LEFT OUTER JOIN rating r ON c.movie_id = r.movie_id AND c.member_id = r.member_id
-WHERE r.movie_id = 129 AND r.member_id = 1;
 
 -- 사용자가 남긴 코멘트, 별점 가져오기
 SELECT COALESCE(c.movie_id, r.movie_id) AS movie_id,
@@ -97,22 +93,38 @@ commit;
 
 insert into comments values (129, 1, '재밌네요...', 0, sysdate, sysdate, 1);
 
-select count(*) from movie_actor;
+select count(*) from movie_genre;
 
-delete from director where profile_path is null;
+delete from director2 where profile_path is null;
+delete from director where tmdb_vote_cnt <= 30;
+delete from movie_director;
 
-DELETE FROM movie_actor
-WHERE movie_id NOT IN (SELECT movie_id FROM movie);
+DELETE FROM movie_director
+WHERE director_id NOT IN (SELECT director_id FROM director);
 
 DELETE FROM movie_actor
 WHERE actor_id NOT IN (SELECT actor_id FROM actor);
 
 select * from movie_director where movie_id = 157336;
-select * from actor where actor_id = 123664;
+select * from actor where actor_id = 2;
 
-delete from movie_actor;
+select * from movie where movie_id = 791373;
+update movie set popularity = 100 where movie_id = 766507;
 
 commit;
+
+-- 중복 필드 제외 삽입
+INSERT INTO director
+SELECT * FROM director2
+WHERE director_id NOT IN (SELECT director_id FROM director);
+
+-- 중복 필드 삭제
+DELETE FROM movie_director a
+WHERE ROWID > (SELECT MIN(ROWID) FROM movie_director b
+WHERE b.director_id = a.director_id AND b.movie_id = a.movie_id);
+
+
+
 
 -- 비슷한 영화 쿼리
 WITH matched_genres AS (
@@ -160,6 +172,24 @@ combined AS (
 SELECT *
 FROM combined
 WHERE ROWNUM <= 12;
+
+
+-- likes
+SELECT *
+FROM likes
+WHERE movie_id = 361743 AND member_id = 1;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

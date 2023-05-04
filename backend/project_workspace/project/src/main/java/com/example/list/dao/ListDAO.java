@@ -13,6 +13,7 @@ import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ImagesDTO;
 import com.example.list.dto.ListDTO;
 import com.example.review.dto.CommentsDTO;
+import com.example.review.dto.LikesDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
 import com.example.wish.dto.WishDTO;
@@ -63,4 +64,11 @@ public interface ListDAO {
 	public WishDTO findWishById(Map<String, Object> map);
 	public void postWish(WishDTO wish);
 	public void deleteWish(Map<String, Object> map);
+	
+	// likes
+	public LikesDTO findLikesById(Map<String, Object> map);
+	
+	
+	
+	
 }

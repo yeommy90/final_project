@@ -29,7 +29,7 @@ const CommentDropdown = ({ isDropdownVisible, setIsDropdownVisible, handleShow, 
       {isDropdownVisible && (
         <div className="dropdown-menu">
           <div className='d-flex justify-content-center flex-column align-items-center'>
-            <div className="dropdown-edit p-2 mb-1" onClick={() => {handleShow();}}>
+            <div className="dropdown-edit p-2 mb-1" onClick={() => {handleShow(true);}}>
               <FontAwesomeIcon icon={faPen} className="mr-2" />코멘트 수정</div>
             <div className="dropdown-del p-2" href="#" onClick={handleDelete}>
               <FontAwesomeIcon icon={faTrashCan} className="mr-2" />코멘트 삭제</div>

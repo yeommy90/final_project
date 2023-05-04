@@ -34,7 +34,7 @@ public class ContentsDTO {
 	private String country;
 	private int runtime;
 	
-	// actor, director, genre, image, review, list, wish 들어가야함
+	// actor, director, genre, image, review, list 들어가야함
 	private List<ActorDTO> actorDTO;
 	private List<DirectorDTO> directorDTO;
 	private List<GenreDTO> genreDTO;

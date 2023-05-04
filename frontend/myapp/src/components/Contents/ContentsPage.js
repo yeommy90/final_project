@@ -33,7 +33,8 @@ const Contents = () => {
     const fetchedComments = await dispatch(MovieActions.getMovieContents(movie_id));
     const fetchedMemberComments = await dispatch(MovieActions.getReviewByMemberId(movie_id, member_id));
     const fetchedMemberWish = await dispatch(MovieActions.getWishByMemberId(movie_id, member_id));
-    setComments(fetchedComments, fetchedMemberComments, fetchedMemberWish);
+    const fetchedLikes = await dispatch(MovieActions.getLikesByMemberId(movie_id, member_id));
+    setComments(fetchedComments, fetchedMemberComments, fetchedMemberWish, fetchedLikes);
   }
 
   useEffect(() => {

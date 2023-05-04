@@ -6,6 +6,7 @@ let initialState = {
   contents: {},
   memberReview: {},
   memberWish: {},
+  memberLikes: {},
 };
 
 const MovieSlice = createSlice({
@@ -31,7 +32,11 @@ const MovieSlice = createSlice({
     // 멤버 wish 정보
     getWishByMemberId(state, action) {
       state.memberWish = action.payload.data;
-    }
+    },
+
+    getLikesByMemberId(state, action) {
+      state.memberLikes = action.payload.data;
+    },
 
   },
 });
