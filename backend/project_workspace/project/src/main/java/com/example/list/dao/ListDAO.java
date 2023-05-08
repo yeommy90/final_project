@@ -12,10 +12,12 @@ import com.example.genre.dto.GenreDTO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ImagesDTO;
 import com.example.list.dto.ListDTO;
+import com.example.member.dto.MemberDTO;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.LikesDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
+import com.example.review.dto.ReviewInfoDTO;
 import com.example.wish.dto.WishDTO;
 
 @Mapper
@@ -66,8 +68,21 @@ public interface ListDAO {
 	public void deleteWish(Map<String, Object> map);
 	
 	// likes
-	public LikesDTO findLikesById(Map<String, Object> map);
+	public List<LikesDTO> findLikesById(Map<String, Object> map);
+	public void postLikes(LikesDTO likes);
+	public void incrementLikesById(CommentsDTO comment);
+	public void incrementLikesCountById(int member_id);
 	
+	public void deleteLikes(LikesDTO likes);
+	public void decrementLikesById(CommentsDTO comment);
+	public void decrementLikesCountById(int member_id);
+	
+	public void updateGradeById(MemberDTO member);
+	public MemberDTO findMemberById(int member_id);
+	
+	// 신고
+	public void commentSpoilerReport(ReviewInfoDTO review);
+	public void commentProfanityReport(ReviewInfoDTO review);
 	
 	
 	

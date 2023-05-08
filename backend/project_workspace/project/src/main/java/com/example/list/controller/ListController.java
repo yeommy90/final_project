@@ -1,6 +1,7 @@
 package com.example.list.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.LikesDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
+import com.example.review.dto.ReviewInfoDTO;
 import com.example.wish.dto.WishDTO;
 
 @CrossOrigin({"http://localhost:3000"})
@@ -42,7 +44,7 @@ public class ListController {
 		
 		return map;
 	}
-		
+	
 	
 	// 영화 상세정보
 	@GetMapping("/contents/{movie_id}")
@@ -112,13 +114,33 @@ public class ListController {
 	
 	// 코멘트 > 좋아요
 	@GetMapping("/likes/{movie_id}/{member_id}")
-	public LikesDTO getLikesExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
-		System.out.println(movie_id);
+	public List<LikesDTO> getLikesExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		System.out.println("멤버아이디" + member_id);
+		System.out.println("좋아요" + listService.findLikesByIdProcess(movie_id, member_id));
 		return listService.findLikesByIdProcess(movie_id, member_id);
 	}
 	
+	@PostMapping("/likes")
+	public void postLikesExecute(@RequestBody LikesDTO likes) {
+		listService.postLikesProcess(likes);
+	}
+	
+	@DeleteMapping("/likes")
+	public void deleteLikesExecute(@RequestBody LikesDTO likes) {
+		listService.deleteLikesProcess(likes);
+	}
 	
 	
+	// 신고
+	@PutMapping("/spoiler")
+	public void commentSpoilerReportExecute(@RequestBody ReviewInfoDTO review) {
+		listService.commentSpoilerReport(review);
+	}
+	
+	@PutMapping("/profanity")
+	public void commentProfanityReportExecute(@RequestBody ReviewInfoDTO review) {
+		listService.commentProfanityReport(review);
+	}
 	
 	
 	

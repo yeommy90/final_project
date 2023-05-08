@@ -10,6 +10,7 @@ import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.LikesDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
+import com.example.review.dto.ReviewInfoDTO;
 import com.example.wish.dto.WishDTO;
 
 public interface ListService {
@@ -52,7 +53,12 @@ public interface ListService {
 	public void deleteWishProcess(int movie_id, int member_id);
 	
 	// likes
-	public LikesDTO findLikesByIdProcess(int movie_id, int member_id);
+	public List<LikesDTO> findLikesByIdProcess(int movie_id, int member_id);
+	public void postLikesProcess(LikesDTO likes);
+	public void deleteLikesProcess(LikesDTO likes);
 	
+	// 신고
+	public void commentSpoilerReport(ReviewInfoDTO review);
+	public void commentProfanityReport(ReviewInfoDTO review);
 	
 }

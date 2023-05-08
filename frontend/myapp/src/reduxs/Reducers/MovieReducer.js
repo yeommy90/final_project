@@ -6,7 +6,7 @@ let initialState = {
   contents: {},
   memberReview: {},
   memberWish: {},
-  memberLikes: {},
+  memberLikes: [],
 };
 
 const MovieSlice = createSlice({

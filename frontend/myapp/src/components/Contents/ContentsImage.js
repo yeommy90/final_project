@@ -61,7 +61,7 @@ const ContentsImage = ({ contents = {} }) => {
         <div className="my-4">
           <div>
             <h3>갤러리</h3>
-            <div className="img-box text-center">
+            <div className="img-box">
               {imageRow}
               <button onClick={handlePrevClick} className="prev_button">
                 <img src={require('assets/img/left.png')}></img>

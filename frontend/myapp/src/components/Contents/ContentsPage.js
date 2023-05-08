@@ -27,7 +27,8 @@ const Contents = () => {
 
   const contents = useSelector((state) => state.movie.contents);
   const memberReview = useSelector((state) => state.movie.memberReview);
-  
+  const memberLikes = useSelector((state) => state.movie.memberLikes);
+
   // 렌더링 트리거 함수 > 이름을 잘못지었음..
   const fetchComments = async () => {
     const fetchedComments = await dispatch(MovieActions.getMovieContents(movie_id));
@@ -47,7 +48,7 @@ const Contents = () => {
       <ContentsHeader contents={contents} fetchComments={fetchComments} handleAuthShow={handleAuthShow} />
       <BasicInfo contents={contents}/>
       <CastInfo contents={contents}/>
-      <Comments contents={contents} handleAuthShow={handleAuthShow} />
+      <Comments contents={contents} handleAuthShow={handleAuthShow} memberLikes={memberLikes} fetchComments={fetchComments}/>
       <ContentsImage contents={contents}/>
       <SimilarMovie contents={contents} />
       <AuthModal isOpen={authShow} onRequestClose={handleAuthClose} />

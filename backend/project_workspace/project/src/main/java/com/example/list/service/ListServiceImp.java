@@ -13,10 +13,12 @@ import com.example.director.dto.DirectorDTO;
 import com.example.list.dao.ListDAO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ListDTO;
+import com.example.member.dto.MemberDTO;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.LikesDTO;
 import com.example.review.dto.RatingDTO;
 import com.example.review.dto.ReviewDTO;
+import com.example.review.dto.ReviewInfoDTO;
 import com.example.wish.dto.WishDTO;
 
 @Service
@@ -173,8 +175,11 @@ public class ListServiceImp implements ListService {
 		listDAO.deleteWish(map);
 	}
 
+	
+	
+	// 코멘트 > 좋아요
 	@Override
-	public LikesDTO findLikesByIdProcess(int movie_id, int member_id) {
+	public List<LikesDTO> findLikesByIdProcess(int movie_id, int member_id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("movie_id", movie_id);
 		map.put("member_id", member_id);
@@ -182,7 +187,80 @@ public class ListServiceImp implements ListService {
 		return listDAO.findLikesById(map);
 	}
 
+	// 하나의 코멘트에 좋아요를 누를 때 > comments, likes, member table 업데이트
+	@Override
+	@Transactional
+	public void postLikesProcess(LikesDTO likes) {
+		// 1. likes table > insert
+		listDAO.postLikes(likes);
+		
+		// 2. comments table > likes update
+		CommentsDTO comment = new CommentsDTO();
+		comment.setMovie_id(likes.getMovie_id());
+		comment.setMember_id(likes.getComment_member_id());
+		listDAO.incrementLikesById(comment);
+		
+		// 3. member table > likes_count update
+		listDAO.incrementLikesCountById(likes.getComment_member_id());
+		
+		// 4. member table > grade update
+		MemberDTO member = listDAO.findMemberById(likes.getComment_member_id());
+		int grade = determineGrade(member.getLikes_count());
+		member.setGrade(grade);
+		listDAO.updateGradeById(member);
+	}
 
+	// grade 계산 메소드
+	private int determineGrade(int likes_count) {
+	    if (likes_count >= 201) {
+	        return 1;
+	    } else if (likes_count >= 101) {
+	        return 2;
+	    } else if (likes_count >= 51) {
+	        return 3;
+	    } else if (likes_count >= 21) {
+	        return 4;
+	    } else if (likes_count >= 1) {
+	        return 5;
+	    } else {
+	        return 6;
+	    }
+	}
+
+	@Override
+	@Transactional
+	public void deleteLikesProcess(LikesDTO likes) {
+		// 1. likes table > delete
+		listDAO.deleteLikes(likes);
+		
+		// 2. comments table > likes update
+		CommentsDTO comment = new CommentsDTO();
+		comment.setMovie_id(likes.getMovie_id());
+		comment.setMember_id(likes.getComment_member_id());
+		listDAO.decrementLikesById(comment);
+		
+		// 3. member table > likes_count update
+		listDAO.decrementLikesCountById(likes.getComment_member_id());
+		
+		// 4. member table > grade update
+		MemberDTO member = listDAO.findMemberById(likes.getComment_member_id());
+		int grade = determineGrade(member.getLikes_count());
+		member.setGrade(grade);
+		listDAO.updateGradeById(member);
+	}
+	
+	
+	
+	// 신고
+	@Override
+	public void commentSpoilerReport(ReviewInfoDTO review) {
+		listDAO.commentSpoilerReport(review);
+	}
+
+	@Override
+	public void commentProfanityReport(ReviewInfoDTO review) {
+		listDAO.commentProfanityReport(review);
+	}
 
 
 

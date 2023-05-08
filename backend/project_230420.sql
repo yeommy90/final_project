@@ -93,11 +93,11 @@ commit;
 
 insert into comments values (129, 1, '재밌네요...', 0, sysdate, sysdate, 1);
 
-select count(*) from movie_genre;
+select count(*) from movie;
 
 delete from director2 where profile_path is null;
 delete from director where tmdb_vote_cnt <= 30;
-delete from movie_director;
+delete from movie_images;
 
 DELETE FROM movie_director
 WHERE director_id NOT IN (SELECT director_id FROM director);

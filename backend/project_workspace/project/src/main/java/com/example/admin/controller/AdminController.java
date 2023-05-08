@@ -81,7 +81,6 @@ public class AdminController {
     	Map<String, Object> map=new HashMap<>();
     	map.put("editSpoiler", adminService.editSpoilerProcess());
     	map.put("editReport", adminService.editReportProcess());
-    	System.out.println("미미미미");
     	return map;
     }
 

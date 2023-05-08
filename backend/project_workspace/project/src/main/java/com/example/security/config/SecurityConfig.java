@@ -62,6 +62,7 @@ public class SecurityConfig {
 	    		 "/comment/**", "/actorProfile/**", "/dirProfile/**", "/selectAll", "/review",
 	    		 "/member/signup", "/editinfo", "/emailcheck", "/genreselect", 
 	    		 "/wish/**", "/rating/**", "/likes/**", "/review", "/analysis/**",
+	    		 "/spoiler", "/profanity",
 	    		 "/adminlogin", "/adminregister", "/adminpage", "/blur", "/deletereview",
 	    		 "/admin/idcheck", "/admin/update").permitAll()
 	    .anyRequest().authenticated();

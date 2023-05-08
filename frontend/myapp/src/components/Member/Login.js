@@ -98,7 +98,7 @@ const Login = () => {
                   <InputGroup className='form-group-no-border'>
                     <InputGroupAddon addonType='prepend'>
                       <InputGroupText>
-                      <FontAwesomeIcon icon={faEnvelope}/>
+                        <FontAwesomeIcon icon={faEnvelope}/>
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input

@@ -137,5 +137,48 @@ function getLikesByMemberId(movie_id, member_id) {
   }
 }
 
+function postLikes(likesDTO) {
+  return async () => {
+    await axios.post(`${baseUrl}/likes`, likesDTO)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
 
-export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, updateComment, deleteComment, postRating, updateRating, deleteRating, getWishByMemberId, postWish, deleteWish, getLikesByMemberId };
+function deleteLikes(likesDTO) {
+  return async () => {
+    await axios.delete(`${baseUrl}/likes`, { data: likesDTO })
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+// 신고
+function commentSpoiler(reviewInfoDTO) {
+  return async () => {
+    await axios.put(`${baseUrl}/spoiler`, reviewInfoDTO)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+function commentProfanity(reviewInfoDTO) {
+  return async () => {
+    await axios.put(`${baseUrl}/profanity`, reviewInfoDTO)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, 
+  updateComment, deleteComment, postRating, updateRating, deleteRating, 
+  getWishByMemberId, postWish, deleteWish, getLikesByMemberId, postLikes, deleteLikes,
+  commentSpoiler, commentProfanity };

@@ -15,6 +15,10 @@ import PrivateRoute from 'access/PrivateRoute';
 import LogOut from 'components/Member/Logout';
 import CastProfile from 'components/CastProfile/CastProfile';
 import Notice from 'components/Notice/Notice';
+import AdminRegister from 'components/Admin/AdminRegister';
+import AdminLogin from 'components/Admin/AdminLogin';
+import AdminEditInfo from 'components/Admin/AdminEditInfo';
+import AdminPage from 'components/Admin/AdminPage';
 
 function App() {
   return (
@@ -33,6 +37,10 @@ function App() {
         <Route path="/comment" element={<PrivateRoute isAuth={false} RouteComponent={CommentPage} />} />
         <Route path="/:profileType/:id" element={<PrivateRoute isAuth={false} RouteComponent={CastProfile}/>} />
         <Route path='/notice' element={<PrivateRoute isAuth={false} RouteComponent={Notice} />} />
+        <Route path='/adminlogin' element={<AdminLogin />} />
+        <Route path='/adminregister' element={<AdminRegister />} />
+        <Route path='/admineditinfo' element={<AdminEditInfo />} />
+        <Route path='/adminpage' element={<AdminPage />} />
       </Routes>
     </BaseLayout>
   );
