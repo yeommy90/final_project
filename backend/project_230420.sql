@@ -113,6 +113,10 @@ update movie set popularity = 100 where movie_id = 766507;
 
 commit;
 
+UPDATE member
+	    SET likes_count = likes_count + 1
+	    WHERE member_id = 2;
+
 -- 중복 필드 제외 삽입
 INSERT INTO director
 SELECT * FROM director2
