@@ -145,13 +145,15 @@
 		<result property="likes" column="likes"/>
 		<result property="regdate" column="regdate"/>
 		<result property="state" column="state"/>
+		<result property="nickname" column="nickname"/>
 	</resultMap>
 	
 	<!--영화 하나에 현재까지 작성된 코멘트-->
 	<select id="getReviewsByMovieId"  parameterType="int" resultMap="CommentAndRatingResultMap">
-		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate
+		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate, m.nickname
 		FROM comments c
 		LEFT OUTER JOIN rating r ON r.movie_id = c.movie_id AND r.member_id = c.member_id
+		JOIN member m ON m.member_id = c.member_id
 		WHERE c.movie_id = #{movie_id}
 		ORDER BY likes DESC
 	</select>
@@ -178,7 +180,7 @@
 	<!--사용자가 코멘트를 안남긴 상태에서 별점만 추가할 경우-->
 	<insert id="postRating" parameterType="RatingDTO">
 		INSERT INTO rating
-		VALUES (#{movie_id}, #{member_id}, #{rating})
+		VALUES (#{movie_id}, #{member_id}, #{rating}, sysdate)
 	</insert>
 	
 	<!--사용자가 별점만 남긴 상태에서 별점만 수정할 경우-->
@@ -218,7 +220,7 @@
 	
 	<insert id="postWish" parameterType="WishDTO">
 		INSERT INTO wish
-		VALUES (#{member_id}, #{movie_id}, sysdate)
+		VALUES (#{member_id}, #{movie_id}, CURRENT_TIMESTAMP)
 	</insert>
 	
 	<delete id="deleteWish" parameterType="map">
@@ -301,6 +303,13 @@
 		SET STATE = 3
 		WHERE MOVIE_ID = #{movie_id} AND MEMBER_ID = #{member_id}
 	</update>
+	
+	<!--이미 신고되었는지 확인-->
+	<select id="checkReported" parameterType="map" resultType="CommentsDTO">
+		SELECT *
+		FROM comments
+		WHERE (movie_id = #{movie_id} AND member_id = #{member_id}) AND (state IN (2, 3, 4))
+	</select>
 	
 	
 	

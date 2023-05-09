@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import CastMovies from './CastMovies';
-import DirMovies from './DirMovies';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Autocomplete } from '@mui/material';
-import ComboBox from 'components/Common/AutoComplete';
 import Pilmography from './Pilmography';
 import style from '../../assets/css/pilmography.module.css';
 
@@ -16,6 +12,7 @@ const CastProfile = () => {
       'Access-Control-Allow-Origin': 'http://localhost:3000',
     },
   };
+
   const { actor_id, dir_id } = useParams();
   const { id, profileType } = useParams();
 
@@ -59,12 +56,13 @@ const CastProfile = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getMovies();
   }, [actor_id, dir_id]);
 
   return (
     <>
-      <div style={{ width: '100%', height: '118px' }}></div>
+      <div style={{ width: '100%', height: '90px' }}></div>
       <div style={{ width: '100%', height: '100%', padding: '20px' }}>
         <div style={{ width: '900px', margin: 'auto' }}>
           <div className={style.profile_box}>
@@ -131,17 +129,11 @@ const CastProfile = () => {
                       </p>
                     )}
                   </div>
-                  {/* <p className="text-center">{castInfo.name}</p> */}
                 </div>
               </div>
             )}
           </div>
-          <div>
-            {/* {castMovieList && <CastMovies castMovieList={castMovieList} />}
-            {dirMovieList && <DirMovies dirMovieList={dirMovieList} />} */}
-          </div>
-
-          <Pilmography />
+          <Pilmography castMovieList={castMovieList} dirMovieList={dirMovieList}/>
         </div>
       </div>
     </>

@@ -114,15 +114,6 @@ public class MemberController {
 		}
 		return null;
 	}
-	
-	// 마이페이지 > 평가하기
-	@GetMapping("/review")
-	public List<ListDTO> printRandom() {
-		System.out.println("요청 들어옴");
-		List<ListDTO> aList= memberService.randomService();
-		System.out.println(aList.size());
-		return aList; 
-	}
 
 	
 }

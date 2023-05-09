@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.list.dto.ContentsDTO;
@@ -131,6 +133,7 @@ public class ListController {
 	}
 	
 	
+	
 	// 신고
 	@PutMapping("/spoiler")
 	public void commentSpoilerReportExecute(@RequestBody ReviewInfoDTO review) {
@@ -140,6 +143,18 @@ public class ListController {
 	@PutMapping("/profanity")
 	public void commentProfanityReportExecute(@RequestBody ReviewInfoDTO review) {
 		listService.commentProfanityReport(review);
+	}
+	
+	@GetMapping("/checkReported/{movie_id}/{member_id}")
+	public ResponseEntity<Map<String, Boolean>> checkReportedExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		List<CommentsDTO> comment = listService.checkReported(movie_id, member_id);
+		System.out.println(comment);
+		boolean isReported = !comment.isEmpty();
+		
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("isReported", isReported);
+		
+		return ResponseEntity.ok(response);
 	}
 	
 	

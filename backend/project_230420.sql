@@ -105,17 +105,16 @@ WHERE director_id NOT IN (SELECT director_id FROM director);
 DELETE FROM movie_actor
 WHERE actor_id NOT IN (SELECT actor_id FROM actor);
 
-select * from movie_director where movie_id = 157336;
+select * from movie_director where movie_id = 212778;
+select * from director where name = 'Jon Favreau';
 select * from actor where actor_id = 2;
 
-select * from movie where movie_id = 791373;
+select * from movie where movie_id = 212778;
 update movie set popularity = 100 where movie_id = 766507;
 
 commit;
 
-UPDATE member
-	    SET likes_count = likes_count + 1
-	    WHERE member_id = 2;
+select * from wish where member_id = 1 order by regdate DESC;
 
 -- 중복 필드 제외 삽입
 INSERT INTO director
@@ -127,7 +126,9 @@ DELETE FROM movie_director a
 WHERE ROWID > (SELECT MIN(ROWID) FROM movie_director b
 WHERE b.director_id = a.director_id AND b.movie_id = a.movie_id);
 
-
+SELECT * FROM 
+			(SELECT * FROM movie ORDER BY dbms_random.value)
+		WHERE ROWNUM BETWEEN 0 AND 4;
 
 
 -- 비슷한 영화 쿼리
@@ -183,6 +184,9 @@ SELECT *
 FROM likes
 WHERE movie_id = 361743 AND member_id = 1;
 
+SELECT *
+FROM comments
+WHERE (movie_id = 361743 AND member_id = 9) AND (state IN (2, 3, 4));
 
 
 

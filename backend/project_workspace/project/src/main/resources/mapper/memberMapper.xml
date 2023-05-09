@@ -48,14 +48,4 @@
 		where email=#{email}
 	</select>
 	
-	<!--마이페이지 > 평가하기-->
-	<select id="printRandom" resultType="ListDTO">
-		<![CDATA[
-		SELECT * FROM 
-			(SELECT * FROM movie ORDER BY dbms_random.value)
-		WHERE ROWNUM BETWEEN 0 AND 4
-		]]>
-	</select>
-	
-	
 </mapper>

@@ -22,6 +22,4 @@ public interface MemberDAO {
 	public void updateByPass(MemberDTO dto);
 	public int idcheck(String email);
 	
-	public List<ListDTO> printRandom();
-	
 }

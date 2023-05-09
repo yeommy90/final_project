@@ -22,6 +22,4 @@ public interface MemberService {
 	public MemberDTO selectByEmailProcess(String email);
 	//public boolean isEmailAlreadyInUse(String email);
 	public int idcheckprocess(String email);
-	
-	public List<ListDTO> randomService();
 }

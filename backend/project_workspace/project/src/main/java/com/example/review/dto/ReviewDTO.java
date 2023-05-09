@@ -20,4 +20,6 @@ public class ReviewDTO {
 	private Date regdate;
 	private Date moddate;
 	private int state;
+	
+	private String nickname;
 }

@@ -60,5 +60,5 @@ public interface ListService {
 	// 신고
 	public void commentSpoilerReport(ReviewInfoDTO review);
 	public void commentProfanityReport(ReviewInfoDTO review);
-	
+	public List<CommentsDTO> checkReported(int movie_id, int member_id);
 }

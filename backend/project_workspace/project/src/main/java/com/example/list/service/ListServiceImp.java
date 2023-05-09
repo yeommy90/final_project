@@ -262,6 +262,15 @@ public class ListServiceImp implements ListService {
 		listDAO.commentProfanityReport(review);
 	}
 
+	@Override
+	public List<CommentsDTO> checkReported(int movie_id, int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("movie_id", movie_id);
+		map.put("member_id", member_id);
+		
+		return listDAO.checkReported(map);
+	}
+
 
 
 }

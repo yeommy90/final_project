@@ -125,7 +125,7 @@ function deleteWish(movie_id, member_id) {
   }
 }
 
-// 코멘트 좋아요
+// 코멘트 좋아요 리스트
 function getLikesByMemberId(movie_id, member_id) {
   return async (dispatch) => {
     const data = await axios.get(`${baseUrl}/likes/${movie_id}/${member_id}`)
@@ -157,7 +157,7 @@ function deleteLikes(likesDTO) {
   }
 }
 
-// 신고
+// 스포일러 신고
 function commentSpoiler(reviewInfoDTO) {
   return async () => {
     await axios.put(`${baseUrl}/spoiler`, reviewInfoDTO)
@@ -168,6 +168,7 @@ function commentSpoiler(reviewInfoDTO) {
   }
 }
 
+// 욕설 신고
 function commentProfanity(reviewInfoDTO) {
   return async () => {
     await axios.put(`${baseUrl}/profanity`, reviewInfoDTO)
@@ -178,7 +179,19 @@ function commentProfanity(reviewInfoDTO) {
   }
 }
 
+// 이미 신고되었는지 확인
+function getCheckReported(movie_id, member_id) {
+  return async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/checkReported/${movie_id}/${member_id}`);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
 export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, 
   updateComment, deleteComment, postRating, updateRating, deleteRating, 
   getWishByMemberId, postWish, deleteWish, getLikesByMemberId, postLikes, deleteLikes,
-  commentSpoiler, commentProfanity };
+  commentSpoiler, commentProfanity, getCheckReported };

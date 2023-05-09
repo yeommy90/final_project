@@ -6,15 +6,24 @@ import ReviewModal from './MovieDetailModal';
 import axios from 'axios';
 import yourImage from '../../assets/img/180c6e128821941b1.jpg';
 import { baseUrl } from 'Apiurl';
+import { DropdownButton, Dropdown } from 'react-bootstrap';
 
 const ReviewPage = () => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("Authorization"),
+    },
+  };
+
+  const [selectedOption, setSelectedOption] = useState('랜덤영화');
   const [movies, setMovies] = useState([]);
   const [show, setShow] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState({});
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleClose = () => {
     setShow(false);
-    setSelectedMovie({});
+    setSelectedMovie(null);
   }
 
   const handleShow = (movie) => {
@@ -23,8 +32,9 @@ const ReviewPage = () => {
   }
 
   useEffect(() => {
-    axios.get(`${baseUrl}/review`)
+    axios.get('http://localhost:8090/printrandom')
       .then(response => {
+        console.log("review")
         setMovies(response.data);
       })
       .catch(error => {
@@ -32,20 +42,60 @@ const ReviewPage = () => {
       });
   }, []);
 
+
+  const handleOptionClick = (eventKey) => {
+    console.log(eventKey)
+    setSelectedOption(eventKey);
+    axios
+      .post("http://localhost:8090/printmovie", eventKey, config)
+      .then((response) => {
+        // 영화 목록을 받아와서 처리하는 코드 작성
+        console.log("printmovie")
+        console.log(response.data)
+        setMovies(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  console.log(movies);
+
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ marginTop: '150px' }}>
+    <div className="container d-flex justify-content-center align-items-center" style={{ marginTop: '100px', width: '50%' }}>
       <div className="container">
         <header className="my-4">
           <div className="row">
             <div className="col mb-3">
-              <h2 className="text-center mb-3">1</h2>
+              <h2 className="text-center mb-3">지금까지 평가 완료한 갯수 들어가야 함</h2>
               <p className="text-center">작품을 평가해보세요. 당신의 취향에 딱 맞는 작품을 추천해드릴게요.</p>
             </div>
           </div>
-          <button className='btn btn-primary'>랜덤 영화</button>
+          <DropdownButton id="dropdown-basic-button" title={selectedOption} onSelect={handleOptionClick}>
+            <Dropdown.Item eventKey='랜덤영화'>랜덤영화</Dropdown.Item>
+            <Dropdown.Item eventKey='드라마'>드라마</Dropdown.Item>
+            <Dropdown.Item eventKey='코미디'>코미디</Dropdown.Item>
+            <Dropdown.Item eventKey='범죄'>범죄</Dropdown.Item>
+            <Dropdown.Item eventKey='로맨스'>로맨스</Dropdown.Item>
+            <Dropdown.Item eventKey='액션'>액션</Dropdown.Item>
+            <Dropdown.Item eventKey='스릴러'>스릴러</Dropdown.Item>
+            <Dropdown.Item eventKey='다큐멘터리'>다큐멘터리</Dropdown.Item>
+            <Dropdown.Item eventKey='모험'>모험</Dropdown.Item>
+            <Dropdown.Item eventKey='SF'>SF</Dropdown.Item>
+            <Dropdown.Item eventKey='애니메이션'>애니메이션</Dropdown.Item>
+            <Dropdown.Item eventKey='가족'>가족</Dropdown.Item>
+            <Dropdown.Item eventKey='미스터리'>미스터리</Dropdown.Item>
+            <Dropdown.Item eventKey='공포'>공포</Dropdown.Item>
+            <Dropdown.Item eventKey='판타지'>판타지</Dropdown.Item>
+            <Dropdown.Item eventKey='전쟁'>전쟁</Dropdown.Item>
+            <Dropdown.Item eventKey='음악'>음악</Dropdown.Item>
+            <Dropdown.Item eventKey='서부'>서부</Dropdown.Item>
+            <Dropdown.Item eventKey='역사'>역사</Dropdown.Item>
+            <Dropdown.Item eventKey='TV 영화'>TV 영화</Dropdown.Item>
+          </DropdownButton>
         </header>
 
-        <div className="row">
+        <div className="row" >
           <div className="col">
             <ul className='pl-0'>
               <li className="list-group-item">
@@ -72,7 +122,7 @@ const ReviewPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

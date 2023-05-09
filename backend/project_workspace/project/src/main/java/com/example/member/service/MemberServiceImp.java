@@ -26,12 +26,6 @@ public class MemberServiceImp implements MemberService{
 	public void setMemberDao(MemberDAO memberDao) {
 		this.memberDao = memberDao;
 	}
-
-	@Override
-	public List<ListDTO> randomService() {
-		List<ListDTO> memberList=memberDao.printRandom();
-		return memberList;
-	}
 	
 	@Override
 	@Transactional

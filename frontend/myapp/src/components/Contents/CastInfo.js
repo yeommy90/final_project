@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
 
 const CastInfo = ({ contents = {} }) => {
@@ -38,7 +39,9 @@ const CastInfo = ({ contents = {} }) => {
         cols.push(
           <React.Fragment key={currentItem.id} >
             <Col md="1" className="p-2">
-              <img src={currentItem.image} alt={currentItem.name} className="pro-img rounded-square"/>
+              <Link to={currentItem.role === 'Actor' ? `/actorProfile/${currentItem.id}` : `/dirProfile/${currentItem.id}`}>
+                <img src={currentItem.image} alt={currentItem.name} className="pro-img rounded-square"/>
+              </Link>
             </Col>
             <Col className='mt-3 p-2 ml-5'>
               <p className='name'>{currentItem.name}</p>

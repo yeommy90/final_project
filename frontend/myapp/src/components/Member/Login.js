@@ -2,7 +2,7 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { baseUrl } from 'Apiurl';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // reactstrap components
 import {
@@ -35,6 +35,10 @@ const Login = () => {
   };
 
   const config = { headers: { 'Content-Type': 'application/json' } };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   //입력한 로그인 정보 보내기
   const onSubmit = async (e) => {

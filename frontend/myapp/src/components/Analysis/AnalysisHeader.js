@@ -1,4 +1,3 @@
-import { Container } from 'reactstrap';
 import style from '../../assets/css/analysis.module.css';
 
 import { baseUrl } from 'Apiurl';

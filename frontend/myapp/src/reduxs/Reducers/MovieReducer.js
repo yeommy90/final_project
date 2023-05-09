@@ -7,6 +7,7 @@ let initialState = {
   memberReview: {},
   memberWish: {},
   memberLikes: [],
+  isReported: null,
 };
 
 const MovieSlice = createSlice({
@@ -37,6 +38,10 @@ const MovieSlice = createSlice({
     getLikesByMemberId(state, action) {
       state.memberLikes = action.payload.data;
     },
+
+    // getCheckReported(state, action) {
+    //   state.isReported = action.payload.data;
+    // }
 
   },
 });

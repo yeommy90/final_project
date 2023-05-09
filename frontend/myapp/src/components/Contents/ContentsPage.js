@@ -12,7 +12,6 @@ import { MovieActions } from 'reduxs/Actions/MovieAction';
 import { useParams } from 'react-router-dom';
 import ContentsImage from './ContentsImage';
 import AuthModal from './AuthModal';
-import MemberReviewInfo from './MemberReviewInfo';
 
 const Contents = () => {
   const dispatch = useDispatch();
@@ -26,7 +25,7 @@ const Contents = () => {
   const handleAuthShow = () => setAuthShow(true);
 
   const contents = useSelector((state) => state.movie.contents);
-  const memberReview = useSelector((state) => state.movie.memberReview);
+  // const memberReview = useSelector((state) => state.movie.memberReview);
   const memberLikes = useSelector((state) => state.movie.memberLikes);
 
   // 렌더링 트리거 함수 > 이름을 잘못지었음..

@@ -83,7 +83,7 @@ public interface ListDAO {
 	// 신고
 	public void commentSpoilerReport(ReviewInfoDTO review);
 	public void commentProfanityReport(ReviewInfoDTO review);
-	
+	public List<CommentsDTO> checkReported(Map<String, Object> map);
 	
 	
 }
