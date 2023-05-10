@@ -85,5 +85,7 @@ public interface ListDAO {
 	public void commentProfanityReport(ReviewInfoDTO review);
 	public List<CommentsDTO> checkReported(Map<String, Object> map);
 	
+	// 인생영화
+	public int findFavoriteById(int member_id);
 	
 }

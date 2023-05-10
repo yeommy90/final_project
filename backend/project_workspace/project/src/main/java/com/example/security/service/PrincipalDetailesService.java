@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.admin.dto.AdminDTO;
+import com.example.login.dao.LoginDAO;
 import com.example.member.dao.MemberDAO;
 import com.example.member.dto.MemberDTO;
 
@@ -14,7 +16,7 @@ import com.example.member.dto.MemberDTO;
 public class PrincipalDetailesService implements UserDetailsService {
 	
 	@Autowired
-	private MemberDAO membersDAO;
+	private LoginDAO loginDAO;
 	
 	public PrincipalDetailesService() {
 		
@@ -26,17 +28,28 @@ public class PrincipalDetailesService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		//System.out.println("loadUserByUsername: "+ memberEmail); //loadUserByUsername: jung@spring.com
-		
-		MemberDTO userEntity = membersDAO.selectByEmail(email);
-		//System.out.println("userEntity: "+userEntity.getMemberName()); //userEntity: 정정정
-		System.out.println(userEntity.getEmail());
-		System.out.println(userEntity.getPassword());
-		
-		if(userEntity == null) {
-			throw new UsernameNotFoundException(email);
+		if (email.startsWith("admi!$")) {
+			int a = email.indexOf('$');
+			String real_email = email.substring(a + 1);
+			System.out.println("관리자");
+			AdminDTO memberEntity = loginDAO.loginAdmin(real_email);
+			if (memberEntity == null) {
+				throw new UsernameNotFoundException(real_email);
+			}
+			return new PrincipalDetails(memberEntity);
+			// admin account 일 경우 처리
+		} else if (email.startsWith("user!$")) {
+			int a = email.indexOf('$');
+			String real_email = email.substring(a + 1);
+			System.out.println("사용자");
+			MemberDTO memberEntity = loginDAO.loginUser(real_email);
+			if (memberEntity == null) {
+				throw new UsernameNotFoundException(real_email);
+			}
+			return new PrincipalDetails(memberEntity);
 		}
-		return new PrincipalDetails(userEntity);
+
+		throw new UsernameNotFoundException(email);
 	}
 
 }//end class

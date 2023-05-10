@@ -126,26 +126,12 @@ create sequence admin_id_seq
 drop sequence admin_id_seq;
 drop table admin;
 
-
--- 리뷰 테이블
-create table review(
-    movie_id number,
-    member_id number,
-    rating number,
-    content varchar2(4000),
-    likes number,
-    regdate date,
-    moddate date,
-    state varchar2(2) --1기본2블러3삭제
-);
-
-drop table review;
-
 -- rating table
 create table rating (
     movie_id number,
     member_id number,
-    rating number
+    rating number,
+    regdate date
 );
 
 -- comments table

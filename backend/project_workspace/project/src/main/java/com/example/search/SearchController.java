@@ -42,7 +42,7 @@ public class SearchController {
 	}
 
 	//배우 프로필(id값으로 검색) return
-	@GetMapping("/actorProfile/{id}")
+	@GetMapping("/cast/actorProfile/{id}")
 	public Map<String, Object> ActorProfileExecute(@PathVariable("id") String actor_id) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("castMovieList", listService.castMoviesProcess(actor_id));
@@ -52,7 +52,7 @@ public class SearchController {
 	}
 
 	//감독 프로필(id값으로 검색) return
-	@GetMapping("/dirProfile/{id}")
+	@GetMapping("/cast/dirProfile/{id}")
 	public Map<String, Object> DirectorProfileExecute(@PathVariable("id") String dir_id) {
 		Map<String, Object> map = new HashMap<>();
 

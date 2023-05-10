@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { baseUrl } from 'Apiurl';
 import {
   Button,
@@ -44,8 +43,14 @@ function AdminLogin() {
   /////////////스프링연동기능
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const newInputs = {
+      ...inputs,
+      email: `admi!$${inputs.email}`
+    };
+
     await axios
-      .post(`${baseUrl}/adminlogin`, inputs, config)
+      .post(`${baseUrl}/login`, newInputs, config)
       .then((response) => {
         console.log('response:', response.data);
         //let jwtToken = response.headers['Authorization'];

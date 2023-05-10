@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { MovieActions } from 'reduxs/Actions/MovieAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faStar } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import MovieRating from './MovieRating';
 import CommentDropdown from './CommentDropdown';
@@ -11,6 +11,7 @@ import CommentModal from 'components/Comment/CommentModal';
 import DeleteModal from './DeleteModal';
 import MemberWish from './MemberWish';
 import MemberReviewInfo from './MemberReviewInfo';
+import MemberFavorite from './MemberFavorite';
 
 const BannerOverlay = styled.div`
     position: absolute;
@@ -108,12 +109,19 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
               <div className='header-button d-flex justify-content'>
                 <MovieRating memberReview={memberReview} fetchComments={fetchComments} handleAuthShow={handleAuthShow}/>
                 <MemberWish handleAuthShow={handleAuthShow} fetchComments={fetchComments}/>
-                <div className='dropdown'>
-                  <div className="mt-1 dropdown-toggle" onClick={handleCommentClick} >
+                <div className='dropdown' style={{cursor:'pointer'}}>
+                  <div className="mt-1 ml-1 dropdown-toggle" onClick={handleCommentClick} >
                     <FontAwesomeIcon icon={faComment} className="mr-2" />
                     코멘트쓰기
                   </div>
                 </div>
+                <MemberFavorite />
+                {/* <div className='' style={{cursor:'pointer'}}>
+                  <div className="mt-1 " onClick={handleCommentClick} >
+                    <FontAwesomeIcon icon={faStar} className="mr-2" />
+                    인생영화
+                  </div>
+                </div> */}
                 <CommentDropdown isDropdownVisible={isDropdownVisible} setIsDropdownVisible={setIsDropdownVisible} handleShow={handleShow} onDelete={handleDelete}/>
               </div>
             </div>

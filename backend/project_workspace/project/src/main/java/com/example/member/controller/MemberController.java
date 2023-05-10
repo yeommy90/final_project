@@ -1,6 +1,7 @@
 package com.example.member.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -57,15 +58,11 @@ public class MemberController {
 	@PostMapping("/emailcheck")
 	public int checkEmail(@RequestBody Map<String, String> requestBody) {		
 		String a = requestBody.get("email");
-		System.out.println("emailcheck실행");
-		System.out.println(a);
 		int count = memberService.idcheckprocess(a);
-		System.out.println(count);
 		
 	    return count;
 	}
 	
-
 	// 회원정보 가져오기
 	@GetMapping("/member/editinfo/{email}")
 	public MemberDTO getMember(@PathVariable("email") String email) {
@@ -75,18 +72,13 @@ public class MemberController {
 	// 회원정보 수정 처리
 	@PostMapping("/profile/update")
 	public void updateMember(@RequestBody MemberDTO memberDTO, HttpServletRequest request) {
-//		UUID uuid = FileUpload.saveCopyFile(file, FileUpload.urlPath(request));
-//		memberDTO.setProfile_path(uuid + "_" + file.getOriginalFilename());
 		System.out.println(memberDTO.getPassword());
 		memberDTO.setPassword(encodePassword.encode(memberDTO.getPassword()));
-//		memberDTO.setNickname(memberDTO.getNickname());
-//		System.out.println(memberDTO.getProfile_path());
 		memberService.updateMemberProcess(memberDTO);
 	}
 	
 	@PostMapping("/profile/imgUpdate")
 	public void updateprofileImg(@RequestParam("file") MultipartFile file, @RequestParam("email") String email, HttpServletRequest request) {
-		System.out.println("Hello World");
 		UUID uuid = FileUpload.saveCopyFile(file, FileUpload.urlPath(request));
 	    System.out.println(uuid);
 	    System.out.println(email);
@@ -96,6 +88,12 @@ public class MemberController {
 	    System.out.println(member.getEmail());
 	    memberService.updateProfileImgProcess(member);
 	};
+	
+	@GetMapping("/profile/getProfileImg")
+	public String getProfileImg(@RequestParam("email") String email) {
+		MemberDTO member = memberService.selectByEmailProcess(email);
+		return memberService.getProfileImgProcess(member.getMember_id());
+	}
 	
 	// 회원가입 > 장르선택
 	@PostMapping("/genreselect")
@@ -108,11 +106,18 @@ public class MemberController {
 		for (int tagValue : selectedGenre) {
 			dto.setMemberId(memberId);
 			dto.setGenreId(tagValue);
-			System.out.println(tagValue);
-			System.out.println(memberId);
 			memberService.insertMemGenreProcess(dto);
 		}
 		return null;
+	}
+
+	//프로필 영화리스트 가져오기
+	@GetMapping("/profile/{member_id}")
+	public Map<String, Object> getProfileListExecute(@PathVariable("member_id") int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("wishList", memberService.getWishListProcess(member_id));
+		map.put("ratingList", memberService.getRatingListProcess(member_id));
+		return map;
 	}
 
 	

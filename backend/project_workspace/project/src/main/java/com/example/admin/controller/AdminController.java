@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -85,9 +86,10 @@ public class AdminController {
     }
 
    	//신고된 댓글 블러 처리해주기 state2(스포일 신고당한 댓글 )=> state4로 변경(블러 처리가 되어진 스포일 댓글 ) 처리 
-    @PostMapping("/blur")
+    @PutMapping("/blur")
    	public void blurspoiler (@RequestBody ReviewInfoDTO info) {
-    	System.out.println("m"+info.getMember_id());
+    	System.out.println("member"+info.getMember_id());
+    	System.out.println("movie"+info.getMovie_id());
     	adminService.blurSpoilerprocess(info);
   	}
     

@@ -39,7 +39,7 @@ const CastInfo = ({ contents = {} }) => {
         cols.push(
           <React.Fragment key={currentItem.id} >
             <Col md="1" className="p-2">
-              <Link to={currentItem.role === 'Actor' ? `/actorProfile/${currentItem.id}` : `/dirProfile/${currentItem.id}`}>
+              <Link to={currentItem.role === 'Actor' ? `/cast/actorProfile/${currentItem.id}` : `/cast/dirProfile/${currentItem.id}`}>
                 <img src={currentItem.image} alt={currentItem.name} className="pro-img rounded-square"/>
               </Link>
             </Col>

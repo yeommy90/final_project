@@ -70,7 +70,7 @@ SELECT g.genre_id, g.name, COUNT(r.rating) AS rating_count, Round(AVG(r.rating),
             total DESC;
 
 -- 하나의 영화 > 코멘트 리스트 가져오기
-SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate, m.nickname
+SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate, m.nickname, m.profile_path
 FROM comments c
 LEFT OUTER JOIN rating r ON r.movie_id = c.movie_id AND r.member_id = c.member_id
 JOIN member m ON m.member_id = c.member_id
@@ -188,10 +188,13 @@ SELECT *
 FROM comments
 WHERE (movie_id = 361743 AND member_id = 9) AND (state IN (2, 3, 4));
 
+UPDATE comments
+SET STATE = 4
+WHERE MOVIE_ID = 361743 AND MEMBER_ID = 9 AND STATE = 2;
+        
+commit;
 
-
-
-
+select favorite from member where member_id = 1;
 
 
 

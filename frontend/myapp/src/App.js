@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import RegisterPage from './components/Member/Register';
 import BaseLayout from 'components/Layout/BaseLayout';
 import Login from 'components/Member/Login';
@@ -19,6 +19,8 @@ import AdminRegister from 'components/Admin/AdminRegister';
 import AdminLogin from 'components/Admin/AdminLogin';
 import AdminEditInfo from 'components/Admin/AdminEditInfo';
 import AdminPage from 'components/Admin/AdminPage';
+import AdminPrivateRoute from 'access/AdminPrivateRoute';
+import ProfileListMore from 'components/Profile/ProfileListMore';
 
 function App() {
   return (
@@ -30,17 +32,20 @@ function App() {
         <Route path="/register" element={<PrivateRoute isAuth={false} RouteComponent={RegisterPage} />} />
         <Route path="/search/:query" element={<PrivateRoute isAuth={false} RouteComponent={SearchPage} />} />
         <Route path="/profile" element={<PrivateRoute isAuth={true} RouteComponent={ProfilePage} />} />
+        <Route path='/profilelistmore/:path' element={<PrivateRoute isAuth={true} RouteComponent={ProfileListMore} />}/>
         <Route path='/genreselect' element={<PrivateRoute isAuth={false} RouteComponent={GenreSelect} />} />
-        <Route path="/analysis/:member_id" element={<PrivateRoute isAuth={false} RouteComponent={AnalysisPage} />} />
+        <Route path="/analysis/:member_id" element={<PrivateRoute isAuth={true} RouteComponent={AnalysisPage} />} />
         <Route path="/contents/:movie_id" element={<PrivateRoute isAuth={false} RouteComponent={Contents} />} />
         <Route path="/review" element={<PrivateRoute isAuth={true} RouteComponent={ReviewPage} />} />
         <Route path="/comment" element={<PrivateRoute isAuth={false} RouteComponent={CommentPage} />} />
-        <Route path="/:profileType/:id" element={<PrivateRoute isAuth={false} RouteComponent={CastProfile}/>} />
-        <Route path='/notice' element={<PrivateRoute isAuth={false} RouteComponent={Notice} />} />
-        <Route path='/adminlogin' element={<AdminLogin />} />
-        <Route path='/adminregister' element={<AdminRegister />} />
-        <Route path='/admineditinfo' element={<AdminEditInfo />} />
-        <Route path='/adminpage' element={<AdminPage />} />
+        <Route path="/cast/:profileType/:id" element={<PrivateRoute isAuth={false} RouteComponent={CastProfile}/>} />
+        {/* <Route path="/recommend" element={<PrivateRoute isAuth={true} RouteComponent={Recommend} />} /> */}
+        <Route path='/notice' element={<AdminPrivateRoute isAuth={false} RouteComponent={Notice} />} />
+        <Route path='/adminlogin' element={<AdminPrivateRoute isAuth={false} RouteComponent={AdminLogin} />} />
+        <Route path='/adminregister' element={<AdminPrivateRoute isAuth={false} RouteComponent={AdminRegister} />} />
+        <Route path='/admineditinfo' element={<AdminPrivateRoute isAuth={true} RouteComponent={AdminEditInfo} />} />
+        <Route path='/adminpage' element={<AdminPrivateRoute isAuth={true} RouteComponent={AdminPage} />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BaseLayout>
   );

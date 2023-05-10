@@ -141,8 +141,7 @@ function IndexNavbar({ transparent }) {
                 <NavItem>
                   <Button
                     className="btn-round"
-                    style={{ borderRadius: 3 }}
-                    color="danger"
+                    style={{ borderRadius: 3, backgroundColor:'#e75757' }}
                     href="/logout"
                   >
                     LOGOUT
@@ -153,8 +152,7 @@ function IndexNavbar({ transparent }) {
               <NavItem>
                 <Button
                   className="btn-round"
-                  style={{ borderRadius: 3, marginLeft: 20 }}
-                  color="danger"
+                  style={{ borderRadius: 3, marginLeft: 20, backgroundColor:'#e75757' }}
                   href="/login"
                 >
                   LOGIN

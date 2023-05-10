@@ -21,7 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.member.dto.MemberDTO;
+import com.example.admin.dto.AdminDTO;
+import com.example.login.dto.LoginDTO;
 import com.example.security.service.PrincipalDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,6 +33,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	
 	public JwtAuthenticationFilter(AuthenticationManager authManager) {
 		this.authManager = authManager;
+		setFilterProcessesUrl("/login");
 	}
 	
 	// http://localhost:8090/login 요청을 하면 실행되는 함수
@@ -43,10 +45,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		try {
 			ObjectMapper om = new ObjectMapper();
-			MemberDTO user = om.readValue(request.getInputStream(), MemberDTO.class); //request보내준 객체값을 읽어와서 담기
-			System.out.printf("email : %s, password : %s\n", user.getEmail(), user.getPassword());
+			LoginDTO user = om.readValue(request.getInputStream(), LoginDTO.class); //request보내준 객체값을 읽어와서 담기
+			System.out.printf("email : %s, password : %s, ar : %s\n", user.getEmail(), user.getPassword(), user.getAuthRole());
 			
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+			System.out.println(authenticationToken);
 			
 			Authentication authentication = authManager.authenticate(authenticationToken);
 			System.out.println("authencation" +authentication.getPrincipal());
@@ -70,26 +73,50 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		System.out.println("successfulAuthentication 실행됨");
 		
 		PrincipalDetails principalDetails = (PrincipalDetails)authResult.getPrincipal();
+		System.out.println(principalDetails.getDTO().getClass());
 		
-		String jwtToken = JWT.create()
-				.withSubject("mycors")
-				.withExpiresAt(new Date(System.currentTimeMillis() + (60 * 1000 * 60 * 1L))) //만료시간 3분
-				.withClaim("member_id", principalDetails.getMemberDTO().getMember_id())
-				.withClaim("name", principalDetails.getMemberDTO().getName()) 	 //회원 이름
-				.withClaim("authRole", principalDetails.getMemberDTO().getAuthRole())		 //회원 권한
-				.withClaim("email", principalDetails.getMemberDTO().getEmail()) //회원 메일
-				.withClaim("nickname", principalDetails.getMemberDTO().getNickname())
-				.sign(Algorithm.HMAC512("mySecurityCos")); //signature을 생성하기 위한 security
+		String jwtToken = "";
+		if (principalDetails.getDTO().getClass().equals(AdminDTO.class)) {
+			jwtToken = JWT.create().withSubject("mycors")
+					.withExpiresAt(new Date(System.currentTimeMillis() + (60 * 1000 * 60 * 2L))) // 만료시간 3분
+					.withClaim("admin_id", principalDetails.getAdminDTO().getAdmin_id())
+					.withClaim("name", principalDetails.getAdminDTO().getName()) // 회원 이름
+					.withClaim("authRole", principalDetails.getAdminDTO().getAuthRole()) // 회원 권한
+					.withClaim("email", principalDetails.getAdminDTO().getEmail()) // 회원 메일
+					.sign(Algorithm.HMAC512("mySecurityCos")); // signature을 생성하기 위한 security
+		} else {
+			jwtToken = JWT.create().withSubject("mycors")
+					.withExpiresAt(new Date(System.currentTimeMillis() + (60 * 1000 * 60 * 2L))) // 만료시간 3분
+					.withClaim("member_id", principalDetails.getMemberDTO().getMember_id())
+					.withClaim("name", principalDetails.getMemberDTO().getName()) // 회원 이름
+					.withClaim("authRole", principalDetails.getMemberDTO().getAuthRole()) // 회원 권한
+					.withClaim("email", principalDetails.getMemberDTO().getEmail()) // 회원 메일
+					.withClaim("nickname", principalDetails.getMemberDTO().getNickname())
+					.withClaim("profile_path", principalDetails.getMemberDTO().getProfile_path())
+					.withClaim("grade", principalDetails.getMemberDTO().getGrade())
+					.sign(Algorithm.HMAC512("mySecurityCos")); // signature을 생성하기 위한 security
+		}
 		
 		//response 응답 헤더에 jwtToken 추가
 		response.addHeader("Authorization", "Bearer " + jwtToken);
 		
 		final Map<String, Object> body = new HashMap<String, Object>();
-		body.put("member_id", principalDetails.getMemberDTO().getMember_id());
-		body.put("name", principalDetails.getMemberDTO().getName());
-		body.put("email", principalDetails.getMemberDTO().getEmail());
-		body.put("authRole", principalDetails.getMemberDTO().getPassword());
-		body.put("nickname", principalDetails.getMemberDTO().getNickname());
+		
+		if (principalDetails.getDTO().getClass().equals(AdminDTO.class)) {
+			body.put("admin_id", principalDetails.getAdminDTO().getAdmin_id());
+			body.put("name", principalDetails.getAdminDTO().getName());
+			body.put("email", principalDetails.getAdminDTO().getEmail());
+			body.put("authRole","관리자");
+
+		} else {
+			body.put("member_id", principalDetails.getMemberDTO().getMember_id());
+			body.put("name", principalDetails.getMemberDTO().getName());
+			body.put("email", principalDetails.getMemberDTO().getEmail());
+			body.put("authRole", "사용자");
+			body.put("nickname", principalDetails.getMemberDTO().getNickname());
+			body.put("profile_path", principalDetails.getMemberDTO().getProfile_path());
+			body.put("grade", principalDetails.getMemberDTO().getGrade());
+		}
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue(response.getOutputStream(), body);

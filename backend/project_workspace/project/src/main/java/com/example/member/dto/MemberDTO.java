@@ -17,12 +17,14 @@ public class MemberDTO {
 	private Date regDate;
 	private String authRole;
 	
+	private int favorite;
+	
 	public MemberDTO() {
 	
 	}
 
 	public MemberDTO(int member_id, String name, String nickname, String email, String password, String profile_path,
-			int gender, int age, int likes_count, int visibility, int grade, Date regDate, String authRole) {
+			int gender, int age, int likes_count, int visibility, int grade, Date regDate, String authRole, int favorite) {
 		super();
 		this.member_id = member_id;
 		this.name = name;
@@ -37,6 +39,7 @@ public class MemberDTO {
 		this.grade = grade;
 		this.regDate = regDate;
 		this.authRole = authRole;
+		this.favorite = favorite;
 	}
 
 	public int getMember_id() {
@@ -152,6 +155,14 @@ public class MemberDTO {
 		if (!password.equals(oldPassword))
 			throw new com.example.common.exception.WrongEmailPasswordException();
 		this.password = newPassword;
+	}
+
+	public int getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(int favorite) {
+		this.favorite = favorite;
 	}
 	
 }

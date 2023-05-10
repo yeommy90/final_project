@@ -22,4 +22,5 @@ public class ReviewDTO {
 	private int state;
 	
 	private String nickname;
+	private String profile_path;
 }

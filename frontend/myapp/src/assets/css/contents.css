@@ -59,7 +59,7 @@ h3 {
 
 .header-button {
   font-size: 17px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .dropdown-toggle::after {
@@ -113,6 +113,16 @@ h3 {
 .member-review .member-review-button {
   cursor: pointer;
   color: #fc8080;
+}
+
+.member-favorite {
+  margin-top: 9px;
+}
+
+.member-favorite .member-favorite-label {
+  padding-right: 5px;
+  position: relative;
+  cursor: pointer;
 }
 
 

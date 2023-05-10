@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from 'reactstrap';
-import profiePic from '../../assets/img/180c6e128821941b1.jpg';
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faThumbsUp } from "@fortawesome/free-solid-svg-icons";
@@ -132,10 +131,10 @@ const Comments = ({ contents, handleAuthShow, memberLikes, fetchComments }) => {
                 .map((comment) => (
                 <div key={comment.member_id} className="comment-box bg-light p-3 mb-3">
                   <div className="d-flex align-items-center">
-                    <img src={profiePic} className="profile-pic rounded-circle mx-3"/>
-                    <div className="ml-2">
-                      <div className="mt-2">{comment.nickname}</div>
-                      <p>★ {comment.rating !== 0 ? comment.rating : '평가없음'}</p>
+                    <img src={`/profiles/${comment.profile_path}`} className="profile-pic rounded-circle mx-3"/>
+                    <div className="ml-1">
+                      <div className="mt-1" style={{color:'gray', fontSize:'1.1em'}}>{comment.nickname}</div>
+                      <div style={{color:'#e75757', fontSize:'0.9em'}}>★ {comment.rating !== 0 ? comment.rating : '평가없음'}</div>
                     </div>
                     {comment.member_id != member_id && (
                       <div className="ml-auto mr-2">

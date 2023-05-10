@@ -31,17 +31,15 @@ const MovieSlice = createSlice({
     },
 
     // 멤버 wish 정보
+    // 근데 사실 전역으로 관리할 필요는 없음..
     getWishByMemberId(state, action) {
       state.memberWish = action.payload.data;
     },
 
+    // 멤버 likes 정보
     getLikesByMemberId(state, action) {
       state.memberLikes = action.payload.data;
     },
-
-    // getCheckReported(state, action) {
-    //   state.isReported = action.payload.data;
-    // }
 
   },
 });

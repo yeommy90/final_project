@@ -171,7 +171,7 @@ const SearchList = () => {
             <div className="actor-list">
               {searchActor.slice(0, actorsToShow).map((actor, index) => (
                 <div key={`${actor.actor_id}-${index}`} className="col-sm-3 col-md-2 profile-img-box">
-                  <Link to={`/actorProfile/${actor.actor_id}`}>
+                  <Link to={`/cast/actorProfile/${actor.actor_id}`}>
                     <img
                       src={`https://image.tmdb.org/t/p/w200/${actor.profile_path}`}
                       alt="출연진 프로필 사진"
@@ -198,7 +198,7 @@ const SearchList = () => {
             <div className="director-list">
               {searchDirector.slice(0, directorsToShow).map((director, index) => (
                 <div key={`${director.director_id}-${index}`} className="col-sm-3 col-md-2 director-img-box">
-                  <Link to={`/dirProfile/${director.director_id}`}>
+                  <Link to={`/cast/dirProfile/${director.director_id}`}>
                     <img
                       src={`https://image.tmdb.org/t/p/w200/${director.profile_path}`}
                     />

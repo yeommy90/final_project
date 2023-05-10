@@ -43,8 +43,14 @@ const Login = () => {
   //입력한 로그인 정보 보내기
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const newInputs = {
+      ...inputs,
+      email: `user!$${inputs.email}`
+    };
+    
     await axios
-      .post(`${baseUrl}/login`, inputs, config)
+      .post(`${baseUrl}/login`, newInputs, config)
       .then((response) => {
         console.log('response: ', response.data);
         //let jwtToken = response.headers['Authorization'];
@@ -56,6 +62,8 @@ const Login = () => {
         let jwtMemberNickname = response.data.nickname;
         let jwtMemberEmail = response.data.email;
         let jwtAuthRole = response.data.authRole;
+        let jwtProfile_path = response.data.profile_path;
+        let jwtGrade = response.data.grade;
 
         localStorage.setItem('Authorization', jwtToken);
         localStorage.setItem('member_id', jwtMemberId);
@@ -64,6 +72,8 @@ const Login = () => {
         localStorage.setItem('nickname', jwtMemberNickname);
         localStorage.setItem('authRole', jwtAuthRole);
         localStorage.setItem('isLogin', 'true');
+        localStorage.setItem("profile_path", jwtProfile_path);
+        localStorage.setItem("grade", jwtGrade);
 
         setInputs({ email: '', password: '' });
       })

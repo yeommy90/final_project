@@ -61,4 +61,7 @@ public interface ListService {
 	public void commentSpoilerReport(ReviewInfoDTO review);
 	public void commentProfanityReport(ReviewInfoDTO review);
 	public List<CommentsDTO> checkReported(int movie_id, int member_id);
+	
+	// 인생영화
+	public int findFavoriteByIdProcess(int member_id);
 }

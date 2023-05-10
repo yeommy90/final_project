@@ -59,11 +59,14 @@ public class SecurityConfig {
 
 		http.authorizeHttpRequests()
 	    .antMatchers("/", "/images/**", "/login", "/register", "/contents/**", "/search/**", 
-	    		 "/comment/**", "/actorProfile/**", "/dirProfile/**", "/selectAll", "/review", "/printmovie", "/printrandom",
+	    		 "/adminlogin", "/adminregister", "/selectAll",
+	    		 "/comment/**", "/cast/actorProfile/**", "/cast/dirProfile/**", 
+	    		 "/profile/**",
+	    		 "/review", "/printmovie", "/printrandom",
 	    		 "/member/signup", "/editinfo", "/emailcheck", "/genreselect", 
-	    		 "/wish/**", "/rating/**", "/likes/**", "/review", "/analysis/**",
+	    		 "/wish/**", "/rating/**", "/favorite/**", "/likes/**", "/analysis/**",
 	    		 "/spoiler", "/profanity", "/checkReported/**",
-	    		 "/adminlogin", "/adminregister", "/adminpage", "/blur", "/deletereview",
+	    		 "/adminpage", "/blur", "/deletereview",
 	    		 "/admin/idcheck", "/admin/update").permitAll()
 	    .anyRequest().authenticated();
 		

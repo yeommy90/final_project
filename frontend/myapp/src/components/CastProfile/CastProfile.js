@@ -31,7 +31,7 @@ const CastProfile = () => {
   const getMovies = async () => {
     await axios
       //profileType: 요청 페이지가 actorProfile || directorProfile인지 받는다.
-      .get(`http://localhost:8090/${profileType}/${id}`, config)
+      .get(`http://localhost:8090/cast/${profileType}/${id}`, config)
       .then((response) => {
         // 요청 profileType이 배우면 배우state(출연한 영화)를 set한다.
         if (profileType === 'actorProfile') {
@@ -42,7 +42,7 @@ const CastProfile = () => {
             name: response.data.actorInfo.name,
             profile_path: response.data.actorInfo.profile_path,
           });
-        } else {
+        } else if (profileType === 'dirProfile') {
           // 요청 profileType이 감독이면 감독state(감독한 영화)를 set한다.
           setDirMovieList(response.data.dirMovieList);
 
@@ -51,6 +51,8 @@ const CastProfile = () => {
             name: response.data.dirInfo.name,
             profile_path: response.data.dirInfo.profile_path,
           });
+        } else {
+          
         }
       });
   };

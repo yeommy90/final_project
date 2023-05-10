@@ -21,5 +21,8 @@ public interface MemberDAO {
 	public void updateMember(MemberDTO dto);
 	public void updateByPass(MemberDTO dto);
 	public int idcheck(String email);
+	public String getProfileImg(int member_id);
 	
+	public List<ListDTO> getWishList(int member_id);
+	public List<ListDTO> getRatingList(int member_id);
 }

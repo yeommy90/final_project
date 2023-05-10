@@ -114,6 +114,15 @@ public class ListController {
 	
 	
 	
+	// 인생영화
+	@GetMapping("/favorite/{member_id}")
+	public int findFavoriteByIdExecute(@PathVariable("member_id") int member_id) {
+		System.out.println(listService.findFavoriteByIdProcess(member_id));
+		return listService.findFavoriteByIdProcess(member_id);
+	}
+	
+	
+	
 	// 코멘트 > 좋아요
 	@GetMapping("/likes/{movie_id}/{member_id}")
 	public List<LikesDTO> getLikesExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {

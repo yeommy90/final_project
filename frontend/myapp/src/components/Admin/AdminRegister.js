@@ -18,7 +18,8 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from 'reactstrap';
-import { idText } from 'typescript';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 function AdminRegister() {
   // 함수 기능
@@ -71,9 +72,8 @@ function AdminRegister() {
             name: '',
           });
         })
-
         .then((response) => {
-          navigator('/');
+          navigator('/adminpage');
         })
         .catch((err) => {
           console.error(err.message);
@@ -97,7 +97,6 @@ function AdminRegister() {
     //radio버튼에서는 e.preventDefault()를 하면 더블 클릭을 해줘야 한다.
     //e.preventDefault();
     e.preventDefault();
-    console.log(e.target.value);
     await axios
       .post(`${baseUrl}/admin/idcheck`, e.target.value, config)
       .then((response) => {
@@ -126,7 +125,16 @@ function AdminRegister() {
   };
 
   return (
-    <Container>
+    <>
+      <div
+      className='page-header'
+      style={{
+        backgroundImage: 'url(' + require('assets/img/login-image.jpg') + ')',
+        marginTop: '88px',
+      }}
+    >
+      <div className='filter' />
+      <Container>
       <Row>
         <Col className='ml-auto mr-auto' lg='4'>
           <Card className='card-register ml-auto mr-auto'>
@@ -136,8 +144,7 @@ function AdminRegister() {
               <InputGroup className='form-group-no-border'>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>
-                    <img src={user} alt='' width='20' />
-                    {/*이름모양아이콘 */}
+                    <FontAwesomeIcon icon={faEnvelope}/>
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input
@@ -150,13 +157,12 @@ function AdminRegister() {
                   onChange={handleEmailChange}
                 />
               </InputGroup>
-              {result > 0 && <span>사용이 불가능합니다.</span>} <br />
+              {result > 0 && <span>중복된 이메일입니다.</span>} <br />
               <label>비밀번호</label>
               <InputGroup className='form-group-no-border'>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>
-                    <i className='nc-icon nc-email-85' />
-                    {/*편지모양아이콘임 */}
+                    <FontAwesomeIcon icon={faLock}/>
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input
@@ -173,7 +179,7 @@ function AdminRegister() {
               <InputGroup className='form-group-no-border'>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>
-                    <i className='nc-icon nc-key-25' />
+                    <img src={user} alt='' width='20' />
                     {/*키모양아이콘임 */}
                   </InputGroupText>
                 </InputGroupAddon>
@@ -196,6 +202,8 @@ function AdminRegister() {
         </Col>
       </Row>
     </Container>
+    </div>
+    </>
   );
 }
 

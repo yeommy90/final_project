@@ -146,11 +146,12 @@
 		<result property="regdate" column="regdate"/>
 		<result property="state" column="state"/>
 		<result property="nickname" column="nickname"/>
+		<result property="profile_path" column="profile_path"/>
 	</resultMap>
 	
 	<!--영화 하나에 현재까지 작성된 코멘트-->
 	<select id="getReviewsByMovieId"  parameterType="int" resultMap="CommentAndRatingResultMap">
-		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate, m.nickname
+		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate, m.nickname, m.profile_path
 		FROM comments c
 		LEFT OUTER JOIN rating r ON r.movie_id = c.movie_id AND r.member_id = c.member_id
 		JOIN member m ON m.member_id = c.member_id
@@ -227,6 +228,15 @@
 		DELETE FROM wish
 		WHERE movie_id = #{movie_id} AND member_id = #{member_id}
 	</delete>
+	
+	
+	
+	<!--인생영화 체크-->
+	<select id="findFavoriteById" parameterType="int" resultType="int">
+		select favorite 
+		from member 
+		where member_id = #{member_id}
+	</select>
 	
 	
 	

@@ -91,7 +91,20 @@ public class MemberServiceImp implements MemberService{
 	public int idcheckprocess(String email) {
 		return memberDao.idcheck(email);
 	}
+	
+	@Override
+	public String getProfileImgProcess(int member_id) {
+		return memberDao.getProfileImg(member_id);
+	}
 
+	@Override
+	public List<ListDTO> getWishListProcess(int member_id) {
+		return memberDao.getWishList(member_id);
+	}
 
+	@Override
+	public List<ListDTO> getRatingListProcess(int member_id) {
+		return memberDao.getRatingList(member_id);
+	}
 	
 }

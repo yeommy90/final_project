@@ -191,6 +191,14 @@ function getCheckReported(movie_id, member_id) {
   };
 }
 
+
+// 인생영화 가져오기
+function getFavoriteByMemberId(member_id) {
+  return async () => {
+    
+  }
+}
+
 export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, 
   updateComment, deleteComment, postRating, updateRating, deleteRating, 
   getWishByMemberId, postWish, deleteWish, getLikesByMemberId, postLikes, deleteLikes,

@@ -270,6 +270,14 @@ public class ListServiceImp implements ListService {
 		
 		return listDAO.checkReported(map);
 	}
+	
+	
+
+	// 인생영화
+	@Override
+	public int findFavoriteByIdProcess(int member_id) {
+		return listDAO.findFavoriteById(member_id);
+	}
 
 
 

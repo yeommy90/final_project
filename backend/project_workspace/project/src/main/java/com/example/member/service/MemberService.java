@@ -22,4 +22,9 @@ public interface MemberService {
 	public MemberDTO selectByEmailProcess(String email);
 	//public boolean isEmailAlreadyInUse(String email);
 	public int idcheckprocess(String email);
+	public String getProfileImgProcess(int member_id);
+	
+	//마이페이지 위시,레이팅 리스트
+	public List<ListDTO> getWishListProcess(int member_id);
+	public List<ListDTO> getRatingListProcess(int member_id);
 }
