@@ -72,6 +72,8 @@ public interface ListDAO {
 	public void deleteRating(Map<String, Object> map);
 	public ReviewDTO findReviewById(Map<String, Object> map);
 	
+	public ListDTO calculateRating(int movie_id);
+	
 	// wish
 	public WishDTO findWishById(Map<String, Object> map);
 	public void postWish(WishDTO wish);

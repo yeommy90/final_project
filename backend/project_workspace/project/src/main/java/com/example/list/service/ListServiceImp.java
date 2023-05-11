@@ -138,7 +138,6 @@ public class ListServiceImp implements ListService {
 		listDAO.updateComment(comment);
 	}
 	
-
 	@Override
 	@Transactional
 	public void deleteCommentProcess(int movie_id, int member_id) {
@@ -148,11 +147,15 @@ public class ListServiceImp implements ListService {
 		
 		listDAO.deleteComment(map);
 	}
-
+	
+	
+	
+	// 별점
 	@Override
 	@Transactional
 	public void postRatingProcess(RatingDTO rating) {
 		listDAO.postRating(rating);
+		ListDTO list = listDAO.calculateRating(rating.getMovie_id());
 	}
 
 	@Override
@@ -170,6 +173,8 @@ public class ListServiceImp implements ListService {
 		
 		listDAO.deleteRating(map);
 	}
+	
+	
 
 	
 	// 보고싶어요
@@ -317,7 +322,6 @@ public class ListServiceImp implements ListService {
 		
 		listDAO.postFavorite(map);
 	}
-
 
 
 }

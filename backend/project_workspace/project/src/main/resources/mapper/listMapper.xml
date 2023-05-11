@@ -251,6 +251,16 @@
 		WHERE (c.movie_id = #{movie_id} AND c.member_id = #{member_id}) OR (r.movie_id = #{movie_id} AND r.member_id = #{member_id})
 	</select>
 	
+	<!--영화 테이블 별점 업데이트-->
+	<select id="calculateRating" parameterType="int" resultType="ListDTO">
+		select count(rating) as vote_cnt, round(avg(rating),2) as vote_sum from rating where movie_id = #{movie_id}
+	</select>
+	
+	<update id="updateMovieRating" parameterType="ListDTO">
+		update movie
+		set vote_sum = #{vote_sum}, vote_cnt = #{vote_cnt}
+		where movie_id = #{movie_id}
+	</update>
 	
 	
 	<!--보고싶어요 체크 유무-->

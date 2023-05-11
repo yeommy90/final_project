@@ -57,6 +57,7 @@ public interface ListService {
 	public void deleteRatingProcess(int movie_id, int member_id);
 	public ReviewDTO findReviewByIdProcess(int movie_id, int member_id);
 	
+	
 	// wish
 	public WishDTO findWishByIdProcess(int movie_id, int member_id);
 	public void postWishProcess(WishDTO wish);

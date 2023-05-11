@@ -57,7 +57,10 @@
 
 .slide-movie img {
   max-width: 100%;
+  max-height: 290px;
   height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .prev-button,
@@ -69,9 +72,14 @@
 }
 
 .prev-button {
-  left: -50px;
+  left: 0px;
 }
 
 .next-button {
-  right: -50px;
+  right: 0px;
+}
+
+.prev_button img,
+.next_button img {
+  width: 50px;
 }

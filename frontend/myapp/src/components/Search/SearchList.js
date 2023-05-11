@@ -83,20 +83,28 @@ const SearchList = () => {
   return (
     <>
       <div style={{ width: '100%', height: '100px' }}></div>
-      <Container>
+      {noResults ? (
+        <div style={{height:'70vh', textAlign:'center', paddingBottom:'-88px'}}>
+          <h3 className="mt-5">검색된 결과가 없습니다.</h3>
+        </div>
+      ) : (
+        <div>
+        <Container>
         {searchMovie && searchMovie.length > 0 ? (
           <>
             <h3 style={{ fontSize: "25px", padding: "10px", fontWeight: "bold" }}>
               검색된 영화가 {searchMovie.length}건 있습니다.
             </h3>
-            <div className="slider">
+            <div className="slider" style={{backgroundColor:'white'}}>
               {searchMovie.slice(currentSlide * 5, currentSlide * 5 + 5).map((movie, index) => (
                 <div className="slide-movie" key={`${movie.movie_id}-${index}`}>
-                  <img
-                    src={movie.poster_path ? `https://image.tmdb.org/t/p/w400/${movie.poster_path}` : "/profile1.jpeg"}
-                    alt="Movie Poster"
-                    loading="lazy"
-                  />
+                  <a href={`/contents/${movie.movie_id}`}>
+                    <img
+                      src={movie.poster_path ? `https://image.tmdb.org/t/p/w400/${movie.poster_path}` : "/profile1.jpeg"}
+                      alt="Movie Poster"
+                      loading="lazy"
+                    />
+                  </a>
                   <div className="movie-title">{movie.title}</div>
                 </div>
               ))}
@@ -107,51 +115,6 @@ const SearchList = () => {
                 <img src={require("assets/img/right.png")}></img>
               </button>
             </div>
-
-            {/* <div className="slide">
-              <p>검색된 영화가 {searchMovie.length}건 있습니다.</p>
-              <div className="img_set">
-                <div
-                  className="img_set_set"
-                  style={{
-                    "--img-set-width": `${imgNumber * imgWidth}px`,
-                    "--img-set-position": `${position}px`,
-                  }}
-                >
-                  {searchMovie && searchMovie.slice(0, 20).map((movie, index) => (
-                    <div
-                      className="slide_movie"
-                      key={`${movie.movie_id}-${index}`}
-                    >
-                      <div className="img_box">
-                        <Link to={`/contents/${movie.movie_id}`}>
-                          {movie.poster_path ? (
-                            <img
-                              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                              alt="영화 포스터"
-                            />
-                          ) : (
-                            <img src="\profile1.jpeg" alt="기본 포스터 이미지" />
-                          )}
-                          <div className="title_box">
-                            <div className="title">{movie.title}</div>
-                            <div className="date">{movie.release_date} 개봉</div>
-                            <div className="rating">★ {(movie.tmdb_vote_sum / 2).toFixed(2)}</div>
-                          </div>
-                        </Link>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <button className="prev_button" onClick={handlePrevClick}>
-                <img src={require("assets/img/left.png")}></img>
-              </button>
-              <button className="next_button" onClick={handleNextClick}>
-                <img src={require("assets/img/right.png")}></img>
-              </button>
-            </div> */}
           </>
         ) : (
           <>
@@ -215,11 +178,8 @@ const SearchList = () => {
           </>
         ) : (<div className="p-3 text-center">검색된 결과가 없습니다.</div>)}
       </Container>
-      {noResults && 
-        <div style={{height:'70vh', textAlign:'center', paddingBottom:'-88px'}}>
-          <h3 className="mt-5">검색된 결과가 없습니다.</h3>
-        </div>
-      }
+      </div>
+      )}
     </>
   );
 };

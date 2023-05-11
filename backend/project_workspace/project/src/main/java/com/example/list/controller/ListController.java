@@ -184,8 +184,8 @@ public class ListController {
 		listService.postFavorite(movie_id, member_id);
 	}
 	
-	
-	
+
+
 	
 	// 코멘트 > 좋아요
 	@GetMapping("/likes/{movie_id}/{member_id}")

@@ -97,7 +97,7 @@ select count(*) from movie;
 
 delete from director2 where profile_path is null;
 delete from director where tmdb_vote_cnt <= 30;
-delete from movie_images;
+delete from rating;
 
 DELETE FROM movie_director
 WHERE director_id NOT IN (SELECT director_id FROM director);
@@ -196,7 +196,7 @@ commit;
 
 select * from movie where movie_id in (select favorite from member where member_id = 1);
 
-
+select count(rating), round(avg(rating),2) from rating where movie_id = 361743;
 
 
 
