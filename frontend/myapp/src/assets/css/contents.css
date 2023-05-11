@@ -117,11 +117,7 @@ h3 {
 
 .member-favorite {
   margin-top: 9px;
-}
-
-.member-favorite .member-favorite-label {
-  padding-right: 5px;
-  position: relative;
+  margin-left: 2px;
   cursor: pointer;
 }
 

@@ -6,6 +6,7 @@ import com.example.actor.dto.ActorDTO;
 import com.example.director.dto.DirectorDTO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ListDTO;
+import com.example.list.dto.RecommendDTO;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.LikesDTO;
 import com.example.review.dto.RatingDTO;
@@ -35,6 +36,15 @@ public interface ListService {
 	//감독 영화
 	public List<ListDTO> dirMoviesProcess(String dir_id);
 	
+	//아이디로 영화 검색
+	public RecommendDTO selectByIdProcess(int member_id);
+	
+	//시청한 영화(리뷰 남긴 영화)
+	public ContentsDTO selectLastSeenProcess(int member_id);
+	
+	//추천 영화(리뷰를 남기지 않은 영화)
+	public RecommendDTO movieRecProcess(int movie_id);
+	
 	// 영화 상세 페이지
 	public ContentsDTO getContentsProcess(int movie_id);
 	
@@ -63,5 +73,8 @@ public interface ListService {
 	public List<CommentsDTO> checkReported(int movie_id, int member_id);
 	
 	// 인생영화
-	public int findFavoriteByIdProcess(int member_id);
+	public ContentsDTO findFavoriteByIdProcess(int member_id);
+	public void deleteFavorite(int member_id);
+	public void postFavorite(int movie_id, int member_id);
+	
 }

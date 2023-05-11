@@ -21,6 +21,7 @@ import AdminEditInfo from 'components/Admin/AdminEditInfo';
 import AdminPage from 'components/Admin/AdminPage';
 import AdminPrivateRoute from 'access/AdminPrivateRoute';
 import ProfileListMore from 'components/Profile/ProfileListMore';
+import RecList from 'components/Profile/RecList';
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
         <Route path="/comment" element={<PrivateRoute isAuth={false} RouteComponent={CommentPage} />} />
         <Route path="/cast/:profileType/:id" element={<PrivateRoute isAuth={false} RouteComponent={CastProfile}/>} />
         {/* <Route path="/recommend" element={<PrivateRoute isAuth={true} RouteComponent={Recommend} />} /> */}
+        <Route path="/recommend/:member_id" element={<PrivateRoute isAuth={false} RouteComponent={RecList} />}/>
+
         <Route path='/notice' element={<AdminPrivateRoute isAuth={false} RouteComponent={Notice} />} />
         <Route path='/adminlogin' element={<AdminPrivateRoute isAuth={false} RouteComponent={AdminLogin} />} />
         <Route path='/adminregister' element={<AdminPrivateRoute isAuth={false} RouteComponent={AdminRegister} />} />

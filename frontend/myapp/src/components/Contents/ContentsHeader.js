@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { MovieActions } from 'reduxs/Actions/MovieAction';
@@ -84,6 +84,8 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
     }
   }
 
+  // 인생영화
+
   return (
     <>
       <div className="banner-container">
@@ -115,12 +117,10 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
                     코멘트쓰기
                   </div>
                 </div>
-                <MemberFavorite />
-                {/* <div className='' style={{cursor:'pointer'}}>
-                  <div className="mt-1 " onClick={handleCommentClick} >
-                    <FontAwesomeIcon icon={faStar} className="mr-2" />
-                    인생영화
-                  </div>
+                <MemberFavorite handleAuthShow={handleAuthShow} fetchComments={fetchComments}/>
+                {/* <div onClick={handleFavoriteClick}>
+                  <FontAwesomeIcon icon={faStar} className="mr-2" style={value ? { color: '#fc8080' } : {}}/>
+                  <span style={value ? { color: '#fc8080' } : {}}>인생영화</span>
                 </div> */}
                 <CommentDropdown isDropdownVisible={isDropdownVisible} setIsDropdownVisible={setIsDropdownVisible} handleShow={handleShow} onDelete={handleDelete}/>
               </div>

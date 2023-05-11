@@ -194,12 +194,37 @@ function getCheckReported(movie_id, member_id) {
 
 // 인생영화 가져오기
 function getFavoriteByMemberId(member_id) {
+  return async (dispatch) => {
+    const data = await axios.get(`${baseUrl}/favorite/${member_id}`)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+    dispatch(MovieReducers.getFavoriteByMemberId({data}));
+  }
+}
+
+function deleteFavorite(member_id) {
   return async () => {
-    
+    await axios.put(`${baseUrl}/favorite/${member_id}`)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+function postFavorite(movie_id, member_id) {
+  return async () => {
+    await axios.put(`${baseUrl}/favorite/${movie_id}/${member_id}`)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }
 
 export const MovieActions = { getMovieList, getMovieContents, getReviewByMemberId, postComment, 
   updateComment, deleteComment, postRating, updateRating, deleteRating, 
   getWishByMemberId, postWish, deleteWish, getLikesByMemberId, postLikes, deleteLikes,
-  commentSpoiler, commentProfanity, getCheckReported };
+  commentSpoiler, commentProfanity, getCheckReported, getFavoriteByMemberId, deleteFavorite, postFavorite };

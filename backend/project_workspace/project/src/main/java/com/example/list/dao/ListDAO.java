@@ -12,6 +12,7 @@ import com.example.genre.dto.GenreDTO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ImagesDTO;
 import com.example.list.dto.ListDTO;
+import com.example.list.dto.RecommendDTO;
 import com.example.member.dto.MemberDTO;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.LikesDTO;
@@ -43,6 +44,15 @@ public interface ListDAO {
 	
 	//전체선택(자동완성 기능)
 	public List<String> selectAll();
+	
+	//시청 영화(후기를 남긴 영화)
+	public ContentsDTO selectLastSeen(int member_id);
+	
+	//추천 영화 선택(movie_id, 리뷰 없는 row만 출력. Review 있으면 null)
+	public RecommendDTO movieRec(int movie_id);
+	
+	//ID로 영화 정보 선택
+	public RecommendDTO selectById(int member_id);
 	
 	// 영화 상세 페이지
 	public ContentsDTO getMovieById(int movie_id);
@@ -86,6 +96,8 @@ public interface ListDAO {
 	public List<CommentsDTO> checkReported(Map<String, Object> map);
 	
 	// 인생영화
-	public int findFavoriteById(int member_id);
+	public ContentsDTO findFavoriteById(int member_id);
+	public void deleteFavorite(int member_id);
+	public void postFavorite(Map<String, Object> map);
 	
 }

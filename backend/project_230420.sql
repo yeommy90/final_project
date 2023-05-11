@@ -105,7 +105,7 @@ WHERE director_id NOT IN (SELECT director_id FROM director);
 DELETE FROM movie_actor
 WHERE actor_id NOT IN (SELECT actor_id FROM actor);
 
-select * from movie_director where movie_id = 212778;
+select * from movie where movie_id = 361743;
 select * from director where name = 'Jon Favreau';
 select * from actor where actor_id = 2;
 
@@ -194,8 +194,7 @@ WHERE MOVIE_ID = 361743 AND MEMBER_ID = 9 AND STATE = 2;
         
 commit;
 
-select favorite from member where member_id = 1;
-
+select * from movie where movie_id in (select favorite from member where member_id = 1);
 
 
 

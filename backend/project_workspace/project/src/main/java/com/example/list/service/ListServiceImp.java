@@ -13,6 +13,7 @@ import com.example.director.dto.DirectorDTO;
 import com.example.list.dao.ListDAO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ListDTO;
+import com.example.list.dto.RecommendDTO;
 import com.example.member.dto.MemberDTO;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.LikesDTO;
@@ -79,6 +80,26 @@ public class ListServiceImp implements ListService {
 		return listDAO.selectAll();
 	}
 	
+	
+	
+	// 시청한 영화 List
+	@Override
+	public ContentsDTO selectLastSeenProcess(int member_id) {
+		return listDAO.selectLastSeen(member_id);
+	}
+
+	@Override
+	public RecommendDTO movieRecProcess(int movie_id) {
+		return listDAO.movieRec(movie_id);
+	}
+
+	@Override
+	public RecommendDTO selectByIdProcess(int member_id) {
+		return listDAO.selectById(member_id);
+	}
+
+	
+	
 
 	// 영화 상세 컨텐츠
 	@Override
@@ -92,6 +113,8 @@ public class ListServiceImp implements ListService {
 		contents.setListDTO(listDAO.getSimilarMovies(movie_id));
 		return contents;
 	}
+	
+	
 	
 	// 영화 코멘트
 	@Override
@@ -253,11 +276,13 @@ public class ListServiceImp implements ListService {
 	
 	// 신고
 	@Override
+	@Transactional
 	public void commentSpoilerReport(ReviewInfoDTO review) {
 		listDAO.commentSpoilerReport(review);
 	}
 
 	@Override
+	@Transactional
 	public void commentProfanityReport(ReviewInfoDTO review) {
 		listDAO.commentProfanityReport(review);
 	}
@@ -275,8 +300,22 @@ public class ListServiceImp implements ListService {
 
 	// 인생영화
 	@Override
-	public int findFavoriteByIdProcess(int member_id) {
+	public ContentsDTO findFavoriteByIdProcess(int member_id) {
 		return listDAO.findFavoriteById(member_id);
+	}
+
+	@Override
+	public void deleteFavorite(int member_id) {
+		listDAO.deleteFavorite(member_id);
+	}
+
+	@Override
+	public void postFavorite(int movie_id, int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("movie_id", movie_id);
+		map.put("member_id", member_id);
+		
+		listDAO.postFavorite(map);
 	}
 
 

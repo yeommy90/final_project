@@ -34,7 +34,8 @@ const Contents = () => {
     const fetchedMemberComments = await dispatch(MovieActions.getReviewByMemberId(movie_id, member_id));
     const fetchedMemberWish = await dispatch(MovieActions.getWishByMemberId(movie_id, member_id));
     const fetchedLikes = await dispatch(MovieActions.getLikesByMemberId(movie_id, member_id));
-    setComments(fetchedComments, fetchedMemberComments, fetchedMemberWish, fetchedLikes);
+    const fetchedFavorite = await dispatch(MovieActions.getFavoriteByMemberId(member_id));
+    setComments(fetchedComments, fetchedMemberComments, fetchedMemberWish, fetchedLikes, fetchedFavorite);
   }
 
   useEffect(() => {

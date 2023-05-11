@@ -1,5 +1,6 @@
 package com.example.list.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.list.dto.ContentsDTO;
+import com.example.list.dto.RecommendDTO;
 import com.example.list.service.ListService;
 import com.example.review.dto.CommentsDTO;
 import com.example.review.dto.LikesDTO;
@@ -45,6 +49,53 @@ public class ListController {
 		map.put("topRatedClassic", listService.getTopRatedClassicProcess());
 		
 		return map;
+	}
+	
+	
+	
+	//	member_id인 사람이 마지막으로 본 영화 기반 추천
+	@GetMapping("/recommend/{member_id}")
+	public List<RecommendDTO> recMovie(@PathVariable("member_id") int member_id) {
+
+		// 마지막으로 후기 남긴 영화 DTO 가져오기
+		ContentsDTO lastMovie = listService.selectLastSeenProcess(member_id);
+
+		if (lastMovie != null) {
+			int lastMovieId = lastMovie.getMovie_id();
+			System.out.println(lastMovieId);
+
+			// Flask url 설정
+			String url = UriComponentsBuilder.fromUriString("http://localhost:5000/recommend")
+					.queryParam("MOVIE_ID", lastMovieId) // 검색할 영화 아이디 값
+					.toUriString();
+
+			RestTemplate restTemplate = new RestTemplate();
+
+			// Flask 결과 받아오기
+			String result = restTemplate.getForObject(url, String.class);
+
+			System.out.println(result);
+
+			// 결과값 편집
+			String[] recMovie = result.replaceAll("[^\\d,]", "").split(",");
+
+			// 영화 아이디 배열에 결과 추가
+			int[] recMovieId = new int[recMovie.length];
+			for (int i = 0; i < recMovie.length; i++) {
+				System.out.println(recMovie[i] + "공백제거함.");
+				recMovieId[i] = Integer.parseInt(recMovie[i]);
+
+			}
+			// 추천 영화 DTO List에 담기(recMovieId에 담긴 영화 id로 선택)
+			List<RecommendDTO> recList = new ArrayList<RecommendDTO>();
+			for (int i = 0; i < recMovieId.length; i++) {
+				RecommendDTO rec = listService.selectByIdProcess(recMovieId[i]);
+				recList.add(rec);
+				System.out.println(rec.getTitle());
+			}
+			return recList;
+		}
+		return null;
 	}
 	
 	
@@ -116,10 +167,23 @@ public class ListController {
 	
 	// 인생영화
 	@GetMapping("/favorite/{member_id}")
-	public int findFavoriteByIdExecute(@PathVariable("member_id") int member_id) {
+	public ContentsDTO findFavoriteByIdExecute(@PathVariable("member_id") int member_id) {
 		System.out.println(listService.findFavoriteByIdProcess(member_id));
 		return listService.findFavoriteByIdProcess(member_id);
 	}
+	
+	// 인생영화 취소 > 0
+	@PutMapping("/favorite/{member_id}")
+	public void deleteFavoriteExecute(@PathVariable("member_id") int member_id) {
+		listService.deleteFavorite(member_id);
+	}
+	
+	// 인생영화 교체
+	@PutMapping("/favorite/{movie_id}/{member_id}")
+	public void postFavoriteExecute(@PathVariable("movie_id") int movie_id, @PathVariable("member_id") int member_id) {
+		listService.postFavorite(movie_id, member_id);
+	}
+	
 	
 	
 	

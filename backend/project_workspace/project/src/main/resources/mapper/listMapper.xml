@@ -103,6 +103,47 @@
 	
 	
 	
+	<!--아이디로 영화 선택-->
+	<select id = "selectById" resultType="RecommendDTO" parameterType="int">
+		SELECT * FROM MOVIE WHERE MOVIE_ID = #{movie_id}
+	</select>
+	
+	<!--가장 최근에 남긴 후기의 영화 정보 가져오기-->
+	<select id="selectLastSeen" resultType="ContentsDTO" parameterType="int">
+		SELECT *
+		FROM (
+		    SELECT m.*, r2.REGDATE
+		    FROM MOVIE m
+		    INNER JOIN (
+		        SELECT MOVIE_ID, MAX(REGDATE) AS latest_review_date
+		        FROM comments
+		        WHERE MEMBER_ID = #{member_id}
+		        GROUP BY MOVIE_ID
+		    ) r ON m.MOVIE_ID = r.MOVIE_ID
+		    INNER JOIN comments r2 ON r.MOVIE_ID = r2.MOVIE_ID AND r.latest_review_date = r2.REGDATE
+		    WHERE r2.MEMBER_ID = #{member_id}
+		    ORDER BY r.latest_review_date DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
+	
+	<!--추천 영화 정보-->
+	<!--리뷰를 남기지 않은 영화 영화만 row 선택. 리뷰를 남긴 영화면 선택하기-->
+	<select id="movieRec" parameterType="map" resultType="RecommendDTO" >
+		SELECT *
+			FROM movie m
+			WHERE NOT EXISTS (
+			  SELECT *
+			  FROM comments r
+			  WHERE r.movie_id = m.movie_id
+			    AND r.state IN (1, 2, 3, 4)
+                AND r.member_id = #{member_id}
+			)
+			AND m.movie_id = #{movie_id}
+	</select>
+	
+	
+	
 	<!--영화 컨텐츠 페이지-->
 	<select id="getMovieById" parameterType="int" resultType="ContentsDTO">
 		SELECT movie_id, title, release_date, round(tmdb_vote_sum / 2, 2) as tmdb_vote_sum, overview, poster_path, backdrop_path, country, runtime, original_title
@@ -232,11 +273,23 @@
 	
 	
 	<!--인생영화 체크-->
-	<select id="findFavoriteById" parameterType="int" resultType="int">
-		select favorite 
-		from member 
-		where member_id = #{member_id}
+	<select id="findFavoriteById" parameterType="int" resultType="ContentsDTO">
+		select * 
+		from movie 
+		where movie_id in (select favorite from member where member_id = 1)
 	</select>
+	
+	<update id="deleteFavorite" parameterType="int">
+		update member
+		set favorite = 0
+		where member_id = #{member_id}
+	</update>
+	
+	<update id="postFavorite" parameterType="map">
+		update member
+		set favorite = #{movie_id}
+		where member_id = #{member_id}
+	</update>
 	
 	
 	

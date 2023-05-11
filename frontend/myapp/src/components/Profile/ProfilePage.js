@@ -9,6 +9,7 @@ import EditImg from 'components/Member/EditImg';
 import EditModal from './EditModal';
 import '../../assets/css/modal.css';
 import EditImgModal from './EditImgModal';
+import RecList from './RecList';
 
 const ProfilePage = () => {
   //리스트 선언 모음
@@ -86,7 +87,7 @@ const ProfilePage = () => {
             </p>
             <ProfileList movies={wishList} />
             <div style={{ height: '150px' }}></div>
-
+            <RecList />
             {/* <MovieList listTitle='보고싶어요' movies={wishList} /> */}
           </div>
         </div>

@@ -61,7 +61,7 @@ public class SecurityConfig {
 	    .antMatchers("/", "/images/**", "/login", "/register", "/contents/**", "/search/**", 
 	    		 "/adminlogin", "/adminregister", "/selectAll",
 	    		 "/comment/**", "/cast/actorProfile/**", "/cast/dirProfile/**", 
-	    		 "/profile/**",
+	    		 "/profile/**", "/recommend/**",
 	    		 "/review", "/printmovie", "/printrandom",
 	    		 "/member/signup", "/editinfo", "/emailcheck", "/genreselect", 
 	    		 "/wish/**", "/rating/**", "/favorite/**", "/likes/**", "/analysis/**",
