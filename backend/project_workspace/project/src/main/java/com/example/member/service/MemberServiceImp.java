@@ -107,4 +107,9 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.getRatingList(member_id);
 	}
 	
+	@Override
+	public MemberDTO selectByIdProcess(int member_id) {
+		return memberDao.selectById(member_id);
+	}
+	
 }

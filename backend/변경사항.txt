@@ -1,0 +1,16 @@
+1. DB 변경사항
+- rating table
+regdate date 필드 추가
+
+- member table
+favorite number 필드 추가 후 초기값 다 0으로 바꾸기 > 나중에 회원가입할 때는 0으로 들어감
+likes_count null인거 다 0으로 바꾸기
+profile_path null인거 다 defaultImage.jpg 바꾸기
+
+
+2. rating table CSV 데이터 임포트
+
+3. database_final_230504 드라이브 파일 받아서 임포트 했던 사람은 넘어가세용
+아닌 사람은 데이터 임포트 새로 하기
+
+

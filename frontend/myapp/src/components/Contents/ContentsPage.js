@@ -12,12 +12,14 @@ import { MovieActions } from 'reduxs/Actions/MovieAction';
 import { useParams } from 'react-router-dom';
 import ContentsImage from './ContentsImage';
 import AuthModal from './AuthModal';
+import ReactPlayer from 'react-player';
 
 const Contents = () => {
   const dispatch = useDispatch();
   const { movie_id } = useParams();
   const member_id = localStorage.getItem("member_id");
   const [comments, setComments] = useState([]);
+  const [trailerPath, setTrailerPath] = useState([]);
 
   // 로그인 여부 확인 모달
   const [authShow, setAuthShow] = useState(false);
@@ -44,8 +46,29 @@ const Contents = () => {
   }, [setComments]);
 
   return (
-    <div className="section">
+    <div className="section" style={{ position: 'relative' }}>
       <ContentsHeader contents={contents} fetchComments={fetchComments} handleAuthShow={handleAuthShow} />
+      {contents.trailerPath && (
+        <ReactPlayer
+          style={{
+            top: '350px',
+            margin: 'auto',
+            left: '650px',
+            right: '0px',
+            zIndex: 2,
+            position: 'absolute',
+            backgroundColor: 'black',
+          }}
+          url={`https://www.youtube.com/watch?v=${contents.trailerPath}`}
+          width='400px'
+          height='200px'
+          loop={true}
+          playing={true}
+          playIcon={true}
+          muted={true}
+          controls={true}
+        />
+      )}
       <BasicInfo contents={contents}/>
       <CastInfo contents={contents}/>
       <Comments contents={contents} handleAuthShow={handleAuthShow} memberLikes={memberLikes} fetchComments={fetchComments}/>

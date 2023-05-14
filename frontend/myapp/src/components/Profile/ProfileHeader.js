@@ -1,11 +1,29 @@
-import { faHeart, faPen, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
 
-const ProfileHeader = ({handleEditShow, handleEditImgShow}) => {
-  const profile_path = localStorage.getItem("profile_path");
-  const member_id = localStorage.getItem('member_id');
-  const grade = localStorage.getItem('grade');
+const ProfileHeader = ({handleEditShow, handleEditImgShow, memberInfo}) => {
+  // const profile_path = localStorage.getItem("profile_path");
+  // const member_id = localStorage.getItem('member_id');
+  // const grade = localStorage.getItem('grade');
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [grade, setGrade] = useState(6);
+  const [profilePath, setProfilePath] = useState('');
+
+  useEffect(() => {
+    if (memberInfo != undefined) {
+      setIsLoggedIn(localStorage.getItem("member_id") == memberInfo.member_id);
+      setGrade(memberInfo.grade);
+      setProfilePath(memberInfo.profile_path);
+    }
+  }, [memberInfo])
+
+  // if (memberInfo != undefined) {
+  //   grade = memberInfo.grade;
+  //   profile_path = memberInfo.profile_path;
+  // }
 
   let gradeImgPath = "";
   switch (grade) {
@@ -59,6 +77,8 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow}) => {
 
   return (
     <>
+      {memberInfo && memberInfo.visibility === 1 ? (
+        memberInfo !== undefined && (
       <div style={{ margin: 'auto' }}>
         <div
           style={{
@@ -92,7 +112,7 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow}) => {
             >
               <div style={{ position: 'relative' }}>
                 <img
-                  src={`${process.env.PUBLIC_URL}/profiles/${profile_path}`}
+                  src={`${process.env.PUBLIC_URL}/profiles/${profilePath}`}
                   alt='프로필 이미지'
                   style={{
                     width: '100%',
@@ -123,11 +143,13 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow}) => {
                   marginRight: "10px",
                 }}
               />
-              <span style={{ fontWeight: 'bold', color: 'white' }}>{localStorage.nickname ? (
-              <>{`${localStorage.getItem("nickname")} 님의 페이지`}</>
+              <span style={{ fontWeight: 'bold', color: 'white' }}>
+                {memberInfo && memberInfo.nickname ? (
+                  <>{memberInfo.nickname} 님의 페이지</>
                 ) : (
                   <>아무개 님의 페이지</>
-                )}</span>
+                )}
+              </span>
                 <FontAwesomeIcon 
                   icon={faPencil}
                   style={{
@@ -168,6 +190,7 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow}) => {
                   // backgroundColor: 'green',
                 }}
               >
+                {isLoggedIn && (
                 <Button
                   className='btn-round bg-dark'
                   type='button'
@@ -176,15 +199,17 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow}) => {
                   <FontAwesomeIcon icon={faHeart} />
                   평가하기
                 </Button>
+                )}
                 <Button
                   className='btn-round bg-dark'
                   type='button'
-                  href={`/analysis/${member_id}`}
+                  href={`/analysis/${memberInfo.member_id}`}
                   style={{ margin: '0px 20px' }}
                 >
                   <FontAwesomeIcon icon={faHeart} />
                   취향분석
                 </Button>
+                {isLoggedIn && (
                 <Button
                   onClick={() => handleEditShow()}
                   className='btn-round bg-dark'
@@ -193,11 +218,106 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow}) => {
                   <FontAwesomeIcon icon={faHeart} />
                   정보수정
                 </Button>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+      )
+      ) : (
+        <div style={{ margin: "auto" }}>
+          <div
+            style={{
+              width: "1100px",
+              margin: "auto",
+              textAlign: "center",
+              height: "550px",
+              backgroundColor: "#343A40",
+              paddingTop: "120px",
+            }}
+          >
+            <div style={{ margin: "auto" }}>
+              <div
+                style={{
+                  marginBottom: "30px",
+                  fontSize: "25pt",
+                  color: "white",
+                  fontFamily: "NanumSquare",
+                  letterSpacing: "3px",
+                }}
+              >
+                😀WELCOME😀
+              </div>
+
+              <div
+                className="profile_img"
+                style={{
+                  margin: "auto",
+                  width: "80px",
+                  height: "80px",
+                }}
+              >
+                <img
+                  src={`${process.env.PUBLIC_URL}/profiles/${profilePath}`}
+                  alt="프로필 이미지"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "8%",
+                    border: "1px solid black",
+                  }}
+                />
+              </div>
+              <img
+                src={`${process.env.PUBLIC_URL}/gradeimg/${gradeImgPath}`}
+                alt="grade"
+                style={{
+                  width: "25px",
+                  height: "25px",
+                  marginRight: "10px",
+                }}
+              />
+              <span style={{ fontWeight: "bold", color: "white" }}>
+                {memberInfo && memberInfo.nickname ? (
+                  <>{memberInfo.nickname} 님의 페이지</>
+                ) : (
+                  <>아무개 님의 페이지</>
+                )}
+              </span>
+              <div
+                className="grede_name"
+                style={{
+                  marginTop: "10px",
+                  marginBottom: "10px",
+                  fontSize: "10pt",
+                  color: "white",
+                  fontFamily: "NanumSquare",
+                  letterSpacing: "3px",
+                }}
+              >
+                <span style={{ fontWeight: "bold", color: "white" }}>
+                  {gradeText}
+                </span>
+              </div>
+            </div>
+            <div>
+              <p
+                style={{
+                  fontSize: "15pt",
+                  padding: "10px",
+                  fontFamily: "NanumSquare",
+                  fontWeight: "bold",
+                  color: "rgb(255,171, 154)",
+                  marginBottom: "20px",
+                }}
+              >
+                공개되지 않은 프로필 입니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

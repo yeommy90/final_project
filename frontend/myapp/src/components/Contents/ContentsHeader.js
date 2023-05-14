@@ -101,12 +101,12 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
           </Col>
           <Col md="10">
             <div className='movie-basic p-1 mb-0'>
-              <h2>{contents.title}</h2>
+              <div className='movie-basic-title'>{contents.title}</div>
               <div className='border-bottom my-1'>
                 <span>{contents.release_date} ・ {' '}{contents.genreDTO ? contents.genreDTO.map((genre) => genre.name).join('/') : null} ・ {contents.country}</span>
               </div>
               <div className='border-bottom mt-1'>
-                <p>평균 ★ {contents.tmdb_vote_sum}</p>
+                <p>평균 ★ {(contents.tmdb_vote_sum / 2).toFixed(2)}</p>
               </div>
               <div className='header-button d-flex justify-content'>
                 <MovieRating memberReview={memberReview} fetchComments={fetchComments} handleAuthShow={handleAuthShow}/>
@@ -118,10 +118,6 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
                   </div>
                 </div>
                 <MemberFavorite handleAuthShow={handleAuthShow} fetchComments={fetchComments}/>
-                {/* <div onClick={handleFavoriteClick}>
-                  <FontAwesomeIcon icon={faStar} className="mr-2" style={value ? { color: '#fc8080' } : {}}/>
-                  <span style={value ? { color: '#fc8080' } : {}}>인생영화</span>
-                </div> */}
                 <CommentDropdown isDropdownVisible={isDropdownVisible} setIsDropdownVisible={setIsDropdownVisible} handleShow={handleShow} onDelete={handleDelete}/>
               </div>
             </div>

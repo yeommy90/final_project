@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-const EditImgModal = ({ isOpen, onRequestClose }) => {
+const EditImgModal = ({ isOpen, onRequestClose, memberInfo }) => {
   const [file, setFile] = useState("");
 
   const formHeaders = {
@@ -31,7 +31,7 @@ const EditImgModal = ({ isOpen, onRequestClose }) => {
       headers: formHeaders,
     });
 
-    window.location.replace("/");
+    window.location.replace(`/profile/${localStorage.getItem("member_id")}`);
   };
 
   return (

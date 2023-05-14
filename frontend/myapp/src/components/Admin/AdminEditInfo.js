@@ -17,6 +17,8 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 function AdminEditInfo() {
   const lcname = localStorage.getItem('adminName');
@@ -51,6 +53,7 @@ function AdminEditInfo() {
 
       .then((response) => {
         window.location.replace('/');
+        localStorage.setItem('adminName', input.name);
       })
       .catch((err) => {
         console.error(err.message);
@@ -66,20 +69,28 @@ function AdminEditInfo() {
   };
 
   return (
+    <div
+      className='page-header'
+      style={{
+        backgroundImage: 'url(' + require('assets/img/login-image.jpg') + ')',
+        marginTop: '70px',
+      }}
+    >
     <Container>
       <Row>
         <Col className='ml-auto mr-auto' lg='4'>
           <Card className='card-register ml-auto mr-auto'>
-            <h3 className='title mx-auto'>AdminEditInfo</h3>
+            <h3 className='title mx-auto'>관리자 정보 수정</h3>
             <Form className='register-form' onSubmit={handleSubmit}>
-              <hr></hr>
+              {/* <hr></hr> */}
 
+              <label>Email</label>
               <InputGroup className='form-group-no-border'>
-                <InputGroupText>
-                  <img src={user} alt='' width='20' />
-                  {/* 이름 모양 아이콘 */}
-                </InputGroupText>
-
+                <InputGroupAddon addonType='prepend'>
+                  <InputGroupText>
+                    <FontAwesomeIcon icon={faEnvelope}/>
+                  </InputGroupText>
+                </InputGroupAddon>
                 <Input
                   placeholder='아이디'
                   type='text'
@@ -88,12 +99,13 @@ function AdminEditInfo() {
                 />
               </InputGroup>
 
+              <label>Name</label>
               <InputGroup className='form-group-no-border'>
-                <InputGroupText>
-                  <img src={user} alt='' width='20' />
-                  {/* 이름 모양 아이콘 */}
-                </InputGroupText>
-
+                <InputGroupAddon addonType='prepend'>
+                  <InputGroupText>
+                    <FontAwesomeIcon icon={faCircleUser}/>
+                  </InputGroupText>
+                </InputGroupAddon>
                 <Input
                   placeholder={localStorage.getItem('adminName')}
                   type='text'
@@ -103,19 +115,22 @@ function AdminEditInfo() {
                 />
               </InputGroup>
 
+              <label>Password</label>
               <InputGroup className='form-group-no-border'>
-                <InputGroupText>
-                  <img src={unlock} alt='' width='20' />
-                </InputGroupText>
+                <InputGroupAddon addonType='prepend'>
+                  <InputGroupText>
+                    <FontAwesomeIcon icon={faLock}/>
+                  </InputGroupText>
+                </InputGroupAddon>
                 <Input
-                  placeholder=''
+                  placeholder='****'
                   type='password'
                   name='password'
                   onChange={handleValueChange}
                 />
               </InputGroup>
 
-              <Button block className='btn-round' color='danger' type='submit'>
+              <Button block className='btn-square my-5' color='danger' type='submit'>
                 정보 업데이트
               </Button>
             </Form>
@@ -123,6 +138,7 @@ function AdminEditInfo() {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 }
 

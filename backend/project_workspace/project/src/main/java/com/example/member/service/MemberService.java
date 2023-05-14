@@ -20,6 +20,7 @@ public interface MemberService {
 	
 	public void updateProfileImgProcess(MemberDTO dto);
 	public MemberDTO selectByEmailProcess(String email);
+	public MemberDTO selectByIdProcess(int member_id);
 	//public boolean isEmailAlreadyInUse(String email);
 	public int idcheckprocess(String email);
 	public String getProfileImgProcess(int member_id);

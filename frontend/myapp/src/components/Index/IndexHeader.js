@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactPlayer from 'react-player';
 
 // reactstrap components
 import { Container } from 'reactstrap';
@@ -13,6 +14,17 @@ function IndexHeader() {
             'url(' + require('assets/img/antoine-barres.jpg') + ')',
         }}
       >
+        <ReactPlayer
+          style={{ position: 'absolute', zIndex: 999999 }}
+          url={'https://www.youtube.com/watch?v=3xQws6Kq5-8'}
+          width='70vw'
+          height='70vh'
+          loop={true}
+          playing={true}
+          playIcon={true}
+          muted={true}
+          controls={true}
+        />
         <div className="filter" />
         <div className="content-center">
           <Container>

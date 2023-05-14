@@ -15,6 +15,7 @@ public interface MemberDAO {
 	
 	public void insertMember(MemberDTO dto);
 	public MemberDTO selectByEmail(String email);
+	public MemberDTO selectById(int member_id);
 	public void insertMemGenre(MemberGenreDTO dto);
 	
 	public void updateProfileImg(MemberDTO dto);

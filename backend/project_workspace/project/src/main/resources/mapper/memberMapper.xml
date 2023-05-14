@@ -10,6 +10,12 @@
 		]]>
 	</insert>
 	
+	<!--아이디로 member 선택-->
+	<select id="selectById" parameterType="int" resultType="MemberDTO">
+	  	SELECT * FROM member
+	  	WHERE member_id = #{member_id}
+	</select>
+	
 	<!--이메일 유효성 검사-->
 	<select id="selectByEmail" parameterType="string" resultType="MemberDTO">
 	  	SELECT * FROM member

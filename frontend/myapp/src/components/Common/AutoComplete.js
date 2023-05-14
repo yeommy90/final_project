@@ -11,7 +11,7 @@ export default function ComboBox({ onQueryChange }) {
   const [query, setQuery] = useState("");
 
   //   옵션 출력 갯수
-  const OPTIONS_LIMIT = 10;
+  const OPTIONS_LIMIT = 5;
   const defaultFilterOptions = createFilterOptions();
 
   //    옵션 출력 갯수(10개(OPTIONS_LIMIT값)만 출력해줘)
@@ -48,10 +48,12 @@ export default function ComboBox({ onQueryChange }) {
   return (
     <Autocomplete
       value={query}
+      // x 표시 없애기
+      disableClearable
       //   한번에 출력되는 option 수 제한
       filterOptions={filterOptions}
-      id="combo-box-demo"
-      //   모든 영화,배우,감독 이름 이 있다.
+      id='free-solo-2-demo'
+      //   모든 영화,배우,감독 이름이 있다.
       options={allKeywords}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       sx={{ width: 250 }}
@@ -60,14 +62,18 @@ export default function ComboBox({ onQueryChange }) {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="검색어를 입력하세요"
+          label='검색어를 입력하세요'
           onChange={(event) => {
             const value = event.target.value;
             setQuery(value);
             onQueryChange(value);
           }}
+          style={{}}
         />
       )}
+      // 아래화살표 표시 없애기
+      freeSolo
+      autoHighlight
     />
   );
 }

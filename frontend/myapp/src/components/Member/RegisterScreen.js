@@ -15,6 +15,9 @@ const RegisterScreen = () => {
   const passField = document.querySelector("input[name='password']");
   const emailField = document.querySelector("input[name='email']");
   const ageField = document.querySelector("input[name='age']");
+  const [ageField2, setAgeField2] = useState();
+  const [submitted, setSubmitted] = useState(false);
+  const [lastClickTime, setLastClickTime] = useState(0);
 
   const [member, setMember] = useState({
     email: "",
@@ -39,10 +42,24 @@ const RegisterScreen = () => {
     return emailRegex.test(email);
   };
 
+  const handlePrevClick = () => {
+    const maxPosition = 350 * 3; // Assuming 5 images are shown at a time
+    // if (position < maxPosition) {
+    //   setPosition(position + 350);
+    // }
+    const currentTime = new Date().getTime();
+    if (position < maxPosition && currentTime - lastClickTime > 500) {
+      setPosition(position + 350);
+      setLastClickTime(currentTime);
+    }
+  };
+
   const handleNextClick = () => {
     const maxPosition = 350 * 3; // Assuming 5 images are shown at a time
-    if (position < maxPosition) {
+    const currentTime = new Date().getTime();
+    if (position < maxPosition && currentTime - lastClickTime > 500) {
       setPosition(position - 350);
+      setLastClickTime(currentTime);
     }
   };
 
@@ -53,11 +70,18 @@ const RegisterScreen = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (!name || !age || !email || !password || !gender || !isChecked) {
-      console.log("필드가 비어있습니다.");
-      console.log(name);
-      setShow(true);
-
+    setSubmitted(true);
+    if (
+      !name ||
+      !age ||
+      !email ||
+      !password ||
+      !gender ||
+      !isChecked ||
+      gender === "" ||
+      !isvalid ||
+      ageField2
+    ) {
       // 첫 번째 슬라이드로 돌아가는 코드
       setPosition(0);
       return;
@@ -111,9 +135,9 @@ const RegisterScreen = () => {
     const selectedValue = event.target.value;
     setGender(selectedValue);
 
-    if (selectedValue === "남자") {
+    if (selectedValue === "male") {
       setMember({ ...member, gender: 1 });
-    } else if (selectedValue === "여자") {
+    } else if (selectedValue === "female") {
       setMember({ ...member, gender: 2 });
     }
   }
@@ -145,10 +169,27 @@ const RegisterScreen = () => {
       setInput({ ...input, [e.target.name]: e.target.value });
     }
     if (e.target.name === "password") {
-      setInput({ ...input, [e.target.name]: e.target.value })
+      setInput({ ...input, [e.target.name]: e.target.value });
     }
     // 서버로 이메일 중복 확인 요청 보내기
     setMember({ ...member, [e.target.name]: e.target.value });
+
+    // 나이 유효성 검사
+    if (e.target.name === "name") {
+      setInput({ ...input, [e.target.name]: e.target.value });
+    }
+    if (e.target.name === "age") {
+      if (
+        isNaN(e.target.value) ||
+        parseInt(e.target.value) < 1 ||
+        parseInt(e.target.value) > 99
+      ) {
+        setAgeField2(true);
+      } else {
+        setAgeField2(false);
+      }
+      setInput({ ...input, [e.target.name]: e.target.value });
+    }
   };
 
   const [passwordCheck, setPasswordCheck] = useState("");
@@ -217,7 +258,7 @@ const RegisterScreen = () => {
                   <div>
                     <p
                       style={{
-                        fonSize: "12px",
+                        fontSize: "12px",
                         color: "white",
                         fontFamily: "NanumSquare",
                       }}
@@ -252,7 +293,7 @@ const RegisterScreen = () => {
                     style={{
                       color: "white",
                       marginTop: "20px",
-                      fonSize: "12px",
+                      fontSize: "12px",
                     }}
                   >
                     이메일
@@ -322,7 +363,7 @@ const RegisterScreen = () => {
                     style={{
                       color: "white",
                       marginTop: "20px",
-                      fonSize: "12px",
+                      fontSize: "12px",
                     }}
                   >
                     비밀번호
@@ -381,7 +422,23 @@ const RegisterScreen = () => {
               </div>
             </div>
             {/* 페이지2 */}
-            <div className="reg_sld">
+            <div className='reg_sld' style={{ position: 'relative' }}>
+              <div>
+                <img
+                  onClick={handlePrevClick}
+                  alt='...'
+                  src={require('assets/img/arrow.png')}
+                  style={{
+                    position: 'absolute',
+                    width: '25px',
+                    transform: 'scaleX(-1)',
+                    top: '25px',
+                    left: '20px',
+                    filter: 'invert(100%)',
+                    cursor: 'pointer',
+                  }}
+                />
+              </div>
               <div className="logo" style={{ height: "90px" }}>
                 <img alt="..." src={require("assets/img/logo.gif")} />
               </div>
@@ -390,7 +447,7 @@ const RegisterScreen = () => {
                   <div>
                     <p
                       style={{
-                        fonSize: "12px",
+                        fontSize: "12px",
                         color: "white",
                         fontFamily: "NanumSquare",
                       }}
@@ -417,6 +474,18 @@ const RegisterScreen = () => {
                         나이를 입력해주세요.
                       </span>
                     )}
+                    {ageField2 && submitted === true && (
+                      <span
+                        style={{
+                          color: "rgb(255, 171, 154)",
+                          animation: "glow 1s ease-in-out infinite",
+                          fontWeight: "bold",
+                          fontSize: "12px",
+                        }}
+                      >
+                        옳바른 나이를 입력해주세요.
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div style={{ marginTop: "20px" }}>
@@ -424,7 +493,7 @@ const RegisterScreen = () => {
                     <div>
                       <p
                         style={{
-                          fonSize: "12px",
+                          fontSize: "12px",
                           color: "white",
                           fontFamily: "NanumSquare",
                         }}
@@ -439,13 +508,12 @@ const RegisterScreen = () => {
                         style={{ height: "35px" }}
                         onChange={handleSelect}
                       >
-                        <option>선택</option>
-                        <option>남자</option>
-                        <option>여자</option>
+                        <option value="">선택</option>
+                        <option value="male">남자</option>
+                        <option value="female">여자</option>
                       </Input>
-                      {!gender && (
+                      {!gender && submitted === true && (
                         <span
-                          className={show ? "" : "hidden"}
                           style={{
                             color: "rgb(255,171, 154)",
                             animation: "glow 1s ease-in-out infinite",
@@ -511,7 +579,23 @@ const RegisterScreen = () => {
             </div>
 
             {/* 페이지3 */}
-            <div className="reg_sld">
+            <div className='reg_sld' style={{ position: 'relative' }}>
+              <div>
+                <img
+                  onClick={handlePrevClick}
+                  alt='...'
+                  src={require('assets/img/arrow.png')}
+                  style={{
+                    position: 'absolute',
+                    width: '25px',
+                    transform: 'scaleX(-1)',
+                    top: '25px',
+                    left: '20px',
+                    filter: 'invert(100%)',
+                    cursor: 'pointer',
+                  }}
+                />
+              </div>
               <div className="logo_agree">
                 <img alt="..." src={require("assets/img/logo.gif")} />
               </div>

@@ -40,8 +40,10 @@
 
 
 /* 컨텐츠 내용 */
-.movie-basic h2 {
+.movie-basic .movie-basic-title {
   font-weight: bold;
+  font-size: 2.3em;
+  margin-top: 15px;
 }
 
 h3 {
@@ -178,6 +180,37 @@ h3 {
   border-radius: 10px;
 }
 
+.comment-content-wrapper {
+  height: 6em;
+}
+
+.comments-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* limits to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: pre-wrap;
+  height: 6em;
+  
+}
+
+.comments-content.expanded {
+  -webkit-line-clamp: unset; /* removes line limit */
+  height: 100%;
+}
+
+.comments-spoiler {
+  font-weight: bold;
+  color: #e75757;
+  cursor: pointer;
+}
+
+.more-button {
+  color: #fc8080;
+  cursor: pointer;
+}
+
+
 
 /* 갤러리 */
 .img-slide {
@@ -259,6 +292,9 @@ h3 {
 .similar-movie-info .title {
   margin: 0;
   min-height: 23px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .similar-movie-info .rating {

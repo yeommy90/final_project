@@ -19,7 +19,7 @@ import {
   InputGroupText,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 function AdminRegister() {
   // 함수 기능
@@ -138,9 +138,9 @@ function AdminRegister() {
       <Row>
         <Col className='ml-auto mr-auto' lg='4'>
           <Card className='card-register ml-auto mr-auto'>
-            <h3 className='title mx-auto'>Admin Register</h3>
+            <h3 className='title mx-auto'>관리자 회원가입</h3>
             <Form className='register-form' onSubmit={onSubmit}>
-              <label>아이디</label>
+              <label>Email</label>
               <InputGroup className='form-group-no-border'>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>
@@ -148,7 +148,7 @@ function AdminRegister() {
                   </InputGroupText>
                 </InputGroupAddon>
                 <Input
-                  placeholder='email'
+                  placeholder='이메일'
                   type='text'
                   name='email'
                   className='form-control'
@@ -158,7 +158,26 @@ function AdminRegister() {
                 />
               </InputGroup>
               {result > 0 && <span>중복된 이메일입니다.</span>} <br />
-              <label>비밀번호</label>
+              
+              <label>Name</label>
+              <InputGroup className='form-group-no-border mb-3'>
+                <InputGroupAddon addonType='prepend'>
+                  <InputGroupText>
+                    <FontAwesomeIcon icon={faCircleUser}/>
+                  </InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  placeholder='이름'
+                  type='text'
+                  name='name'
+                  className='form-control'
+                  // placeholder='이메일'
+                  maxLength='20'
+                  onChange={handleValueChange}
+                />
+              </InputGroup>
+
+              <label>Password</label>
               <InputGroup className='form-group-no-border'>
                 <InputGroupAddon addonType='prepend'>
                   <InputGroupText>
@@ -175,26 +194,7 @@ function AdminRegister() {
                   onChange={handleValueChange}
                 />
               </InputGroup>
-              <label>이름</label>
-              <InputGroup className='form-group-no-border'>
-                <InputGroupAddon addonType='prepend'>
-                  <InputGroupText>
-                    <img src={user} alt='' width='20' />
-                    {/*키모양아이콘임 */}
-                  </InputGroupText>
-                </InputGroupAddon>
-
-                <Input
-                  placeholder='이름'
-                  type='text'
-                  name='name'
-                  className='form-control'
-                  // placeholder='이메일'
-                  maxLength='20'
-                  onChange={handleValueChange}
-                />
-              </InputGroup>
-              <Button block className='btn-round' color='danger'>
+              <Button block className='btn-square my-5' color='danger'>
                 Register
               </Button>
             </Form>

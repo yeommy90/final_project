@@ -36,13 +36,11 @@ const Recommend = () => {
     }, []);
 
     return <>
-        {loading && <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}> <PulseLoader color="#e75757" size={40} /></div>}
+        {loading && <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '100px'}}> <PulseLoader color="#e75757" size={40} /></div>}
         {!loading && <div style={{ marginLeft: '5%', marginRight: '5%' }}>
-            <MovieList listTitle="최근 평가한 영화와 장르가 비슷한 추천 영화" movies={movies} />
-            <MovieList listTitle="최근 평가한 영화와 제목이 비슷한 추천 영화" movies={movies1} />
-            <MovieList listTitle="비슷한 평가결과를 가진 사용자들의 추천 영화" movies={movies2} />
-
-
+            <MovieList listTitle="최근 평가한 영화 장르 기반 추천" movies={movies} />
+            <MovieList listTitle="최근 평가한 영화 제목 기반 추천" movies={movies1} />
+            <MovieList listTitle="나와 비슷한 사용자들의 추천" movies={movies2} />
         </div>}
 
     </>

@@ -2,7 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
   topRatedList : [],
-  topRatedClassic : [],
+  topRated : [],
+  latestMovies : [],
+  themeMovies : [],
+  topRatedDirector : [],
+  topRatedActor : [],
+  favoriteGenre : [],
+  favoriteDirector : [],
+  favoriteActor : [],
+
   contents: {},
   memberReview: {},
   memberWish: {},
@@ -18,7 +26,14 @@ const MovieSlice = createSlice({
     // 메인 페이지 추천 리스트
     getMovieList(state, action) {
       state.topRatedList = action.payload.data.topRatedList;
-      state.topRatedClassic = action.payload.data.topRatedClassic;
+      state.topRated = action.payload.data.topRated;
+      state.latestMovies = action.payload.data.latestMovies;
+      state.themeMovies = action.payload.data.themeMovies;
+      state.topRatedDirector = action.payload.data.topRatedDirector;
+      state.topRatedActor = action.payload.data.topRatedActor;
+      // state.favoriteGenre = action.payload.data.favoriteGenre;
+      // state.favoriteDirector = action.payload.data.favoriteDirector;
+      // state.favoriteActor = action.payload.data.favoriteActor;
     },
 
     // 영화 상세정보 컨텐츠

@@ -103,8 +103,8 @@ const Login = () => {
                 className='card-register ml-auto mr-auto'
                 style={{ backgroundColor: '#343a40' }}
               >
-                <div>
-                  <img alt='...' src={require('assets/img/logo.gif')} />
+                <div style={{ textAlign: "center" }}>
+                  <img alt='...' src={require('assets/img/logo.gif')} style={{ width: "180px", filter: "invert(0%)" }}/>
                 </div>
                 <div className='social-line text-center'></div>
                 <Form className='register-form'>

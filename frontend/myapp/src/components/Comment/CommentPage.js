@@ -1,14 +1,23 @@
-import { Button, Col, Container, Row } from "reactstrap";
+import { NavLink } from "react-router-dom";
+import { Col, Container, Row } from "reactstrap";
 
-const CommentPage = () => {
+const CommentPage = ({ comments, handleAuthShow, memberLikes, fetchComments }) => {
+	if (!comments) {
+    return <NavLink to="/" />;
+  }
+
 	return (
 		<div className="section">
 			<Container>
 			<Row className="my-4">
           <Col md="2">
-            <div className="movie-poster-wrapper">
-              코멘트코멘트리스트
-            </div>
+					<div className="d-flex justify-content align-items-center">
+					{comments.map((comment) => (
+						<div key={comment.member_id}>
+							{comment.content}
+						</div>
+					))}
+					</div>
           </Col>
         </Row>
 			</Container>

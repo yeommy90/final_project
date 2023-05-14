@@ -11,7 +11,8 @@ CREATE TABLE member(
     likes_count NUMBER, --총 좋아요수
     visibility NUMBER, --1공개2비공개
     grade NUMBER,
-    regdate date --가입일
+    regdate date, --가입일,
+    favorite number
 );
 
 -- 시퀀스
@@ -142,7 +143,7 @@ create table comments (
     likes number,
     regdate date,
     moddate date,
-    state varchar2(2) --1기본2스포3삭제4블러
+    state varchar2(2) --1기본2블러처리3삭제신고4스포일러신고
 );
 
 -- likes table
@@ -151,6 +152,28 @@ create table likes (
     movie_id number,
     comment_member_id number --작성된 코멘트의 member id
 );
+
+-- trailer
+create table movie_trailer(
+    movie_id number,
+    filepath varchar2(1000)
+);
+
+-- notice
+create table notice (
+    notice_id number,
+    admin_id number,
+    title varchar2(2000),
+    content varchar2(4000),
+    upload varchar2(500),
+    regdate date
+);
+
+create sequence notice_id_seq
+    start with 1
+    increment by 1
+    nocache
+    nocycle;
 
 ---------------------------------------------------------
 select count(*) from movie;

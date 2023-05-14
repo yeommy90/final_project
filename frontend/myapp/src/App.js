@@ -22,6 +22,9 @@ import AdminPage from 'components/Admin/AdminPage';
 import AdminPrivateRoute from 'access/AdminPrivateRoute';
 import ProfileListMore from 'components/Profile/ProfileListMore';
 import RecList from 'components/Profile/RecList';
+import NoticePage from 'components/Notice/NoticePage';
+import EditNotice from 'components/Notice/EditNotice';
+import ModifyNotice from 'components/Notice/ModifyNotice';
 
 function App() {
   return (
@@ -32,7 +35,7 @@ function App() {
         <Route path="/logout" element={<PrivateRoute isAuth={true} RouteComponent={LogOut} />} />
         <Route path="/register" element={<PrivateRoute isAuth={false} RouteComponent={RegisterPage} />} />
         <Route path="/search/:query" element={<PrivateRoute isAuth={false} RouteComponent={SearchPage} />} />
-        <Route path="/profile" element={<PrivateRoute isAuth={true} RouteComponent={ProfilePage} />} />
+        <Route path="/profile/:member_id" element={<PrivateRoute isAuth={true} RouteComponent={ProfilePage} />} />
         <Route path='/profilelistmore/:path' element={<PrivateRoute isAuth={true} RouteComponent={ProfileListMore} />}/>
         <Route path='/genreselect' element={<PrivateRoute isAuth={false} RouteComponent={GenreSelect} />} />
         <Route path="/analysis/:member_id" element={<PrivateRoute isAuth={true} RouteComponent={AnalysisPage} />} />
@@ -48,6 +51,9 @@ function App() {
         <Route path='/adminregister' element={<AdminPrivateRoute isAuth={false} RouteComponent={AdminRegister} />} />
         <Route path='/admineditinfo' element={<AdminPrivateRoute isAuth={true} RouteComponent={AdminEditInfo} />} />
         <Route path='/adminpage' element={<AdminPrivateRoute isAuth={true} RouteComponent={AdminPage} />} />
+        <Route path='/adminnotice' element={<AdminPrivateRoute isAuth={true} RouteComponent={NoticePage} />} />
+        <Route path='/admineditnotice' element={<AdminPrivateRoute isAuth={true} RouteComponent={EditNotice} />} />
+        <Route path='/adminmodifynotice/:notice_id' element={<AdminPrivateRoute isAuth={true} RouteComponent={ModifyNotice} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BaseLayout>

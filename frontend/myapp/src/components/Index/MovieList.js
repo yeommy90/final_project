@@ -41,10 +41,13 @@ function MovieList({ movies = [], listTitle = "" }) {
                       <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}/>
                     </a>
                   </div>
-                  <div className='title_box'>
-                    <div className='title'>{movie.title}</div>
-                    <div className='date'>{movie.release_date} 개봉</div>
-                    <div className='rating'>★ {movie.tmdb_vote_sum}</div>
+                  <div className='title-box'>
+                    <div className='title-box-title'>{movie.title}</div>
+                    <div className='title-box-date'>{movie.release_date} 개봉</div>
+                    <div className='d-flex justify-content'>
+                    <div className='rating mr-2'>TMDB ★ {(movie.tmdb_vote_sum / 2).toFixed(2)}</div>
+                    <div className='rating'>・ 부귀영화 ★ {movie.vote_sum}</div>
+                    </div>
                   </div>
                 </div>
               );

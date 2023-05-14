@@ -1,7 +1,6 @@
-SELECT movie_id, title FROM MOVIE WHERE country like '%Korea%';
-
 -- 평점, 인기도, 2000년도 이후
-SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum / 2, 2), a.tmdb_vote_cnt, a.poster_path
+SELECT a.movie_id, a.title, a.release_date, 
+			   round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
 FROM (SELECT * 
         FROM movie
         WHERE tmdb_vote_cnt >= 3000 AND popularity >= 150 AND release_date >= '20/01/01'
@@ -9,12 +8,125 @@ FROM (SELECT *
 WHERE rownum <= 20;
 
 -- 평점, 인기도, 고전
-SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2), a.tmdb_vote_cnt, a.poster_path
+SELECT a.movie_id, a.title, a.release_date, 
+			   round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
 FROM (SELECT * 
         FROM movie
         WHERE tmdb_vote_cnt >= 200 AND popularity >= 30 AND release_date <= '00/01/01'
         ORDER BY tmdb_vote_sum DESC) A 
 WHERE rownum <= 20;
+
+-- 부귀영화 top 20 영화
+SELECT a.movie_id, a.title, a.release_date, 
+			   round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
+FROM (SELECT * 
+        FROM movie
+        ORDER BY vote_sum DESC) A 
+WHERE rownum <= 20;
+
+-- TMDB 추천 영화
+SELECT a.movie_id, a.title, a.release_date,
+round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
+FROM (
+    SELECT *
+    FROM movie
+    WHERE tmdb_vote_cnt >= 0 AND popularity >= 0
+    ORDER BY 
+        CASE 
+            WHEN tmdb_vote_cnt IS NOT NULL THEN tmdb_vote_cnt
+            WHEN tmdb_vote_sum IS NOT NULL THEN tmdb_vote_sum
+            ELSE popularity 
+        END DESC
+) a
+WHERE rownum <= 20;
+
+-- 최근 개봉 영화
+SELECT a.movie_id, a.title, a.release_date, 
+			   round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
+FROM (SELECT * 
+        FROM movie
+        WHERE tmdb_vote_cnt >= 1000 AND popularity >= 10
+        ORDER BY release_date DESC) A 
+WHERE rownum <= 20;
+
+-- 가정의 달 추천 영화
+SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
+FROM (
+    SELECT DISTINCT movie.*
+    FROM movie
+    JOIN movie_genre ON movie.movie_id = movie_genre.movie_id
+    JOIN genre ON movie_genre.genre_id = genre.genre_id
+    WHERE tmdb_vote_cnt >= 9000 AND popularity >= 100 AND genre.name IN ('가족') AND genre.name NOT IN ('공포', '스릴러', '범죄')
+    ORDER BY tmdb_vote_cnt DESC
+) a
+WHERE rownum <= 20;
+
+-- 화제의 감독
+SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
+FROM (
+    SELECT DISTINCT movie.*
+    FROM movie
+    JOIN movie_director ON movie.movie_id = movie_director.movie_id
+    JOIN director ON movie_director.director_id = director.director_id
+    WHERE director.name = 'Tim Burton'
+    ORDER BY tmdb_vote_cnt DESC
+) a
+WHERE rownum <= 10;
+
+-- 화제의 배우
+SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
+FROM (
+    SELECT DISTINCT movie.*
+    FROM movie
+    JOIN movie_actor ON movie.movie_id = movie_actor.movie_id
+    JOIN actor ON movie_actor.actor_id = actor.actor_id
+    WHERE actor.name = 'Timothée Chalamet'
+    ORDER BY tmdb_vote_cnt DESC
+) a
+WHERE rownum <= 10;
+
+-- ㅇㅇㅇ님이 선호하는 장르의 영화에요!
+-- 선호장르 id가 포함된 영화 중 평점이 높은 순
+SELECT m.movie_id, m.title, m.release_date, round(m.tmdb_vote_sum, 2) as tmdb_vote_sum, m.tmdb_vote_cnt, m.poster_path, m.vote_sum
+FROM (
+    SELECT DISTINCT m.*
+    FROM movie m
+    JOIN movie_genre mg ON m.movie_id = mg.movie_id
+    WHERE mg.genre_id IN (
+        SELECT genre_id
+        FROM member_genre
+        WHERE member_id = 1
+    )
+    ORDER BY m.tmdb_vote_cnt DESC
+) m
+WHERE ROWNUM <= 20;
+
+-- ㅇㅇㅇ님의 선호감독
+-- ㅇㅇㅇ님의 선호배우
+
+
+SELECT DISTINCT MOVIE.*
+		FROM MOVIE
+		INNER JOIN MOVIE_ACTOR ON MOVIE.MOVIE_ID = MOVIE_ACTOR.MOVIE_ID
+		INNER JOIN ACTOR ON MOVIE_ACTOR.ACTOR_ID = ACTOR.ACTOR_ID
+		WHERE ACTOR.ACTOR_ID = 37625
+		ORDER BY release_date DESC;
+
+
+commit;
+
+select * from movie where movie_id = 123377;
+
+
+-- recomment recent rating 쿼리 틀렸음..
+select * from movie where movie_id in (SELECT movie_id FROM ( SELECT
+movie_id FROM rating WHERE member_id = 1 ) ORDER BY regdate DESC );
+        
+SELECT m.* 
+FROM movie m 
+JOIN rating r ON m.movie_id = r.movie_id 
+WHERE r.member_id = 1 
+ORDER BY r.regdate DESC;
 
 -- contents
 SELECT movie_id, title, EXTRACT(YEAR FROM release_date) as release_date, round(tmdb_vote_sum, 2) as tmdb_vote_sum, overview, poster_path, backdrop_path, country, runtime
@@ -109,7 +221,7 @@ select * from movie where movie_id = 361743;
 select * from director where name = 'Jon Favreau';
 select * from actor where actor_id = 2;
 
-select * from movie where movie_id = 212778;
+select * from movie where movie_id = 361743;
 update movie set popularity = 100 where movie_id = 766507;
 
 commit;
@@ -179,6 +291,8 @@ FROM combined
 WHERE ROWNUM <= 12;
 
 
+
+
 -- likes
 SELECT *
 FROM likes
@@ -196,12 +310,32 @@ commit;
 
 select * from movie where movie_id in (select favorite from member where member_id = 1);
 
-select count(rating), round(avg(rating),2) from rating where movie_id = 361743;
+select count(rating) as vote_cnt, round(avg(rating),2) as vote_sum from rating where movie_id = 240;
 
+select * from rating where movie_id = 240;
 
+select * from movie where movie_id = 634649;
 
+update movie set vote_sum = 3.5, vote_cnt = 10 where vote_sum is null;
 
+SELECT *
+		FROM (
+		    SELECT m.*, r2.REGDATE
+		    FROM MOVIE m
+		    INNER JOIN (
+		        SELECT MOVIE_ID, MAX(REGDATE) AS latest_review_date
+		        FROM comments
+		        WHERE MEMBER_ID = 1
+		        GROUP BY MOVIE_ID
+		    ) r ON m.MOVIE_ID = r.MOVIE_ID
+		    INNER JOIN comments r2 ON r.MOVIE_ID = r2.MOVIE_ID AND r.latest_review_date = r2.REGDATE
+		    WHERE r2.MEMBER_ID = 1
+		    ORDER BY r.latest_review_date DESC
+		)
+		WHERE ROWNUM = 1;
 
+select * from notice
+		order by notice_id desc;
 
 
 

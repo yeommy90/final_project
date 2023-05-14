@@ -111,10 +111,12 @@ public class MemberController {
 		return null;
 	}
 
+	
 	//프로필 영화리스트 가져오기
 	@GetMapping("/profile/{member_id}")
 	public Map<String, Object> getProfileListExecute(@PathVariable("member_id") int member_id) {
 		Map<String, Object> map = new HashMap<>();
+		map.put("memberInfo", memberService.selectByIdProcess(member_id));
 		map.put("wishList", memberService.getWishListProcess(member_id));
 		map.put("ratingList", memberService.getRatingListProcess(member_id));
 		return map;

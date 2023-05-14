@@ -14,7 +14,6 @@ const MemberReviewInfo = ({ handleShow, handleDelete }) => {
     ));
   };
 
-
   return (
     <div>
       <div className="member-review d-flex justify-content-between">

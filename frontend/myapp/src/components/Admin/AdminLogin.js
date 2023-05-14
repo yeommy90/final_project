@@ -63,6 +63,7 @@ function AdminLogin() {
         console.log(jwtadminEmail);
         console.log(jwtadminName);
         localStorage.setItem('Authorization', jwtToken);
+        localStorage.setItem('adminId', response.data.admin_id);
         localStorage.setItem('adminEmail', jwtadminEmail);
         localStorage.setItem('adminName', jwtadminName);
         localStorage.setItem('authRole', jwtAuthRole);
@@ -72,7 +73,7 @@ function AdminLogin() {
       })
       .then((response) => {
         // navigator('/');
-        window.location.replace('/');
+        window.location.replace('/adminpage');
       })
       .catch((err) => {
         console.error(err.message);
@@ -89,7 +90,7 @@ function AdminLogin() {
       className='page-header'
       style={{
         backgroundImage: 'url(' + require('assets/img/login-image.jpg') + ')',
-        marginTop: '88px',
+        marginTop: '70px',
       }}
     >
       <div className='filter' />
@@ -97,7 +98,7 @@ function AdminLogin() {
         <Row>
           <Col className='ml-auto mr-auto' lg='4'>
             <Card className='card-register ml-auto mr-auto'>
-              <h3 className='title mx-auto'>Admin Login</h3>
+              <h3 className='title mx-auto'>관리자 로그인</h3>
               <Form className='register-form' onSubmit={onSubmit}>
                 <label>Email</label>
                 <InputGroup className='form-group-no-border'>
@@ -136,11 +137,11 @@ function AdminLogin() {
                     onChange={handleValueChange}
                   />
                 </InputGroup>
-                <Button block className='btn-round' color='danger'>
+                <Button block className='btn-square my-5' color='danger'>
                   Login
                 </Button>
               </Form>
-              <div className='forgot'>
+              {/* <div className='forgot'>
                 <Button
                   className='btn-link'
                   color='danger'
@@ -149,7 +150,7 @@ function AdminLogin() {
                 >
                   Forgot password?
                 </Button>
-              </div>
+              </div> */}
             </Card>
           </Col>
         </Row>

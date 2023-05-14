@@ -13,6 +13,7 @@ const ProfileSlice = createSlice({
     getProfileList(state, action) {
       state.wishList = action.payload.data.wishList;
       state.ratingList = action.payload.data.ratingList;
+      state.memberInfo = action.payload.data.memberInfo;
     },
   },
 });

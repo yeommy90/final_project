@@ -40,7 +40,7 @@
 }
 
 .img_box {
-  float: left;
+  /* float: left; */
 }
 
 .img_box img {
@@ -51,23 +51,22 @@
 .img_box img {
   margin-bottom: 10px;
   width: 245px;
-  /* max-width: 245px; */
 }
 
-.title_box .title {
-  padding-top: 10px;
-  margin-bottom: 3px;
+.title-box .title-box-title {
+  padding-top: 0px;
+  margin-bottom: 5px;
   font-weight: bold;
   font-size: 16px;
 }
 
-.title_box .date {
+.title-box .title-box-date {
   font-size: 14px;
 }
 
-.title_box .rating {
+.title-box .rating {
   padding-top: 2px;
-  font-size: 15px;
+  font-size: 14px;
   color: #fc8080;
 }
 
