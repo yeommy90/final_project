@@ -9,7 +9,6 @@ const AnalysisHeader = () => {
   const { member_id } = useParams();
   const [ratingCnt, setRatingCnt] = useState([]);
 
-  console.log(member_id);
   const save = [...ratingCnt];
 
   useEffect(() => {
@@ -21,6 +20,7 @@ const AnalysisHeader = () => {
       .catch((error) => {
         console.log(error);
       });
+
   }, []);
 
   const ratingSum =

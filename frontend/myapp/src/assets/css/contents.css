@@ -186,11 +186,11 @@ h3 {
 
 .comments-content {
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* limits to 3 lines */
+  -webkit-line-clamp: 2; /* limits to 3 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
   white-space: pre-wrap;
-  height: 6em;
+  height: 4.5em;
   
 }
 
@@ -208,6 +208,14 @@ h3 {
 .more-button {
   color: #fc8080;
   cursor: pointer;
+}
+
+.more_button {
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  color: #fc8080;
+  font-weight: bold;
 }
 
 

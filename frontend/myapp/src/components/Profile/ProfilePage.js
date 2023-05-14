@@ -24,16 +24,9 @@ const ProfilePage = () => {
   const memberInfo = useSelector((state) => state.profile.memberInfo);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(ProfileAction.getProfileList(member_id));
   }, []);
-
-  // 로그인 여부를 확인하는 코드
-  // const isLoggedIn = !!localStorage.getItem('Authorization');
-
-  // 로그인하지 않은 사용자일 경우, /login으로 Redirect 시킨다.
-  // if (!isLoggedIn) {
-  //   window.location.replace('/Login');
-  // }
 
   const [editShow, setEditShow] = useState(false);
   const handleEditClose = () => setEditShow(false);

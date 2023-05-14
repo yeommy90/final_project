@@ -1,13 +1,10 @@
 import { faHeart, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 const ProfileHeader = ({handleEditShow, handleEditImgShow, memberInfo}) => {
-  // const profile_path = localStorage.getItem("profile_path");
-  // const member_id = localStorage.getItem('member_id');
-  // const grade = localStorage.getItem('grade');
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [grade, setGrade] = useState(6);
   const [profilePath, setProfilePath] = useState('');
@@ -19,11 +16,6 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow, memberInfo}) => {
       setProfilePath(memberInfo.profile_path);
     }
   }, [memberInfo])
-
-  // if (memberInfo != undefined) {
-  //   grade = memberInfo.grade;
-  //   profile_path = memberInfo.profile_path;
-  // }
 
   let gradeImgPath = "";
   switch (grade) {
@@ -150,6 +142,7 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow, memberInfo}) => {
                   <>아무개 님의 페이지</>
                 )}
               </span>
+              {isLoggedIn && (
                 <FontAwesomeIcon 
                   icon={faPencil}
                   style={{
@@ -158,6 +151,7 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow, memberInfo}) => {
                   }}
                   onClick={() => handleEditImgShow()}
                 />
+              )}
             </div>
             <div
               className="grede_name"
@@ -200,15 +194,22 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow, memberInfo}) => {
                   평가하기
                 </Button>
                 )}
-                <Button
-                  className='btn-round bg-dark'
-                  type='button'
-                  href={`/analysis/${memberInfo.member_id}`}
-                  style={{ margin: '0px 20px' }}
+                <Link
+                  to={{
+                    pathname: `/analysis/${memberInfo.member_id}`,
+                    state: { memberInfo: memberInfo }
+                  }}
                 >
-                  <FontAwesomeIcon icon={faHeart} />
-                  취향분석
-                </Button>
+                  <Button
+                    className='btn-round bg-dark'
+                    type='button'
+                    style={{ margin: '0px 20px' }}
+                    >
+                    <FontAwesomeIcon icon={faHeart} />
+                    취향분석
+                  </Button>
+                </Link>
+
                 {isLoggedIn && (
                 <Button
                   onClick={() => handleEditShow()}

@@ -9,7 +9,6 @@ import ProfilePage from 'components/Profile/ProfilePage';
 import Contents from 'components/Contents/ContentsPage';
 import ReviewPage from 'components/Review/ReviewPage';
 import AnalysisPage from 'components/Analysis/AnalysisPage';
-import CommentPage from 'components/Comment/CommentPage';
 import GenreSelect from 'components/Member/GenreSelect';
 import PrivateRoute from 'access/PrivateRoute';
 import LogOut from 'components/Member/Logout';
@@ -35,15 +34,13 @@ function App() {
         <Route path="/logout" element={<PrivateRoute isAuth={true} RouteComponent={LogOut} />} />
         <Route path="/register" element={<PrivateRoute isAuth={false} RouteComponent={RegisterPage} />} />
         <Route path="/search/:query" element={<PrivateRoute isAuth={false} RouteComponent={SearchPage} />} />
-        <Route path="/profile/:member_id" element={<PrivateRoute isAuth={true} RouteComponent={ProfilePage} />} />
+        <Route path="/profile/:member_id" element={<PrivateRoute isAuth={false} RouteComponent={ProfilePage} />} />
         <Route path='/profilelistmore/:path' element={<PrivateRoute isAuth={true} RouteComponent={ProfileListMore} />}/>
         <Route path='/genreselect' element={<PrivateRoute isAuth={false} RouteComponent={GenreSelect} />} />
         <Route path="/analysis/:member_id" element={<PrivateRoute isAuth={true} RouteComponent={AnalysisPage} />} />
         <Route path="/contents/:movie_id" element={<PrivateRoute isAuth={false} RouteComponent={Contents} />} />
         <Route path="/review" element={<PrivateRoute isAuth={true} RouteComponent={ReviewPage} />} />
-        <Route path="/comment" element={<PrivateRoute isAuth={false} RouteComponent={CommentPage} />} />
         <Route path="/cast/:profileType/:id" element={<PrivateRoute isAuth={false} RouteComponent={CastProfile}/>} />
-        {/* <Route path="/recommend" element={<PrivateRoute isAuth={true} RouteComponent={Recommend} />} /> */}
         <Route path="/recommend/:member_id" element={<PrivateRoute isAuth={false} RouteComponent={RecList} />}/>
 
         <Route path='/notice' element={<AdminPrivateRoute isAuth={false} RouteComponent={Notice} />} />
