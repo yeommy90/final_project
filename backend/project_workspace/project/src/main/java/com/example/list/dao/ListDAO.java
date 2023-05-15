@@ -32,8 +32,8 @@ public interface ListDAO {
 	public List<ListDTO> getTopRatedActor();
 	
 	public List<ListDTO> getFavoriteGenre(int member_id);
-	public List<ListDTO> getFavoriteDirector();
-	public List<ListDTO> getFavoriteActor();
+	public List<ListDTO> getFavoriteDirector(int member_id);
+	public List<ListDTO> getFavoriteActor(int member_id);
 	
 	//검색 영역
 	public List<ListDTO> searchMovies(String query);

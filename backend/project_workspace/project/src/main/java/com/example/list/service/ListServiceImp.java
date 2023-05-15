@@ -66,13 +66,13 @@ public class ListServiceImp implements ListService {
 	}
 
 	@Override
-	public List<ListDTO> getFavoriteDirectorProcess() {
-		return listDAO.getFavoriteDirector();
+	public List<ListDTO> getFavoriteDirectorProcess(int member_id) {
+		return listDAO.getFavoriteDirector(member_id);
 	}
 
 	@Override
-	public List<ListDTO> getFavoriteActorProcess() {
-		return listDAO.getFavoriteActor();
+	public List<ListDTO> getFavoriteActorProcess(int member_id) {
+		return listDAO.getFavoriteActor(member_id);
 	}
 	
 	
@@ -300,18 +300,14 @@ public class ListServiceImp implements ListService {
 
 	// grade 계산 메소드
 	private int determineGrade(int likes_count) {
-	    if (likes_count >= 201) {
+	    if (likes_count >= 51) {
 	        return 1;
-	    } else if (likes_count >= 101) {
-	        return 2;
-	    } else if (likes_count >= 51) {
-	        return 3;
 	    } else if (likes_count >= 21) {
-	        return 4;
+	        return 2;
 	    } else if (likes_count >= 1) {
-	        return 5;
+	        return 3;
 	    } else {
-	        return 6;
+	        return 4;
 	    }
 	}
 

@@ -34,8 +34,7 @@
 
 	</select>
 
-	<select id="getPreferredDirector" parameterType="int"
-		resultType="AnalysisDTO">
+	<select id="getPreferredDirector" parameterType="int" resultType="AnalysisDTO">
 		SELECT D.NAME AS DIRECTOR_NAME, D.PROFILE_PATH AS DIRECTOR_IMAGE,
 		COUNT(R.RATING) AS directorRating_cnt, ((SUM(R.RATING) /
 		(COUNT(R.RATING) * 5)) * 100) AS TOTAL
@@ -46,11 +45,9 @@
 		WHERE R.MEMBER_ID = #{member_id}
 		GROUP BY D.NAME, D.PROFILE_PATH
 		ORDER BY TOTAL DESC, directorRating_cnt DESC
-
 	</select>
 
-	<select id="getPreferredActor" parameterType="int"
-		resultType="AnalysisDTO">
+	<select id="getPreferredActor" parameterType="int" resultType="AnalysisDTO">
 		SELECT A.NAME AS ACTOR_NAME, A.PROFILE_PATH AS ACTOR_IMAGE,
 		COUNT(R.RATING) AS actorRating_cnt, ((SUM(R.RATING) /
 		(COUNT(R.RATING) * 5)) * 100) AS TOTAL
@@ -62,7 +59,6 @@
 		AND A.PROFILE_PATH is not null
 		GROUP BY A.NAME, A.PROFILE_PATH
 		ORDER BY TOTAL DESC, actorRating_cnt DESC
-
 	</select>
 
 </mapper>

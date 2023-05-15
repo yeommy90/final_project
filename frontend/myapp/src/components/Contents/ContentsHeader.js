@@ -102,11 +102,12 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
           <Col md="10">
             <div className='movie-basic p-1 mb-0'>
               <div className='movie-basic-title'>{contents.title}</div>
-              <div className='border-bottom my-1'>
+              <div className='border-bottom my-1 ml-2'>
                 <span>{contents.release_date} ・ {' '}{contents.genreDTO ? contents.genreDTO.map((genre) => genre.name).join('/') : null} ・ {contents.country}</span>
               </div>
               <div className='border-bottom mt-1'>
-                <p>평균 ★ {(contents.tmdb_vote_sum / 2).toFixed(2)}</p>
+                <span className='rating mr-1 ml-2'>TMDB ★ {(contents.tmdb_vote_sum / 2).toFixed(2)}</span>
+                <span className='rating2'>・ 부귀영화 ★ {contents.vote_sum}</span>
               </div>
               <div className='header-button d-flex justify-content'>
                 <MovieRating memberReview={memberReview} fetchComments={fetchComments} handleAuthShow={handleAuthShow}/>

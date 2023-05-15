@@ -23,8 +23,8 @@ public interface ListService {
 	public List<ListDTO> getTopRatedDirectorProcess();
 	public List<ListDTO> getTopRatedActorProcess();
 	public List<ListDTO> getFavoriteGenreProcess(int member_id);
-	public List<ListDTO> getFavoriteDirectorProcess();
-	public List<ListDTO> getFavoriteActorProcess();
+	public List<ListDTO> getFavoriteDirectorProcess(int member_id);
+	public List<ListDTO> getFavoriteActorProcess(int member_id);
 	
 	// 검색 영역
 	public List<ListDTO> searchMovies(String query);

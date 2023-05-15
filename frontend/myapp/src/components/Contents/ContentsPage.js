@@ -19,7 +19,6 @@ const Contents = () => {
   const { movie_id } = useParams();
   const member_id = localStorage.getItem("member_id");
   const [comments, setComments] = useState([]);
-  const [trailerPath, setTrailerPath] = useState([]);
 
   // 로그인 여부 확인 모달
   const [authShow, setAuthShow] = useState(false);
@@ -27,7 +26,6 @@ const Contents = () => {
   const handleAuthShow = () => setAuthShow(true);
 
   const contents = useSelector((state) => state.movie.contents);
-  // const memberReview = useSelector((state) => state.movie.memberReview);
   const memberLikes = useSelector((state) => state.movie.memberLikes);
 
   // 렌더링 트리거 함수 > 이름을 잘못지었음..

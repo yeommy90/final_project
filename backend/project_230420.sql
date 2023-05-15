@@ -102,15 +102,119 @@ FROM (
 WHERE ROWNUM <= 20;
 
 -- ㅇㅇㅇ님의 선호감독
+SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
+FROM (
+    SELECT DISTINCT movie.*
+    FROM movie
+    JOIN movie_director ON movie.movie_id = movie_director.movie_id
+    JOIN director ON movie_director.director_id = director.director_id
+    WHERE director.director_id = (SELECT md.director_id
+FROM movie_director md
+WHERE md.movie_id = (
+  SELECT * FROM (
+    SELECT movie_id
+    FROM rating
+    WHERE member_id = 1
+    AND regdate >= SYSDATE - 30
+    ORDER BY rating DESC, regdate DESC
+  )
+  WHERE ROWNUM <= 1
+))
+    ORDER BY tmdb_vote_cnt DESC
+) a
+WHERE rownum <= 10;
+
+-- 선호 감독 with 사용
+WITH
+highest_rated_movie AS (
+    SELECT * FROM (
+        SELECT movie_id
+        FROM rating
+        WHERE member_id = 1
+        AND regdate >= SYSDATE - 30
+        ORDER BY rating DESC, regdate DESC
+    )
+    WHERE ROWNUM <= 1
+),
+director_id AS (
+    SELECT md.director_id
+    FROM movie_director md
+    WHERE md.movie_id = (SELECT movie_id FROM highest_rated_movie)
+)
+SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum, d.name as director_name
+FROM (
+    SELECT DISTINCT movie.*, movie_director.director_id
+    FROM movie
+    JOIN movie_director ON movie.movie_id = movie_director.movie_id
+    JOIN director ON movie_director.director_id = director.director_id
+    WHERE director.director_id = (SELECT director_id FROM director_id)
+    ORDER BY tmdb_vote_cnt DESC
+) a
+JOIN director d ON a.director_id = d.director_id
+WHERE rownum <= 10;
+
+
+
+-- 선호 감독 아이디 뽑기
+SELECT md.director_id
+FROM movie_director md
+WHERE md.movie_id = (
+  SELECT * FROM (
+    SELECT movie_id
+    FROM rating
+    WHERE member_id = 1
+    AND regdate >= SYSDATE - 30
+    ORDER BY rating DESC, regdate DESC
+  )
+  WHERE ROWNUM <= 1
+);
+
 -- ㅇㅇㅇ님의 선호배우
+WITH 
+top_rated_movie AS (
+  SELECT * FROM (
+    SELECT movie_id
+    FROM rating
+    WHERE member_id = 1
+    AND regdate >= SYSDATE - 30
+    ORDER BY rating DESC, regdate DESC
+  )
+  WHERE ROWNUM <= 1
+),
+actor_id AS (
+    SELECT md.actor_id
+    FROM top_rated_movie m
+    JOIN movie_actor md ON m.movie_id = md.movie_id
+    WHERE ROWNUM <= 1
+)
+SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum, d.name as actor_name
+FROM (
+    SELECT DISTINCT movie.*, movie_actor.actor_id
+    FROM movie
+    JOIN movie_actor ON movie.movie_id = movie_actor.movie_id
+    JOIN actor ON movie_actor.actor_id = actor.actor_id
+    WHERE actor.actor_id = (SELECT actor_id FROM actor_id)
+    ORDER BY tmdb_vote_cnt DESC
+) a
+JOIN actor d ON a.actor_id = d.actor_id
+WHERE rownum <= 10;
 
+-- 선호 배우 아이디 뽑기
+SELECT md.actor_id
+FROM (
+    SELECT movie_id
+    FROM (
+        SELECT movie_id
+        FROM rating
+        WHERE member_id = 1
+        AND regdate >= SYSDATE - 30
+        ORDER BY rating DESC, regdate DESC
+    )
+    WHERE ROWNUM <= 1
+) m
+JOIN movie_actor md ON m.movie_id = md.movie_id
+WHERE ROWNUM <= 1;
 
-SELECT DISTINCT MOVIE.*
-		FROM MOVIE
-		INNER JOIN MOVIE_ACTOR ON MOVIE.MOVIE_ID = MOVIE_ACTOR.MOVIE_ID
-		INNER JOIN ACTOR ON MOVIE_ACTOR.ACTOR_ID = ACTOR.ACTOR_ID
-		WHERE ACTOR.ACTOR_ID = 37625
-		ORDER BY release_date DESC;
 
 
 commit;

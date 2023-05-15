@@ -79,3 +79,19 @@
 .submitbar p {
   padding-top: 10px;
 }
+
+/* 검색css */
+#free-solo-2-demo {
+  color: white;
+}
+
+#free-solo-2-demo-label {
+  color: white;
+}
+
+.MuiAutocomplete-root {
+  border-radius: 3px;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.5;
+  margin: 1px;
+}

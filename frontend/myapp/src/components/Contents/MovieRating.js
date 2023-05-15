@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
+import Tooltip from '@mui/material/Tooltip';
 import StarIcon from '@mui/icons-material/Star';
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -63,6 +64,7 @@ const MovieRating = ({ memberReview, fetchComments, handleAuthShow }) => {
         alignItems: 'center',
       }}
     >
+      <Tooltip title={hover === value ? '취소하기' : ''} arrow>
       <Rating
         name="hover-feedback"
         value={value}
@@ -78,6 +80,7 @@ const MovieRating = ({ memberReview, fetchComments, handleAuthShow }) => {
         emptyIcon={<StarIcon style={{ ...customStarSize, opacity: 0.55 }} fontSize="inherit" />}
         icon={<StarIcon style={customStarSize} fontSize="inherit" />}
       />
+      </Tooltip>
     </Box>
   )
 }

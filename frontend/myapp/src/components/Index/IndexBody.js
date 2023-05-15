@@ -22,7 +22,13 @@ function IndexBody() {
   // const favoriteActor = useSelector((state) => state.movie.favoriteActor);
 
   const member_id = localStorage.getItem("member_id");
+  const nickname = localStorage.getItem("nickname");
+  
   const [favoriteGenre, setFavoriteGenre] = useState([]);
+  const [favoriteDirector, setFavoriteDirector] = useState([]);
+  const [favoriteActor, setFavoriteActor] = useState([]);
+  const [directorName, setDirectorName] = useState('');
+  const [actorName, setActorName] = useState('');
   
   const config = {
     headers: {
@@ -38,22 +44,28 @@ function IndexBody() {
       axios.get(`${baseUrl}/favoriteGenre/${member_id}`, config)
         .then((res) => {
           setFavoriteGenre(res.data.favoriteGenre);
+          setFavoriteDirector(res.data.favoriteDirector);
+          setFavoriteActor(res.data.favoriteActor);
+          setDirectorName(res.data.favoriteDirector[0].director_name);
+          setActorName(res.data.favoriteActor[0].actor_name);
         })
         .catch(err => {
           console.log(err);
       });
-    }
-  }, [favoriteGenre]);
+    }  
+  }, []);
 
   return (
     <>
       <div style={{ marginLeft: '5%', marginRight: '5%' }}>
         <MovieList listTitle="부귀영화 TOP 20" movies={topRated} />
-        <MovieList listTitle="TMDB 추천 영화" movies={topRatedList} />
+        <MovieList listTitle="해외 평가 순위" movies={topRatedList} />
         <MovieList listTitle="최근 개봉 영화" movies={latestMovies} />
         {member_id ? (
           <>
-            <MovieList listTitle="선호하는 장르 기반 추천" movies={favoriteGenre} />
+            <MovieList listTitle={`${nickname} 님의 선호 장르 리스트`} movies={favoriteGenre} />
+            <MovieList listTitle={`선호 감독 ${directorName}의 영화`} movies={favoriteDirector} />
+            <MovieList listTitle={`선호 배우 ${actorName}의 영화`} movies={favoriteActor} />
           </>
         ) : (
           <>

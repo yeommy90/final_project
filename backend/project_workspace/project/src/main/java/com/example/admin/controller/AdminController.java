@@ -65,9 +65,10 @@ public class AdminController {
  
     //관리자정보 수정
     @PostMapping("/admin/update")//json객체를 java객체로 변환해야하기 때문에 requestbody사용 
-    public void updateAdmin(@RequestBody AdminDTO a) {
-    	System.out.println("이름:" + a.getName());
-    	adminService.updateNameProcess(a);
+    public void updateAdmin(@RequestBody AdminDTO adminDTO) {
+    	System.out.println("이름:" + adminDTO.getName());
+    	adminDTO.setPassword(encodePassword.encode(adminDTO.getPassword()));
+    	adminService.updateNameProcess(adminDTO);
     }
 
     //관리자페이지(댓글 삭제 및 수정 )

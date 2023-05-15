@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import ProfileList from './ProfileList';
 import style from '../../assets/css/profile.module.css';
-import EditImg from 'components/Member/EditImg';
 import EditModal from './EditModal';
 import '../../assets/css/modal.css';
 import EditImgModal from './EditImgModal';

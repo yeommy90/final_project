@@ -62,8 +62,8 @@ public class ListController {
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("favoriteGenre", listService.getFavoriteGenreProcess(member_id));
-//		map.put("favoriteDirector", listService.getFavoriteDirectorProcess());
-//		map.put("favoriteActor", listService.getFavoriteActorProcess());
+		map.put("favoriteDirector", listService.getFavoriteDirectorProcess(member_id));
+		map.put("favoriteActor", listService.getFavoriteActorProcess(member_id));
 		
 		return map;
 	}

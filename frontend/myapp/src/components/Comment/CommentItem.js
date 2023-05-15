@@ -39,7 +39,7 @@ const CommentItem = ({comments, handleSpoilerReport, handleProfanityReport, togg
         ) : (
           <>
             <p className={`comments-content ${expandedComments.includes(comment.member_id) ? 'expanded' : ''} px-3 pt-4`}>{comment.content}</p>
-              {comment.content.split('\n').length > 3 && 
+              {comment.content.split('\n').length > 2 && 
                 <div className="more-button mx-3 mb-3" onClick={() => toggleExpanded(comment.member_id)}>
                   {expandedComments.includes(comment.member_id) ? 'less' : 'more'}
                 </div>

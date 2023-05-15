@@ -6,7 +6,7 @@
 	<insert id="insertMember" parameterType="MemberDTO">
 		<![CDATA[
 		INSERT INTO member(member_id, email, password, name, age, gender, visibility, grade, regdate, nickname, likes_count, profile_path, favorite)
-		VALUES (member_id_seq.nextval, #{email}, #{password}, #{name}, #{age}, #{gender}, #{visibility}, 6, sysdate, '아무개', 0, 'defaultImage.jpg', 0)
+		VALUES (member_id_seq.nextval, #{email}, #{password}, #{name}, #{age}, #{gender}, #{visibility}, 4, sysdate, '아무개', 0, 'defaultImage.jpg', 0)
 		]]>
 	</insert>
 	

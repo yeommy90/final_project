@@ -146,9 +146,20 @@ function IndexNavbar({ transparent }) {
                 </NavItem>
                 <NavItem>
                   <Button
-                    className="btn-round"
-                    style={{ borderRadius: 3, backgroundColor:'#e75757', border: 0, marginTop:'20px' }}
-                    href="/logout"
+                    className='btn-round'
+                    onMouseOver={(e) =>
+                      (e.target.style.backgroundColor = '#d43f3f')
+                    }
+                    onMouseOut={(e) =>
+                      (e.target.style.backgroundColor = '#e75757')
+                    }
+                    style={{
+                      borderRadius: 3,
+                      border: 0,
+                      backgroundColor: '#e75757',
+                      marginTop: '18px',
+                    }}
+                    href='/logout'
                   >
                     LOGOUT
                   </Button>
@@ -157,9 +168,20 @@ function IndexNavbar({ transparent }) {
             ) : (
               <NavItem>
                 <Button
-                  className="btn-round"
-                  style={{ borderRadius: 3, marginLeft: 20, backgroundColor:'#e75757', border: 0 }}
-                  href="/login"
+                  onMouseOver={(e) =>
+                    (e.target.style.backgroundColor = '#d43f3f')
+                  }
+                  onMouseOut={(e) =>
+                    (e.target.style.backgroundColor = '#e75757')
+                  }
+                  className='btn-round'
+                  style={{
+                    border: 0,
+                    borderRadius: 3,
+                    marginLeft: 20,
+                    backgroundColor: '#e75757',
+                  }}
+                  href='/login'
                 >
                   LOGIN
                 </Button>
@@ -225,9 +247,20 @@ function IndexNavbar({ transparent }) {
                 </NavItem>
                 <NavItem>
                   <Button
-                    className="btn-round"
-                    style={{ borderRadius: 3, backgroundColor:'#e75757', border: 0, marginTop:'20px' }}
-                    href="/logout"
+                    className='btn-round'
+                    onMouseOver={(e) =>
+                      (e.target.style.backgroundColor = '#d43f3f')
+                    }
+                    onMouseOut={(e) =>
+                      (e.target.style.backgroundColor = '#e75757')
+                    }
+                    style={{
+                      borderRadius: 3,
+                      border: 0,
+                      backgroundColor: '#e75757',
+                      marginTop: '18px',
+                    }}
+                    href='/logout'
                   >
                     LOGOUT
                   </Button>
@@ -236,9 +269,20 @@ function IndexNavbar({ transparent }) {
             ) : (
               <NavItem>
                 <Button
-                  className="btn-round"
-                  style={{ borderRadius: 3, marginLeft: 20, backgroundColor:'#e75757', border: 0 }}
-                  href="/login"
+                  onMouseOver={(e) =>
+                    (e.target.style.backgroundColor = '#d43f3f')
+                  }
+                  onMouseOut={(e) =>
+                    (e.target.style.backgroundColor = '#e75757')
+                  }
+                  className='btn-round'
+                  style={{
+                    border: 0,
+                    borderRadius: 3,
+                    marginLeft: 20,
+                    backgroundColor: '#e75757',
+                  }}
+                  href='/login'
                 >
                   LOGIN
                 </Button>

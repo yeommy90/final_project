@@ -67,7 +67,13 @@
 .title-box .rating {
   padding-top: 2px;
   font-size: 14px;
-  color: #fc8080;
+  color: #b660f8;
+}
+
+.title-box .rating2 {
+  padding-top: 2px;
+  font-size: 14px;
+  color: #e75757;
 }
 
 .prev_button,

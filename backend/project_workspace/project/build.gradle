@@ -28,7 +28,6 @@ dependencies {
 	
 	//AOP
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
-	
 	//mybatis 
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	
@@ -38,8 +37,13 @@ dependencies {
 	
 	//jwt
 	implementation 'com.auth0:java-jwt:4.0.0'
+	
+	
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+	
+	
 }
