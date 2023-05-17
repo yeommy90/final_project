@@ -6,7 +6,7 @@ import { MovieActions } from 'reduxs/Actions/MovieAction';
 
 Modal.setAppElement('#root'); // 이 부분은 루트 요소를 설정합니다. 이 예에서는 index.html에 있는 'root' 요소입니다.
 
-const CommentModal = ({ isOpen, onRequestClose, movie = {}, fetchComments, comment, setComment, setIsSpoiler, isSpoiler, isEditMode }) => {
+const CommentModal = ({ isOpen, onRequestClose, movie = {}, fetchComments, comment, setComment, setIsSpoiler, isSpoiler, isEditMode, handleDetailClose }) => {
   const dispatch = useDispatch();
 
   function handleSubmit(e) {
@@ -28,7 +28,14 @@ const CommentModal = ({ isOpen, onRequestClose, movie = {}, fetchComments, comme
     onRequestClose();
     setComment('');
     setIsSpoiler(1);
-    fetchComments();
+
+    if (handleDetailClose) {
+      handleDetailClose();
+    }
+    
+    if (fetchComments) {
+      fetchComments();
+    }
   }
 
   return (

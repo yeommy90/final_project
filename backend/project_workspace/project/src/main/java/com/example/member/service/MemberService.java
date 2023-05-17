@@ -17,6 +17,7 @@ public interface MemberService {
 	public MemberDTO updateMemberProcess(String email);
 	public AuthInfo updateMemberProcess(MemberDTO dto);
 	public void updatePassProcess(String email, ChangePwdCommand changePwd);
+	public void deleteMemberProcess(MemberDTO dto);
 	
 	public void updateProfileImgProcess(MemberDTO dto);
 	public MemberDTO selectByEmailProcess(String email);
@@ -28,4 +29,7 @@ public interface MemberService {
 	//마이페이지 위시,레이팅 리스트
 	public List<ListDTO> getWishListProcess(int member_id);
 	public List<ListDTO> getRatingListProcess(int member_id);
+	
+	public int[] selectMemGenreProcess(int member_id);
+	public void deleteMemGenreProcess(int member_id);
 }

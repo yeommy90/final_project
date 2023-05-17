@@ -28,6 +28,8 @@ public class ListDTO {
 //	private String backdrop_path;
 	private String country;
 //	private int runtime;
+	
+	private Date regdate;
 	private String director_name;
 	private String actor_name;
 

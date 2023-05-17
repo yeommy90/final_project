@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { MovieActions } from 'reduxs/Actions/MovieAction';
@@ -12,6 +12,7 @@ import DeleteModal from './DeleteModal';
 import MemberWish from './MemberWish';
 import MemberReviewInfo from './MemberReviewInfo';
 import MemberFavorite from './MemberFavorite';
+import useComment from './useComment';
 
 const BannerOverlay = styled.div`
     position: absolute;
@@ -27,64 +28,30 @@ const BannerOverlay = styled.div`
   `;
 
 const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
-  const dispatch = useDispatch();
   const memberReview = useSelector((state) => state.movie.memberReview);
-
-  const hasComment = memberReview && memberReview.content;
   const member_id = localStorage.getItem('member_id');
+  const movie_id = contents.movie_id;
 
-  // memberReview가 아직 전달되지 않았을 수 있으므로 확인 후 state를 초기화 해야함
-  const [comment, setComment] = useState('');
-  const [isSpoiler, setIsSpoiler] = useState(1);
-  const [isEditMode, setIsEditMode] = useState(false);
-
-  // 코멘트작성 버튼 > 모달
-  const [show, setShow] = useState(false);
-  const handleClose = () => {
-    setShow(false);
-    setComment('');
-  };
-  const handleShow = (editMode = false) => {
-    setIsEditMode(editMode);
-    if (editMode) {
-      setComment(memberReview.content);
-      setIsSpoiler(memberReview.state);
-    }
-    setShow(true);
-  };
-
-  // 코멘트작성 버튼 > 수정/삭제 드롭다운 메뉴
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-  // 삭제 모달
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const handleCancelDelete = () => setShowDeleteModal(false);
-  const handleConfirmDelete = () => {
-    dispatch(MovieActions.deleteComment(memberReview.movie_id, memberReview.member_id));
-    setShowDeleteModal(false);
-    setComment('');
-    fetchComments();
-  }
-  
-  const handleDelete = () => {
-    setShowDeleteModal(true);
-  };
-
-  // 코멘트 작성 버튼
-  const handleCommentClick = () => {
-    if (!member_id) {
-      // 로그아웃 상태일 때: auth 모달
-      handleAuthShow();
-    } else if (hasComment) {
-      // 로그인 상태이며 기존 작성 comment가 있을 때: 수정/삭제 드롭다운 메뉴
-      setIsDropdownVisible(!isDropdownVisible);
-    } else {
-      // 로그인 상태이며 기존 작성 comment가 없을 때: 코멘트 작성 모달창
-      handleShow();
-    }
-  }
-
-  // 인생영화
+  const {
+    comment,
+    isSpoiler,
+    isEditMode,
+    show,
+    isDropdownVisible,
+    showDeleteModal,
+    setComment,
+    setIsSpoiler,
+    setIsEditMode,
+    setShow,
+    setIsDropdownVisible,
+    setShowDeleteModal,
+    handleShow,
+    handleClose,
+    handleDelete,
+    handleConfirmDelete,
+    handleCancelDelete,
+    handleCommentClick,
+  } = useComment(fetchComments, handleAuthShow, movie_id, member_id);
 
   return (
     <>

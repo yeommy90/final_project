@@ -48,4 +48,10 @@ public class NoticeServiceImp implements NoticeService{
 		// TODO Auto-generated method stub
 		dao.deleteNotice(notice_id);
 	}
+	@Override
+	public void delimgProcess(String notice_id) {
+		// TODO Auto-generated method stub
+		dao.delimg(notice_id);
+	}
+	
 }

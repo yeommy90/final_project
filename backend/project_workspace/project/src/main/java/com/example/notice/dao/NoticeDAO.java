@@ -16,4 +16,5 @@ public interface NoticeDAO {
 	public NoticeDTO selectByNoticeId(String notice_id);
 	public void editNotice(NoticeDTO dto);
 	public void deleteNotice(String notice_id);
+	public void delimg(String notice_id);
 }

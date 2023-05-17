@@ -12,7 +12,8 @@ CREATE TABLE member(
     visibility NUMBER, --1공개2비공개
     grade NUMBER,
     regdate date, --가입일,
-    favorite number
+    favorite number,
+    type varchar2(20) --회원가입 타입
 );
 
 -- 시퀀스
@@ -174,6 +175,18 @@ create sequence notice_id_seq
     increment by 1
     nocache
     nocycle;
+    
+-- provider table
+create table provider (
+    provider_id number,
+    name varchar2(20)
+);
+
+-- movie_provider 테이블
+create table movie_provider (
+    movie_id number,
+    provider_id number
+);
 
 ---------------------------------------------------------
 select count(*) from movie;

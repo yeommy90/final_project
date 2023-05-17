@@ -72,11 +72,8 @@ const Notice = () => {
     },
   };
 
-
-
-
   useEffect(() => {
-    axios.post(`${baseUrl}/selectallnotice`, config)  // 공지사항 전체출력하는 컨트롤러
+    axios.get(`${baseUrl}/selectallnotice`, config)  // 공지사항 전체출력하는 컨트롤러
       .then((response) => {
         console.log(response.data)
         setNotices(response.data)

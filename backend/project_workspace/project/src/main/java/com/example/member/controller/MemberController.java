@@ -77,15 +77,17 @@ public class MemberController {
 		memberService.updateMemberProcess(memberDTO);
 	}
 	
+	@PostMapping("/profile/delete")
+	public void deleteMember(@RequestBody MemberDTO memberDTO, HttpServletRequest request) {
+		memberService.deleteMemberProcess(memberDTO);
+	}
+	
 	@PostMapping("/profile/imgUpdate")
 	public void updateprofileImg(@RequestParam("file") MultipartFile file, @RequestParam("email") String email, HttpServletRequest request) {
 		UUID uuid = FileUpload.saveCopyFile(file, FileUpload.urlPath(request));
-	    System.out.println(uuid);
-	    System.out.println(email);
 	    MemberDTO member = memberService.selectByEmailProcess(email);
 	    member.setProfile_path(uuid + "_" + file.getOriginalFilename());
 	    System.out.println(member.getProfile_path());
-	    System.out.println(member.getEmail());
 	    memberService.updateProfileImgProcess(member);
 	};
 	
@@ -97,8 +99,12 @@ public class MemberController {
 	
 	// 회원가입 > 장르선택
 	@PostMapping("/genreselect")
-	public String addMember(@RequestBody MemberGenreDTO memberGenreDTO) {
+	public void addMemberGenre(@RequestBody MemberGenreDTO memberGenreDTO) {
+
 		int memberId = memberGenreDTO.getMemberId();
+
+		memberService.deleteMemGenreProcess(memberId);
+
 		List<Integer> selectedGenre = memberGenreDTO.getSelectedGenre();
 
 		MemberGenreDTO dto = new MemberGenreDTO();
@@ -108,7 +114,22 @@ public class MemberController {
 			dto.setGenreId(tagValue);
 			memberService.insertMemGenreProcess(dto);
 		}
-		return null;
+
+	}
+
+	@GetMapping("/genreselect/{member_id}")
+	public int[] getMemberGenre(@PathVariable int member_id) {
+
+//			System.out.println("실행행행행행행행행행행");
+		int[] memGenre = memberService.selectMemGenreProcess(member_id);
+
+		// 가져왔는지 확인
+		for (int genre : memGenre) {
+//				System.out.println("장르다"+ genre);
+
+		}
+
+		return memGenre;
 	}
 
 	

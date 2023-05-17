@@ -31,7 +31,7 @@ const RegisterScreen = () => {
   const [input, setInput] = useState({
     email: "",
     password: "",
-  })
+  });
 
   function handleCheckboxChange(event) {
     setIsChecked(event.target.checked);
@@ -69,33 +69,34 @@ const RegisterScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log(isvalid);
 
     setSubmitted(true);
-    if (
-      !name ||
-      !age ||
-      !email ||
-      !password ||
-      !gender ||
-      !isChecked ||
-      gender === "" ||
-      !isvalid ||
-      ageField2
-    ) {
+    if (!name || !email || !password || count === 1) {
       // 첫 번째 슬라이드로 돌아가는 코드
       setPosition(0);
       return;
     }
 
+    if (!age || gender === "" || !gender || ageField2) {
+      // 두 번째 슬라이드로 돌아가는 코드
+      setPosition(-350);
+      return;
+    }
+
+    if (!isChecked) {
+      // 세 번째 슬라이드로 돌아가는 코드
+      setPosition(-700);
+      return;
+    }
+
     const newInputs = {
       ...input,
-      email: `user!$${input.email}`
+      email: `user!$${input.email}`,
     };
 
-    console.log(input)
-    console.log(member);
-
     await axios.post(`${baseUrl}/register`, member, config);
+    // 자동 로그인
     await axios
       .post(`${baseUrl}/login`, newInputs, config)
       .then((response) => {
@@ -109,8 +110,6 @@ const RegisterScreen = () => {
         let jwtMemberNickname = response.data.nickname;
         let jwtMemberEmail = response.data.email;
         let jwtAuthRole = response.data.authRole;
-        let jwtProfile_path = response.data.profile_path;
-        let jwtGrade = response.data.grade;
 
         // localStorage.setItem("Authorization", test);
         localStorage.setItem("Authorization", jwtToken);
@@ -119,13 +118,11 @@ const RegisterScreen = () => {
         localStorage.setItem("name", jwtMemberName);
         localStorage.setItem("nickname", jwtMemberNickname);
         localStorage.setItem("authRole", jwtAuthRole);
-        localStorage.setItem("profile_path", jwtProfile_path);
-        localStorage.setItem("grade", jwtGrade);
         localStorage.setItem("isLogin", "true");
+        window.location.replace("/genreselect");
       })
-      .then(window.location.replace("/genreselect"))
-      // .then(window.location.replace("/"))
-      // .then((response) => {})
+      // .then(window.location.replace("/genreselect"))
+      // .then(window.location.replace("/login"))
       .catch((err) => {
         console.error(err.message);
       });
@@ -172,12 +169,12 @@ const RegisterScreen = () => {
       setInput({ ...input, [e.target.name]: e.target.value });
     }
     // 서버로 이메일 중복 확인 요청 보내기
+    console.log(isvalid);
     setMember({ ...member, [e.target.name]: e.target.value });
 
-    // 나이 유효성 검사
     if (e.target.name === "name") {
-      setInput({ ...input, [e.target.name]: e.target.value });
     }
+    // 나이 유효성 검사
     if (e.target.name === "age") {
       if (
         isNaN(e.target.value) ||
@@ -188,7 +185,6 @@ const RegisterScreen = () => {
       } else {
         setAgeField2(false);
       }
-      setInput({ ...input, [e.target.name]: e.target.value });
     }
   };
 
@@ -272,19 +268,22 @@ const RegisterScreen = () => {
                       value={name}
                       onChange={handleValueChange}
                     ></input>
-                    {nameField && name.trim() === "" && (
-                      <span
-                        className={show ? "" : "hidden"}
-                        style={{
-                          color: "rgb(255,171, 154)",
-                          animation: "glow 1s ease-in-out infinite",
-                          fontWeight: "bold",
-                          fontSize: "12px",
-                        }}
-                      >
-                        이름을 입력해주세요.
-                      </span>
-                    )}
+                    {nameField &&
+                      name.trim() === "" &&
+                      submitted === true &&
+                      !isvalid && (
+                        <span
+                          className={show ? "" : "hidden"}
+                          style={{
+                            color: "rgb(255,171, 154)",
+                            animation: "glow 1s ease-in-out infinite",
+                            fontWeight: "bold",
+                            fontSize: "12px",
+                          }}
+                        >
+                          이름을 입력해주세요.
+                        </span>
+                      )}
                   </div>
                 </div>
 
@@ -306,7 +305,7 @@ const RegisterScreen = () => {
                     onChange={handleValueChange}
                     onBlur={idcheck}
                   ></input>
-                  {isvalid === false && (
+                  {isvalid === false && submitted === true && emailField && (
                     <span
                       style={{
                         color: "rgb(255,171, 154)",
@@ -318,9 +317,9 @@ const RegisterScreen = () => {
                       유효하지 않은 이메일입니다.
                     </span>
                   )}
-                  {emailField && email.trim() === "" && (
+                  {emailField && email.trim() === "" && submitted === true && (
                     <span
-                      className={show ? "" : "hidden"}
+                      // className={show ? "" : "hidden"}
                       style={{
                         color: "rgb(255,171, 154)",
                         animation: "glow 1s ease-in-out infinite",
@@ -331,7 +330,7 @@ const RegisterScreen = () => {
                       이메일을 입력해주세요.
                     </span>
                   )}
-                  {isvalid && count === 0 && (
+                  {isvalid && count === 0 && submitted === true && (
                     <div
                       style={{
                         color: "rgb(170,255, 0)",
@@ -344,7 +343,7 @@ const RegisterScreen = () => {
                       사용 가능한 이메일입니다.
                     </div>
                   )}
-                  {count === 1 && (
+                  {count === 1 && submitted === true && isvalid && (
                     <span
                       style={{
                         color: "rgb(255,171, 154)",
@@ -370,24 +369,27 @@ const RegisterScreen = () => {
                   </p>
                   <input
                     className="text-input-pw"
-                    type="text"
+                    type="password"
                     name="password"
                     value={password}
                     onChange={handleValueChange}
+                    maxlength="13"
                   ></input>
-                  {passField && password.trim() === "" && (
-                    <span
-                      className={show ? "" : "hidden"}
-                      style={{
-                        color: "rgb(255,171, 154)",
-                        animation: "glow 1s ease-in-out infinite",
-                        fontWeight: "bold",
-                        fontSize: "12px",
-                      }}
-                    >
-                      비밀번호를 입력해주세요.
-                    </span>
-                  )}
+                  {passField &&
+                    password.trim() === "" &&
+                    submitted === true && (
+                      <span
+                        className={show ? "" : "hidden"}
+                        style={{
+                          color: "rgb(255,171, 154)",
+                          animation: "glow 1s ease-in-out infinite",
+                          fontWeight: "bold",
+                          fontSize: "12px",
+                        }}
+                      >
+                        비밀번호를 입력해주세요.
+                      </span>
+                    )}
                 </div>
                 <div>
                   <p
@@ -401,9 +403,10 @@ const RegisterScreen = () => {
                   </p>
                   <input
                     className="text-input-pw"
-                    type="text"
+                    type="password"
                     name="password"
                     onChange={passChange}
+                    maxlength="13"
                   ></input>
                   <span>{passwordCheck}</span>
                 </div>
@@ -422,20 +425,20 @@ const RegisterScreen = () => {
               </div>
             </div>
             {/* 페이지2 */}
-            <div className='reg_sld' style={{ position: 'relative' }}>
+            <div className="reg_sld" style={{ position: "relative" }}>
               <div>
                 <img
                   onClick={handlePrevClick}
-                  alt='...'
-                  src={require('assets/img/arrow.png')}
+                  alt="..."
+                  src={require("assets/img/arrow.png")}
                   style={{
-                    position: 'absolute',
-                    width: '25px',
-                    transform: 'scaleX(-1)',
-                    top: '25px',
-                    left: '20px',
-                    filter: 'invert(100%)',
-                    cursor: 'pointer',
+                    position: "absolute",
+                    width: "25px",
+                    transform: "scaleX(-1)",
+                    top: "25px",
+                    left: "20px",
+                    filter: "invert(100%)",
+                    cursor: "pointer",
                   }}
                 />
               </div>
@@ -460,8 +463,9 @@ const RegisterScreen = () => {
                       name="age"
                       value={age}
                       onChange={handleValueChange}
+                      maxlength="2"
                     ></input>
-                    {ageField && age.trim() === "" && (
+                    {ageField && age.trim() === "" && submitted === true && (
                       <span
                         className={show ? "" : "hidden"}
                         style={{
@@ -579,20 +583,20 @@ const RegisterScreen = () => {
             </div>
 
             {/* 페이지3 */}
-            <div className='reg_sld' style={{ position: 'relative' }}>
+            <div className="reg_sld" style={{ position: "relative" }}>
               <div>
                 <img
                   onClick={handlePrevClick}
-                  alt='...'
-                  src={require('assets/img/arrow.png')}
+                  alt="..."
+                  src={require("assets/img/arrow.png")}
                   style={{
-                    position: 'absolute',
-                    width: '25px',
-                    transform: 'scaleX(-1)',
-                    top: '25px',
-                    left: '20px',
-                    filter: 'invert(100%)',
-                    cursor: 'pointer',
+                    position: "absolute",
+                    width: "25px",
+                    transform: "scaleX(-1)",
+                    top: "25px",
+                    left: "20px",
+                    filter: "invert(100%)",
+                    cursor: "pointer",
                   }}
                 />
               </div>
@@ -866,7 +870,7 @@ const RegisterScreen = () => {
                           onChange={handleCheckboxChange}
                         />{" "}
                         약관에 동의합니다.
-                        {isChecked === false && (
+                        {isChecked === false && submitted === true && (
                           <span
                             className={show ? "" : "hidden"}
                             style={{

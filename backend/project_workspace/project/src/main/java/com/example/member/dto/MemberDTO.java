@@ -16,7 +16,9 @@ public class MemberDTO {
 	private int grade;
 	private Date regDate;
 	private String authRole;
+	private String type;
 	
+	private int rating_count;
 	private int favorite;
 	
 	public MemberDTO() {
@@ -24,7 +26,7 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(int member_id, String name, String nickname, String email, String password, String profile_path,
-			int gender, int age, int likes_count, int visibility, int grade, Date regDate, String authRole, int favorite) {
+			int gender, int age, int likes_count, int visibility, int grade, Date regDate, String authRole, int favorite, int rating_count, String type) {
 		super();
 		this.member_id = member_id;
 		this.name = name;
@@ -40,6 +42,8 @@ public class MemberDTO {
 		this.regDate = regDate;
 		this.authRole = authRole;
 		this.favorite = favorite;
+		this.rating_count = rating_count;
+		this.type = type;
 	}
 
 	public int getMember_id() {
@@ -163,6 +167,22 @@ public class MemberDTO {
 
 	public void setFavorite(int favorite) {
 		this.favorite = favorite;
+	}
+
+	public int getRating_count() {
+		return rating_count;
+	}
+
+	public void setRating_count(int rating_count) {
+		this.rating_count = rating_count;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }

@@ -9,27 +9,77 @@ const CommentItem = ({comments, handleSpoilerReport, handleProfanityReport, togg
 
   const renderedComments = comments.slice(0, itemsToShow).map((comment) => {
     return (
-      <div key={comment.member_id} className="comment-box p-3 mb-3">
-        <div className="d-flex align-items-center">
+      <div
+        key={comment.member_id}
+        className='comment-box p-4 mb-3'
+        style={{ position: 'relative' }}
+      >
+        <img
+          src={require('assets/img/crown.png')}
+          style={{
+            position: 'absolute',
+            top: '15px',
+            left: '25px',
+            width: '30px',
+            zIndex: '8',
+            transform: 'rotate( -53deg )',
+          }}
+        />
+
+        <img
+          style={{
+            position: 'absolute',
+            width: '30px',
+            top: '50px',
+            left: '70px',
+            zIndex: 99,
+          }}
+          src={require('assets/img/gold.png')}
+        ></img>
+        <div className='d-flex align-items-center' style={{ zIndex: 9 }}>
           <Link to={`/profile/${comment.member_id}`}>
-            <img src={`/profiles/${comment.profile_path}`} className="profile-pic rounded-circle mx-3"/>
+            <img
+              src={`/profiles/${comment.profile_path}`}
+              className='profile-pic rounded-circle mx-3'
+              style={{ zIndex: 9 }}
+            />
           </Link>
-          <div className="ml-1">
-            <div className="mt-1" style={{color:'gray', fontSize:'1.1em'}}>{comment.nickname}</div>
-            <div style={{color:'#e75757', fontSize:'0.9em'}}>★ {comment.rating !== 0 ? comment.rating : '평가없음'}</div>
+          <div className='ml-1'>
+            <div className='mt-1' style={{ color: 'gray', fontSize: '1.1em' }}>
+              {comment.nickname}
+            </div>
+            <div style={{ color: '#e75757', fontSize: '0.9em' }}>
+              ★ {comment.rating !== 0 ? comment.rating : '평가없음'}
+            </div>
           </div>
           {comment.member_id != member_id && (
-          <div className="ml-auto mr-2">
-            <Dropdown>
-              <Dropdown.Toggle variant="link" size="sm" style={{outline: 'none', boxShadow: 'none'}}>
-                <FontAwesomeIcon icon={faEllipsisV} className="m-0" />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => {handleSpoilerReport(comment.member_id)}}>스포일러 신고</Dropdown.Item>
-                <Dropdown.Item onClick={() => {handleProfanityReport(comment.member_id)}}>욕설 신고</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
+            <div className='ml-auto mr-2'>
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant='link'
+                  size='sm'
+                  style={{ outline: 'none', boxShadow: 'none' }}
+                >
+                  <FontAwesomeIcon icon={faEllipsisV} className='m-0' />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    onClick={() => {
+                      handleSpoilerReport(comment.member_id);
+                    }}
+                  >
+                    스포일러 신고
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => {
+                      handleProfanityReport(comment.member_id);
+                    }}
+                  >
+                    욕설 신고
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
           )}
         </div>
         {comment.state === 2 ? (
@@ -41,7 +91,7 @@ const CommentItem = ({comments, handleSpoilerReport, handleProfanityReport, togg
             <p className={`comments-content ${expandedComments.includes(comment.member_id) ? 'expanded' : ''} px-3 pt-4`}>{comment.content}</p>
               {comment.content.split('\n').length > 2 && 
                 <div className="more-button mx-3 mb-3" onClick={() => toggleExpanded(comment.member_id)}>
-                  {expandedComments.includes(comment.member_id) ? 'less' : 'more'}
+                  {expandedComments.includes(comment.member_id) ? '접기' : '더보기'}
                 </div>
               }
           </>

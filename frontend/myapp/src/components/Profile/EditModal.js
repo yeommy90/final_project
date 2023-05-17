@@ -10,6 +10,11 @@ const EditModal = ({ isOpen, onRequestClose}) => {
     password: "",
     name: "",
     nickname: "",
+    visibility: "",
+  });
+
+  const [input, setInput] = useState({
+    password: "",
   });
 
   const { password, name, nickname } = member;
@@ -34,6 +39,7 @@ const EditModal = ({ isOpen, onRequestClose}) => {
   }, []);
 
   const [passwordCheck, setPasswordCheck] = useState("");
+  const passField = document.querySelector("input[name='password2']");
 
   const passChange = (e) => {
     e.preventDefault();
@@ -42,19 +48,33 @@ const EditModal = ({ isOpen, onRequestClose}) => {
   };
 
   const handleValueChange = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    //추가한 부분
+    if (e.target.name === "password") {
+      setInput({ ...input, [e.target.name]: e.target.value });
+    }
+    let value = e.target.value;
+    if (e.target.type === "radio") {
+      value = parseInt(value);
+    }
+
     setMember({ ...member, [e.target.name]: e.target.value });
+    console.log(member.visibility);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!password) {
+    if (password === "") {
       alert("비밀번호를 입력하세요.");
+      return;
+    }
+    if (password !== passField.value) {
+      alert("비밀번호가 일치하지 않습니다.");
       return;
     }
 
     await axios.post(`${baseUrl}/profile/update`, member, config);
-    localStorage.setItem('nickname', nickname);
+    localStorage.setItem("nickname", nickname);
     //navigator('/');
     window.location.replace("/");
   };
@@ -123,6 +143,43 @@ const EditModal = ({ isOpen, onRequestClose}) => {
                 value={name}
                 onChange={handleValueChange}
               />
+            </div>
+
+            <div style={{ marginTop: "25px" }}>
+              <div
+                className="form-check-radio"
+                style={{ color: "white" }}
+              >
+                <label className="form-check-label">
+                  <input
+                    type="radio"
+                    name="visibility"
+                    id="exampleRadios1"
+                    value="1"
+                    checked={member.visibility === "1"} // 수정된 부분
+                    onChange={handleValueChange}
+                  />
+                  프로필 공개
+                  <span className="form-check-sign"></span>
+                </label>
+              </div>
+              <div
+                className="form-check-radio"
+                style={{ color: "white" }}
+              >
+                <label className="form-check-label">
+                  <input
+                    type="radio"
+                    name="visibility"
+                    id="exampleRadios2"
+                    value="2"
+                    checked={member.visibility === "2"} // 수정된 부분
+                    onChange={handleValueChange}
+                  />
+                  프로필 비공개
+                  <span className="form-check-sign"></span>
+                </label>
+              </div>
             </div>
 
             <button type="submit" className="btn btn-primary mt-3">

@@ -66,6 +66,7 @@ function IndexBody() {
             <MovieList listTitle={`${nickname} 님의 선호 장르 리스트`} movies={favoriteGenre} />
             <MovieList listTitle={`선호 감독 ${directorName}의 영화`} movies={favoriteDirector} />
             <MovieList listTitle={`선호 배우 ${actorName}의 영화`} movies={favoriteActor} />
+            {/* <Recommend /> */}
           </>
         ) : (
           <>
@@ -74,7 +75,7 @@ function IndexBody() {
             <MovieList listTitle="화제의 배우 티모시 샬라메의 영화" movies={topRatedActor} />
           </>
         )}
-        {/* <Recommend /> */}
+        
       </div>
     </>
   );

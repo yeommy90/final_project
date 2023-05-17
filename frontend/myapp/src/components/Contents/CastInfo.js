@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
 
@@ -12,6 +12,17 @@ const CastInfo = ({ contents = {} }) => {
     image: `https://image.tmdb.org/t/p/w200/${item.profile_path}`,
     role: item.actor_id ? 'Actor' : 'Director',
   }));
+
+  const preloadImages = (items) => {
+    items.forEach(item => {
+      const img = new Image();
+      img.src = item.image;  // 각 item에서 image URL을 가져옵니다.
+    });
+  };
+  
+  useEffect(() => {
+    preloadImages(totalItems);
+  }, [totalItems]);
 
   const itemsPerRow = 3;
   const numberOfRows = 2;

@@ -1,5 +1,5 @@
 import 'assets/css/font.css';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ProfileAction } from 'reduxs/Actions/ProfileAction';
@@ -12,6 +12,23 @@ const ProfileListMore = () => {
   const ratingList = useSelector((state) => state.profile.ratingList);
   const [movies, setMovies] = useState([]);
   const { path } = useParams();
+  const [option, setOption] = useState('최신순');
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     dispatch(ProfileAction.getProfileList(member_id));
@@ -36,12 +53,133 @@ const ProfileListMore = () => {
         <div style={{ width: '100%', height: '150px' }}></div>
         <div style={{ width: '100%' }}>
           <div style={{ width: '1100px', margin: 'auto' }}>
-            {path === 'wish' ? (
-              <p className={style.list_title}>보고싶어요 전체보기</p>
-            ) : (
-              <p className={style.list_title}>평가를 완료한 영화 전체보기</p>
-            )}
+            <div
+              style={{
+                width: '100%',
+                height: '50px',
+              }}
+            >
+              {path === 'wish' ? (
+                <p className={style.list_title}>보고싶어요</p>
+              ) : (
+                <p className={style.list_title}>평가를 완료한 영화</p>
+              )}
+              <div className={style.dropdown} ref={dropdownRef}>
+                <div
+                  className={style.menu_title}
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor = '#d43f3f')
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor = '#e75757')
+                  }
+                >
+                  <p>{option}</p>
+                </div>
+                {menuOpen && (
+                  <div className={style.menu_box}>
+                    <div className={style.option_box}>
+                      <div
+                        className={style.option_hover}
+                        onClick={() => {
+                          const sortedMovies = [...movies].sort(function (
+                            a,
+                            b
+                          ) {
+                            const dateA = new Date(a.regdate);
+                            const dateB = new Date(b.regdate);
+                            return dateB - dateA;
+                          });
+                          setMovies(sortedMovies);
+                          setOption('최신순');
+                          setMenuOpen(!menuOpen);
+                        }}
+                      >
+                        <p>최신순</p>
+                      </div>
+                    </div>
+                    <div className={style.option_box}>
+                      <div
+                        className={style.option_hover}
+                        onClick={() => {
+                          const sortedMovies = [...movies].sort(function (
+                            a,
+                            b
+                          ) {
+                            const dateA = new Date(a.regdate);
+                            const dateB = new Date(b.regdate);
+                            return dateA - dateB;
+                          });
 
+                          setOption('오래된 순');
+                          setMenuOpen(!menuOpen);
+                          setMovies(sortedMovies);
+                        }}
+                      >
+                        <p>오래된 순</p>
+                      </div>
+                    </div>
+                    <div className={style.option_box}>
+                      <div
+                        className={style.option_hover}
+                        onClick={() => {
+                          const sortedMovies = [...movies].sort(function (
+                            a,
+                            b
+                          ) {
+                            return b.tmdb_vote_sum - a.tmdb_vote_sum;
+                          });
+                          setMovies(sortedMovies);
+                          setOption('평점 높은 순');
+                          setMenuOpen(!menuOpen);
+                        }}
+                      >
+                        <p>평점 높은 순</p>
+                      </div>
+                    </div>
+                    <div className={style.option_box}>
+                      <div
+                        className={style.option_hover}
+                        onClick={() => {
+                          const sortedMovies = [...movies].sort(function (
+                            a,
+                            b
+                          ) {
+                            return a.tmdb_vote_sum - b.tmdb_vote_sum;
+                          });
+                          setMovies(sortedMovies);
+                          setOption('평점 낮은 순');
+                          setMenuOpen(!menuOpen);
+                        }}
+                      >
+                        <p>평점 낮은 순</p>
+                      </div>
+                    </div>
+                    <div className={style.option_box}>
+                      <div
+                        className={style.option_hover}
+                        onClick={() => {
+                          const sortedMovies = [...movies].sort(function (
+                            a,
+                            b
+                          ) {
+                            const dateA = new Date(a.release_date);
+                            const dateB = new Date(b.regdate);
+                            return dateB - dateA;
+                          });
+                          setMovies(sortedMovies);
+                          setOption('출시일 순');
+                          setMenuOpen(!menuOpen);
+                        }}
+                      >
+                        <p>출시일 순</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
             {movies &&
               movies.map((movie) => {
                 return (

@@ -202,11 +202,15 @@
 	
 	<!--검색 자동완성 기능을 위한 모든 선택-->
 	<select id="selectAll" resultType="java.lang.String">
-		(SELECT ACTOR.NAME FROM ACTOR)
-		UNION
-		(SELECT DIRECTOR.NAME FROM DIRECTOR)
-		UNION
-		(SELECT MOVIE.TITLE FROM MOVIE)
+		SELECT NAME
+		FROM (
+		  SELECT NAME, NULL AS popularity FROM ACTOR
+		  UNION
+		  SELECT NAME, NULL AS popularity FROM DIRECTOR
+		  UNION
+		  SELECT TITLE, popularity FROM MOVIE
+		) combined_results
+		ORDER BY popularity DESC NULLS LAST
 	</select>
 	
 	<!--배우 ID로 ACTOR row 선택(이미지, 이름, ID)-->
@@ -264,17 +268,18 @@
 		    FROM MOVIE m
 		    INNER JOIN (
 		        SELECT MOVIE_ID, MAX(REGDATE) AS latest_review_date
-		        FROM comments
+		        <!--기존 FROM comment에서 rating으로 변경-->
+		        FROM rating
 		        WHERE MEMBER_ID = #{member_id}
 		        GROUP BY MOVIE_ID
 		    ) r ON m.MOVIE_ID = r.MOVIE_ID
-		    INNER JOIN comments r2 ON r.MOVIE_ID = r2.MOVIE_ID AND r.latest_review_date = r2.REGDATE
+		     <!--기존 INNER JOIN comment에서 rating으로 변경-->
+		    INNER JOIN rating r2 ON r.MOVIE_ID = r2.MOVIE_ID AND r.latest_review_date = r2.REGDATE
 		    WHERE r2.MEMBER_ID = #{member_id}
 		    ORDER BY r.latest_review_date DESC
 		)
 		WHERE ROWNUM = 1
 	</select>
-	
 	
 	<!--추천 영화 정보-->
 	<!--리뷰를 남기지 않은 영화 영화만 row 선택. 리뷰를 남긴 영화면 선택하기-->
@@ -290,6 +295,7 @@
 			)
 			AND m.movie_id = #{movie_id}
 	</select>
+	
 	
 	
 	
@@ -327,6 +333,13 @@
 		where m.movie_id = #{movie_id}
 	</select>
 	
+	<select id="getProviderByMovieId" parameterType="int" resultType="ProviderDTO">
+		select distinct * 
+		from provider p 
+		join movie_provider mp on p.provider_id = mp.provider_id 
+		where mp.movie_id = #{movie_id}
+	</select>
+	
 	<!--영화 아이디로 트레일러 가져오기-->	
 	<select id="getTrailerByMovieId" parameterType="int" resultType="String">
 		SELECT trailerPath
@@ -344,11 +357,12 @@
 		<result property="state" column="state"/>
 		<result property="nickname" column="nickname"/>
 		<result property="profile_path" column="profile_path"/>
+		<result property="grade" column="grade"/>
 	</resultMap>
 	
 	<!--영화 하나에 현재까지 작성된 코멘트-->
 	<select id="getReviewsByMovieId"  parameterType="int" resultMap="CommentAndRatingResultMap">
-		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate, m.nickname, m.profile_path
+		SELECT c.movie_id, c.member_id, c.content, COALESCE(r.rating, 0) AS rating, c.likes, c.state, c.regdate, m.nickname, m.profile_path, m.grade
 		FROM comments c
 		LEFT OUTER JOIN rating r ON r.movie_id = c.movie_id AND r.member_id = c.member_id
 		JOIN member m ON m.member_id = c.member_id
@@ -410,6 +424,18 @@
 	
 	
 	
+	<!--현재 사용자가 남긴 모든 rating-->
+	<select id="findAllRatingById" parameterType="int" resultType="RatingDTO">
+		select * from rating where member_id = #{member_id}
+	</select>
+	
+	<select id="findAllWishById" parameterType="int" resultType="WishDTO">
+		select * from wish where member_id = #{member_id}
+	</select>
+	
+	
+	
+	
 	<!--영화 테이블 별점 업데이트-->
 	<select id="calculateRating" parameterType="int" resultType="map">
 		select count(rating) as vote_cnt, round(avg(rating),2) as vote_sum from rating where movie_id = #{movie_id}
@@ -447,7 +473,7 @@
 	<select id="findFavoriteById" parameterType="int" resultType="ContentsDTO">
 		select * 
 		from movie 
-		where movie_id in (select favorite from member where member_id = 1)
+		where movie_id in (select favorite from member where member_id = #{member_id})
 	</select>
 	
 	<update id="deleteFavorite" parameterType="int">

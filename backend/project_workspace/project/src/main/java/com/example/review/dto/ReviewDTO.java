@@ -23,4 +23,5 @@ public class ReviewDTO {
 	
 	private String nickname;
 	private String profile_path;
+	private int grade;
 }

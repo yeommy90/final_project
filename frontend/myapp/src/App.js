@@ -35,15 +35,15 @@ function App() {
         <Route path="/register" element={<PrivateRoute isAuth={false} RouteComponent={RegisterPage} />} />
         <Route path="/search/:query" element={<PrivateRoute isAuth={false} RouteComponent={SearchPage} />} />
         <Route path="/profile/:member_id" element={<PrivateRoute isAuth={false} RouteComponent={ProfilePage} />} />
-        <Route path='/profilelistmore/:path' element={<PrivateRoute isAuth={true} RouteComponent={ProfileListMore} />}/>
+        <Route path='/profilelistmore/:path' element={<PrivateRoute isAuth={false} RouteComponent={ProfileListMore} />}/>
         <Route path='/genreselect' element={<PrivateRoute isAuth={false} RouteComponent={GenreSelect} />} />
-        <Route path="/analysis/:member_id" element={<PrivateRoute isAuth={true} RouteComponent={AnalysisPage} />} />
+        <Route path="/analysis/:member_id" element={<PrivateRoute isAuth={false} RouteComponent={AnalysisPage} />} />
         <Route path="/contents/:movie_id" element={<PrivateRoute isAuth={false} RouteComponent={Contents} />} />
         <Route path="/review" element={<PrivateRoute isAuth={true} RouteComponent={ReviewPage} />} />
         <Route path="/cast/:profileType/:id" element={<PrivateRoute isAuth={false} RouteComponent={CastProfile}/>} />
         <Route path="/recommend/:member_id" element={<PrivateRoute isAuth={false} RouteComponent={RecList} />}/>
+        <Route path='/notice' element={<PrivateRoute isAuth={false} RouteComponent={Notice} />} />
 
-        <Route path='/notice' element={<AdminPrivateRoute isAuth={false} RouteComponent={Notice} />} />
         <Route path='/adminlogin' element={<AdminPrivateRoute isAuth={false} RouteComponent={AdminLogin} />} />
         <Route path='/adminregister' element={<AdminPrivateRoute isAuth={false} RouteComponent={AdminRegister} />} />
         <Route path='/admineditinfo' element={<AdminPrivateRoute isAuth={true} RouteComponent={AdminEditInfo} />} />

@@ -252,8 +252,9 @@
   transform: translate(-50%, -50%);
   background: white;
   border-radius: 20px;
-  width: 500px;
+  width: 400px;
   max-width: 80%;
+  max-height: 80%;
   outline: none;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -273,4 +274,34 @@
   overflow-y: auto;
   overflow-x: hidden;
   outline: 0;
+}
+
+.CancelFavoriteModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 20px;
+  width: 400px;
+  max-width: 80%;
+  max-height: 80%;
+  outline: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.ChangeFavoriteModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 20px;
+  width: 500px;
+  max-width: 80%;
+  max-height: 80%;
+  outline: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }

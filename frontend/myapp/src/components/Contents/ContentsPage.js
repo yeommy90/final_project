@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import ContentsImage from './ContentsImage';
 import AuthModal from './AuthModal';
 import ReactPlayer from 'react-player';
+import ProviderInfo from './ProviderInfo';
 
 const Contents = () => {
   const dispatch = useDispatch();
@@ -31,11 +32,14 @@ const Contents = () => {
   // 렌더링 트리거 함수 > 이름을 잘못지었음..
   const fetchComments = async () => {
     const fetchedComments = await dispatch(MovieActions.getMovieContents(movie_id));
-    const fetchedMemberComments = await dispatch(MovieActions.getReviewByMemberId(movie_id, member_id));
-    const fetchedMemberWish = await dispatch(MovieActions.getWishByMemberId(movie_id, member_id));
-    const fetchedLikes = await dispatch(MovieActions.getLikesByMemberId(movie_id, member_id));
-    const fetchedFavorite = await dispatch(MovieActions.getFavoriteByMemberId(member_id));
-    setComments(fetchedComments, fetchedMemberComments, fetchedMemberWish, fetchedLikes, fetchedFavorite);
+
+    if (member_id) {
+      const fetchedMemberComments = await dispatch(MovieActions.getReviewByMemberId(movie_id, member_id));
+      const fetchedMemberWish = await dispatch(MovieActions.getWishByMemberId(movie_id, member_id));
+      const fetchedLikes = await dispatch(MovieActions.getLikesByMemberId(movie_id, member_id));
+      const fetchedFavorite = await dispatch(MovieActions.getFavoriteByMemberId(member_id));
+      setComments(fetchedComments, fetchedMemberComments, fetchedMemberWish, fetchedLikes, fetchedFavorite);
+    }
   }
 
   useEffect(() => {
@@ -67,6 +71,7 @@ const Contents = () => {
           controls={true}
         />
       )}
+      <ProviderInfo contents={contents}/>
       <BasicInfo contents={contents}/>
       <CastInfo contents={contents}/>
       <Comments contents={contents} handleAuthShow={handleAuthShow} memberLikes={memberLikes} fetchComments={fetchComments}/>

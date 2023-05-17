@@ -17,8 +17,16 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from 'reactstrap';
+import KakaoButton from './KakaoButton';
+import NaverButton from './NaverButton';
+
 
 const Login = () => {
+  const passField = document.querySelector("Input[name='password']");
+  const emailField = document.querySelector("Input[name='email']");
+  const [submitted, setSubmitted] = useState(false);
+  const [isvalid, setIsvalid] = useState();
+
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
@@ -27,11 +35,24 @@ const Login = () => {
   const { email, password } = inputs;
 
   const handleValueChange = (e) => {
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
+    // 이메일 필드에 대한 유효성 검사와 중복 확인
+    if (e.target.name === "email") {
+      // 이메일 형식이 올바른지 검사
+      console.log(isvalid);
+      setInputs({ ...inputs, [e.target.name]: e.target.value });
+    }
+    if (e.target.name === "password") {
+      setInputs({ ...inputs, [e.target.name]: e.target.value });
+    }
   };
 
   const urlReg = () => {
     window.location.replace('/register');
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
   };
 
   const config = { headers: { 'Content-Type': 'application/json' } };
@@ -44,47 +65,69 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    setSubmitted(true);
+    if (!email || !password || !isvalid) {
+      return;
+    }
+
     const newInputs = {
       ...inputs,
       email: `user!$${inputs.email}`
     };
-    
+
     await axios
       .post(`${baseUrl}/login`, newInputs, config)
       .then((response) => {
-        console.log('response: ', response.data);
-        //let jwtToken = response.headers['Authorization'];
-        let jwtToken = response.headers.get('Authorization');
-        console.log(jwtToken);
+        console.log(response.data)
+        if (response.data.type === '일반') {
+          console.log('response: ', response.data);
+          //let jwtToken = response.headers['Authorization'];
+          let jwtToken = response.headers.get('Authorization');
+          console.log(jwtToken);
 
-        let jwtMemberId = response.data.member_id;
-        let jwtMemberName = response.data.name;
-        let jwtMemberNickname = response.data.nickname;
-        let jwtMemberEmail = response.data.email;
-        let jwtAuthRole = response.data.authRole;
-        let jwtProfile_path = response.data.profile_path;
-        let jwtGrade = response.data.grade;
+          let jwtMemberId = response.data.member_id;
+          let jwtMemberName = response.data.name;
+          let jwtMemberNickname = response.data.nickname;
+          let jwtMemberEmail = response.data.email;
+          let jwtAuthRole = response.data.authRole;
+          let jwtProfile_path = response.data.profile_path;
+          let jwtGrade = response.data.grade;
 
-        localStorage.setItem('Authorization', jwtToken);
-        localStorage.setItem('member_id', jwtMemberId);
-        localStorage.setItem('email', jwtMemberEmail);
-        localStorage.setItem('name', jwtMemberName);
-        localStorage.setItem('nickname', jwtMemberNickname);
-        localStorage.setItem('authRole', jwtAuthRole);
-        localStorage.setItem('isLogin', 'true');
-        localStorage.setItem("profile_path", jwtProfile_path);
-        localStorage.setItem("grade", jwtGrade);
+          localStorage.setItem('Authorization', jwtToken);
+          localStorage.setItem('member_id', jwtMemberId);
+          localStorage.setItem('email', jwtMemberEmail);
+          localStorage.setItem('name', jwtMemberName);
+          localStorage.setItem('nickname', jwtMemberNickname);
+          localStorage.setItem('authRole', jwtAuthRole);
+          localStorage.setItem('isLogin', 'true');
+          localStorage.setItem("profile_path", jwtProfile_path);
+          localStorage.setItem("grade", jwtGrade);
 
-        setInputs({ email: '', password: '' });
-      })
-      .then((response) => {
-        window.location.replace('/');
+          setInputs({ email: '', password: '' });
+          window.location.replace('/');
+        } else {
+          alert("아이디와 비밀번호를 확인해주세요")
+        }
       })
       .catch((err) => {
         console.error(err.message);
       });
   };
-  // const navigator = useNavigation();
+
+  const idcheck = async (e) => {
+    await axios
+      .post(
+        `http://localhost:8090/emailcheck`,
+        { email: e.target.value },
+        config
+      )
+      .then((response) => {
+        console.log(response.data);
+        setIsvalid(validateEmail(e.target.value));
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <>
       {/* <IndexNavbar /> */}
@@ -104,15 +147,15 @@ const Login = () => {
                 style={{ backgroundColor: '#343a40' }}
               >
                 <div style={{ textAlign: "center" }}>
-                  <img alt='...' src={require('assets/img/logo.gif')} style={{ width: "180px", filter: "invert(0%)" }}/>
+                  <img alt='...' src={require('assets/img/logo.gif')} style={{ width: "180px", filter: "invert(0%)", marginBottom: '30px' }} />
                 </div>
                 <div className='social-line text-center'></div>
                 <Form className='register-form'>
-                  <label>이메일</label>
+                  {/* <label>이메일</label> */}
                   <InputGroup className='form-group-no-border'>
                     <InputGroupAddon addonType='prepend'>
                       <InputGroupText>
-                        <FontAwesomeIcon icon={faEnvelope}/>
+                        <FontAwesomeIcon icon={faEnvelope} />
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
@@ -121,23 +164,70 @@ const Login = () => {
                       name='email'
                       onChange={handleValueChange}
                       value={email}
+                      onBlur={idcheck}
                     />
                   </InputGroup>
-                  <label>비밀번호</label>
+                  {isvalid === false && submitted === true && emailField && (
+                    <span
+                      style={{
+                        color: "rgb(255,171, 154)",
+                        animation: "glow 1s ease-in-out infinite",
+                        fontWeight: "bold",
+                        fontSize: "12px",
+                      }}
+                    >
+                      유효하지 않은 이메일입니다.
+                    </span>
+                  )}
+                  {emailField &&
+                    email.trim() === "" &&
+                    submitted === true &&
+                    !isvalid && (
+                      <span
+                        style={{
+                          color: "rgb(255,171, 154)",
+                          animation: "glow 1s ease-in-out infinite",
+                          fontWeight: "bold",
+                          fontSize: "12px",
+                        }}
+                      >
+                        이메일을 입력해주세요.
+                      </span>
+                    )}
+                  <br></br>
+
+                  {/* <label>비밀번호</label> */}
                   <InputGroup className='form-group-no-border'>
                     <InputGroupAddon addonType='prepend'>
                       <InputGroupText>
-                        <FontAwesomeIcon icon={faLock}/>
+                        <FontAwesomeIcon icon={faLock} />
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
+                      className="text-Input-pw"
                       placeholder='Password'
                       type='password'
                       name='password'
                       onChange={handleValueChange}
                       value={password}
+                      maxlength="13"
                     />
                   </InputGroup>
+                  {passField &&
+                    password.trim() === "" &&
+                    submitted === true && (
+                      <span
+                        style={{
+                          color: "rgb(255,171, 154)",
+                          animation: "glow 1s ease-in-out infinite",
+                          fontWeight: "bold",
+                          fontSize: "12px",
+                        }}
+                      >
+                        비밀번호를 입력해주세요.
+                      </span>
+                    )}
+
                   <button
                     className='btn-round'
                     color='danger'
@@ -200,16 +290,10 @@ const Login = () => {
                     marginTop: '20px',
                   }}
                 >
-                  <img
-                    alt='...'
-                    src={require('assets/img/btnG_N.png')}
-                    style={{ width: 60 }}
-                  />
-                  <img
-                    alt='...'
-                    src={require('assets/img/btnG_K.png')}
-                    style={{ width: 60, margin: '0px 20px' }}
-                  />
+                  <NaverButton></NaverButton>
+                  <KakaoButton></KakaoButton>
+
+
                   <img
                     alt='...'
                     src={require('assets/img/btnG_G.png')}

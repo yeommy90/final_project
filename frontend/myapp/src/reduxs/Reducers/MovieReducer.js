@@ -7,9 +7,6 @@ let initialState = {
   themeMovies : [],
   topRatedDirector : [],
   topRatedActor : [],
-  favoriteGenre : [],
-  favoriteDirector : [],
-  favoriteActor : [],
 
   contents: {},
   memberReview: {},
@@ -31,9 +28,6 @@ const MovieSlice = createSlice({
       state.themeMovies = action.payload.data.themeMovies;
       state.topRatedDirector = action.payload.data.topRatedDirector;
       state.topRatedActor = action.payload.data.topRatedActor;
-      // state.favoriteGenre = action.payload.data.favoriteGenre;
-      // state.favoriteDirector = action.payload.data.favoriteDirector;
-      // state.favoriteActor = action.payload.data.favoriteActor;
     },
 
     // 영화 상세정보 컨텐츠

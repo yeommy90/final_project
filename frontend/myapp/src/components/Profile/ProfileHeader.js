@@ -1,13 +1,22 @@
-import { faHeart, faPencil } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { faHeart, faPencil } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import style from "../../assets/css/profile.module.css";
+import { baseUrl } from "Apiurl";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import Tooltip from "@mui/material/Tooltip";
 
-const ProfileHeader = ({handleEditShow, handleEditImgShow, memberInfo}) => {
+const ProfileHeader = ({
+  handleEditShow,
+  handleEditImgShow,
+  memberInfo,
+  member_id,
+}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [grade, setGrade] = useState(6);
-  const [profilePath, setProfilePath] = useState('');
+  const [grade, setGrade] = useState(4);
+  const [profilePath, setProfilePath] = useState("");
 
   useEffect(() => {
     if (memberInfo != undefined) {
@@ -15,307 +24,338 @@ const ProfileHeader = ({handleEditShow, handleEditImgShow, memberInfo}) => {
       setGrade(memberInfo.grade);
       setProfilePath(memberInfo.profile_path);
     }
-  }, [memberInfo])
+  }, [memberInfo]);
 
   let gradeImgPath = "";
   switch (grade) {
-    case 6:
-      gradeImgPath = "석탄1.png";
-      break;
-    case 5:
-      gradeImgPath = "철2.png";
-      break;
-    case 4:
-      gradeImgPath = "금3.png";
-      break;
     case 3:
-      gradeImgPath = "에메랄드4.png";
+      gradeImgPath = "동.png";
       break;
     case 2:
-      gradeImgPath = "루비5.png";
+      gradeImgPath = "은.png";
       break;
     case 1:
-      gradeImgPath = "다이아몬드6.png";
+      gradeImgPath = "금.png";
       break;
     default:
-      gradeImgPath = "석탄1.png";
+      gradeImgPath = "";
       break;
   }
 
   let gradeText = "";
   switch (grade) {
-    case 6:
-      gradeText = "당신은 석탄 등급입니다.";
-      break;
-    case 5:
-      gradeText = "당신은 철 등급입니다.";
-      break;
-    case 4:
-      gradeText = "당신은 금 등급입니다.";
-      break;
-    case 3:
-      gradeText = "당신은 에메랄드 등급입니다.";
+    case 1:
+      gradeText = "골드 등급입니다.";
       break;
     case 2:
-      gradeText = "당신은 루비 등급입니다.";
+      gradeText = "실버 등급입니다.";
       break;
-    case 1:
-      gradeText = "당신은 다이아몬드 등급입니다.";
+    case 3:
+      gradeText = "브론즈 등급입니다.";
       break;
     default:
-      gradeText = "당신은 석탄 등급입니다.";
+      gradeText = "등급을 올려보세요!";
       break;
   }
 
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("Authorization"),
+    },
+  };
+
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false); // 회원 탈퇴 확인 모달 상태
+
+  // 회원 탈퇴 처리
+  const handleDelete = async () => {
+    const member = {
+      member_id: memberInfo.member_id,
+      name: "",
+      nickname: "",
+      email: "",
+      password: "",
+    };
+
+    await axios.post(`${baseUrl}/profile/delete`, member, config).then(() => {
+      console.log("회원 탈퇴 성공");
+      // 회원 탈퇴 성공 처리
+      window.location.replace("/logout");
+    });
+  };
+
+  // 회원 탈퇴 확인 모달 열기
+  const openConfirmModal = () => {
+    setConfirmModalOpen(true);
+  };
+
+  // 회원 탈퇴 확인 모달 닫기
+  const closeConfirmModal = () => {
+    setConfirmModalOpen(false);
+  };
   return (
     <>
-      {memberInfo && memberInfo.visibility === 1 ? (
-        memberInfo !== undefined && (
-      <div style={{ margin: 'auto' }}>
-        <div
-          style={{
-            width: '1100px',
-            margin: 'auto',
-            textAlign: 'center',
-            height: '550px',
-            backgroundColor: '#343A40',
-            paddingTop: '120px',
-          }}
-        >
-          <div style={{ margin: 'auto' }}>
-            <div
-              style={{
-                marginBottom: '30px',
-                fontSize: '25pt',
-                color: 'white',
-                fontFamily: 'NanumSquare',
-                letterSpacing: '3px',
-              }}
-            >
-              😀WELCOME😀
-            </div>
-            <div
-              className='profile_img'
-              style={{
-                margin: 'auto',
-                width: '80px',
-                height: '80px',
-              }}
-            >
-              <div style={{ position: 'relative' }}>
-                <img
-                  src={`${process.env.PUBLIC_URL}/profiles/${profilePath}`}
-                  alt='프로필 이미지'
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '8%',
-                    border: '1px solid black',
-                  }}
-                />
+      {memberInfo && memberInfo.nickname !== "존재하지 않는 회원입니다" ? (
+        (memberInfo && memberInfo.visibility === 1) ||
+        String(localStorage.getItem("member_id")) ===
+          String(memberInfo.member_id) ? (
+          memberInfo !== undefined && (
+            <div className={style.header_wrap}>
+              {grade !== 4 ? (<img
+                style={{
+                  position: "absolute",
+                  width: "50px",
+                  top: "180px",
+                  left: "420px",
+                  zIndex: 99,
+                }}
+                src={`${process.env.PUBLIC_URL}/gradeimg/${gradeImgPath}`}
+              ></img>) : ('')}
+              <div className={style.profile}>
+                <div className={style.left}>
+                  <div className={style.profile_img}>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/profiles/${profilePath}`}
+                      alt="프로필 이미지"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "8%",
+                        border: "1px solid black",
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className={style.right}>
+                  <p style={{ fontSize: "12pt" }}>
+                    {memberInfo && memberInfo.nickname ? (
+                      <>
+                        <span style={{ fontWeight: "bold" }}>
+                          {memberInfo.nickname}
+                        </span>
+                        님의 페이지
+                        {isLoggedIn &&
+                          localStorage.getItem("member_id") === member_id && (
+                            <FontAwesomeIcon
+                              icon={faPencil}
+                              style={{
+                                fontWeight: "lighter",
+                                cursor: "pointer",
+                                width: "13px",
+                                paddingTop: "3px",
+                                marginLeft: "7px",
+                                color: "white",
+                              }}
+                              onClick={() => handleEditImgShow()}
+                            />
+                          )}
+                      </>
+                    ) : (
+                      <>아무개 님의 페이지</>
+                    )}
+                  </p>
+                  <p>{gradeText}</p>
+                </div>
+              </div>
+              <div className={style.nav}>
+                {isLoggedIn &&
+                  localStorage.getItem("member_id") === member_id && (
+                    <Tooltip title="더 많은 작품을 평가해보세요!" arrow>
+                      <span>
+                        <Link
+                          to={{
+                            pathname: `/review`,
+                          }}
+                        >
+                          <div
+                            className={style.button}
+                            onMouseOver={(e) =>
+                              (e.target.style.backgroundColor = "#bc3e3e")
+                            }
+                            onMouseOut={(e) =>
+                              (e.target.style.backgroundColor = "#ce4545")
+                            }
+                          >
+                            평가하기
+                          </div>
+                        </Link>
+                      </span>
+                    </Tooltip>
+                  )}
+
+                  <Tooltip title="사용자님의 취향을 분석해보세요!" arrow>
+                    <Link
+                        to={{
+                          pathname: `/analysis/${memberInfo.member_id}`,
+                          state: { memberInfo: memberInfo },
+                        }}
+                      >
+                      <span>
+                        <div
+                          className={style.button}
+                          onMouseOver={(e) =>
+                            (e.target.style.backgroundColor = "#bc3e3e")
+                          }
+                          onMouseOut={(e) =>
+                            (e.target.style.backgroundColor = "#ce4545")
+                          }
+                        >
+                          취향분석
+                        </div>
+                      </span>
+                    </Link>
+                  </Tooltip>
+
+
+                {isLoggedIn &&
+                  localStorage.getItem("member_id") === member_id && (
+                    <Tooltip title="사용자님의 선호장르를 선택하세요!" arrow>
+                      <span>
+                        <Link
+                          to={{
+                            pathname: `/genreselect`,
+                          }}
+                        >
+                          <div
+                            className={style.button}
+                            onMouseOver={(e) =>
+                              (e.target.style.backgroundColor = "#bc3e3e")
+                            }
+                            onMouseOut={(e) =>
+                              (e.target.style.backgroundColor = "#ce4545")
+                            }
+                          >
+                            선호장르
+                          </div>
+                        </Link>
+                      </span>
+                    </Tooltip>
+                  )}
+
+                {isLoggedIn &&
+                  localStorage.getItem("member_id") === member_id && (
+                    <Tooltip title="사용자님의 정보를 변경하세요!" arrow>
+                      <span>
+                        <div
+                          onClick={() => handleEditShow()}
+                          className={style.button}
+                          onMouseOver={(e) =>
+                            (e.target.style.backgroundColor = "#bc3e3e")
+                          }
+                          onMouseOut={(e) =>
+                            (e.target.style.backgroundColor = "#ce4545")
+                          }
+                        >
+                          정보수정
+                        </div>
+                      </span>
+                    </Tooltip>
+                  )}
+                {isLoggedIn &&
+                  localStorage.getItem("member_id") === member_id && (
+                    <Tooltip title="지금까지 남긴게 모두 사라져요!" arrow>
+                      <span>
+                        <Button
+                          // onClick={handleDelete}
+                          onClick={openConfirmModal} // 확인 모달 열기
+                          className="btn-round bg-dark"
+                          type="button"
+                          style={{ marginLeft: " 20px" }}
+                        >
+                          <FontAwesomeIcon icon={faHeart} />
+                          회원탈퇴
+                        </Button>
+                      </span>
+                    </Tooltip>
+                  )}
+
+                {/* 회원 탈퇴 확인 모달 */}
+                <Modal isOpen={confirmModalOpen} toggle={closeConfirmModal}>
+                  <ModalHeader toggle={closeConfirmModal}>
+                    회원 탈퇴
+                  </ModalHeader>
+                  <ModalBody>
+                    지금까지 남겨온 추억이 전부 사라집니다! <br />
+                    정말 탈퇴 하시겠습니까?
+                    {/* 추가적인 메시지 또는 안내를 여기에 포함할 수 있습니다. */}
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="secondary" onClick={closeConfirmModal}>
+                      취소
+                    </Button>
+                    <Button color="danger" onClick={handleDelete}>
+                      확인
+                    </Button>
+                  </ModalFooter>
+                </Modal>
               </div>
             </div>
-
+          )
+        ) : (
+          <div style={{ margin: "auto" }}>
             <div
-              className='profile_name'
               style={{
-                marginTop: '10px',
-                fontSize: '13pt',
-                color: 'white',
-                fontFamily: 'NanumSquare',
-                letterSpacing: '3px',
+                width: "1100px",
+                margin: "150px auto 0 auto",
+                textAlign: "center",
+                height: "550px",
+                position: "relative",
+                paddingTop: "120px",
+                backgroundImage:
+                  "url(" + require("assets/img/ticket.png") + ")",
+                backgroundPosition: "center bottom",
+                backgroundRepeat: "no-repeat",
               }}
             >
-              <img
-                src={`${process.env.PUBLIC_URL}/gradeimg/${gradeImgPath}`}
-                alt="grade"
+              <p
                 style={{
-                  width: "25px",
-                  height: "25px",
-                  marginRight: "10px",
-                }}
-              />
-              <span style={{ fontWeight: 'bold', color: 'white' }}>
-                {memberInfo && memberInfo.nickname ? (
-                  <>{memberInfo.nickname} 님의 페이지</>
-                ) : (
-                  <>아무개 님의 페이지</>
-                )}
-              </span>
-              {isLoggedIn && (
-                <FontAwesomeIcon 
-                  icon={faPencil}
-                  style={{
-                    marginLeft: '5px',
-                    color: 'white',
-                  }}
-                  onClick={() => handleEditImgShow()}
-                />
-              )}
-            </div>
-            <div
-              className="grede_name"
-              style={{
-                marginTop: "10px",
-                marginBottom: "10px",
-                fontSize: "10pt",
-                color: "white",
-                fontFamily: "NanumSquare",
-                letterSpacing: "3px",
-              }}
-            >
-              <span style={{ fontWeight: "bold", color: "white" }}>
-                {gradeText}
-              </span>
-            </div>
-            <div
-              style={{
-                marginTop: '50px',
-                width: '100%',
-                height: '40px',
-                // backgroundColor: 'blue',
-              }}
-            >
-              <div
-                style={{
-                  width: 'auto',
-                  height: '40px',
-                  margin: 'auto',
-                  // backgroundColor: 'green',
+                  fontSize: "15pt",
+                  position: "absolute",
+                  top: "280px",
+                  left: "430px",
                 }}
               >
-                {isLoggedIn && (
-                <Button
-                  className='btn-round bg-dark'
-                  type='button'
-                  href='/review'
-                >
-                  <FontAwesomeIcon icon={faHeart} />
-                  평가하기
-                </Button>
-                )}
-                <Link
-                  to={{
-                    pathname: `/analysis/${memberInfo.member_id}`,
-                    state: { memberInfo: memberInfo }
-                  }}
-                >
-                  <Button
-                    className='btn-round bg-dark'
-                    type='button'
-                    style={{ margin: '0px 20px' }}
-                    >
-                    <FontAwesomeIcon icon={faHeart} />
-                    취향분석
-                  </Button>
-                </Link>
-
-                {isLoggedIn && (
-                <Button
-                  onClick={() => handleEditShow()}
-                  className='btn-round bg-dark'
-                  type='button'
-                >
-                  <FontAwesomeIcon icon={faHeart} />
-                  정보수정
-                </Button>
-                )}
-              </div>
+                <span style={{ fontWeight: "bold" }}>비공개</span> 프로필입니다.
+              </p>
+              <div
+                style={{
+                  margin: "auto",
+                }}
+              ></div>
             </div>
           </div>
-        </div>
-      </div>
-      )
+        )
       ) : (
         <div style={{ margin: "auto" }}>
           <div
             style={{
               width: "1100px",
-              margin: "auto",
+              margin: "150px auto 0 auto",
               textAlign: "center",
               height: "550px",
-              backgroundColor: "#343A40",
+              position: "relative",
               paddingTop: "120px",
+              backgroundImage: "url(" + require("assets/img/ticket.png") + ")",
+              backgroundPosition: "center bottom",
+              backgroundRepeat: "no-repeat",
             }}
           >
-            <div style={{ margin: "auto" }}>
-              <div
-                style={{
-                  marginBottom: "30px",
-                  fontSize: "25pt",
-                  color: "white",
-                  fontFamily: "NanumSquare",
-                  letterSpacing: "3px",
-                }}
-              >
-                😀WELCOME😀
-              </div>
-
-              <div
-                className="profile_img"
-                style={{
-                  margin: "auto",
-                  width: "80px",
-                  height: "80px",
-                }}
-              >
-                <img
-                  src={`${process.env.PUBLIC_URL}/profiles/${profilePath}`}
-                  alt="프로필 이미지"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "8%",
-                    border: "1px solid black",
-                  }}
-                />
-              </div>
-              <img
-                src={`${process.env.PUBLIC_URL}/gradeimg/${gradeImgPath}`}
-                alt="grade"
-                style={{
-                  width: "25px",
-                  height: "25px",
-                  marginRight: "10px",
-                }}
-              />
-              <span style={{ fontWeight: "bold", color: "white" }}>
-                {memberInfo && memberInfo.nickname ? (
-                  <>{memberInfo.nickname} 님의 페이지</>
-                ) : (
-                  <>아무개 님의 페이지</>
-                )}
-              </span>
-              <div
-                className="grede_name"
-                style={{
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                  fontSize: "10pt",
-                  color: "white",
-                  fontFamily: "NanumSquare",
-                  letterSpacing: "3px",
-                }}
-              >
-                <span style={{ fontWeight: "bold", color: "white" }}>
-                  {gradeText}
-                </span>
-              </div>
-            </div>
-            <div>
-              <p
-                style={{
-                  fontSize: "15pt",
-                  padding: "10px",
-                  fontFamily: "NanumSquare",
-                  fontWeight: "bold",
-                  color: "rgb(255,171, 154)",
-                  marginBottom: "20px",
-                }}
-              >
-                공개되지 않은 프로필 입니다.
-              </p>
-            </div>
+            <p
+              style={{
+                fontSize: "15pt",
+                position: "absolute",
+                top: "280px",
+                left: "410px",
+              }}
+            >
+              <span style={{ fontWeight: "bold" }}>존재하지 않는</span>{" "}
+              프로필입니다.
+            </p>
+            <div
+              style={{
+                margin: "auto",
+              }}
+            ></div>
           </div>
         </div>
       )}

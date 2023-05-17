@@ -45,6 +45,7 @@ public class RecommendController {
 			array.add(aList.get(i).getMovie_id());
 		}
 		
+		
 //		System.out.println("array"+array.toString());
 		String url = "http://localhost:5000/abc/"+member_id+"/"+array.toString();
 

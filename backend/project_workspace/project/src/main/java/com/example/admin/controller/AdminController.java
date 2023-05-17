@@ -86,13 +86,22 @@ public class AdminController {
     	adminService.blurSpoilerprocess(info);
   	}
     
-    //신고된 댓글 삭제 처리해주기
-    @DeleteMapping("/deletereview")
-   	public void deletereview (@RequestBody ReviewInfoDTO info) {
-    	adminService.deleteReviewprocess(info);
-    	//axios 오류가 뜨면 react//adminpage에 있는 axios.@@@@랑 확인해봐야함 같아야 하기 떄문
-  	}
-   	
+	// 신고된 댓글반려 처리 state4(스포일 신고당한 댓글 )=> state1로 변경(블러 신청 댓글 반려 처리로 인해 일반댓글인
+	// state1로 처리)
+	@PutMapping("/return")
+	public void returnspoiler(@RequestBody ReviewInfoDTO info) {
+		adminService.returnSpoilerprocess(info);
+	}
+
+	// 신고된 댓글 삭제 처리해주기
+	@DeleteMapping("/deletereview/{member_id}/{movie_id}")
+	public void deletereview(@PathVariable String movie_id, @PathVariable String member_id) {
+		System.out.println(member_id);
+		System.out.println(movie_id);
+		ReviewInfoDTO info = new ReviewInfoDTO(member_id, movie_id);
+		adminService.deleteReviewprocess(info);
+		// axios 오류가 뜨면 react//adminpage에 있는 axios.@@@@랑 확인해봐야함 같아야 하기 떄문
+	}
 	
     	
 //    	adminService.editSpoilerProcess(2);

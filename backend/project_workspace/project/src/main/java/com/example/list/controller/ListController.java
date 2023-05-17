@@ -41,6 +41,7 @@ public class ListController {
 		
 	}
 	
+	
 	// 메인 리스트
 	// http://localhost:8090/
 	@GetMapping("/")
@@ -145,8 +146,6 @@ public class ListController {
 		listService.postRatingProcess(rating);
 	}
 	
-	
-	
 	@PutMapping("/rating")
 	public void updateRatingExecute(@RequestBody RatingDTO rating) {
 		listService.updateRatingProcess(rating);
@@ -162,9 +161,21 @@ public class ListController {
 		System.out.println("리뷰썼냐" + movie_id);
 		return listService.findReviewByIdProcess(movie_id, member_id);
 	}
-		
 	
-
+	
+	
+	// 사용자가 남긴 모든 별점 가져오기
+	@GetMapping("/getRatingAndWish/{member_id}")
+	public Map<String, Object> getRatingExecute(@PathVariable("member_id") int member_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("rating", listService.findRatingByIdProcess(member_id));
+		map.put("wish", listService.findWishByIdProcess(member_id));
+		
+		return map;
+	}
+	
+	
+	
 	// 보고싶어요
 	@PostMapping("/wish")
 	public void postWishExecute(@RequestBody WishDTO wish) {

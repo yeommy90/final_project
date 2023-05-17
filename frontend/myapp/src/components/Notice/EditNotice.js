@@ -74,33 +74,33 @@ const EditNotice = () => {
         <>
             <div style={{ width: '100%', height: '188px' }}></div>
             <div style={{ margin: 'auto', width: '800px', height:'70vh' }}>
-                <p className={style.main_title}>
+                <div className={style.main_title}>
                     <span className={style.red}>현재 등록된 공지사항</span>
-                    <div className={style.line}></div>
-                </p>
+                    {/* <div className={style.line}></div> */}
+                </div>
 
                 {notices ? 
                     notices.slice((currentPage - 1) * noticesPerPage, currentPage * noticesPerPage).map((notice) => (
-                    <>
-                    <div key={notice.notice_id}>
-                        {/* <div className={style.line}></div> */}
-                        <div className={style.notice}>
-                            <div
-                                className={style.notice_set}
-                                onClick={() => handleToggleText(notice.notice_id)}
-                            >
-                                <div className={style.title}>{notice.title}</div>
-                                <div className={style.date}>{notice.date}</div>
-                            </div>
-                            {notice.showText && (
-                                <div className={style.text}>
-                                    <div className='mb-5'>{notice.content}</div>
-                                    <Button className='mr-2' onClick={() => window.location.href = `/adminmodifynotice/${notice.notice_id}`}>수정</Button>
-                                    <Button onClick={() => deleteNotice(notice.notice_id)}>삭제</Button>
+                    <Fragment key={notice.notice_id}>
+                        <div>
+                            <div className={style.line}></div>
+                            <div className={style.notice}>
+                                <div
+                                    className={style.notice_set}
+                                    onClick={() => handleToggleText(notice.notice_id)}
+                                >
+                                    <div className={style.title}>{notice.title}</div>
+                                    <div className={style.date}>{notice.date}</div>
                                 </div>
-                            )}
+                                {notice.showText && (
+                                    <div className={style.text}>
+                                        <div className='mb-5'>{notice.content}</div>
+                                        <Button className='mr-2' onClick={() => window.location.href = `/adminmodifynotice/${notice.notice_id}`}>수정</Button>
+                                        <Button onClick={() => deleteNotice(notice.notice_id)}>삭제</Button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
 
                     {/* <Page
                     noticesPerPage={noticesPerPage}
@@ -108,7 +108,7 @@ const EditNotice = () => {
                     paginate={paginate}
                     currentPage={currentPage}
                     /> */}
-                    </>
+                    </Fragment>
                 )) : (<div className='text-center' style={{marginBottom:'300px', marginTop:'100px', fontWeight:'bold', fontSize:'18px'}}>등록된 공지사항이 없습니다.</div>)}
             
                 <div className={style.line}></div>
@@ -124,4 +124,5 @@ const EditNotice = () => {
         </>
     );
 };
+
 export default EditNotice;

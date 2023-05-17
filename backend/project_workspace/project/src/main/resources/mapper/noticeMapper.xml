@@ -27,13 +27,22 @@
 		UPDATE notice
 		SET title = #{title},
 		content= #{content},
-		upload = #{upload},
+		<if test="upload != null">
+			upload = #{upload},
+		</if> 
 		regdate = sysdate
 		WHERE notice_id = #{notice_id}
 	</update>
 	
 	<delete id="deleteNotice" parameterType="String">
-		DELETE FROM notice WHERE notice_id = #{notice_id}
+		DELETE FROM notice 
+		WHERE notice_id = #{notice_id}
 	</delete>
+	
+	<update id="delimg" parameterType="String">
+		update notice 
+		set upload=null
+		where notice_id=#{notice_id}
+	</update>
 	
 </mapper>

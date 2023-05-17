@@ -22,10 +22,6 @@ public class NoticeDTO {
 		this.upload = upload;
 	}
 
-
-
-
-
 	public NoticeDTO(int notice_id, int admin_id, String title, String content, String upload, Date date) {
 		super();
 		this.notice_id = notice_id;
@@ -35,10 +31,6 @@ public class NoticeDTO {
 		this.upload = upload;
 		this.date = date;
 	}
-
-
-
-
 
 	public int getNotice_id() {
 		return notice_id;

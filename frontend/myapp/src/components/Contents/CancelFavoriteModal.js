@@ -16,11 +16,11 @@ const CancelFavoriteModal = ({ isOpen, onRequestClose, onConfirm, onCancel }) =>
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="NoFavorite"
-      className="NoFavoriteModal"
+      className="CancelFavoriteModal"
       overlayClassName="NoFavoriteOverlay"
     >
       <div>
-        <div>
+        <div className='text-center mb-5'>
           <h4>인생영화를 취소하시겠습니까?</h4>
         </div>
         <div className='d-flex justify-content-center align-items-center m-2'>

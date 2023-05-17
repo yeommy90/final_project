@@ -1,26 +1,52 @@
 import { Container } from 'reactstrap';
 import '../../assets/css/genre.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { baseUrl } from 'Apiurl';
 
 function GenreSelect() {
   const [selectedGenre, setSelectedGenre] = useState([]);
+
+  const [genreList, setGenreList] = useState([]);
   //내아이디
-  const memberId = localStorage.getItem("member_id");
-  const config = { headers: { 'Content-Type': 'application/json' } };
+  const memberId = localStorage.getItem('member_id');
+  const config = {
+    headers: { 'Content-Type': 'application/json' },
+    // Authorization: `Bearer ${memberId}`,
+  };
+
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}/genreselect/${memberId}`, config)
+      .then((response) => {
+        setGenreList(response.data);
+        setSelectedGenre(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log('가져왔냐?', genreList);
+    //어떤 처리를 할거냐, 가져와서?
+  }, [genreList]);
 
   // 체크박스가 선택되면 호출되는 함수
   function handleCheckboxChange(e) {
     const { value, checked } = e.target;
+
     if (checked) {
-      setSelectedGenre((prevSelectedGanre) => [
-        ...prevSelectedGanre,
+      setSelectedGenre((prevSelectedGenre) => [
+        ...prevSelectedGenre,
         Number(value),
       ]);
     } else {
-      setSelectedGenre((prevSelectedGanre) =>
-        prevSelectedGanre.filter((genre) => genre !== Number(value))
+      setSelectedGenre((prevSelectedGenre) =>
+        prevSelectedGenre.filter((genre) => genre !== Number(value))
+      );
+      setGenreList((prevSelectedGenre) =>
+        prevSelectedGenre.filter((genre) => genre !== Number(value))
       );
     }
   }
@@ -31,12 +57,12 @@ function GenreSelect() {
     axios
       .post(`${baseUrl}/genreselect`, data, config)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-      window.location.replace("/");
+    window.location.replace('/');
   }
 
   return (
@@ -62,6 +88,7 @@ function GenreSelect() {
                 id='a1'
                 name='드라마'
                 value='18'
+                checked={genreList.includes(18) || selectedGenre.includes(18)}
                 onChange={handleCheckboxChange}
               />
               <label for='a1'>
@@ -80,6 +107,7 @@ function GenreSelect() {
                 id='a2'
                 name='코미디'
                 value='35'
+                checked={genreList.includes(35) || selectedGenre.includes(35)}
                 onChange={handleCheckboxChange}
               />
               <label for='a2'>
@@ -98,6 +126,7 @@ function GenreSelect() {
                 id='a3'
                 name='범죄'
                 value='80'
+                checked={genreList.includes(80) || selectedGenre.includes(80)}
                 onChange={handleCheckboxChange}
               />
               <label for='a3'>
@@ -116,6 +145,9 @@ function GenreSelect() {
                 id='a4'
                 name='로맨스'
                 value='10749'
+                checked={
+                  genreList.includes(10749) || selectedGenre.includes(10749)
+                }
                 onChange={handleCheckboxChange}
               />
               <label for='a4'>
@@ -135,6 +167,7 @@ function GenreSelect() {
                 name='액션'
                 value='28'
                 onChange={handleCheckboxChange}
+                checked={genreList.includes(28) || selectedGenre.includes(28)}
               />
               <label for='a5'>
                 <div id='drama' className='genre-set'>
@@ -158,6 +191,7 @@ function GenreSelect() {
                 id='a6'
                 name='스릴러'
                 value='53'
+                checked={genreList.includes(53) || selectedGenre.includes(53)}
                 onChange={handleCheckboxChange}
               />
               <label for='a6'>
@@ -176,6 +210,7 @@ function GenreSelect() {
                 id='a7'
                 name='다큐'
                 value='99'
+                checked={genreList.includes(99) || selectedGenre.includes(99)}
                 onChange={handleCheckboxChange}
               />
               <label for='a7'>
@@ -194,6 +229,7 @@ function GenreSelect() {
                 id='a8'
                 name='모험'
                 value='12'
+                checked={genreList.includes(12) || selectedGenre.includes(12)}
                 onChange={handleCheckboxChange}
               />
               <label for='a8'>
@@ -211,6 +247,7 @@ function GenreSelect() {
                 type='checkbox'
                 id='a9'
                 name='SF'
+                checked={genreList.includes(878) || selectedGenre.includes(878)}
                 value='878'
                 onChange={handleCheckboxChange}
               />
@@ -230,6 +267,7 @@ function GenreSelect() {
                 id='a10'
                 name='애니메이션'
                 value='16'
+                checked={genreList.includes(16) || selectedGenre.includes(16)}
                 onChange={handleCheckboxChange}
               />
               <label for='a10'>
@@ -254,6 +292,9 @@ function GenreSelect() {
                 id='a11'
                 name='가족'
                 value='10751'
+                checked={
+                  genreList.includes(10751) || selectedGenre.includes(10751)
+                }
                 onChange={handleCheckboxChange}
               />
               <label for='a11'>
@@ -272,6 +313,9 @@ function GenreSelect() {
                 id='a12'
                 name='미스터리'
                 value='9648'
+                checked={
+                  genreList.includes(9648) || selectedGenre.includes(9648)
+                }
                 onChange={handleCheckboxChange}
               />
               <label for='a12'>
@@ -290,6 +334,7 @@ function GenreSelect() {
                 id='a13'
                 name='공포'
                 value='27'
+                checked={genreList.includes(27) || selectedGenre.includes(27)}
                 onChange={handleCheckboxChange}
               />
               <label for='a13'>
@@ -307,6 +352,7 @@ function GenreSelect() {
                 id='a14'
                 name='판타지'
                 value='14'
+                checked={genreList.includes(14) || selectedGenre.includes(14)}
                 onChange={handleCheckboxChange}
               />
               <label for='a14'>
@@ -325,6 +371,9 @@ function GenreSelect() {
                 id='a15'
                 name='전쟁'
                 value='10752'
+                checked={
+                  genreList.includes(10752) || selectedGenre.includes(10752)
+                }
                 onChange={handleCheckboxChange}
               />
               <label for='a15'>
@@ -349,6 +398,9 @@ function GenreSelect() {
                 id='a16'
                 name='음악'
                 value='10402'
+                checked={
+                  genreList.includes(10402) || selectedGenre.includes(10402)
+                }
                 onChange={handleCheckboxChange}
               />
               <label for='a16'>
@@ -367,6 +419,7 @@ function GenreSelect() {
                 id='a17'
                 name='서부'
                 value='37'
+                checked={genreList.includes(37) || selectedGenre.includes(37)}
                 onChange={handleCheckboxChange}
               />
               <label for='a17'>
@@ -384,6 +437,7 @@ function GenreSelect() {
                 id='a18'
                 name='역사'
                 value='36'
+                checked={genreList.includes(36) || selectedGenre.includes(36)}
                 onChange={handleCheckboxChange}
               />
               <label for='a18'>
@@ -401,11 +455,14 @@ function GenreSelect() {
                 id='a19'
                 name='TV영화'
                 value='10770'
+                checked={
+                  genreList.includes(10770) || selectedGenre.includes(10770)
+                }
                 onChange={handleCheckboxChange}
               />
               <label for='a19'>
                 <div id='drama' className='genre-set'>
-                  <img src='https://an2-img.amz.wtchn.net/image/v2/pUxLYXDHHe3A8tZXC_2G0w.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXhMM2R2YzNOeU1YSjZjR1ZqWkd4dWJHTndNbVp5SW4wLjZrYmFaTFdIemVKZXVHUTU2aXF0SmNKb3N0US1YMFdhYXhDS1A0RHhyUFE' />
+                  <img src='https://an2-img.amz.wtchn.net/image/v2/xpn8wOtdJc_c_R07Uo9ECQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXhMMmQyWm1WdlkycDVObkY0ZG04eWNqWm9jMmR4SW4wLjRvMDBOb0tNSzQ3N3NadzNWeWtKazZpYS1XWTRDZloyVEszX3NNcG9JTzQ' />
 
                   <p className='genretype'>TV영화</p>
                 </div>

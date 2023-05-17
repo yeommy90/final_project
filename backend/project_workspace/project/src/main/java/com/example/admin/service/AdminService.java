@@ -21,5 +21,6 @@ public interface AdminService {
 	public List<ReviewDTO> editSpoilerProcess();
 	public List<ReviewDTO> editReportProcess();
 	public void blurSpoilerprocess(ReviewInfoDTO blurspoiler);
+	public void returnSpoilerprocess(ReviewInfoDTO returnspoiler);
 	public void deleteReviewprocess(ReviewInfoDTO deletereview);
 }

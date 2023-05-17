@@ -151,6 +151,7 @@ public class ListServiceImp implements ListService {
 		contents.setReviewDTO(listDAO.getReviewsByMovieId(movie_id));
 		contents.setListDTO(listDAO.getSimilarMovies(movie_id));
 		contents.setTrailerPath(listDAO.getTrailerByMovieId(movie_id));
+		contents.setProviderDTO(listDAO.getProviderByMovieId(movie_id));
 		return contents;
 	}
 	
@@ -377,6 +378,18 @@ public class ListServiceImp implements ListService {
 		map.put("member_id", member_id);
 		
 		listDAO.postFavorite(map);
+	}
+
+	
+	
+	@Override
+	public List<RatingDTO> findRatingByIdProcess(int member_id) {
+		return listDAO.findAllRatingById(member_id);
+	}
+
+	@Override
+	public List<WishDTO> findWishByIdProcess(int member_id) {
+		return listDAO.findAllWishById(member_id);
 	}
 
 

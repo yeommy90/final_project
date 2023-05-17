@@ -60,11 +60,16 @@ public class MemberServiceImp implements MemberService{
 	public MemberDTO updateMemberProcess(String email) {
 		return memberDao.selectByEmail(email);
 	}
+	
+	@Override
+	public void deleteMemberProcess(MemberDTO dto) {
+		memberDao.deleteMember(dto);
+	}
 
 	@Override
 	public AuthInfo updateMemberProcess(MemberDTO dto) {
 		memberDao.updateMember(dto);
-		return new AuthInfo(dto.getEmail(), dto.getName(), dto.getPassword(), dto.getAge(), dto.getGender());
+		return new AuthInfo(dto.getEmail(), dto.getName(), dto.getPassword(), dto.getAge(), dto.getGender(), dto.getVisibility());
 	}
 
 	@Override
@@ -110,6 +115,18 @@ public class MemberServiceImp implements MemberService{
 	@Override
 	public MemberDTO selectByIdProcess(int member_id) {
 		return memberDao.selectById(member_id);
+	}
+
+	@Override
+	public int[] selectMemGenreProcess(int member_id) {
+		return memberDao.selectMemGenre(member_id);
+	}
+
+	@Override
+	public void deleteMemGenreProcess(int member_id) {
+		System.out.println("삭제 실행");
+		memberDao.deleteMemGenre(member_id);
+		
 	}
 	
 }

@@ -10,11 +10,10 @@ public class AuthInfo {
 	private int gender;
 	private String nickname;
 	private String profile_path;
+	private int visibility;
 	
-	
+	public AuthInfo() {
 
-	public AuthInfo() {  
-		
 	}
 
 	public AuthInfo(String email, String password) {
@@ -23,13 +22,14 @@ public class AuthInfo {
 		this.password = password;
 	}
 	
-	public AuthInfo(String email, String name, String password, int age, int gender) {
+	public AuthInfo(String email, String name, String password, int age, int gender, int visibility) {
 		super();
 		this.email = email;
 		this.name = name;
 		this.password = password;
 		this.age = age;
 		this.gender = gender;
+		this.visibility = visibility;
 	}
 	
 	public AuthInfo(String email, String name, String password, int age, int gender, String nickname, String profile_path) {
@@ -69,6 +69,10 @@ public class AuthInfo {
 
 	public int getGender() {
 		return gender;
+	}
+	
+	public int getVisibility() {
+		return visibility;
 	}
 	
 }//end class

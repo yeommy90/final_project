@@ -61,12 +61,12 @@ public class SecurityConfig {
 	    .antMatchers("/", "/images/**", "/login", "/register", "/contents/**", "/search/**", 
 	    		 "/adminlogin", "/adminregister", "/selectAll",
 	    		 "/comment/**", "/cast/actorProfile/**", "/cast/dirProfile/**", 
-	    		 "/profile/**", "/recommend/**",
+	    		 "/profile/**", "/recommend/**", "/getRatingAndWish/**",
 	    		 "/review", "/printmovie", "/printrandom",
-	    		 "/member/signup", "/editinfo", "/emailcheck", "/genreselect", 
+	    		 "/member/signup", "/editinfo", "/emailcheck", "/genreselect/**", 
 	    		 "/wish/**", "/rating/**", "/favorite/**", "/likes/**", "/analysis/**",
-	    		 "/spoiler", "/profanity", "/checkReported/**",
-	    		 "/adminpage", "/blur", "/deletereview",
+	    		 "/spoiler", "/profanity", "/checkReported/**", "/kakaoRegister", "/naverregister", "/test",
+	    		 "/adminpage", "/blur", "/deletereview", "/selectallnotice", "/check",	
 	    		 "/admin/idcheck", "/admin/update").permitAll()
 	    .anyRequest().authenticated();
 		

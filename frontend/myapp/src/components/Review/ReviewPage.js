@@ -2,19 +2,83 @@ import style from '../../assets/css/review.module.css';
 import { Box, Rating } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import React, { useEffect, useState } from 'react';
-import { Button, Modal } from 'reactstrap';
+import { Button } from 'reactstrap';
 import '../../assets/css/modal.css';
 import yourImage from '../../assets/img/180c6e128821941b1.jpg';
 import axios from 'axios';
 import ReviewModal from './MovieDetailModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { ProfileAction } from 'reduxs/Actions/ProfileAction';
+import Tooltip from '@mui/material/Tooltip';
+import { MovieActions } from 'reduxs/Actions/MovieAction';
+import { baseUrl } from 'Apiurl';
+import { MovieReducers } from 'reduxs/Reducers/MovieReducer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const ReviewPage = () => {
+  const dispatch = useDispatch();
+  const member_id = localStorage.getItem("member_id");
+  const memberInfo = useSelector((state) => state.profile.memberInfo);
+
+  const [selectedOption, setSelectedOption] = useState('랜덤영화');
+  const [prevSelectedOption, setPrevSelectedOption] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [detailShow, setDetailShow] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  // 별점 관련
   const customStarSize = {
     fontSize: '30px',
   };
 
+  const [userRatings, setUserRatings] = useState({});
   const [value, setValue] = useState(0);
   const [hover, setHover] = useState(-1);
+
+  const handleRatingChange = async (newValue, movie_id) => {
+    console.log("선택된거", newValue);
+
+    const ratingDTO = {
+      movie_id: movie_id,
+      member_id: member_id,
+      rating: newValue,
+    };
+
+    if (newValue === null || userRatings[movie_id]?.rating > 0 && userRatings[movie_id]?.rating === newValue) {
+      // 현재 작성된 평점과 저장된 평점이 같을 때
+      await dispatch(MovieActions.deleteRating(movie_id, member_id));
+      setUserRatings(prev => ({ ...prev, [movie_id]: null }));
+      setValue(0);
+    } else if (userRatings[movie_id]?.rating > 0) {
+      // 이미 작성된 평점이 있을 때
+      await dispatch(MovieActions.updateRating(ratingDTO));
+      setUserRatings(prev => ({ ...prev, [movie_id]: ratingDTO }));
+    } else {
+      // userRatings에 없을 때
+      await dispatch(MovieActions.postRating(ratingDTO));
+      setUserRatings(prev => ({ ...prev, [movie_id]: ratingDTO }));
+    }
+  }
+
+  // 보고싶어요
+  const [messages, setMessages] = useState({});
+  const [wishChecked, setWishChecked] = useState({});
+
+  // 자세히 보기
+  const handleDetailClose = (message, movie_id) => {
+    setDetailShow(false);
+    setSelectedMovie(null);
+    setMessages(prev => ({
+      ...prev,
+      [movie_id]: message
+    }));
+  };
+
+  const handleDetailShow = (movie) => {
+    setSelectedMovie(movie);
+    setDetailShow(true);
+  };
 
   const config = {
     headers: {
@@ -23,50 +87,12 @@ const ReviewPage = () => {
     },
   };
 
-  const [selectedOption, setSelectedOption] = useState('랜덤영화');
-  const [prevSelectedOption, setPrevSelectedOption] = useState('');
-  const [movies, setMovies] = useState([]);
-  const [show, setShow] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-
-  const handleClose = () => {
-    setShow(false);
-    setSelectedMovie(null);
-  };
-
-  const handleShow = (movie) => {
-    setSelectedMovie(movie);
-    setShow(true);
-  };
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:8090/printrandom')
-      .then((response) => {
-        console.log('review');
-        setMovies(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  //상태 변할때마다 effect 발생
-  useEffect(() => {
-    setPrevSelectedOption(selectedOption);
-  }, [selectedOption]);
-
+  // 장르별 리스트 불러오기
   const handleOptionClick = (eventKey) => {
-    console.log(eventKey);
-
     setSelectedOption(eventKey);
-
     axios
       .post('http://localhost:8090/printmovie', eventKey, config)
       .then((response) => {
-        // 영화 목록을 받아와서 처리하는 코드 작성
-        console.log('printmovie');
-        console.log(response.data);
         setMovies(response.data);
       })
       .catch((error) => {
@@ -74,7 +100,40 @@ const ReviewPage = () => {
       });
   };
 
-  console.log(movies);
+  useEffect(() => {
+    // 영화 리스트 불러오기
+    axios
+      .get('http://localhost:8090/printrandom')
+      .then((response) => {
+        setMovies(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // 사용자 프로필 정보 불러오기
+    dispatch(ProfileAction.getProfileList(member_id));
+    
+    // 사용자 rating 정보 불러오기
+    axios.get(`${baseUrl}/getRatingAndWish/${member_id}`)
+      .then((response) => {
+        const ratingsByMovieId = response.data.rating.reduce((acc, rating) => {
+          acc[rating.movie_id] = rating;
+          return acc;
+        }, {});
+        setUserRatings(ratingsByMovieId);
+        const wishByMovieId = response.data.wish.reduce((acc, wish) => {
+          acc[wish.movie_id] = wish;
+          return acc;
+        }, {});
+        setWishChecked(wishByMovieId);
+      });
+  }, [member_id]);
+
+  // 리모콘 누를때마다 렌더링
+  useEffect(() => {
+    setPrevSelectedOption(selectedOption);
+  }, [selectedOption, value]);
 
   return (
     <>
@@ -86,19 +145,21 @@ const ReviewPage = () => {
         <div className={style.wrap}>
           <div className={style.screen}>
             <div className={style.maintitle}>
-              <p>
-                현재까지　
-                <span
-                  style={{
-                    fontWeight: 'bold',
-                    fontSize: '15pt',
-                    color: '#e75757',
-                  }}
-                >
-                  총 250개
-                </span>
-                　평가를 완료했습니다.
-              </p>
+              <div>
+                <p>
+                  현재까지　
+                  <span
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: '15pt',
+                      color: '#e75757',
+                    }}
+                  >
+                    총 {memberInfo && memberInfo.member_id ? (<span>{memberInfo.rating_count}</span>) : ''}개
+                  </span>
+                  　평가를 완료했습니다.
+                </p>
+              </div>
               <p>
                 작품을 평가해보세요. 당신의 취향에 딱 맞는 작품을
                 추천해드릴게요.
@@ -120,8 +181,14 @@ const ReviewPage = () => {
                 <div className={style.right}>
                   <div style={{ position: 'absolute', top: '20px' }}>
                     <p className={style.text1}>{movie.title}</p>
-                    <p className={style.text2}>
-                      {movie.release_date} ・ {movie.country}
+                    <p className={style.text2} style={messages[movie.movie_id] ? {color: '#fc8080'} : {}}>
+                      {messages[movie.movie_id]
+                        ? <>
+                            <FontAwesomeIcon icon={faHeart} className='mr-1'/>
+                            {messages[movie.movie_id]}
+                          </>
+                        : `${movie.release_date} ・ ${movie.country}`
+                      }
                     </p>
                     <Box
                       sx={{
@@ -131,13 +198,15 @@ const ReviewPage = () => {
                         alignItems: 'center',
                       }}
                     >
+                      <Tooltip title={hover === value ? '취소하기' : ''} arrow>
                       <Rating
                         name='hover-feedback'
-                        value={value}
+                        value={userRatings[movie.movie_id]?.rating || 0}
                         precision={0.5}
                         onChange={(event, newValue) => {
                           setValue(newValue);
                           console.log(newValue);
+                          handleRatingChange(newValue, movie.movie_id);
                         }}
                         onChangeActive={(event, newHover) => {
                           setHover(newHover);
@@ -156,6 +225,7 @@ const ReviewPage = () => {
                           <StarIcon style={customStarSize} fontSize='inherit' />
                         }
                       />
+                      </Tooltip>
                     </Box>
                   </div>
                   <Button
@@ -168,7 +238,7 @@ const ReviewPage = () => {
                       right: '0px',
                     }}
                     color='secondary'
-                    onClick={() => handleShow(movie)}
+                    onClick={() => handleDetailShow(movie)}
                   >
                     <p
                       style={{
@@ -182,9 +252,11 @@ const ReviewPage = () => {
                     </p>
                   </Button>
                   <ReviewModal
-                    show={show}
-                    handleClose={handleClose}
+                    detailShow={detailShow}
+                    handleDetailClose={handleDetailClose}
                     movie={selectedMovie}
+                    wishChecked={wishChecked}
+                    setWishChecked={setWishChecked}
                   />
                 </div>
               </div>

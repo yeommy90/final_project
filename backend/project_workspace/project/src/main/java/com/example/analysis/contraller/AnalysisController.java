@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.analysis.dto.AnalysisDTO;
+import com.example.analysis.dto.SimilarMemberDTO;
 import com.example.analysis.service.AnalysisService;
 
 @CrossOrigin("*")
@@ -60,6 +61,14 @@ public class AnalysisController {
 
 		}
 		
+		//추가
+		List<SimilarMemberDTO> simMemberList = analysisService.getSimilarMembers(member_id);
+//				System.out.println(simPersonList.get(0).getEmail());
+		for (int g = 0; g < simMemberList.size(); g++) {
+			System.out.println(simMemberList.get(g).getProfile_path());
+		}
+		
+		map.put("simMemberList", simMemberList);
 		map.put("ratingDistribution", save);
 		map.put("preferredGenre", analysisService.getPreferredGenreProcess(member_id));
 		map.put("preferredDirector", analysisService.getPreferredDirectorProcess(member_id));

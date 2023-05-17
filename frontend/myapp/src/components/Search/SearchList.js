@@ -8,24 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const SearchList = () => {
-  // 슬라이드 사용하기 위한 선언 모음
-  // const imgNumber = 20;
-  // const imgWidth = 1280; // The width of each image box in pixels
-  // const [position, setPosition] = useState(0);
-
-  // const handlePrevClick = () => {
-  //   if (position < 0) {
-  //     setPosition(position + imgWidth);
-  //   }
-  // };
-
-  // const handleNextClick = () => {
-  //   const maxPosition = (-(imgNumber - 5) * imgWidth) / 5; // Assuming 5 images are shown at a time
-  //   if (position > maxPosition) {
-  //     setPosition(position - imgWidth);
-  //   }
-  // };
-
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loadedImages, setLoadedImages] = useState([]);
 

@@ -254,6 +254,12 @@ h3 {
   border-radius: 5px;
 }
 
+@media screen and (max-width: 768px) {
+  .img-item img {
+    max-width: 100%;
+  }
+}
+
 .img-box .prev_button,
 .img-box .next_button {
   position: absolute;

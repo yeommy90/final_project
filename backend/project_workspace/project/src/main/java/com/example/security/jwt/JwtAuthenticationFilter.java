@@ -116,6 +116,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			body.put("nickname", principalDetails.getMemberDTO().getNickname());
 			body.put("profile_path", principalDetails.getMemberDTO().getProfile_path());
 			body.put("grade", principalDetails.getMemberDTO().getGrade());
+			body.put("type", principalDetails.getMemberDTO().getType());
 		}
 		
 		ObjectMapper mapper = new ObjectMapper();

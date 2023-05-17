@@ -12,6 +12,7 @@ import com.example.genre.dto.GenreDTO;
 import com.example.list.dto.ContentsDTO;
 import com.example.list.dto.ImagesDTO;
 import com.example.list.dto.ListDTO;
+import com.example.list.dto.ProviderDTO;
 import com.example.list.dto.RecommendDTO;
 import com.example.member.dto.MemberDTO;
 import com.example.review.dto.CommentsDTO;
@@ -71,6 +72,7 @@ public interface ListDAO {
 	public List<ReviewDTO> getReviewsByMovieId(int movie_id);
 	public List<ListDTO> getSimilarMovies(int movie_id);
 	public String getTrailerByMovieId(int movie_id);
+	public List<ProviderDTO> getProviderByMovieId(int movie_id);
 	
 	// review > comment, rating
 	public void postComment(CommentsDTO comment);
@@ -80,6 +82,9 @@ public interface ListDAO {
 	public void updateRating(RatingDTO rating);
 	public void deleteRating(Map<String, Object> map);
 	public ReviewDTO findReviewById(Map<String, Object> map);
+	
+	public List<RatingDTO> findAllRatingById(int member_id);
+	public List<WishDTO> findAllWishById(int member_id);
 	
 	// 부귀영화 평점 업데이트
 	public Map<String, Object> calculateRating(int movie_id);

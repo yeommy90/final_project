@@ -412,34 +412,39 @@ WHERE MOVIE_ID = 361743 AND MEMBER_ID = 9 AND STATE = 2;
         
 commit;
 
-select * from movie where movie_id in (select favorite from member where member_id = 1);
 
-select count(rating) as vote_cnt, round(avg(rating),2) as vote_sum from rating where movie_id = 240;
+-- 사용자 마이페이지
+SELECT m.member_id, m.email, m.name, m.nickname, m.profile_path, m.likes_count, m.regdate, m.visibility, m.grade, m.favorite, COUNT(r.member_id) as rating_count
+FROM member m
+LEFT JOIN rating r ON m.member_id = r.member_id
+WHERE m.member_id = 1
+GROUP BY m.member_id, m.email, m.name, m.nickname, m.profile_path, m.likes_count, m.regdate, m.visibility, m.grade, m.favorite;
 
-select * from rating where movie_id = 240;
 
-select * from movie where movie_id = 634649;
+-- 날짜 형식 변경
+ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD';
 
-update movie set vote_sum = 3.5, vote_cnt = 10 where vote_sum is null;
 
-SELECT *
-		FROM (
-		    SELECT m.*, r2.REGDATE
-		    FROM MOVIE m
-		    INNER JOIN (
-		        SELECT MOVIE_ID, MAX(REGDATE) AS latest_review_date
-		        FROM comments
-		        WHERE MEMBER_ID = 1
-		        GROUP BY MOVIE_ID
-		    ) r ON m.MOVIE_ID = r.MOVIE_ID
-		    INNER JOIN comments r2 ON r.MOVIE_ID = r2.MOVIE_ID AND r.latest_review_date = r2.REGDATE
-		    WHERE r2.MEMBER_ID = 1
-		    ORDER BY r.latest_review_date DESC
-		)
-		WHERE ROWNUM = 1;
+commit;
 
-select * from notice
-		order by notice_id desc;
+select distinct * from provider p join movie_provider mp on p.provider_id = mp.provider_id where mp.movie_id = 37724;
+
+select * 
+from movie 
+where movie_id in (select favorite from member where member_id = 1);
+
+delete from movie_images where filepath = '/5vPW6MPAyCFd84FEQQgtPDmVDPQ.jpg';
+
+
+
+
+
+
+
+
+
+
+
 
 
 

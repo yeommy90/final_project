@@ -1,7 +1,6 @@
 import style from '../../assets/css/profile.module.css';
 
 const ProfileList = ({ movies = [] }) => {
-  console.log(movies);
 
   return (
     <>

@@ -68,6 +68,13 @@ public class AdminServiceImp implements AdminService {
 		adminDao.deleteReview(deletereview);
 		
 	}
+
+	@Override
+	public void returnSpoilerprocess(ReviewInfoDTO returnspoiler) {
+		// TODO Auto-generated method stub
+		adminDao.returnSpoiler(returnspoiler);
+		
+	}
 	
 //	
 	

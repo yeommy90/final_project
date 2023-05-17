@@ -73,7 +73,31 @@ const AdminPage = () => {
    }
   };
 
-  //
+
+  const handleSpoilerReturn = async (member_id, movie_id) => {
+    if (member_id && movie_id) {
+      const newInfo = {
+        member_id: member_id,
+        movie_id: movie_id,
+      };
+
+      setInfo(newInfo);
+
+      axios.put(`${baseUrl}/return`, newInfo, config);
+
+      const updatedSpoilers = spoilerReports.map((report) => {
+        if (report.member_id === member_id) {
+          return { ...report, content: '블러 처리된 내용' }; // 블러 처리된 내용으로 변경
+        }
+
+        return report;
+      });
+
+      setSpoilerReports(updatedSpoilers);
+    }
+  };
+  
+
   const handleReportDelete = async (member_id, movie_id) => {
     // 욕설 댓글 삭제 처리 로직
     if (member_id && movie_id) {
@@ -85,10 +109,8 @@ const AdminPage = () => {
       setInfo(newInfo);
 
       await axios
-        .delete('http://localhost:8090/deletereview', newInfo, config)
-        .then((response) => {
-          setReports(response.data.editReport);
-        })
+        .delete(
+          `http://localhost:8090/deletereview/${member_id}/${movie_id}`, config)
         .catch((error) => {
           console.log(error);
         });
@@ -134,46 +156,113 @@ const AdminPage = () => {
     >
       <Container>
         <div className='pb-5'>
-          <h2 className="pb-4" style={{ color: 'black' }}>욕설 신고 목록</h2>
-          <div className='reports1' style={{ borderTop: '1px solid black' }}>
-            {Reports && Reports.length > 0 ? (Reports.map((report) => (
-              <div key={report.review_id}>
-                <li>{report.content}</li>
-                <Button
-                  color='danger'
-                  size='sm'
-                  onClick={() =>
-                    handleReportDelete(report.member_id, report.movie_id)
-                  }
-                >
-                  삭제
-                </Button>
-              </div>
-            ))) : (<p className="d-flex justify-content-center py-5">욕설 신고된 코멘트가 없습니다.</p>)}
+          <h2 className='pb-4' style={{ color: 'black' }}>
+            욕설 신고 목록
+          </h2>
+          <div
+            className='reports1'
+            style={{ border: '1px solid black', padding: '2px' }}
+          >
+            {Reports && Reports.length > 0 ? (
+              Reports.map((report) => (
+                <div key={report.review_id}>
+                  <li>{report.content}</li>
+                  <Button
+                    color='danger'
+                    size='sm'
+                    onClick={() =>
+                      handleReportDelete(report.member_id, report.movie_id)
+                    }
+                    style={{
+                      marginRight: '1px',
+                      marginLeft: '2px',
+                      padding: '1px',
+                    }}
+                  >
+                    댓글삭제
+                  </Button>
+                </div>
+              ))
+            ) : (
+              <p className='d-flex justify-content-center py-5'>
+                욕설 신고된 코멘트가 없습니다.
+              </p>
+            )}
           </div>
         </div>
 
         <div className='pb-5'>
-          <h2 className="pb-4" style={{ color: 'black' }}>스포일러 신고 목록</h2>
-          <div className='reports2' style={{ borderTop: '1px solid black' }}>
-            {spoilerReports && spoilerReports.length > 0 ? (spoilerReports.map((spoilerreport) => (
-              <div key={spoilerreport.member_id}>
-                <li>{spoilerreport.member_id}</li>
-                <li>{spoilerreport.content}</li>
-                <Button
-                  color='danger'
-                  size='sm'
-                  onClick={() =>
-                    handleSpoilerBlur(
-                      spoilerreport.member_id,
-                      spoilerreport.movie_id
-                    )
-                  }
-                >
-                  블러 처리
-                </Button>
-              </div>
-            ))) : (<p className="d-flex justify-content-center py-5">스포일러 신고된 코멘트가 없습니다.</p>)}
+          <h2 className='pb-4' style={{ color: 'black' }}>
+            스포일러 신고 목록
+          </h2>
+          <div
+            className='reports2'
+            style={{ border: '1px solid black', padding: '2px' }}
+          >
+            {spoilerReports && spoilerReports.length > 0 ? (
+              spoilerReports.map((spoilerreport) => (
+                <div key={spoilerreport.member_id}>
+                  <li>{spoilerreport.member_id}</li>
+                  {spoilerreport.state !== 1 &&
+                  spoilerreport.state !== 3 &&
+                  spoilerreport.state === 2 ? (
+                    <li>블러처리</li>
+                  ) : (
+                    <>
+                      <li>{spoilerreport.content}</li>
+                      <Button
+                        color='danger'
+                        size='sm'
+                        onClick={() =>
+                          handleSpoilerBlur(
+                            spoilerreport.member_id,
+                            spoilerreport.movie_id
+                          )
+                        }
+                        style={{
+                          marginRight: '1px',
+                          marginLeft: '2px',
+                          padding: '1px',
+                        }}
+                      >
+                        블러처리
+                      </Button>
+                    </>
+                  )}
+
+                  {spoilerreport.state === 4 ? (
+                    <>
+                      <Button
+                        color='danger'
+                        size='m'
+                        style={{
+                          marginRight: '1px',
+                          marginLeft: '2px',
+                          padding: '1px',
+                        }}
+                        onClick={() =>
+                          handleSpoilerReturn(
+                            spoilerreport.member_id,
+                            spoilerreport.movie_id
+                          )
+                        }
+                      >
+                        반려처리
+                      </Button>
+                      <br></br>
+                    </>
+                  ) : (
+                    <>
+                      <br></br>
+                    </>
+                  )}
+                </div>
+              ))
+            ) : (
+              <p className='d-flex justify-content-center py-5'>
+                스포일러 신고된 코멘트가 없습니다.
+              </p>
+            )}
           </div>
         </div>
       </Container>

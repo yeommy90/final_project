@@ -2,11 +2,13 @@ import { baseUrl } from 'Apiurl';
 import axios from 'axios';
 import { useState } from 'react';
 import Modal from 'react-modal';
+import { FormGroup } from 'reactstrap';
 
 Modal.setAppElement('#root');
 
 const EditImgModal = ({ isOpen, onRequestClose, memberInfo }) => {
   const [file, setFile] = useState("");
+  const [imageSrc, setImageSrc] = useState("");
 
   const formHeaders = {
     "Content-Type": "multipart/form-data",
@@ -16,7 +18,18 @@ const EditImgModal = ({ isOpen, onRequestClose, memberInfo }) => {
   const handleFileChange = (e) => {
     e.preventDefault();
     setFile(e.target.files[0]); // 선택한 파일을 state에 저장
-    console.log(e.target.files[0]);
+    encodeFileToBase64(e.target.files[0]);
+  };
+
+  const encodeFileToBase64 = (fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        resolve();
+      };
+    });
   };
 
   const onSubmit = async (e) => {
@@ -55,6 +68,17 @@ const EditImgModal = ({ isOpen, onRequestClose, memberInfo }) => {
                 name="profileImg"
                 onChange={handleFileChange}
               />
+              {imageSrc && (
+                <FormGroup
+                  style={{ width: "100px", height: "100px", left: "150px" }}
+                >
+                  <img
+                    src={imageSrc}
+                    alt="preview-img"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                </FormGroup>
+              )}
             </div>
 
             <button type="submit" className="btn btn-primary mt-3">

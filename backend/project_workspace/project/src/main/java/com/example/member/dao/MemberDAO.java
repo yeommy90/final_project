@@ -17,9 +17,12 @@ public interface MemberDAO {
 	public MemberDTO selectByEmail(String email);
 	public MemberDTO selectById(int member_id);
 	public void insertMemGenre(MemberGenreDTO dto);
+	public int[] selectMemGenre(int member_id);
+	public void deleteMemGenre(int member_id);
 	
 	public void updateProfileImg(MemberDTO dto);
 	public void updateMember(MemberDTO dto);
+	public void deleteMember(MemberDTO dto);
 	public void updateByPass(MemberDTO dto);
 	public int idcheck(String email);
 	public String getProfileImg(int member_id);

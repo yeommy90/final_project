@@ -11,4 +11,5 @@ public interface NoticeService {
 	public NoticeDTO selectByNoticeIdProcess(String notice_id);
 	public void editNoticeProcess(NoticeDTO dto);
 	public void deleteNoticeProcess(String notice_id);
+	public void delimgProcess(String notice_id);
 }	

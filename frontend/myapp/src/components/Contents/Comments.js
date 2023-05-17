@@ -79,12 +79,16 @@ const Comments = ({ contents, handleAuthShow, memberLikes, fetchComments }) => {
     }
     const response = await dispatch(MovieActions.getCheckReported(movie_id, comment_member_id));
 
-    if(response.isReported) {
-      setShowAlreadyModal(true);
+    if (!member_id) {
+      handleAuthShow();
     } else {
-      dispatch(MovieActions.commentSpoiler(reviewInfoDTO));
-      setShowConfirmModal(true);
-    }
+      if(response.isReported) {
+        setShowAlreadyModal(true);
+      } else {
+        dispatch(MovieActions.commentSpoiler(reviewInfoDTO));
+        setShowConfirmModal(true);
+      }
+    } 
   }
 
   // 코멘트 욕설 신고
@@ -95,23 +99,17 @@ const Comments = ({ contents, handleAuthShow, memberLikes, fetchComments }) => {
     }
     const response = await dispatch(MovieActions.getCheckReported(movie_id, comment_member_id));
 
-    if(response && response.isReported) {
-      setShowAlreadyModal(true);
+    if (!member_id) {
+      handleAuthShow();
     } else {
-      dispatch(MovieActions.commentProfanity(reviewInfoDTO));
-      setShowConfirmModal(true);
+      if(response && response.isReported) {
+        setShowAlreadyModal(true);
+      } else {
+        dispatch(MovieActions.commentProfanity(reviewInfoDTO));
+        setShowConfirmModal(true);
+      }
     }
   }
-
-  // 코멘트 내용 엔터 처리
-  const renderWithLineBreaks = (text) => {
-    return text.split('\n').map((line, index) => (
-      <Fragment key={index}>
-        {line}
-        <br />
-      </Fragment>
-    ));
-  };
 
   // 코멘트 한개의 더보기 처리
   const [expandedComments, setExpandedComments] = useState([]);

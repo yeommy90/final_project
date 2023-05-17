@@ -8,18 +8,14 @@ import { useParams } from 'react-router-dom';
 
 function ModifyNotice() {
     const [imageSrc, setImageSrc] = useState('');
-
+    const [originalfile, setOriginalfile] = useState(null);
     const author = localStorage.getItem("adminName")
     const { notice_id } = useParams();
-
 
     const [notices, setNotices] = useState({
         admin_id: localStorage.getItem("adminId"),
         title: '',
-
         content: '',
-        file: null,
-
     }
 
 
@@ -50,22 +46,35 @@ function ModifyNotice() {
         },
     };
 
-
-    const [file, setFile] = useState("");
+    const [file, setFile] = useState(null);
 
     const formHeaders = {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.getItem("Authorization"),
     };
 
-
-
     const handleFileChange = (e) => {
         e.preventDefault();
-        setFile(e.target.files[0]); // 선택한 파일을 state에 저장
-        console.log(e.target.files[0]);
-        encodeFileToBase64(e.target.files[0]);
+
+        if (e.target.files[0] === null) {
+
+        } else {
+            setFile(e.target.files[0]); // 선택한 파일을 state에 저장
+            console.log(e.target.files[0]);
+            encodeFileToBase64(e.target.files[0]);
+        }
     };
+
+    const handleFileRemove = async (e) => {
+        e.preventDefault()
+        const confirmed = window.confirm('정말로 파일을 제거하시겠습니까?');
+        if (confirmed) {
+            // 파일 제거 로직
+            axios.post(`${baseUrl}/delimg`, notice_id, config)
+            setImageSrc(null);
+        }
+    };
+
     const encodeFileToBase64 = (fileBlob) => {
         const reader = new FileReader();
         reader.readAsDataURL(fileBlob);
@@ -92,18 +101,17 @@ function ModifyNotice() {
             headers: formHeaders,
         }).then(
             alert("수정되었습니다"),
-            window.location.replace("/admineditnotice")
+            // window.location.replace("/admineditnotice")
         );
-
-
     };
+    
     useEffect(() => {
         console.log(notice_id)
         axios.post(`${baseUrl}/getnotice_id`, notice_id, config)
             .then((response) => {
                 setNotices(response.data)
             })
-    }, [])
+    }, [imageSrc]);
 
 
     return <>
@@ -165,10 +173,10 @@ function ModifyNotice() {
                                     type="file"
                                     className="form-control-file"
                                     name="profileImg"
-
+                                    id="fileInput"
                                     onChange={handleFileChange}
                                 />
-
+                                <button onClick={handleFileRemove}>파일제거</button>
                             </FormGroup>
 
 

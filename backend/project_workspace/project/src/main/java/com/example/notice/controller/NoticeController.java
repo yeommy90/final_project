@@ -32,25 +32,32 @@ public class NoticeController {
 	}
 
 	@PostMapping("/noticefileupdate")
-	public String updatefile(@RequestParam("file") MultipartFile file, @RequestParam("title") String title,
-			@RequestParam("admin_id") String admin_id, @RequestParam("content") String content, HttpServletRequest request) {
+	public String updatefile(@RequestParam(value = "file", required = false) MultipartFile file,
+			@RequestParam("title") String title, @RequestParam("admin_id") String admin_id,
+			@RequestParam("content") String content, HttpServletRequest request) {
 		System.out.println(title);
 		System.out.println(admin_id);
 		System.out.println(content);
+		String upload = "";
 		System.out.println(file);
-		UUID uuid = FileUpload.saveCopyFile(file, FileUpload.urlPath(request));
-		String upload = uuid + "_" + file.getOriginalFilename();
-		System.out.println(FileUpload.urlPath(request));
-		NoticeDTO notice = new NoticeDTO(Integer.parseInt(admin_id), title, content, upload);
-		System.out.println(uuid);
-		System.out.println(title);
-		System.out.println(uuid + "_" + file.getOriginalFilename());
-		noticeService.updateNoticeProcess(notice);
-//	       NoticeDTO notice= noticeService.selectByTitleProcess(title);
-//	      
-//	       notice.setUpload(uuid+ "_" +file.getOriginalFilename());
 
-		// 업로드처리
+		System.out.println(FileUpload.urlPath(request));
+		NoticeDTO notice = new NoticeDTO();
+
+		notice.setAdmin_id(Integer.parseInt(admin_id));
+		notice.setTitle(title);
+		notice.setContent(content);
+
+		if (file != null && !file.isEmpty()) {
+			UUID uuid = FileUpload.saveCopyFile(file, FileUpload.urlPath(request));
+			upload = uuid + "_" + file.getOriginalFilename();
+			notice.setUpload(upload);
+		} else {
+			upload = "";
+			notice.setUpload(upload);
+		}
+
+		noticeService.updateNoticeProcess(notice);
 		return "1234";
 	};
 
@@ -70,40 +77,56 @@ public class NoticeController {
 	}
 
 	@PostMapping("/modifynotice")
-	public String modifyfile(@RequestParam("file") MultipartFile file, @RequestParam("title") String title,
-			@RequestParam("admin_id") String admin_id, @RequestParam("content") String content,
-			@RequestParam("notice_id") String notice_id, HttpServletRequest request) {
+	public String modifyfile(@RequestParam(value = "file", required = false) MultipartFile file,
+			@RequestParam("title") String title, @RequestParam("admin_id") String admin_id,
+			@RequestParam("content") String content, @RequestParam("notice_id") String notice_id,
+			HttpServletRequest request) {
 		System.out.println(title);
 		System.out.println(admin_id);
 		System.out.println(content);
-		System.out.println(file);
-		UUID uuid = FileUpload.saveCopyFile(file, FileUpload.urlPath(request));
-		String upload = uuid + "_" + file.getOriginalFilename();
-		System.out.println(FileUpload.urlPath(request));
-		
-		NoticeDTO notice = new NoticeDTO(Integer.parseInt(admin_id), title, content, upload);
-		notice.setNotice_id(Integer.parseInt(notice_id));
-		System.out.println(uuid);
-		System.out.println(title);
-		System.out.println(uuid + "_" + file.getOriginalFilename());
-		noticeService.editNoticeProcess(notice);
-//	       NoticeDTO notice= noticeService.selectByTitleProcess(title);
-//	      
-//	       notice.setUpload(uuid+ "_" +file.getOriginalFilename());
 
-		// 업로드처리   
-		System.out.println("notice_id"+notice_id);
+		String upload = "";
+		NoticeDTO original = noticeService.selectByNoticeIdProcess(notice_id);
+
+		NoticeDTO notice = new NoticeDTO();
+		notice.setNotice_id(Integer.parseInt(notice_id));
+		notice.setAdmin_id(Integer.parseInt(admin_id));
+		notice.setTitle(title);
+		notice.setContent(content);
+
+		if (file != null && !file.isEmpty()) {
+			// notice id 로 가져와서 파일명이 같지 않을때만 아래 3줄 실행
+			System.out.println("실행");
+			System.out.println(file);
+			System.out.println(file.getName());
+			System.out.println(file.getOriginalFilename());
+			UUID uuid = FileUpload.saveCopyFile(file, FileUpload.urlPath(request));
+			upload = uuid + "_" + file.getOriginalFilename();
+			notice.setUpload(upload);
+		} else {
+			System.out.println("file");
+			System.out.println("file" + file);
+			upload = "";
+		}
+		
+		noticeService.editNoticeProcess(notice);
+
 		return "1234";
 	};
 	
 	@DeleteMapping("/deletenotice/{notice_id}")
 	public String deleteN(@PathVariable String notice_id, HttpServletRequest request) {
-		
 		System.out.println("deleten");
 		System.out.println(notice_id);
 		noticeService.deleteNoticeProcess(notice_id);		
 		
 		return "성공";
-		
+	}
+	
+	@PostMapping("/delimg")
+	public String delfile(@RequestBody String notice_id) {
+		System.out.println(notice_id);
+		noticeService.delimgProcess(notice_id);
+		return null;
 	}
 }

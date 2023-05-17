@@ -13,13 +13,9 @@ function NoticePage() {
     const [notices, setNotices] = useState({
         admin_id: localStorage.getItem("adminId"),
         title: '',
-
         content: '',
+    });
 
-    }
-
-
-    );
     const onDrop = useCallback((acceptedFiles) => {
         // 파일이 업로드될 때 실행되는 콜백 함수입니다.
         // 업로드된 파일 객체를 upload 상태값에 저장합니다.
@@ -34,9 +30,7 @@ function NoticePage() {
     const handleValueChange = (e) => {
         //radio버튼에서는 e.preventDefault()를 하면 더블 클릭을 해줘야 한다.
         //e.preventDefault();
-
         setNotices({ ...notices, [e.target.name]: e.target.value });
-
     };
 
     const config = {
@@ -55,10 +49,14 @@ function NoticePage() {
 
     const handleFileChange = (e) => {
         e.preventDefault();
+        if (e.target.files[0] === null) {
+            setFile(null);
+        }
         setFile(e.target.files[0]); // 선택한 파일을 state에 저장
         console.log(e.target.files[0]);
         encodeFileToBase64(e.target.files[0]);
     };
+
     const encodeFileToBase64 = (fileBlob) => {
         const reader = new FileReader();
         reader.readAsDataURL(fileBlob);
@@ -85,12 +83,9 @@ function NoticePage() {
             headers: formHeaders,
         }).then(
             alert("등록되었습니다"),
-            window.location.replace("/adminnotice")
+            window.location.replace("/admineditnotice")
         );
-
-
     };
-
 
     return <>
         <Container className="d-flex justify-content-center align-items-center" style={{ marginTop: '20px', height: '100vh', width: 1200 }}>

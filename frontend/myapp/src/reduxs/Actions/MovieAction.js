@@ -30,7 +30,7 @@ function getReviewByMemberId(movie_id, member_id) {
   return async (dispatch) => {
     const data = await axios.get(`${baseUrl}/comment/${movie_id}/${member_id}`)
       .then((res) => res.data);
-    dispatch(MovieReducers.getReviewByMemberId({data}));
+    return dispatch(MovieReducers.getReviewByMemberId({data}));
   }
 }
 

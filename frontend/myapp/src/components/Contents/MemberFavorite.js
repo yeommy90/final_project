@@ -82,8 +82,8 @@ const MemberFavorite = ({ handleAuthShow, fetchComments }) => {
   return (
     <>
       <div className="member-favorite" onClick={handleFavoriteChange}>
-        <FontAwesomeIcon icon={faStar} className="mr-2" style={value ? { color: '#fc8080' } : {}}/>
-        <span style={value ? { color: '#fc8080' } : {}}>인생영화</span>
+        <FontAwesomeIcon icon={faStar} className="mr-2" style={value ? { color: '#b660f8' } : {}}/>
+        <span style={value ? { color: '#b660f8' } : {}}>인생영화</span>
       </div>
       <NoFavoriteModal isOpen={showNoFavoriteModal} onRequestClose={handleNoFavoriteClose} onConfirm={handleNoFavoriteClose} onCancel={handleNoFavoriteClose} />
       <ChangeFavoriteModal isOpen={showChangeFavoriteModal} onRequestClose={handleChangeFavoriteClose} onConfirm={handleChangeFavoriteClose} onCancel={handleChangeFavoriteClose} currentFavorite={memberFavorite} />

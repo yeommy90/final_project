@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const AnalysisHeader = () => {
+const AnalysisHeader = ({ memberInfo = {} }) => {
   const { member_id } = useParams();
   const [ratingCnt, setRatingCnt] = useState([]);
 
@@ -20,7 +20,6 @@ const AnalysisHeader = () => {
       .catch((error) => {
         console.log(error);
       });
-
   }, []);
 
   const ratingSum =
@@ -35,18 +34,17 @@ const AnalysisHeader = () => {
     save[8] +
     save[9];
 
-  const nickname = localStorage.getItem('nickname');
   return (
     <div style={{ margin: '50px auto 0 auto', width: '700px' }}>
       <div className={style.profile}>
         <div className={style.maintitle}>
-          <span style={{ fontWeight: 'bold' }}>{nickname}님</span>의 취향분석
+          <span style={{ fontWeight: 'bold' }}>{memberInfo && memberInfo.nickname}님</span>의 취향분석
         </div>
         <div className={style.profile_img}>
           <img
             className={style.profile_img_img}
-            src={require('assets/img/profile2.jpg')}
-            alt='검색 버튼'
+            src={`${process.env.PUBLIC_URL}/profiles/${memberInfo.profile_path}`}
+            alt='프로필 이미지'
           />
         </div>{' '}
         {save.length > 0 ? (
@@ -74,7 +72,6 @@ const AnalysisHeader = () => {
           style={{
             width: '100%',
             height: '60px',
-            // backgroundColor: 'blue',
           }}
         ></div>
       </div>
