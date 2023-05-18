@@ -1,9 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { MovieActions } from 'reduxs/Actions/MovieAction';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import MovieRating from './MovieRating';
 import CommentDropdown from './CommentDropdown';
@@ -51,7 +49,7 @@ const ContentsHeader = ({ contents = {}, fetchComments, handleAuthShow }) => {
     handleConfirmDelete,
     handleCancelDelete,
     handleCommentClick,
-  } = useComment(fetchComments, handleAuthShow, movie_id, member_id);
+  } = useComment(fetchComments, handleAuthShow, undefined, movie_id, member_id);
 
   return (
     <>

@@ -229,3 +229,19 @@
   width: 260px;
   border-bottom: 1px solid #dddcdc;
 }
+
+.rankpro_left2 {
+  float: left;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.rankpro_left2 img {
+  position: absolute;
+
+  width: 70px;
+  object-fit: cover;
+}

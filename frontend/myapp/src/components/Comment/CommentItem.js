@@ -7,35 +7,72 @@ import { Link } from "react-router-dom";
 const CommentItem = ({comments, handleSpoilerReport, handleProfanityReport, toggleExpanded, isCommentLiked, handleLikesClick, expandedComments, member_id}) => {
   const [itemsToShow, setItemsToShow] = useState(3);
 
-  const renderedComments = comments.slice(0, itemsToShow).map((comment) => {
-    return (
-      <div
-        key={comment.member_id}
-        className='comment-box p-4 mb-3'
-        style={{ position: 'relative' }}
-      >
-        <img
-          src={require('assets/img/crown.png')}
-          style={{
-            position: 'absolute',
-            top: '15px',
-            left: '25px',
-            width: '30px',
-            zIndex: '8',
-            transform: 'rotate( -53deg )',
-          }}
-        />
+  let gradeImgPath = "";
+  switch (comments.grade) {
+    case 3:
+      gradeImgPath = "동.png";
+      break;
+    case 2:
+      gradeImgPath = "은.png";
+      break;
+    case 1:
+      gradeImgPath = "금.png";
+      break;
+    default:
+      gradeImgPath = "";
+      break;
+  }
 
-        <img
-          style={{
-            position: 'absolute',
-            width: '30px',
-            top: '50px',
-            left: '70px',
-            zIndex: 99,
-          }}
-          src={require('assets/img/gold.png')}
-        ></img>
+  const renderedComments = comments.slice(0, itemsToShow).map((comment, index) => {
+    let gradeImgPath = "";
+    switch (comment.grade) {
+      case 3:
+        gradeImgPath = '동.png';
+        break;
+      case 2:
+        gradeImgPath = '은.png';
+        break;
+      case 1:
+        gradeImgPath = '금.png';
+        break;
+      default:
+        gradeImgPath = "";
+        break;
+    }
+
+    return (
+      <div key={comment.member_id} className='comment-box p-4 mb-3' style={{ position: 'relative' }}>
+        {index === 0 && comment.likes !== 0 ? (
+        <>
+          <img
+            src={require('assets/img/crown.png')}
+            style={{
+              position: 'absolute',
+              top: '15px',
+              left: '25px',
+              width: '30px',
+              zIndex: '8',
+              transform: 'rotate( -53deg )',
+            }}
+          />
+        </>
+        ) : (
+          ''
+        )}    
+        {comment.grade !== 4 ? (
+          <img
+            src={`${process.env.PUBLIC_URL}/gradeimg/${gradeImgPath}`}
+            style={{
+              position: 'absolute',
+              width: '30px',
+              top: '50px',
+              left: '70px',
+              zIndex: 50,
+            }}
+          />  
+        ) : (
+          ''
+        )}
         <div className='d-flex align-items-center' style={{ zIndex: 9 }}>
           <Link to={`/profile/${comment.member_id}`}>
             <img
@@ -55,26 +92,14 @@ const CommentItem = ({comments, handleSpoilerReport, handleProfanityReport, togg
           {comment.member_id != member_id && (
             <div className='ml-auto mr-2'>
               <Dropdown>
-                <Dropdown.Toggle
-                  variant='link'
-                  size='sm'
-                  style={{ outline: 'none', boxShadow: 'none' }}
-                >
+                <Dropdown.Toggle variant='link' size='sm' style={{ outline: 'none', boxShadow: 'none' }}>
                   <FontAwesomeIcon icon={faEllipsisV} className='m-0' />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    onClick={() => {
-                      handleSpoilerReport(comment.member_id);
-                    }}
-                  >
+                  <Dropdown.Item onClick={() => {handleSpoilerReport(comment.member_id);}}>
                     스포일러 신고
                   </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={() => {
-                      handleProfanityReport(comment.member_id);
-                    }}
-                  >
+                  <Dropdown.Item onClick={() => {handleProfanityReport(comment.member_id);}}>
                     욕설 신고
                   </Dropdown.Item>
                 </Dropdown.Menu>

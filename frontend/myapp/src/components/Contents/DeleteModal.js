@@ -11,7 +11,7 @@ const DeleteModal = ({ isOpen, onConfirm, onCancel }) => {
     >
       <div>
         <div className='d-flex justify-content-center'>
-          <h3>정말로 삭제하시겠습니까?</h3>
+          <h4 className='mb-4'>정말로 삭제하시겠습니까?</h4>
         </div>
         <div className='d-flex justify-content-center align-items-center m-2'>
           <button className='btn mr-2' onClick={onConfirm}>확인</button>

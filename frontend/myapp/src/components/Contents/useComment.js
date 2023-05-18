@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MovieActions } from "reduxs/Actions/MovieAction";
 
-const useComment = (fetchComments = () => {}, handleAuthShow = () => {}, movie_id, member_id) => {
+const useComment = (fetchComments = () => {}, handleAuthShow = () => {}, handleDetailClose = () => {}, movie_id, member_id) => {
   const dispatch = useDispatch();
   const memberReview = useSelector((state) => state.movie.memberReview);
   const hasComment = memberReview && memberReview.content;
@@ -33,6 +33,9 @@ const useComment = (fetchComments = () => {}, handleAuthShow = () => {}, movie_i
   const handleClose = useCallback(() => {
     setShow(false);
     setComment('');
+    if(handleDetailClose) { 
+      handleDetailClose();
+    }
   }, []);
 
   // 삭제 확인 모달

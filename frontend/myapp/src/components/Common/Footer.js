@@ -1,37 +1,66 @@
-import React from 'react';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { baseUrl } from 'Apiurl';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 // reactstrap components
-import { Row, Container } from 'reactstrap';
+import {
+  Row,
+  Container,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'reactstrap';
 
 function Footer() {
+  const member_id = localStorage.getItem('member_id');
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false); // 회원 탈퇴 확인 모달 상태
+
+  // 회원 탈퇴 확인 모달 열기
+  const openConfirmModal = () => {
+    setConfirmModalOpen(true);
+  };
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('Authorization'),
+    },
+  };
+
+  // 회원 탈퇴 확인 모달 닫기
+  const closeConfirmModal = () => {
+    setConfirmModalOpen(false);
+  };
+
+  // 회원 탈퇴 처리
+  const handleDelete = async () => {
+    const member = {
+      member_id: localStorage.getItem('member_id'),
+    };
+
+    await axios.post(`${baseUrl}/profile/delete`, member, config).then(() => {
+      console.log('회원 탈퇴 성공');
+      // 회원 탈퇴 성공 처리
+      window.location.replace('/logout');
+    });
+  };
+
   return (
-    <footer className='footer footer-black footer-white'>
+    <footer className='footer footer-black footer-white' style={{marginTop:'60px'}}>
       <Container>
         <Row>
           <nav className='footer-nav'>
             <ul>
               <li>
                 <a
-                  href='https://www.creative-tim.com?ref=pkr-footer'
-                  target='_blank'
+                  href='/notice'
                 >
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a
-                  href='http://blog.creative-tim.com/?ref=pkr-footer'
-                  target='_blank'
-                >
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a
-                  href='https://www.creative-tim.com/license?ref=pkr-footer'
-                  target='_blank'
-                >
-                  Licenses
+                  공지사항
                 </a>
               </li>
             </ul>
@@ -39,7 +68,8 @@ function Footer() {
           <div className='credits ml-auto'>
             <span className='copyright'>
               © {new Date().getFullYear()}, made with{' '}
-              <i className='fa fa-heart heart' /> by Creative Tim
+              <FontAwesomeIcon icon={faHeart} style={{color: "#e75757", marginRight:'3px'}} />
+              by 부귀영화
             </span>
           </div>
         </Row>
@@ -77,15 +107,65 @@ function Footer() {
             style={{
               width: '180px',
               position: 'absolute',
-              bottom: 0,
+              top: 0,
               right: 0,
               cursor: 'pointer',
             }}
+            onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
           />
+
+          {localStorage.getItem('member_id') && (
+            // <Tooltip title='지금까지 남긴게 모두 사라져요!' arrow>
+            <span>
+              <Button
+                // onClick={handleDelete}
+                onClick={openConfirmModal} // 확인 모달 열기
+                className='btn-round bg-dark'
+                type='button'
+                style={{
+                  position: 'absolute',
+                  marginLeft: ' 20px',
+                  right: '60px',
+                  bottom: '0px',
+                }}
+              >
+                회원탈퇴
+              </Button>
+            </span>
+            // </Tooltip>
+          )}
+          {/* 회원 탈퇴 확인 모달 */}
+          <Modal isOpen={confirmModalOpen} toggle={closeConfirmModal}>
+            <ModalHeader
+              toggle={closeConfirmModal}
+              style={{ fontWeight: 'bold' }}
+            >
+              회원 탈퇴
+            </ModalHeader>
+            <ModalBody style={{ mergin: 'auto' }}>
+              지금까지 남겨온 추억이 전부 사라집니다! <br />
+              정말 탈퇴 하시겠습니까?
+              {/* 추가적인 메시지 또는 안내를 여기에 포함할 수 있습니다. */}
+            </ModalBody>
+            <ModalFooter>
+              <div style={{ margin: 'auto' }}>
+                <Button
+                  style={{ margin: '10px' }}
+                  color='secondary'
+                  onClick={closeConfirmModal}
+                >
+                  취소
+                </Button>
+                <Button color='danger' onClick={handleDelete}>
+                  확인
+                </Button>
+              </div>
+            </ModalFooter>
+          </Modal>
         </div>
       </div>
     </footer>
   );
 }
 
-export default Footer;
+export default Footer

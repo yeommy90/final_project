@@ -116,7 +116,7 @@ const KakaoButton = () => {
             render={(props) => <img
                 alt='...'
                 src={require('assets/img/btnG_K.png')}
-                style={{ width: 60, margin: '0px 20px' }}
+                style={{ width: 60, margin: '0px 20px', cursor:'pointer'  }}
                 onClick={props.onClick}
             />}
         />

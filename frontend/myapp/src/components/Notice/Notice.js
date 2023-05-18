@@ -116,12 +116,16 @@ const Notice = () => {
           </div>
         ))}
         <div className={style.line}></div>
+
+        <div style={{width:'100%', height:'150px'}}>
         <Page
+
           noticesPerPage={noticesPerPage}
           totalNotices={notices.length}
           paginate={paginate}
           currentPage={currentPage}
         />
+        </div>
 
       </div>
 

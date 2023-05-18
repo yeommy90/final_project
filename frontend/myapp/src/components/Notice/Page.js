@@ -9,9 +9,10 @@ const Page = ({ noticesPerPage, totalNotices, paginate, currentPage }) => {
     }
 
     return (
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center m-auto" style={{textAlign:'center'}}>
             <Pagination>
-                <Pagination.Prev onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
+                <Pagination.Prev onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} 
+                />
 
 
                 {pageNumbers.map((number) => (
@@ -24,7 +25,7 @@ const Page = ({ noticesPerPage, totalNotices, paginate, currentPage }) => {
                         {number}
                     </Pagination.Item>
                 ))}
-                <Pagination.Next disabled={currentPage >= Math.ceil(totalNotices / noticesPerPage)} onClick={() => paginate(currentPage + 1)} />
+                <Pagination.Next    disabled={currentPage >= Math.ceil(totalNotices / noticesPerPage)} onClick={() => paginate(currentPage + 1)} />
             </Pagination>
         </div>
     );

@@ -21,7 +21,11 @@ const SimilarMovie = ({ contents = {}}) => {
                   </div>
                   <div className='similar-movie-info'>
                     <div className='title'>{movie.title}</div>
-                    <div className='rating'>★ {(movie.tmdb_vote_sum / 2).toFixed(2)}</div>
+                    {/* <div className='rating'>★ {(movie.tmdb_vote_sum / 2).toFixed(2)}</div> */}
+                    <div className='d-flex justify-content'>
+                      <div className='rating mr-2'>TMDB ★ {(movie.tmdb_vote_sum / 2).toFixed(2)}</div>
+                      <div className='rating2'>・ 부귀영화 ★ {movie.vote_sum}</div>
+                    </div>
                   </div>
                 </div>
               );

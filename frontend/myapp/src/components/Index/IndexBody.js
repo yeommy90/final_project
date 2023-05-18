@@ -64,9 +64,15 @@ function IndexBody() {
         {member_id ? (
           <>
             <MovieList listTitle={`${nickname} 님의 선호 장르 리스트`} movies={favoriteGenre} />
-            <MovieList listTitle={`선호 감독 ${directorName}의 영화`} movies={favoriteDirector} />
-            <MovieList listTitle={`선호 배우 ${actorName}의 영화`} movies={favoriteActor} />
-            {/* <Recommend /> */}
+
+            {/* 최초 회원가입시 선호감독, 선호배우 정보가 없기 때문에 가려놓음 */}
+            {favoriteDirector && Object.keys(favoriteDirector).length > 0 ? (
+              <>
+                <MovieList listTitle={`선호 감독 ${directorName}의 영화`} movies={favoriteDirector} />
+                <MovieList listTitle={`선호 배우 ${actorName}의 영화`} movies={favoriteActor} />
+                <Recommend />
+              </>
+            ) : ('')}
           </>
         ) : (
           <>

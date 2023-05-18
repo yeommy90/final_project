@@ -29,7 +29,7 @@
 	<!--회원정보 수정 > 이름, 비번, 닉네임, 프로필 이미지-->
 	<update id="updateMember" parameterType="MemberDTO">
 	  	UPDATE member
-	  	SET password=#{password}, name=#{name}, nickname=#{nickname}
+	  	SET password=#{password}, name=#{name}, nickname=#{nickname}, visibility=#{visibility}
 	  	WHERE email=#{email}
 	</update>
 	
@@ -67,7 +67,7 @@
 	
 	<!--마이페이지 위시리스트-->
 	<select id="getWishList"  parameterType="int" resultType="ListDTO">
-		SELECT a.movie_id, a.title, a.release_date,
+		SELECT a.movie_id, a.title, a.release_date, a.vote_sum,
 		round(a.tmdb_vote_sum / 2, 2) as tmdb_vote_sum, a.poster_path, w.regdate
 		FROM movie a
 		JOIN wish w on a.movie_id = w.movie_id
@@ -77,13 +77,14 @@
 
 	<!--마이페이지 평가리스트-->
 	<select id="getRatingList" parameterType="int" resultType="ListDTO">
-		SELECT a.movie_id, a.title, a.release_date,
+		SELECT a.movie_id, a.title, a.release_date, a.vote_sum,
 		round(a.tmdb_vote_sum / 2, 2) as tmdb_vote_sum, a.poster_path, r.regdate
 		FROM movie a
 		JOIN rating r on a.movie_id = r.movie_id
 		WHERE r.member_id = #{member_id}
 		order by R.regdate DESC
 	</select>
+
 
 	
 	

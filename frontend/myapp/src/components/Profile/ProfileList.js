@@ -72,14 +72,15 @@ const ProfileList = ({ movies = [] }) => {
                       {movie.release_date}
                     </div>
                     <div
-                      className='movie_rating'
+                      className='movie_rating d-flex justify-content'
                       style={{
-                        fontSize: '15px',
+                        fontSize: '0.9em',
                         color: '#fc8080',
                         fontFamily: 'NanumSquare',
                       }}
                     >
-                      ★ {movie.tmdb_vote_sum}
+                      <div className='rating mr-2'>★ {(movie.tmdb_vote_sum).toFixed(2)}</div>
+                      <div className='rating2'> ★ {movie.vote_sum}</div>
                     </div>
                   </div>
                 </div>

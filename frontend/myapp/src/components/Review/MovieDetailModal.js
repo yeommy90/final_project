@@ -67,7 +67,7 @@ const ReviewModal = ({ detailShow, handleDetailClose, movie, wishChecked, setWis
     handleConfirmDelete,
     handleCancelDelete,
     handleCommentClick,
-  } = useComment(undefined, undefined, movie_id, member_id);
+  } = useComment(undefined, undefined, handleDetailClose, movie_id, member_id);
 
   // 보고싶어요 처리
   const handleWishChange = async (movie_id) => {

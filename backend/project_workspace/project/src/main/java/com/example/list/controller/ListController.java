@@ -194,7 +194,7 @@ public class ListController {
 	}
 	
 	
-	
+
 	// 인생영화
 	@GetMapping("/favorite/{member_id}")
 	public ContentsDTO findFavoriteByIdExecute(@PathVariable("member_id") int member_id) {

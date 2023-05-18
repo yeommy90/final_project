@@ -76,7 +76,8 @@ const EditModal = ({ isOpen, onRequestClose}) => {
     await axios.post(`${baseUrl}/profile/update`, member, config);
     localStorage.setItem("nickname", nickname);
     //navigator('/');
-    window.location.replace("/");
+    //window.location.replace("/");
+    window.location.replace(`/profile/${localStorage.getItem("member_id")}`);
   };
 
   return (

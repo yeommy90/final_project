@@ -54,8 +54,8 @@ function MovieList({ movies = [], listTitle = "" }) {
                     <div className='title-box-title'>{movie.title}</div>
                     <div className='title-box-date'>{movie.release_date} 개봉</div>
                     <div className='d-flex justify-content'>
-                    <div className='rating mr-2'>TMDB ★ {(movie.tmdb_vote_sum / 2).toFixed(2)}</div>
-                    <div className='rating2'>・ 부귀영화 ★ {movie.vote_sum}</div>
+                      <div className='rating mr-2'>TMDB ★ {(movie.tmdb_vote_sum / 2).toFixed(2)}</div>
+                      <div className='rating2'>・ 부귀영화 ★ {movie.vote_sum}</div>
                     </div>
                   </div>
                 </div>

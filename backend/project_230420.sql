@@ -1,3 +1,40 @@
+commit;
+
+delete from rating where movie_id = 442249;
+
+delete from rating where member_id = 1;
+
+update rating set movie_id = 705996 where movie_id = 37724;
+
+WITH
+		highest_rated_movie AS (
+		    SELECT * FROM (
+		        SELECT movie_id
+		        FROM rating
+		        WHERE member_id = 25
+		        AND regdate >= SYSDATE - 30
+		        ORDER BY rating DESC, regdate DESC
+		    )
+		    WHERE ROWNUM <= 1
+		),
+		director_id AS (
+		    SELECT md.director_id
+		    FROM movie_director md
+		    WHERE md.movie_id = (SELECT movie_id FROM highest_rated_movie)
+		)
+		SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum, d.name as director_name
+		FROM (
+		    SELECT DISTINCT movie.*, movie_director.director_id
+		    FROM movie
+		    JOIN movie_director ON movie.movie_id = movie_director.movie_id
+		    JOIN director ON movie_director.director_id = director.director_id
+		    WHERE director.director_id = (SELECT director_id FROM director_id)
+		    ORDER BY tmdb_vote_cnt DESC
+		) a
+		JOIN director d ON a.director_id = d.director_id
+		WHERE rownum <= 10;
+
+
 -- 평점, 인기도, 2000년도 이후
 SELECT a.movie_id, a.title, a.release_date, 
 			   round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum
@@ -130,7 +167,7 @@ highest_rated_movie AS (
     SELECT * FROM (
         SELECT movie_id
         FROM rating
-        WHERE member_id = 1
+        WHERE member_id = 26
         AND regdate >= SYSDATE - 30
         ORDER BY rating DESC, regdate DESC
     )
@@ -140,6 +177,7 @@ director_id AS (
     SELECT md.director_id
     FROM movie_director md
     WHERE md.movie_id = (SELECT movie_id FROM highest_rated_movie)
+    AND ROWNUM = 1
 )
 SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum, d.name as director_name
 FROM (
@@ -198,6 +236,8 @@ FROM (
 ) a
 JOIN actor d ON a.actor_id = d.actor_id
 WHERE rownum <= 10;
+
+
 
 -- 선호 배우 아이디 뽑기
 SELECT md.actor_id

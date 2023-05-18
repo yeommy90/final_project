@@ -101,7 +101,7 @@ function ModifyNotice() {
             headers: formHeaders,
         }).then(
             alert("수정되었습니다"),
-            // window.location.replace("/admineditnotice")
+            window.location.replace("/admineditnotice")
         );
     };
     

@@ -7,7 +7,7 @@ import style from '../../assets/css/profile.module.css';
 
 const ProfileListMore = () => {
   const dispatch = useDispatch();
-  const member_id = localStorage.getItem('member_id');
+  const { member_id } = useParams();
   const wishList = useSelector((state) => state.profile.wishList);
   const ratingList = useSelector((state) => state.profile.ratingList);
   const [movies, setMovies] = useState([]);
@@ -18,6 +18,8 @@ const ProfileListMore = () => {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setMenuOpen(false);
@@ -247,15 +249,17 @@ const ProfileListMore = () => {
                           {movie.release_date}
                         </div>
                         <div
-                          className='movie_rating'
+                          className='movie_rating d-flex justify-content'
                           style={{
-                            fontSize: '15px',
+                            fontSize: '0.8em',
                             color: '#fc8080',
                             fontFamily: 'NanumSquare',
                             marginBottom: '20px',
                           }}
                         >
-                          ★ {movie.tmdb_vote_sum}
+                          <div className='rating mr-2'>★ {(movie.tmdb_vote_sum).toFixed(2)}</div>
+                          <div className='rating2'> ★ {movie.vote_sum}</div>
+                          
                         </div>
                       </div>
                     </div>
@@ -269,4 +273,4 @@ const ProfileListMore = () => {
   );
 };
 
-export default ProfileListMore;
+export default ProfileListMore

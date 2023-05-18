@@ -133,6 +133,7 @@
 		    SELECT md.director_id
 		    FROM movie_director md
 		    WHERE md.movie_id = (SELECT movie_id FROM highest_rated_movie)
+		    AND ROWNUM = 1
 		)
 		SELECT a.movie_id, a.title, a.release_date, round(a.tmdb_vote_sum, 2) as tmdb_vote_sum, a.tmdb_vote_cnt, a.poster_path, a.vote_sum, d.name as director_name
 		FROM (
@@ -487,6 +488,7 @@
 		set favorite = #{movie_id}
 		where member_id = #{member_id}
 	</update>
+	
 	
 	
 	

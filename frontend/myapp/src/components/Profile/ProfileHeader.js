@@ -1,12 +1,12 @@
-import { faHeart, faPencil } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import style from "../../assets/css/profile.module.css";
-import { baseUrl } from "Apiurl";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import Tooltip from "@mui/material/Tooltip";
+import { faHeart, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import style from '../../assets/css/profile.module.css';
+import { baseUrl } from 'Apiurl';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import Tooltip from '@mui/material/Tooltip';
 
 const ProfileHeader = ({
   handleEditShow,
@@ -16,52 +16,52 @@ const ProfileHeader = ({
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [grade, setGrade] = useState(4);
-  const [profilePath, setProfilePath] = useState("");
+  const [profilePath, setProfilePath] = useState('');
 
   useEffect(() => {
     if (memberInfo != undefined) {
-      setIsLoggedIn(localStorage.getItem("member_id") == memberInfo.member_id);
+      setIsLoggedIn(localStorage.getItem('member_id') == memberInfo.member_id);
       setGrade(memberInfo.grade);
       setProfilePath(memberInfo.profile_path);
     }
   }, [memberInfo]);
 
-  let gradeImgPath = "";
+  let gradeImgPath = '';
   switch (grade) {
     case 3:
-      gradeImgPath = "동.png";
+      gradeImgPath = '동.png';
       break;
     case 2:
-      gradeImgPath = "은.png";
+      gradeImgPath = '은.png';
       break;
     case 1:
-      gradeImgPath = "금.png";
+      gradeImgPath = '금.png';
       break;
     default:
-      gradeImgPath = "";
+      gradeImgPath = '';
       break;
   }
 
-  let gradeText = "";
+  let gradeText = '';
   switch (grade) {
     case 1:
-      gradeText = "골드 등급입니다.";
+      gradeText = '골드 등급입니다.';
       break;
     case 2:
-      gradeText = "실버 등급입니다.";
+      gradeText = '실버 등급입니다.';
       break;
     case 3:
-      gradeText = "브론즈 등급입니다.";
+      gradeText = '브론즈 등급입니다.';
       break;
     default:
-      gradeText = "등급을 올려보세요!";
+      gradeText = '등급을 올려보세요!';
       break;
   }
 
   const config = {
     headers: {
-      "Content-Type": "application/json",
-      Authorization: localStorage.getItem("Authorization"),
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('Authorization'),
     },
   };
 
@@ -71,16 +71,16 @@ const ProfileHeader = ({
   const handleDelete = async () => {
     const member = {
       member_id: memberInfo.member_id,
-      name: "",
-      nickname: "",
-      email: "",
-      password: "",
+      name: '',
+      nickname: '',
+      email: '',
+      password: '',
     };
 
     await axios.post(`${baseUrl}/profile/delete`, member, config).then(() => {
-      console.log("회원 탈퇴 성공");
+      console.log('회원 탈퇴 성공');
       // 회원 탈퇴 성공 처리
-      window.location.replace("/logout");
+      window.location.replace('/logout');
     });
   };
 
@@ -95,56 +95,68 @@ const ProfileHeader = ({
   };
   return (
     <>
-      {memberInfo && memberInfo.nickname !== "존재하지 않는 회원입니다" ? (
+      {memberInfo && memberInfo.nickname !== '존재하지 않는 회원입니다' ? (
         (memberInfo && memberInfo.visibility === 1) ||
-        String(localStorage.getItem("member_id")) ===
+        String(localStorage.getItem('member_id')) ===
           String(memberInfo.member_id) ? (
           memberInfo !== undefined && (
             <div className={style.header_wrap}>
-              {grade !== 4 ? (<img
-                style={{
-                  position: "absolute",
-                  width: "50px",
-                  top: "180px",
-                  left: "420px",
-                  zIndex: 99,
-                }}
-                src={`${process.env.PUBLIC_URL}/gradeimg/${gradeImgPath}`}
-              ></img>) : ('')}
+              {grade !== 4 ? (
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    position: 'absolute',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <img
+                    style={{
+                      marginTop: '130px',
+                      width: '50px',
+                      marginLeft: '-310px',
+                      zIndex: 99,
+                    }}
+                    src={`${process.env.PUBLIC_URL}/gradeimg/${gradeImgPath}`}
+                  ></img>
+                </div>
+              ) : (
+                ''
+              )}
               <div className={style.profile}>
                 <div className={style.left}>
                   <div className={style.profile_img}>
                     <img
                       src={`${process.env.PUBLIC_URL}/profiles/${profilePath}`}
-                      alt="프로필 이미지"
+                      alt='프로필 이미지'
                       style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "8%",
-                        border: "1px solid black",
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: '8%',
+                        border: '1px solid black',
                       }}
                     />
                   </div>
                 </div>
                 <div className={style.right}>
-                  <p style={{ fontSize: "12pt" }}>
+                  <p style={{ fontSize: '12pt' }}>
                     {memberInfo && memberInfo.nickname ? (
                       <>
-                        <span style={{ fontWeight: "bold" }}>
+                        <span style={{ fontWeight: 'bold' }}>
                           {memberInfo.nickname}
                         </span>
                         님의 페이지
                         {isLoggedIn &&
-                          localStorage.getItem("member_id") === member_id && (
+                          localStorage.getItem('member_id') === member_id && (
                             <FontAwesomeIcon
                               icon={faPencil}
                               style={{
-                                fontWeight: "lighter",
-                                cursor: "pointer",
-                                width: "13px",
-                                paddingTop: "3px",
-                                marginLeft: "7px",
-                                color: "white",
+                                fontWeight: 'lighter',
+                                cursor: 'pointer',
+                                width: '13px',
+                                paddingTop: '3px',
+                                marginLeft: '7px',
+                                color: 'white',
                               }}
                               onClick={() => handleEditImgShow()}
                             />
@@ -159,201 +171,163 @@ const ProfileHeader = ({
               </div>
               <div className={style.nav}>
                 {isLoggedIn &&
-                  localStorage.getItem("member_id") === member_id && (
-                    <Tooltip title="더 많은 작품을 평가해보세요!" arrow>
+                  localStorage.getItem('member_id') === member_id && (
+                    <Tooltip title='더 많은 작품을 평가해보세요!' arrow>
                       <span>
                         <Link
                           to={{
                             pathname: `/review`,
                           }}
                         >
-                          <div
+                          <span
                             className={style.button}
                             onMouseOver={(e) =>
-                              (e.target.style.backgroundColor = "#bc3e3e")
+                              (e.target.style.backgroundColor = '#bc3e3e')
                             }
                             onMouseOut={(e) =>
-                              (e.target.style.backgroundColor = "#ce4545")
+                              (e.target.style.backgroundColor = '#ce4545')
                             }
                           >
                             평가하기
-                          </div>
+                          </span>
                         </Link>
                       </span>
                     </Tooltip>
                   )}
 
-                  <Tooltip title="사용자님의 취향을 분석해보세요!" arrow>
-                    <Link
-                        to={{
-                          pathname: `/analysis/${memberInfo.member_id}`,
-                          state: { memberInfo: memberInfo },
-                        }}
+                <Tooltip title='사용자님의 취향을 분석해보세요!' arrow>
+                  <Link
+                    to={{
+                      pathname: `/analysis/${memberInfo.member_id}`,
+                      state: { memberInfo: memberInfo },
+                    }}
+                  >
+                    <span>
+                      <span
+                        className={style.button}
+                        onMouseOver={(e) =>
+                          (e.target.style.backgroundColor = '#bc3e3e')
+                        }
+                        onMouseOut={(e) =>
+                          (e.target.style.backgroundColor = '#ce4545')
+                        }
                       >
-                      <span>
-                        <div
-                          className={style.button}
-                          onMouseOver={(e) =>
-                            (e.target.style.backgroundColor = "#bc3e3e")
-                          }
-                          onMouseOut={(e) =>
-                            (e.target.style.backgroundColor = "#ce4545")
-                          }
-                        >
-                          취향분석
-                        </div>
+                        취향분석
                       </span>
-                    </Link>
-                  </Tooltip>
-
+                    </span>
+                  </Link>
+                </Tooltip>
 
                 {isLoggedIn &&
-                  localStorage.getItem("member_id") === member_id && (
-                    <Tooltip title="사용자님의 선호장르를 선택하세요!" arrow>
+                  localStorage.getItem('member_id') === member_id && (
+                    <Tooltip title='사용자님의 선호장르를 선택하세요!' arrow>
                       <span>
                         <Link
                           to={{
                             pathname: `/genreselect`,
                           }}
                         >
-                          <div
+                          <span
                             className={style.button}
                             onMouseOver={(e) =>
-                              (e.target.style.backgroundColor = "#bc3e3e")
+                              (e.target.style.backgroundColor = '#bc3e3e')
                             }
                             onMouseOut={(e) =>
-                              (e.target.style.backgroundColor = "#ce4545")
+                              (e.target.style.backgroundColor = '#ce4545')
                             }
                           >
                             선호장르
-                          </div>
+                          </span>
                         </Link>
                       </span>
                     </Tooltip>
                   )}
 
                 {isLoggedIn &&
-                  localStorage.getItem("member_id") === member_id && (
-                    <Tooltip title="사용자님의 정보를 변경하세요!" arrow>
+                  localStorage.getItem('member_id') === member_id && (
+                    <Tooltip title='사용자님의 정보를 변경하세요!' arrow>
                       <span>
-                        <div
+                        <span
                           onClick={() => handleEditShow()}
                           className={style.button}
                           onMouseOver={(e) =>
-                            (e.target.style.backgroundColor = "#bc3e3e")
+                            (e.target.style.backgroundColor = '#bc3e3e')
                           }
                           onMouseOut={(e) =>
-                            (e.target.style.backgroundColor = "#ce4545")
+                            (e.target.style.backgroundColor = '#ce4545')
                           }
                         >
                           정보수정
-                        </div>
+                        </span>
                       </span>
                     </Tooltip>
                   )}
-                {isLoggedIn &&
-                  localStorage.getItem("member_id") === member_id && (
-                    <Tooltip title="지금까지 남긴게 모두 사라져요!" arrow>
-                      <span>
-                        <Button
-                          // onClick={handleDelete}
-                          onClick={openConfirmModal} // 확인 모달 열기
-                          className="btn-round bg-dark"
-                          type="button"
-                          style={{ marginLeft: " 20px" }}
-                        >
-                          <FontAwesomeIcon icon={faHeart} />
-                          회원탈퇴
-                        </Button>
-                      </span>
-                    </Tooltip>
-                  )}
-
-                {/* 회원 탈퇴 확인 모달 */}
-                <Modal isOpen={confirmModalOpen} toggle={closeConfirmModal}>
-                  <ModalHeader toggle={closeConfirmModal}>
-                    회원 탈퇴
-                  </ModalHeader>
-                  <ModalBody>
-                    지금까지 남겨온 추억이 전부 사라집니다! <br />
-                    정말 탈퇴 하시겠습니까?
-                    {/* 추가적인 메시지 또는 안내를 여기에 포함할 수 있습니다. */}
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button color="secondary" onClick={closeConfirmModal}>
-                      취소
-                    </Button>
-                    <Button color="danger" onClick={handleDelete}>
-                      확인
-                    </Button>
-                  </ModalFooter>
-                </Modal>
               </div>
             </div>
           )
         ) : (
-          <div style={{ margin: "auto" }}>
+          <div style={{ margin: 'auto' }}>
             <div
               style={{
-                width: "1100px",
-                margin: "150px auto 0 auto",
-                textAlign: "center",
-                height: "550px",
-                position: "relative",
-                paddingTop: "120px",
+                width: '1100px',
+                margin: '150px auto 0 auto',
+                textAlign: 'center',
+                height: '550px',
+                position: 'relative',
+                paddingTop: '120px',
                 backgroundImage:
-                  "url(" + require("assets/img/ticket.png") + ")",
-                backgroundPosition: "center bottom",
-                backgroundRepeat: "no-repeat",
+                  'url(' + require('assets/img/ticket.png') + ')',
+                backgroundPosition: 'center bottom',
+                backgroundRepeat: 'no-repeat',
               }}
             >
               <p
                 style={{
-                  fontSize: "15pt",
-                  position: "absolute",
-                  top: "280px",
-                  left: "430px",
+                  fontSize: '15pt',
+                  position: 'absolute',
+                  top: '280px',
+                  left: '430px',
                 }}
               >
-                <span style={{ fontWeight: "bold" }}>비공개</span> 프로필입니다.
+                <span style={{ fontWeight: 'bold' }}>비공개</span> 프로필입니다.
               </p>
               <div
                 style={{
-                  margin: "auto",
+                  margin: 'auto',
                 }}
               ></div>
             </div>
           </div>
         )
       ) : (
-        <div style={{ margin: "auto" }}>
+        <div style={{ margin: 'auto' }}>
           <div
             style={{
-              width: "1100px",
-              margin: "150px auto 0 auto",
-              textAlign: "center",
-              height: "550px",
-              position: "relative",
-              paddingTop: "120px",
-              backgroundImage: "url(" + require("assets/img/ticket.png") + ")",
-              backgroundPosition: "center bottom",
-              backgroundRepeat: "no-repeat",
+              width: '1100px',
+              margin: '150px auto 0 auto',
+              textAlign: 'center',
+              height: '550px',
+              position: 'relative',
+              paddingTop: '120px',
+              backgroundImage: 'url(' + require('assets/img/ticket.png') + ')',
+              backgroundPosition: 'center bottom',
+              backgroundRepeat: 'no-repeat',
             }}
           >
             <p
               style={{
-                fontSize: "15pt",
-                position: "absolute",
-                top: "280px",
-                left: "410px",
+                fontSize: '15pt',
+                position: 'absolute',
+                top: '280px',
+                left: '410px',
               }}
             >
-              <span style={{ fontWeight: "bold" }}>존재하지 않는</span>{" "}
+              <span style={{ fontWeight: 'bold' }}>존재하지 않는</span>{' '}
               프로필입니다.
             </p>
             <div
               style={{
-                margin: "auto",
+                margin: 'auto',
               }}
             ></div>
           </div>
@@ -363,4 +337,4 @@ const ProfileHeader = ({
   );
 };
 
-export default ProfileHeader;
+export default ProfileHeader

@@ -2,6 +2,7 @@
   position: relative;
   overflow: hidden;
   height: 400px;
+  margin-top: 13px;
   background-color: #f8f9fa; /* Set the background color to match your website background */
 }
 
@@ -328,5 +329,11 @@ h3 {
 }
 
 .similar-movie-info .rating {
+  color: #b660f8;
+  font-size: 0.9em;
+}
+
+.similar-movie-info .rating2 {
   color: #e75757;
+  font-size: 0.9em;
 }

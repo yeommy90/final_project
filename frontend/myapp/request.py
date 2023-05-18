@@ -358,9 +358,9 @@ def recommend(user_id, array):
 
     recommend_df = merged_df.sort_values("weighted_vote", ascending=False)
     new_recommend_df = recommend_df.drop_duplicates(
-        subset=['movie_id'], keep='first')[0:10]
+        subset=['MOVIE_ID'], keep='first')[0:10]
 
-    recommend_json = new_recommend_df['movie_id'].to_list()
+    recommend_json = new_recommend_df['MOVIE_ID'].to_list()
     print(recommend_json)
     values_only_title = list(set(titlesim_list))
     user_rec_list = userrecommenddef(user_id).tolist()

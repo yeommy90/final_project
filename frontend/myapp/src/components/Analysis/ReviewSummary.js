@@ -59,6 +59,8 @@ const ReviewSummary = () => {
       return '준비중인';
     } else if (ratingAvg < 2.5) {
       return '부정적인';
+    } else if (ratingAvg < 3) {
+      return '중립적인';
     } else return '긍정적인';
   };
 

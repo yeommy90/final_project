@@ -1,8 +1,9 @@
-import { baseUrl } from "Apiurl";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import style from "../../assets/css/analysis.module.css";
+//Analysis >> SimilarUsers.js//
+import { baseUrl } from 'Apiurl';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import style from '../../assets/css/analysis.module.css';
 
 const SimilarUsers = () => {
   const { member_id } = useParams();
@@ -24,17 +25,17 @@ const SimilarUsers = () => {
   console.log(simMembers && simMembers);
   return (
     <>
-      <div style={{ margin: "10px  auto 0 auto", width: "700px" }}>
+      <div style={{ margin: '10px  auto 0 auto', width: '700px' }}>
         <div className={style.box2}>
           <div className={style.content}>
-            <p className={style.title}>나와 취향이 비슷한 유저</p>
+            <p className={style.title}>취향이 비슷한 유저</p>
             <div className={style.ranking2}>
               <div className={style.rank_left}>
                 {simMembers.length > 0 && (
-                  <div id="rank1" className={style.rankprofile}>
+                  <div id='rank1' className={style.rankprofile}>
                     <div
-                      className={style.rankpro_left}
-                      style={{ display: simMembers.length > 0 ? "" : "none" }}
+                      className={style.rankpro_left2}
+                      style={{ display: simMembers.length > 0 ? '' : 'none' }}
                     >
                       <a
                         href={`${process.env.PUBLIC_URL}/profile/${simMembers[0].member_id}`}
@@ -44,7 +45,7 @@ const SimilarUsers = () => {
                           src={`${process.env.PUBLIC_URL}/profiles/${
                             simMembers.length > 0
                               ? simMembers[0].profile_path
-                              : "defaultImg.png"
+                              : 'defaultImg.png'
                           }`}
                         />
                       </a>
@@ -64,8 +65,8 @@ const SimilarUsers = () => {
                 <div className={style.line}></div>
 
                 {simMembers.length > 1 && (
-                  <div id="rank1" className={style.rankprofile}>
-                    <div className={style.rankpro_left}>
+                  <div id='rank1' className={style.rankprofile}>
+                    <div className={style.rankpro_left2}>
                       <a
                         href={`${process.env.PUBLIC_URL}/profile/${simMembers[1].member_id}`}
                       >
@@ -89,8 +90,8 @@ const SimilarUsers = () => {
                 <div className={style.line}></div>
 
                 {simMembers.length > 2 && (
-                  <div id="rank1" className={style.rankprofile}>
-                    <div className={style.rankpro_left}>
+                  <div id='rank1' className={style.rankprofile}>
+                    <div className={style.rankpro_left2}>
                       <a
                         href={`${process.env.PUBLIC_URL}/profile/${simMembers[2].member_id}`}
                       >
@@ -115,8 +116,8 @@ const SimilarUsers = () => {
 
               <div className={style.rank_right}>
                 {simMembers.length > 3 && (
-                  <div id="rank1" className={style.rankprofile}>
-                    <div className={style.rankpro_left}>
+                  <div id='rank1' className={style.rankprofile}>
+                    <div className={style.rankpro_left2}>
                       <a
                         href={`${process.env.PUBLIC_URL}/profile/${simMembers[3].member_id}`}
                       >
@@ -145,8 +146,8 @@ const SimilarUsers = () => {
                 <div className={style.line}></div>
 
                 {simMembers.length > 4 && (
-                  <div id="rank1" className={style.rankprofile}>
-                    <div className={style.rankpro_left}>
+                  <div id='rank1' className={style.rankprofile}>
+                    <div className={style.rankpro_left2}>
                       <a
                         href={`${process.env.PUBLIC_URL}/profile/${simMembers[4].member_id}`}
                       >
@@ -170,8 +171,8 @@ const SimilarUsers = () => {
                 <div className={style.line}></div>
 
                 {simMembers.length > 5 && (
-                  <div id="rank1" className={style.rankprofile}>
-                    <div className={style.rankpro_left}>
+                  <div id='rank1' className={style.rankprofile}>
+                    <div className={style.rankpro_left2}>
                       <a
                         href={`${process.env.PUBLIC_URL}/profile/${simMembers[5].member_id}`}
                       >

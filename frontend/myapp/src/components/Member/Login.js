@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { baseUrl } from 'Apiurl';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
 
 // reactstrap components
 import {
@@ -26,6 +27,7 @@ const Login = () => {
   const emailField = document.querySelector("Input[name='email']");
   const [submitted, setSubmitted] = useState(false);
   const [isvalid, setIsvalid] = useState();
+  const [success, setSuccess] = useState(true);
 
   const [inputs, setInputs] = useState({
     email: '',
@@ -78,11 +80,12 @@ const Login = () => {
     await axios
       .post(`${baseUrl}/login`, newInputs, config)
       .then((response) => {
-        console.log(response.data)
-        if (response.data.type === '일반') {
-          console.log('response: ', response.data);
+        setSuccess(true);
+        console.log(response.data);
+        if (response.data.type === "일반") {
+          console.log("response: ", response.data);
           //let jwtToken = response.headers['Authorization'];
-          let jwtToken = response.headers.get('Authorization');
+          let jwtToken = response.headers.get("Authorization");
           console.log(jwtToken);
 
           let jwtMemberId = response.data.member_id;
@@ -93,24 +96,26 @@ const Login = () => {
           let jwtProfile_path = response.data.profile_path;
           let jwtGrade = response.data.grade;
 
-          localStorage.setItem('Authorization', jwtToken);
-          localStorage.setItem('member_id', jwtMemberId);
-          localStorage.setItem('email', jwtMemberEmail);
-          localStorage.setItem('name', jwtMemberName);
-          localStorage.setItem('nickname', jwtMemberNickname);
-          localStorage.setItem('authRole', jwtAuthRole);
-          localStorage.setItem('isLogin', 'true');
+          localStorage.setItem("Authorization", jwtToken);
+          localStorage.setItem("member_id", jwtMemberId);
+          localStorage.setItem("email", jwtMemberEmail);
+          localStorage.setItem("name", jwtMemberName);
+          localStorage.setItem("nickname", jwtMemberNickname);
+          localStorage.setItem("authRole", jwtAuthRole);
+          localStorage.setItem("isLogin", "true");
           localStorage.setItem("profile_path", jwtProfile_path);
           localStorage.setItem("grade", jwtGrade);
 
-          setInputs({ email: '', password: '' });
-          window.location.replace('/');
+          // setInputs({ email: "", password: "" });
+          window.location.replace("/");
         } else {
-          alert("아이디와 비밀번호를 확인해주세요")
+          alert("아이디와 비밀번호를 확인해주세요");
         }
       })
       .catch((err) => {
         console.error(err.message);
+        setSuccess(false);
+        console.log(success && success);
       });
   };
 
@@ -127,6 +132,12 @@ const Login = () => {
       })
       .catch((error) => console.error(error));
   };
+
+
+  const [authShow, setAuthShow] = useState(false);
+  const handleAuthClose = () => setAuthShow(false);
+  const handleAuthShow = () => setAuthShow(true);
+
 
   return (
     <>
@@ -227,6 +238,18 @@ const Login = () => {
                         비밀번호를 입력해주세요.
                       </span>
                     )}
+                  {!success && success === false && (
+                    <span
+                      style={{
+                        color: "rgb(255,171, 154)",
+                        animation: "glow 1s ease-in-out infinite",
+                        fontWeight: "bold",
+                        fontSize: "12px",
+                      }}
+                    >
+                      이메일과 비밀번호를 확인해주세요.
+                    </span>
+                  )}
 
                   <button
                     className='btn-round'
@@ -293,12 +316,26 @@ const Login = () => {
                   <NaverButton></NaverButton>
                   <KakaoButton></KakaoButton>
 
-
+                  {/* 구글 로그인 버튼 */}
                   <img
                     alt='...'
                     src={require('assets/img/btnG_G.png')}
-                    style={{ width: 65 }}
+                    style={{ width: 65, cursor:"pointer" }}
+                    onClick={handleAuthShow}
                   />
+                  <Modal
+                    isOpen={authShow}
+                    onRequestClose={handleAuthClose}
+                    contentLabel="Auth"
+                    className="AuthModal"
+                    overlayClassName="AuthOverlay"
+                  >
+                    <div>
+                      <div className='d-flex justify-content-center'>
+                        <h3>아직 준비중입니다~</h3>
+                      </div>
+                    </div>
+                  </Modal>
                 </div>
 
                 <div className='forgot'>

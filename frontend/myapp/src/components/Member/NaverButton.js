@@ -94,7 +94,7 @@ const NaverButton = () => {
                 <img
                     alt='네이버로그인'
                     src={require('assets/img/btnG_N.png')}
-                    style={{ width: 60 }}
+                    style={{ width: 60, cursor:'pointer' }}
                     onClick={onClick}
                 />
             )}

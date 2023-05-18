@@ -1,13 +1,8 @@
-import { Link } from "react-router-dom";
 import { Col, Container, Row } from 'reactstrap';
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisV, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import Modal from 'react-modal';
 import { useDispatch } from "react-redux";
 import { MovieActions } from "reduxs/Actions/MovieAction";
-import { Dropdown } from "react-bootstrap";
-import { Fragment } from "react";
 import CommentItem from "components/Comment/CommentItem";
 
 const Comments = ({ contents, handleAuthShow, memberLikes, fetchComments }) => {

@@ -47,6 +47,7 @@ const EditNotice = () => {
                     console.log(response.data)
                 })
             alert(`삭제 ${notice_id}`);
+            window.location.replace("/admineditnotice")
         }
     }
 
