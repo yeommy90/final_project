@@ -221,7 +221,7 @@ const Login = () => {
                       name='password'
                       onChange={handleValueChange}
                       value={password}
-                      maxlength="13"
+                      maxLength="13"
                     />
                   </InputGroup>
                   {passField &&
